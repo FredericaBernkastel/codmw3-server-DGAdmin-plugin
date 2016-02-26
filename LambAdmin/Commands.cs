@@ -12,6 +12,7 @@ namespace LambAdmin
         volatile string MapRotation = "";
         public static partial class ConfigValues
         {
+            private static string DayTime = "day";
             public static int settings_warn_maxwarns
             {
                 get
@@ -45,6 +46,26 @@ namespace LambAdmin
                 get
                 {
                     return bool.Parse(Sett_GetString("settings_enable_spree_messages"));
+                }
+            }
+            public static string settings_daytime
+            {
+                get
+                {
+                    return DayTime;
+                }
+                set
+                {
+                    switch (value)
+                    {
+                        case "night":
+                        case "day":
+                        case "morning":
+                        case "cloudy":
+                            DayTime = value;
+                            System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt", new string[] { value });
+                            break;
+                    }
                 }
             }
         }
@@ -358,6 +379,9 @@ namespace LambAdmin
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\chatalias.txt"))
                 System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\chatalias.txt", new string[] { });
+
+            if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))
+                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt", new string[] {"day"});
 
             InitCommands();
             InitCommandAliases();
@@ -1585,6 +1609,11 @@ namespace LambAdmin
             CommandList.Add(new Command("ft", 1, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
+                    if (ConfigValues.settings_daytime == "night")
+                    {
+                        WriteChatToPlayer(sender, Command.GetMessage("Message_blockedByNightMode"));
+                        return;
+                    }
                     CMD_applyfilmtweak(sender, arguments[0]);
                     WriteChatToPlayer(sender, Command.GetString("ft", "message").Format(new Dictionary<string, string>()
                     {
@@ -1596,6 +1625,11 @@ namespace LambAdmin
             CommandList.Add(new Command("night", 1, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
+                    if (ConfigValues.settings_daytime == "night")
+                    {
+                        WriteChatToPlayer(sender, Command.GetMessage("Message_blockedByNightMode"));
+                        return;
+                    }
                     switch (arguments[0])
                     {
                         case "on": { 
@@ -1949,6 +1983,15 @@ namespace LambAdmin
                             {"<targetf>", target.GetFormattedName(database) },
                         }));
                     }));
+
+                // DAY TIME
+                CommandList.Add(new Command("daytime", 1, Command.Behaviour.Normal,
+                    (sender, arguments, optarg) =>
+                    {
+                        ConfigValues.settings_daytime = arguments[0];
+                        foreach (Entity player in Players)
+                            UTILS_SetCliDefDvars(player);
+                    }));
             }
 
             #endregion
@@ -1985,6 +2028,13 @@ namespace LambAdmin
                 {
                     string[] parts = line.Split('=');
                     DefaultCDvars.Add(parts[0], parts[1]);
+                }
+            }
+            if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))
+            {
+                foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Utils\cdvars.txt"))
+                {
+                    ConfigValues.settings_daytime = line;
                 }
             }
         }

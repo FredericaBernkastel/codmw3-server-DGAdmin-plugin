@@ -994,6 +994,13 @@ namespace LambAdmin
             {
                 player.SetClientDvar(dvar.Key, dvar.Value);
             }
+            switch (ConfigValues.settings_daytime)
+            {
+                case "day": Call("setsunlight", 1f, 1f, 1f); break;
+                case "night": UTILS_SetClientNightVision(player); Call("setsunlight", 0f, 0.7f, 1f); break;
+                case "morning": Call("setsunlight", 1.5f, 0.65f, 0f); break;
+                case "cloudy": Call("setsunlight", 0f, 0f, 0f); break;
+            }
         }
 
         public void ExecuteCommand(string command)

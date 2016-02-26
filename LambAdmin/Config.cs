@@ -87,6 +87,7 @@ namespace LambAdmin
             {"Message_InvalidNumber", "^1Invalid number." },
             {"Message_DefaultError", "^1Something went wrong. Check console for more details." },
             {"Message_NoEntriesFound", "^1No entries found." },
+            {"Message_blockedByNightMode", "^1You cant use this command when night mode is active" },
 
             #endregion
 
@@ -232,7 +233,7 @@ namespace LambAdmin
             {"command_time_usage", "^1Usage: !time" },
             {"command_time_message", "^2Time: {0:HH:mm:ss}" },
 
-            {"command_yell_usage", "^1Usage: !yell <player/all> <message>" },
+            {"command_yell_usage", "^1Usage: !yell <player|all> <message>" },
 
             {"command_changeteam_usage", "^1Usage: !changeteam <player>" },
 
@@ -245,7 +246,7 @@ namespace LambAdmin
 
             {"command_foreach_usage", "^1Usage: !foreach <include self> <command>" },
 
-            {"command_spy_usage", "^1Usage: !spy <on/off>" },
+            {"command_spy_usage", "^1Usage: !spy <on|off>" },
             {"command_spy_message_on", "^0Spy mode ^2enabled"},
             {"command_spy_message_off", "^0Spy mode ^1disabled" },
 
@@ -259,7 +260,7 @@ namespace LambAdmin
             {"command_hidebombicon_usage", "^1Usage: !hidebombicon" },
             {"command_hidebombicon_message", "^5Bomb icons hidden." },
 
-            {"command_knife_usage", "^1Usage: !knife <on/off>" },
+            {"command_knife_usage", "^1Usage: !knife <on|off>" },
             {"command_knife_message_on", "^2Knife enabled." },
             {"command_knife_message_off", "^1Knife disabled." },
 
@@ -330,7 +331,7 @@ namespace LambAdmin
 
             {"command_sunlight_usage", "^1Usage: !sunlight <float R> <float G> <float B>"},
 
-            {"command_night_usage", "^1Usage: !night <on/off>"},
+            {"command_night_usage", "^1Usage: !night <on|off>"},
 
             {"command_alias_usage", "^1Usage: !alias <player> [alias]"},
             {"command_alias_reset", "^2<player> ^7alias has been ^2reset"},
@@ -338,6 +339,8 @@ namespace LambAdmin
             {"command_alias_disabled", "^1Chat alias feature disabled in settings"},
 
             {"command_myalias_usage", "^1Usage: !myalias [alias]"},
+
+            {"command_daytime_usage", "^1Usage: !daytime <day|night|morning|cloudy>"}
         };
 
         public static void CFG_ReadConfig()
