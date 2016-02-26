@@ -1995,6 +1995,8 @@ namespace LambAdmin
                 foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Utils\chatalias.txt"))
                 {
                     string[] parts = line.Split('=');
+                    for (int i = 2; i < parts.Length; i++)
+                        parts[1] += "=" + parts[i];
                     try
                     {
                         ChatAlias.Add(Convert.ToInt64(parts[0]), parts[1]);
