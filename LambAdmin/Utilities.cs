@@ -22,7 +22,7 @@ namespace LambAdmin
 
         public static partial class ConfigValues
         {
-            public static string Version = "v3.1n2";
+            public static string Version = "v3.1n3";
             public static string ConfigPath = @"scripts\DGAdmin\";
             public static string ChatPrefix
             {
@@ -501,8 +501,8 @@ namespace LambAdmin
                 List<string> identifiers = new List<string>();
                 if (player_guid != null)
                     identifiers.Add(player_guid.ToString());
-                if (player_ip != null)
-                    identifiers.Add(player_ip.ToString());
+                //if (player_ip != null)
+                //    identifiers.Add(player_ip.ToString());
                 if (player_hwid != null)
                     identifiers.Add(player_hwid.ToString());
                 return string.Join(",", identifiers);
