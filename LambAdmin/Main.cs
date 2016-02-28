@@ -144,6 +144,7 @@ namespace LambAdmin
         public void MAIN_OnPlayerConnecting(Entity player)
         {
             player.SetField("isConnecting", 1);
+            player.SetClientDvar("didyouknow", "get REKT naba");
         }
 
         public void MAIN_OnPlayerConnect(Entity player)

@@ -340,7 +340,10 @@ namespace LambAdmin
 
             {"command_myalias_usage", "^1Usage: !myalias [alias]"},
 
-            {"command_daytime_usage", "^1Usage: !daytime <day|night|morning|cloudy>"}
+            {"command_daytime_usage", "^1Usage: !daytime <day|night|morning|cloudy>"},
+
+            {"command_kd_usage", "^Usage: !kd <player> <kills> <deaths>"},
+            {"command_kd_message","^2<player>'s ^7KD has been set to ^1<kills>^7/^1<deaths>"} 
         };
 
         public static void CFG_ReadConfig()

@@ -374,7 +374,16 @@ namespace LambAdmin
                     "r_filmTweakContrast=1.4",
                     "r_filmTweakBrightness=0",
                     "r_filmTweakLightTint=1.1 1.05 0.85",
-                    "r_filmTweakDarkTint=0.7 0.85 1"
+                    "r_filmTweakDarkTint=0.7 0.85 1",
+                    "cg_gun_x=15",
+                    "cg_gun_z=0",
+                    "r_skipPvs=0",
+                    "ui_debugMode=0",
+                    "r_showFloatZDebug=0",
+                    "cl_freelook=1",
+                    "r_clearColor=1 0 0",
+                    "r_clear=1",
+                    "fixedtime=0"
                 });
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\chatalias.txt"))
@@ -1611,7 +1620,7 @@ namespace LambAdmin
                 {
                     if (ConfigValues.settings_daytime == "night")
                     {
-                        WriteChatToPlayer(sender, Command.GetMessage("Message_blockedByNightMode"));
+                        WriteChatToPlayer(sender, Command.GetMessage("blockedByNightMode"));
                         return;
                     }
                     CMD_applyfilmtweak(sender, arguments[0]);
@@ -1627,7 +1636,7 @@ namespace LambAdmin
                 {
                     if (ConfigValues.settings_daytime == "night")
                     {
-                        WriteChatToPlayer(sender, Command.GetMessage("Message_blockedByNightMode"));
+                        WriteChatToPlayer(sender, Command.GetMessage("blockedByNightMode"));
                         return;
                     }
                     switch (arguments[0])
@@ -1992,6 +2001,36 @@ namespace LambAdmin
                         foreach (Entity player in Players)
                             UTILS_SetCliDefDvars(player);
                     }));
+
+                //KD
+                CommandList.Add(new Command("kd", 3, Command.Behaviour.Normal,
+                    (sender, arguments, optarg) =>
+                    {
+                        int kills, deaths;
+                        if (!(int.TryParse(arguments[1], out kills) && int.TryParse(arguments[2], out deaths)))
+                        {
+                            WriteChatToPlayer(sender, Command.GetString("kd", "usage"));
+                            return;
+                        }
+                        Entity target = FindSinglePlayer(arguments[0]);
+                        if (target == null)
+                        {
+                            WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                            return;
+                        }
+                        target.SetField("kills", kills);
+                        target.SetField("Kills", kills);
+                        target.SetField("Kill", kills);
+                        target.SetField("deaths", deaths);
+                        target.SetField("Deaths", deaths);
+                        target.SetField("death", deaths);
+                        WriteChatToPlayer(sender, Command.GetString("kd", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<player>", target.Name },
+                            {"<kills>", kills.ToString() },
+                            {"<deaths>", deaths.ToString() }
+                        }));
+                    }));
             }
 
             #endregion
@@ -2032,7 +2071,7 @@ namespace LambAdmin
             }
             if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))
             {
-                foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Utils\cdvars.txt"))
+                foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))
                 {
                     ConfigValues.settings_daytime = line;
                 }
