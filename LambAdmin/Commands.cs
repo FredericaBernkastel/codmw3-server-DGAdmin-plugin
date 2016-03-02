@@ -31,7 +31,8 @@ namespace LambAdmin
             {
                 get
                 {
-                    return bool.Parse(Sett_GetString("settings_enable_misccommands"));
+                    //return bool.Parse(Sett_GetString("settings_enable_misccommands"));
+                    return true;
                 }
             }
             public static bool settings_enable_chat_alias
@@ -2031,6 +2032,30 @@ namespace LambAdmin
                             {"<deaths>", deaths.ToString() }
                         }));
                     }));
+                //FILL AMMO
+                CommandList.Add(new Command("fillammo", 0, Command.Behaviour.Normal,
+                    (sender, arguments, optarg) =>
+                    {
+                        sender.Call("setweaponammostock", new Parameter[]
+				        {
+					        sender.CurrentWeapon,
+					        999
+				        });
+                        sender.Call("setweaponammoclip", new Parameter[]
+				        {
+					        sender.CurrentWeapon,
+					        999,
+					        "left"
+				        });
+                        sender.Call("setweaponammoclip", new Parameter[]
+				        {
+					        sender.CurrentWeapon,
+					        999,
+					        "right"
+				        });
+                        WriteChatToPlayer(sender, Command.GetString("fillammo", "message"));
+                    }
+                ));
             }
 
             #endregion
@@ -2048,6 +2073,7 @@ namespace LambAdmin
                     "cvsa=clanvsall",
                     "tbt=tmpbantime",
                     "a=amsg",
+                    "ga=fillammo"
                 });
 
             foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\commandaliases.txt"))
