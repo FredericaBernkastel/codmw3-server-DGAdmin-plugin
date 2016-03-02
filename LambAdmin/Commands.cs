@@ -1208,8 +1208,8 @@ namespace LambAdmin
                     }));
                 }));
 
-            // UNBAN
-            CommandList.Add(new Command("unban", 1, Command.Behaviour.Normal,
+            // UNBAN BY ID
+            CommandList.Add(new Command("unban-id", 1, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
                     int bannumber;
@@ -1218,7 +1218,7 @@ namespace LambAdmin
                         WriteChatToPlayer(sender, Command.GetMessage("InvalidNumber"));
                         return;
                     }
-                    if (CMD_unban(bannumber) != 1)
+                    if (CMD_unban(bannumber) != 0)
                     {
                         WriteChatToPlayer(sender, Command.GetMessage("DefaultError"));
                         return;
@@ -1226,6 +1226,41 @@ namespace LambAdmin
                     WriteChatToPlayer(sender, Command.GetString("unban", "message"));
                 }));
 
+            // UNBAN BY NAME
+            CommandList.Add(new Command("unban", 1, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    List<BanEntry> entries = CMD_SearchBanEntries(arguments[0]);
+                    if (entries.Count == 0)
+                    {
+                        WriteChatToPlayer(sender,Command.GetMessage("NoEntriesFound"));
+                        return;
+                    }
+                    if (entries.Count > 1)
+                    {
+                        WriteChatToPlayer(sender,Command.GetString("unban", "multiple_entries_found"));
+                        return;
+                    }
+                    switch (CMD_unban(entries[0].banid))
+                    {
+                        case 0:
+                            WriteChatToPlayer(sender,
+                                Command.GetString("unban", "message").Format(new Dictionary<string, string>()
+                                {
+                                    {"<banid>", entries[0].banid.ToString() },
+                                    {"<name>",  entries[0].playername },
+                                    {"<guid>",  entries[0].playerinfo.GetGUIDString() },
+                                    {"<ip>",    entries[0].playerinfo.GetIPString() },
+                                    {"<hwid>",  entries[0].playerinfo.GetHWIDString() },
+                                    {"<time>",  entries[0].until.Year == 9999 ? "^6PERMANENT" : entries[0].until.ToString("yyyy MMM d HH:mm") }
+                                }));
+                            break;
+                        default: 
+                            WriteChatToPlayer(sender, "Unknown error at DGAdmin::cmd_unban"); 
+                            break;
+                    }
+                }
+            ));
             //LASTBANS
             CommandList.Add(new Command("lastbans", 0, Command.Behaviour.HasOptionalArguments,
                 (sender, arguments, optarg) =>
@@ -2032,30 +2067,6 @@ namespace LambAdmin
                             {"<deaths>", deaths.ToString() }
                         }));
                     }));
-                //FILL AMMO
-                CommandList.Add(new Command("fillammo", 0, Command.Behaviour.Normal,
-                    (sender, arguments, optarg) =>
-                    {
-                        sender.Call("setweaponammostock", new Parameter[]
-				        {
-					        sender.CurrentWeapon,
-					        999
-				        });
-                        sender.Call("setweaponammoclip", new Parameter[]
-				        {
-					        sender.CurrentWeapon,
-					        999,
-					        "left"
-				        });
-                        sender.Call("setweaponammoclip", new Parameter[]
-				        {
-					        sender.CurrentWeapon,
-					        999,
-					        "right"
-				        });
-                        WriteChatToPlayer(sender, Command.GetString("fillammo", "message"));
-                    }
-                ));
             }
 
             #endregion
@@ -2072,8 +2083,7 @@ namespace LambAdmin
                     "hbi=hidebombicon",
                     "cvsa=clanvsall",
                     "tbt=tmpbantime",
-                    "a=amsg",
-                    "ga=fillammo"
+                    "a=amsg"
                 });
 
             foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\commandaliases.txt"))
@@ -2319,13 +2329,13 @@ namespace LambAdmin
                 if (banentry < BanList.Count && banentry >= 0)
                     BanList.Remove(BanList[banentry]);
                 CMDS_SaveBanList();
-                return 1;
+                return 0;
             }
             catch (Exception ex)
             {
                 WriteLog.Error("Error while running unban command");
                 WriteLog.Error(ex.Message);
-                return 0;
+                return 1;
             }
         }
 
@@ -2654,7 +2664,7 @@ namespace LambAdmin
                     if (until.Year != 9999)
                     {
                         TimeSpan forhowlong = until - DateTime.Now;
-                        ExecuteCommand(string.Format("dropclient {0} \"^1You are banned from this server for ^3{1}d {2}:{3}\"", player.GetEntityNumber(), forhowlong.Days, forhowlong.Hours, forhowlong.Minutes));
+                        ExecuteCommand(string.Format("dropclient {0} \"^1You are banned from this server for \n^3{1}d {2}m {3}s\"", player.GetEntityNumber(), forhowlong.Days, forhowlong.Hours, forhowlong.Minutes));
                         return;
                     }
                     else

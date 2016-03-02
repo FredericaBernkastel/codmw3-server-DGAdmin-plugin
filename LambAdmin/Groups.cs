@@ -65,21 +65,21 @@ namespace LambAdmin
                     WriteLog.Warning("Groups file not found, creating new one...");
                     File.WriteAllLines(ConfigValues.ConfigPath + @"Groups\groups.txt", new string[]
                     {
-                        "default::pm,admins,guid,version,ga,rules,afk,credits,hidebombicon,help,rage,maps,time,amsg,ft,hwid,apply,night,fillammo",
-                        "moderator:DGMod:login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,changeteam,setaff,apply,night,fillammo:^0[^5Moderator^0]^7",
-                        "family:familypassword:kickhacker,kill,mute,unmute,end,tmpbantime,cdvar,getplayerinfo,say,sayto,resetwarns,setgroup,scream,receiveamsg,whois,changeteam,yell,gametype,mode,login,map,status,kick,tmpban,ban,warn,unwarn,getwarns,res,setafk,setteam,balance,clanvsall,clanvsallspectate,apply,night,sunlight,alias,fillammo:^0[^3F^0]^7",
+                        "default::pm,admins,guid,version,ga,rules,afk,credits,hidebombicon,help,rage,maps,time,amsg,ft,hwid,apply,night",
+                        "moderator:DGMod:login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,changeteam,setaff,apply,night:^0[^5Moderator^0]^7",
+                        "family:familypassword:kickhacker,kill,mute,unmute,end,tmpbantime,cdvar,getplayerinfo,say,sayto,resetwarns,setgroup,scream,receiveamsg,whois,changeteam,yell,gametype,mode,login,map,status,kick,tmpban,ban,warn,unwarn,getwarns,res,setafk,setteam,balance,clanvsall,clanvsallspectate,apply,night,sunlight,alias:^0[^3F^0]^7",
                         "elder:DGElder:*all*:^0[^4Elder^0]^7",
                         "developer:developerpassword:*all*:^0[^;D^0]^;",
                         "owner:DGOwner:*all*:^0[^1O^2w^3n^4e^5r^0]^3",
-                        "admin:DGAdmin:scream,receiveamsg,whois,changeteam,yell,gametype,mode,login,map,status,unban,kick,tmpban,ban,warn,unwarn,getwarns,res,setafk,setteam,balance,clanvsall,clanvsallspectate,login,apply,night,fillammo:^0[^1Admin^0]^7",
+                        "admin:DGAdmin:scream,receiveamsg,whois,changeteam,yell,gametype,mode,login,map,status,unban,unban-id,kick,tmpban,ban,warn,unwarn,getwarns,res,setafk,setteam,balance,clanvsall,clanvsallspectate,login,apply,night:^0[^1Admin^0]^7",
                         "leader:DGLeader:*all*:^0[^1L^2e^3a^4d^5e^7r^0]^2",
-                        "trial:DGTrial:pm,admins,guid,version,ga,rules,afk,credits,hidebombicon,help,rage,maps,time,amsg,ft,hwid,login,warn,unwarn,kick,apply,night,fillammo:^0[^5Trial^0]^7",
-                        "member:DGMember:pm,admins,guid,version,ga,rules,afk,credits,hidebombicon,help,rage,maps,time,amsg,ft,hwid,login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,apply,night,fillammo:^0[^5Member^0]^7",
-                        "friend:DGFriend:pm,admins,guid,version,ga,rules,afk,credits,hidebombicon,help,rage,maps,time,amsg,ft,hwid,apply,night,login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,map,mode,tmpban,fillammo:^0[^6Friend^0]^7",
-                        "vip:DGVip:ban,kick,tmpban,warn,unwarn,map,balance,mode,rules,whois,status,login,setafk,changeteam,scream,fakesay,apply,night,myalias,fillammo:^0[^3V.I.P.^0]^7",
+                        "trial:DGTrial:pm,admins,guid,version,ga,rules,afk,credits,hidebombicon,help,rage,maps,time,amsg,ft,hwid,login,warn,unwarn,kick,apply,night:^0[^5Trial^0]^7",
+                        "member:DGMember:pm,admins,guid,version,ga,rules,afk,credits,hidebombicon,help,rage,maps,time,amsg,ft,hwid,login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,apply,night:^0[^5Member^0]^7",
+                        "friend:DGFriend:pm,admins,guid,version,ga,rules,afk,credits,hidebombicon,help,rage,maps,time,amsg,ft,hwid,apply,night,login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,map,mode,tmpban:^0[^6Friend^0]^7",
+                        "vip:DGVip:ban,kick,tmpban,warn,unwarn,map,balance,mode,rules,whois,status,login,setafk,changeteam,scream,fakesay,apply,night,myalias:^0[^3V.I.P.^0]^7",
                         "founder:DGFounder:*all*:^0[^1F^2o^3u^4n^5d^6e^8r^0]^6",
                         "senioradmin:DGSAdmin:*all*:^0[^1Senior^0-Admin^0]^7",
-                        "donator:DGDonator:kick,warn,tmpban,unwarn,mute,unmute,login,balance,setafk,changeteam,apply,night,myalias,fillammo:^0[^2Donator^0]^7",
+                        "donator:DGDonator:kick,warn,tmpban,unwarn,mute,unmute,login,balance,setafk,changeteam,apply,night,myalias:^0[^2Donator^0]^7",
                         "nab:DGNab:kick,warn,unwarn,tmpbantime,tmpban,mute,unmute,balance,setafk,changeteam,login,apply,night:^0[^1N^2A^3B^0]^7",
                         "coleader:DGCoLeader:*all*:^0[^3CoLeader^0]^7;"
                     });

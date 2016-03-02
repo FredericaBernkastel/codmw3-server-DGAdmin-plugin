@@ -195,8 +195,12 @@ namespace LambAdmin
             {"command_pban_usage", "^1Usage: !pban <player>" },
             {"command_pban_message", "^3<target> ^7 was ^1permanently banned ^7by ^1<issuer>" },
 
-            {"command_unban_usage", "^1Usage: !unban <playerinfo>" },
-            {"command_unban_message", "^3Ban entry removed." },
+            {"command_unban_usage", "^1Usage: !unban <name>"},
+            {"command_unban_message", "^3Ban entry removed. ^1<banid>: <name>, <guid>, <ip>, <hwid>, <time>"},
+            {"command_unban_multiple_entries_found", "^1Error: Multiple entries found. Use ^3!searchbans > !unban-id"},
+
+            {"command_unban-id_usage", "^1Usage: !unban-id <playerinfo>" },
+            {"command_unban-id_message", "^3Ban entry removed." },
 
             {"command_lastbans_usage", "^1Usage: !lastbans [amount]" },
             {"command_lastbans_firstline", "^2Last <nr> bans:" },
@@ -343,10 +347,7 @@ namespace LambAdmin
             {"command_daytime_usage", "^1Usage: !daytime <day|night|morning|cloudy>"},
 
             {"command_kd_usage", "^Usage: !kd <player> <kills> <deaths>"},
-            {"command_kd_message","^2<player>'s ^7KD has been set to ^1<kills>^7/^1<deaths>"}, 
-
-            {"command_fillammo_usage", "^Usage: !fillammo"},
-            {"command_fillammo_message", "^2All current weapon ammo filled!"}
+            {"command_kd_message","^2<player>'s ^7KD has been set to ^1<kills>^7/^1<deaths>"}
         };
 
         public static void CFG_ReadConfig()
