@@ -1,5 +1,6 @@
 ## "DGAdmin" - Call of Duty: MW3 dedicated server plugin
 DG Admin script for Call of Duty: MW3 dedicated server. Based on RGAdmin, modified by **F. Bernkastel**<br>
+Complete admin guide can be found [here](https://github.com/FredericaBernkastel/codmw3-server-DGAdmin-plugin/blob/master/DGAdmin%20guide.docx?raw=true).<br><br>
 **New commands**
 ```Javascript
 !apply
