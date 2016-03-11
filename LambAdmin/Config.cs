@@ -50,7 +50,7 @@ namespace LambAdmin
             { "settings_teamicons_axis", "cardicon_thebomb" },
             { "settings_enable_connectmessage", "false" },
             { "format_connectmessage", "^3<player> ^7connected." },
-            { "settings_enable_misccommands", "true" },
+            { "settings_enable_misccommands", "false" },
             { "settings_maxwarns", "3" },
             { "settings_groups_autosave", "true" },
             { "settings_enable_spy_onlogin", "false" },
@@ -347,7 +347,14 @@ namespace LambAdmin
             {"command_daytime_usage", "^1Usage: !daytime <day|night|morning|cloudy>"},
 
             {"command_kd_usage", "^Usage: !kd <player> <kills> <deaths>"},
-            {"command_kd_message","^2<player>'s ^7KD has been set to ^1<kills>^7/^1<deaths>"}
+            {"command_kd_message","^2<player>'s ^7KD has been set to ^1<kills>^7/^1<deaths>"},
+
+            {"command_report_usage", "^1Usage: !report <message>" },
+            {"command_report_message", "^7<senderf>^7 reported: ^3<message>" },
+
+            
+            {"command_lastreports_usage", "^1Usage: !lastreports [count]. Cont may be 1..8" },
+            {"command_lastreports_message", "^;<sender>: ^3<message>" }
         };
 
         public static void CFG_ReadConfig()

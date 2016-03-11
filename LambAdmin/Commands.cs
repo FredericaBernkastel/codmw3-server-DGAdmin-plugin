@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InfinityScript;
+using System.IO;
 
 namespace LambAdmin
 {
@@ -31,8 +32,7 @@ namespace LambAdmin
             {
                 get
                 {
-                    //return bool.Parse(Sett_GetString("settings_enable_misccommands"));
-                    return true;
+                    return bool.Parse(Sett_GetString("settings_enable_misccommands"));
                 }
             }
             public static bool settings_enable_chat_alias
@@ -376,15 +376,6 @@ namespace LambAdmin
                     "r_filmTweakBrightness=0",
                     "r_filmTweakLightTint=1.1 1.05 0.85",
                     "r_filmTweakDarkTint=0.7 0.85 1",
-                    "cg_gun_x=15",
-                    "cg_gun_z=0",
-                    "r_skipPvs=0",
-                    "ui_debugMode=0",
-                    "r_showFloatZDebug=0",
-                    "cl_freelook=1",
-                    "r_clearColor=1 0 0",
-                    "r_clear=1",
-                    "fixedtime=0"
                 });
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\chatalias.txt"))
@@ -392,6 +383,9 @@ namespace LambAdmin
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))
                 System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt", new string[] {"day"});
+
+            if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\ChatReports.txt"))
+                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\ChatReports.txt", new string[] {  });
 
             InitCommands();
             InitCommandAliases();
@@ -1955,6 +1949,118 @@ namespace LambAdmin
                     WriteChatToPlayerMultiline(sender, foundplayerinfo, 2000);
                 }));
 
+            // CLANKICK
+            CommandList.Add(new Command("clankick", 1, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    Entity target = FindSinglePlayer(arguments[0]);
+                    if (target == null)
+                    {
+                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                        return;
+                    }
+                    target.SetGroup("default", database);
+                    if (ConfigValues.settings_groups_autosave)
+                        database.SaveGroups();
+                    CMD_kick(target, Command.GetString("clankick", "kickmessage"));
+                    WriteChatToAll(Command.GetString("clankick", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<issuer>", sender.Name },
+                            {"<issuerf>", sender.GetFormattedName(database) },
+                            {"<target>", target.Name },
+                            {"<targetf>", target.GetFormattedName(database) },
+                        }));
+                }));
+            // DAY TIME
+            CommandList.Add(new Command("daytime", 1, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    ConfigValues.settings_daytime = arguments[0];
+                    foreach (Entity player in Players)
+                        UTILS_SetCliDefDvars(player);
+                }));
+
+            //KD
+            CommandList.Add(new Command("kd", 3, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    int kills, deaths;
+                    if (!(int.TryParse(arguments[1], out kills) && int.TryParse(arguments[2], out deaths)))
+                    {
+                        WriteChatToPlayer(sender, Command.GetString("kd", "usage"));
+                        return;
+                    }
+                    Entity target = FindSinglePlayer(arguments[0]);
+                    if (target == null)
+                    {
+                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                        return;
+                    }
+                    target.SetField("kills", kills);
+                    target.SetField("Kills", kills);
+                    target.SetField("Kill", kills);
+                    target.SetField("deaths", deaths);
+                    target.SetField("Deaths", deaths);
+                    target.SetField("death", deaths);
+                    WriteChatToPlayer(sender, Command.GetString("kd", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<player>", target.Name },
+                            {"<kills>", kills.ToString() },
+                            {"<deaths>", deaths.ToString() }
+                        }));
+                }));
+
+            // REPORT
+            CommandList.Add(new Command("report", 0, Command.Behaviour.HasOptionalArguments | Command.Behaviour.OptionalIsRequired,
+                (sender, arguments, optarg) =>
+                {
+                    using (StreamWriter w = File.AppendText(ConfigValues.ConfigPath + @"Commands\internal\ChatReports.txt"))
+                    {
+                        w.WriteLine(
+                            Command.GetString("lastreports", "message").Format(new Dictionary<string, string>()
+                            {
+                                {"<sender>", sender.Name },
+                                {"<senderf>", sender.GetFormattedName(database) },
+                                {"<message>", optarg },
+                            }));
+                        w.Close();
+                    }
+                    WriteChatToPlayer(sender, @"^3Niggas reported");
+                    CMD_sendadminmsg(Command.GetString("report", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<sender>", sender.Name },
+                            {"<senderf>", sender.GetFormattedName(database) },
+                            {"<message>", optarg },
+                        }));
+                }));
+
+            //LASTREPORTS
+            CommandList.Add(new Command("lastreports", 0, Command.Behaviour.HasOptionalArguments,
+                (sender, arguments, optarg) =>
+                {
+                    int reportcnt;
+                    if (!String.IsNullOrEmpty(optarg))
+                    {
+                        if (!int.TryParse(optarg, out reportcnt))
+                        {
+                            WriteChatToPlayer(sender, Command.GetString("lastreports", "usage"));
+                            return;
+                        }
+                        if ((reportcnt < 1) || (reportcnt > 8))
+                        {
+                            WriteChatToPlayer(sender, Command.GetString("lastreports", "usage"));
+                            return;
+                        }
+                    }
+                    else
+                        reportcnt = 4;
+                    string[] reports = File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\internal\ChatReports.txt");
+                    for (int i = reports.Length - 1; (i >= 0) && (i > reports.Length - 1 - reportcnt); i--)
+                    {
+                        WriteChatToPlayer(sender, reports[i]);
+                    }
+                }));
+
             if (ConfigValues.settings_enable_misccommands)
             {
                 // FORCECOMMAND // FC
@@ -1983,28 +2089,7 @@ namespace LambAdmin
                                 continue;
                             ProcessCommand(sender, sender.Name, optarg.Replace("<player>", "#" + player.GetEntityNumber().ToString()));
                         }
-                    }));
-
-                // CLANKICK
-                CommandList.Add(new Command("clankick", 1, Command.Behaviour.Normal,
-                    (sender, arguments, optarg) =>
-                    {
-                        Entity target = FindSinglePlayer(arguments[0]);
-                        if (target == null)
-                        {
-                            WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                            return;
-                        }
-                        target.SetGroup("default", database);
-                        CMD_kick(target, Command.GetString("clankick", "kickmessage"));
-                        WriteChatToAll(Command.GetString("clankick", "message").Format(new Dictionary<string, string>()
-                        {
-                            {"<issuer>", sender.Name },
-                            {"<issuerf>", sender.GetFormattedName(database) },
-                            {"<target>", target.Name },
-                            {"<targetf>", target.GetFormattedName(database) },
-                        }));
-                    }));
+                    }));                
 
                 // AC130
                 CommandList.Add(new Command("ac130", 1, Command.Behaviour.Normal,
@@ -2026,45 +2111,6 @@ namespace LambAdmin
                             {"<issuerf>", sender.GetFormattedName(database) },
                             {"<target>", target.Name },
                             {"<targetf>", target.GetFormattedName(database) },
-                        }));
-                    }));
-
-                // DAY TIME
-                CommandList.Add(new Command("daytime", 1, Command.Behaviour.Normal,
-                    (sender, arguments, optarg) =>
-                    {
-                        ConfigValues.settings_daytime = arguments[0];
-                        foreach (Entity player in Players)
-                            UTILS_SetCliDefDvars(player);
-                    }));
-
-                //KD
-                CommandList.Add(new Command("kd", 3, Command.Behaviour.Normal,
-                    (sender, arguments, optarg) =>
-                    {
-                        int kills, deaths;
-                        if (!(int.TryParse(arguments[1], out kills) && int.TryParse(arguments[2], out deaths)))
-                        {
-                            WriteChatToPlayer(sender, Command.GetString("kd", "usage"));
-                            return;
-                        }
-                        Entity target = FindSinglePlayer(arguments[0]);
-                        if (target == null)
-                        {
-                            WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                            return;
-                        }
-                        target.SetField("kills", kills);
-                        target.SetField("Kills", kills);
-                        target.SetField("Kill", kills);
-                        target.SetField("deaths", deaths);
-                        target.SetField("Deaths", deaths);
-                        target.SetField("death", deaths);
-                        WriteChatToPlayer(sender, Command.GetString("kd", "message").Format(new Dictionary<string, string>()
-                        {
-                            {"<player>", target.Name },
-                            {"<kills>", kills.ToString() },
-                            {"<deaths>", deaths.ToString() }
                         }));
                     }));
             }
