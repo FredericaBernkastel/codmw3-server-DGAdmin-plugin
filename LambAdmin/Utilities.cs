@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using InfinityScript;
 using System.Net;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace LambAdmin
 {
@@ -20,9 +23,19 @@ namespace LambAdmin
         HudElem RGAdminMessage;
         HudElem OnlineAdmins;
 
+        //typedef
+        public struct Dvar
+        {
+            [XmlAttribute]
+            public string key;
+            [XmlAttribute]
+            public string value;
+        }
+        public class Dvars : List<Dvar>{};
+        //-------
         public static partial class ConfigValues
         {
-            public static string Version = "v3.2n6";
+            public static string Version = "v3.2n7";
             public static string ConfigPath = @"scripts\DGAdmin\";
             public static string ChatPrefix
             {
@@ -794,7 +807,7 @@ namespace LambAdmin
                 }
             }
 
-            UTILS_SetClientDvars(player);
+            UTILS_SetTeamNames(player);
             if (!player.HasField("killstreak"))
             {
                 int v = 0;
@@ -843,7 +856,7 @@ namespace LambAdmin
             // TEAM NAMES
             foreach (Entity player in Players)
             {
-                UTILS_SetClientDvars(player);
+                UTILS_SetTeamNames(player);
             }
 
             // RGADMIN HUDELEM
@@ -990,9 +1003,9 @@ namespace LambAdmin
 
         public void UTILS_SetCliDefDvars(Entity player)
         {
-            foreach (KeyValuePair<string, string> dvar in DefaultCDvars)
+            foreach (Dvar dvar in DefaultCDvars)
             {
-                player.SetClientDvar(dvar.Key, dvar.Value);
+                player.SetClientDvar(dvar.key, dvar.value);
             }
             switch (ConfigValues.settings_daytime)
             {
@@ -1001,6 +1014,14 @@ namespace LambAdmin
                 case "morning": Call("setsunlight", 1.5f, 0.65f, 0f); break;
                 case "cloudy": Call("setsunlight", 0f, 0f, 0f); break;
             }
+            if ((ConfigValues.settings_daytime != "night") && PersonalPlayerDvars.ContainsKey(player.GUID))
+                foreach (Dvar dvar in PersonalPlayerDvars[player.GUID])
+                    player.SetClientDvar(dvar.key, dvar.value);
+        }
+
+        public void UTILS_SetClientDvars(Entity player, List<Dvar> dvars){
+            foreach (Dvar dvar in dvars)
+                player.SetClientDvar(dvar.key, dvar.value);
         }
 
         public void ExecuteCommand(string command)
@@ -1008,7 +1029,7 @@ namespace LambAdmin
             Utilities.ExecuteCommand(command);
         }
 
-        public void UTILS_SetClientDvars(Entity player)
+        public void UTILS_SetTeamNames(Entity player)
         {
             player.SetClientDvar("g_TeamName_Allies", ConfigValues.settings_teamnames_allies);
             player.SetClientDvar("g_TeamName_Axis", ConfigValues.settings_teamnames_axis);
@@ -1018,16 +1039,20 @@ namespace LambAdmin
 
         public void UTILS_SetClientNightVision(Entity player)
         {
-            player.SetClientDvar("r_filmUseTweaks", "1");
-            player.SetClientDvar("r_filmTweakEnable", "1");
-            player.SetClientDvar("r_filmTweakLightTint", "0 0.2 1");
-            player.SetClientDvar("r_filmTweakDarkTint", "0 0.125 1");
+            string[,] dvars = new string[5,2] { 
+                { "r_filmUseTweaks", "1" }, 
+                { "r_filmTweakEnable", "1" }, 
+                { "r_filmTweakLightTint", "0 0.2 1" }, 
+                { "r_filmTweakDarkTint", "0 0.125 1" },
+                { "r_filmtweakbrightness","0" }
+            };
+            for (int i = 0; i < 5; i++ )
+                player.SetClientDvar(dvars[i,0], dvars[i,1]);
         }
 
-        public void UTILS_GetDefCDvar(string key)
+        public string UTILS_GetDefCDvar(string key)
         {
-            string val = Call<string>("getdvar", key);
-            WriteLog.Info(key + "=" + val);
+            return Call<string>("getdvar", key);
         }
 
         public void UTILS_SetChatAlias(Entity sender, string player, string alias)
@@ -1089,6 +1114,24 @@ namespace LambAdmin
                 }
             }
         }
+
+        public SerializableDictionary<long, List<Dvar>> UTILS_PersonalPlayerDvars_load()
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(SerializableDictionary<long, List<Dvar>>));
+            using (FileStream fs = new FileStream(ConfigValues.ConfigPath + @"Utils\internal\PersonalPlayerDvars.xml", FileMode.Open))
+            {
+                return (SerializableDictionary<long, List<Dvar>>)xmlSerializer.Deserialize(fs);
+            }
+        }
+        public void UTILS_PersonalPlayerDvars_save(SerializableDictionary<long, List<Dvar>> db)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(SerializableDictionary<long, List<Dvar>>));
+            using (FileStream fs = new FileStream(ConfigValues.ConfigPath + @"Utils\internal\PersonalPlayerDvars.xml", FileMode.Create))
+            {
+                xmlSerializer.Serialize(fs, db);
+            }
+        }
+
     }
 
     public static partial class Extensions

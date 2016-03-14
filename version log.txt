@@ -1,0 +1,3 @@
+v3.2.7:
+ * FIXED: losing !ft after restart
+ * CHANGED: !cdvar <type> <key> <value> -> !cdvar <type> <key> [value]

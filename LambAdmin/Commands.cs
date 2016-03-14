@@ -79,6 +79,8 @@ namespace LambAdmin
 
         public volatile Dictionary<string, string> CommandAliases = new Dictionary<string, string>();
 
+        public volatile SerializableDictionary<long, List<Dvar>> PersonalPlayerDvars = new SerializableDictionary<long, List<Dvar>>();
+
         public class Command
         {
             public enum Behaviour
@@ -378,6 +380,12 @@ namespace LambAdmin
                     "r_filmTweakDarkTint=0.7 0.85 1",
                 });
 
+            if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\PersonalPlayerDvars.xml"))
+                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\internal\PersonalPlayerDvars.xml", new string[] { 
+                    "<?xml version=\"1.0\" encoding=\"utf-8\"?>",
+                    "<dictionary />",
+                });
+
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\chatalias.txt"))
                 System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\chatalias.txt", new string[] { });
 
@@ -390,6 +398,7 @@ namespace LambAdmin
             InitCommands();
             InitCommandAliases();
             InitCDVars();
+            PersonalPlayerDvars = UTILS_PersonalPlayerDvars_load();
             if(ConfigValues.settings_enable_chat_alias)
                 InitChatAlias();
 
@@ -1054,31 +1063,42 @@ namespace LambAdmin
                 }));
 
             // CDVAR
-            CommandList.Add(new Command("cdvar", 3, Command.Behaviour.Normal,
+            CommandList.Add(new Command("cdvar", 2, Command.Behaviour.HasOptionalArguments,
                 (sender, arguments, optarg) =>
                 {
-                    switch (arguments[0].ToLowerInvariant())
+                    if (!String.IsNullOrEmpty(optarg))
                     {
-                        case "int":
-                            sender.Call("setclientdvar", arguments[1], int.Parse(arguments[2]));
-                            break;
-                        case "float":
-                            sender.Call("setclientdvar", arguments[1], float.Parse(arguments[2]));
-                            break;
-                        case "string":
-                            sender.Call("setclientdvar", arguments[1], arguments[2]);
-                            break;
-                        case "direct":
-                            arguments[2] = arguments[2].Replace(@",", @" ");
-                            sender.SetClientDvar(arguments[1], arguments[2]);
-                            break;
+                        switch (arguments[0].ToLowerInvariant())
+                        {
+                            case "int":
+                                sender.Call("setclientdvar", arguments[1], int.Parse(optarg));
+                                break;
+                            case "float":
+                                sender.Call("setclientdvar", arguments[1], float.Parse(optarg));
+                                break;
+                            case "string":
+                                sender.Call("setclientdvar", arguments[1], optarg);
+                                break;
+                            case "direct":
+                                sender.SetClientDvar(arguments[1], optarg);
+                                break;
+                        }
+                        WriteChatToPlayer(sender, Command.GetString("cdvar", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<type>", arguments[0] },
+                            {"<key>", arguments[1] },
+                            {"<value>", optarg },
+                        }));
                     }
-                    WriteChatToPlayer(sender, Command.GetString("cdvar", "message").Format(new Dictionary<string, string>()
+                    else
                     {
-                        {"<type>", arguments[0] },
-                        {"<key>", arguments[1] },
-                        {"<value>", arguments[2] },
-                    }));
+                        WriteChatToPlayer(sender, Command.GetString("cdvar", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<type>", "string" },
+                            {"<key>", arguments[1] },
+                            {"<value>", UTILS_GetDefCDvar(arguments[1]) }
+                        }));
+                    }
                     return;
                 }));
 
@@ -2055,7 +2075,8 @@ namespace LambAdmin
                     else
                         reportcnt = 4;
                     string[] reports = File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\internal\ChatReports.txt");
-                    for (int i = reports.Length - 1; (i >= 0) && (i > reports.Length - 1 - reportcnt); i--)
+                    reportcnt = Math.Min(reportcnt, reports.Length);
+                    for (int i = reports.Length - reportcnt; i < reports.Length; i++)
                     {
                         WriteChatToPlayer(sender, reports[i]);
                     }
@@ -2148,7 +2169,7 @@ namespace LambAdmin
                 foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Utils\cdvars.txt"))
                 {
                     string[] parts = line.Split('=');
-                    DefaultCDvars.Add(parts[0], parts[1]);
+                    DefaultCDvars.Add(new Dvar { key = parts[0], value = parts[1] });
                 }
             }
             if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))
@@ -2476,109 +2497,135 @@ namespace LambAdmin
 
         public void CMD_applyfilmtweak(Entity sender, string ft)
         {
+            List<Dvar> dvars = new List<Dvar>();
             switch (ft)
             {
                 case "0":
-                    sender.SetClientDvar("r_filmusetweaks", "0");
-                    sender.SetClientDvar("r_filmtweakenable", "0");
-                    sender.SetClientDvar("r_colorMap", "1");
-                    sender.SetClientDvar("r_specularMap", "1");
-                    sender.SetClientDvar("r_normalMap", "1");
-                    return;
+                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "0" });
+                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "0" });
+                    dvars.Add(new Dvar { key = "r_filmtweakenable",         value = "0" });
+                    dvars.Add(new Dvar { key = "r_colorMap",                value = "1" });
+                    dvars.Add(new Dvar { key = "r_specularMap",             value = "1" });
+                    dvars.Add(new Dvar { key = "r_normalMap",               value = "1" });
+                    break;
                 case "1":
-                    sender.SetClientDvar("r_filmtweakdarktint", "0.65 0.7 0.8");
-                    sender.SetClientDvar("r_filmtweakcontrast", "1.3");
-                    sender.SetClientDvar("r_filmtweakbrightness", "0.15");
-                    sender.SetClientDvar("r_filmtweakdesaturation", "0");
-                    sender.SetClientDvar("r_filmusetweaks", "1");
-                    sender.SetClientDvar("r_filmtweaklighttint", "1.8 1.8 1.8");
-                    sender.SetClientDvar("r_filmtweakenable", "1");
-                    return;
+                    dvars.Add(new Dvar { key = "r_filmtweakdarktint",       value = "0.65 0.7 0.8"});
+                    dvars.Add(new Dvar { key = "r_filmtweakcontrast",       value = "1.3"});
+                    dvars.Add(new Dvar { key = "r_filmtweakbrightness",     value = "0.15"});
+                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation",   value = "0"});
+                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "1"});
+                    dvars.Add(new Dvar { key = "r_filmtweaklighttint",      value = "1.8 1.8 1.8"});
+                    dvars.Add(new Dvar { key = "r_filmtweakenable",         value = "1" });
+                    break;
                 case "2":
-                    sender.SetClientDvar("r_filmtweakdarktint", "1.15 1.1 1.3");
-                    sender.SetClientDvar("r_filmtweakcontrast", "1.6");
-                    sender.SetClientDvar("r_filmtweakbrightness", "0.2");
-                    sender.SetClientDvar("r_filmtweakdesaturation", "0");
-                    sender.SetClientDvar("r_filmusetweaks", "1");
-                    sender.SetClientDvar("r_filmtweaklighttint", "1.35 1.3 1.25");
-                    sender.SetClientDvar("r_filmtweakenable", "1");
-                    return;
+                    dvars.Add(new Dvar { key = "r_filmtweakdarktint",       value = "1.15 1.1 1.3"});
+                    dvars.Add(new Dvar { key = "r_filmtweakcontrast",       value = "1.6"});
+                    dvars.Add(new Dvar { key = "r_filmtweakbrightness",     value = "0.2"});
+                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation",   value = "0"});
+                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "1"});
+                    dvars.Add(new Dvar { key = "r_filmtweaklighttint",      value = "1.35 1.3 1.25"});
+                    dvars.Add(new Dvar { key = "r_filmtweakenable",         value = "1" });
+                    break;
                 case "3":
-                    sender.SetClientDvar("r_filmtweakdarktint", "0.8 0.8 1.1");
-                    sender.SetClientDvar("r_filmtweakcontrast", "1.3");
-                    sender.SetClientDvar("r_filmtweakbrightness", "0.48");
-                    sender.SetClientDvar("r_filmtweakdesaturation", "0");
-                    sender.SetClientDvar("r_filmusetweaks", "1");
-                    sender.SetClientDvar("r_filmtweaklighttint", "1 1 1.4");
-                    sender.SetClientDvar("r_filmtweakenable", "1");
-                    return;
+                    dvars.Add(new Dvar { key = "r_filmtweakdarktint",       value = "0.8 0.8 1.1"});
+                    dvars.Add(new Dvar { key = "r_filmtweakcontrast",       value = "1.3"});
+                    dvars.Add(new Dvar { key = "r_filmtweakbrightness",     value = "0.48"});
+                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation",   value = "0"});
+                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "1"});
+                    dvars.Add(new Dvar { key = "r_filmtweaklighttint",      value = "1 1 1.4"});
+                    dvars.Add(new Dvar { key = "r_filmtweakenable",         value = "1" });
+                    break;
                 case "4":
-                    sender.SetClientDvar("r_filmtweakdarktint", "1.8 1.8 2");
-                    sender.SetClientDvar("r_filmtweakcontrast", "1.25");
-                    sender.SetClientDvar("r_filmtweakbrightness", "0.02");
-                    sender.SetClientDvar("r_filmtweakdesaturation", "0");
-                    sender.SetClientDvar("r_filmusetweaks", "1");
-                    sender.SetClientDvar("r_filmtweaklighttint", "0.8 0.8 1");
-                    sender.SetClientDvar("r_filmtweakenable", "1");
-                    return;
+                    dvars.Add(new Dvar { key = "r_filmtweakdarktint",       value = "1.8 1.8 2"});
+                    dvars.Add(new Dvar { key = "r_filmtweakcontrast",       value = "1.25"});
+                    dvars.Add(new Dvar { key = "r_filmtweakbrightness",     value = "0.02"});
+                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation",   value = "0"});
+                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "1"});
+                    dvars.Add(new Dvar { key = "r_filmtweaklighttint",      value = "0.8 0.8 1"});
+                    dvars.Add(new Dvar { key = "r_filmtweakenable",         value = "1"});
+                    break;
                 case "5":
-                    sender.SetClientDvar("r_filmtweakdarktint", "1 1 2");
-                    sender.SetClientDvar("r_filmtweakcontrast", "1.5");
-                    sender.SetClientDvar("r_filmtweakbrightness", "0.07");
-                    sender.SetClientDvar("r_filmtweakdesaturation", "0");
-                    sender.SetClientDvar("r_filmusetweaks", "1");
-                    sender.SetClientDvar("r_filmtweaklighttint", "1 1.2 1");
-                    sender.SetClientDvar("r_filmtweakenable", "1");
-                    return;
+                    dvars.Add(new Dvar { key = "r_filmtweakdarktint",       value = "1 1 2"});
+                    dvars.Add(new Dvar { key = "r_filmtweakcontrast",       value = "1.5"});
+                    dvars.Add(new Dvar { key = "r_filmtweakbrightness",     value = "0.07"});
+                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation",   value = "0"});
+                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "1"});
+                    dvars.Add(new Dvar { key = "r_filmtweaklighttint",      value = "1 1.2 1"});
+                    dvars.Add(new Dvar { key = "r_filmtweakenable",         value = "1"});
+                    break;
                 case "6":
-                    sender.SetClientDvar("r_filmtweakdarktint", "1.5 1.5 2");
-                    sender.SetClientDvar("r_filmtweakcontrast", "1");
-                    sender.SetClientDvar("r_filmtweakbrightness", "0.0.4");
-                    sender.SetClientDvar("r_filmtweakdesaturation", "0");
-                    sender.SetClientDvar("r_filmusetweaks", "1");
-                    sender.SetClientDvar("r_filmtweaklighttint", "1.5 1.5 1");
-                    sender.SetClientDvar("r_filmtweakenable", "1");
-                    return;
+                    dvars.Add(new Dvar { key = "r_filmtweakdarktint",       value = "1.5 1.5 2"});
+                    dvars.Add(new Dvar { key = "r_filmtweakcontrast",       value = "1"});
+                    dvars.Add(new Dvar { key = "r_filmtweakbrightness",     value = "0.0.4"});
+                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation",   value = "0"});
+                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "1"});
+                    dvars.Add(new Dvar { key = "r_filmtweaklighttint",      value = "1.5 1.5 1"});
+                    dvars.Add(new Dvar { key = "r_filmtweakenable",         value = "1"});
+                    break;
                 case "7":
-                    sender.SetClientDvar("r_specularMap", "2");
-                    sender.SetClientDvar("r_normalMap", "0");
-                    return;
+                    dvars.Add(new Dvar { key = "r_specularMap",             value = "2"});
+                    dvars.Add(new Dvar { key = "r_normalMap",               value = "0"});
+                    break;
                 case "8":
-                    sender.SetClientDvar("cg_drawFPS", "1");
-                    sender.SetClientDvar("cg_fovScale", "1.5");
-                    return;
+                    dvars.Add(new Dvar { key = "cg_drawFPS",                value = "1"});
+                    dvars.Add(new Dvar { key = "cg_fovScale",               value = "1.5"});
+                    break;
                 case "9":
-                    sender.SetClientDvar("r_debugShader", "1");
-                    return;
+                    dvars.Add(new Dvar { key = "r_debugShader",             value = "1"});
+                    break;
                 case "10":
-                    sender.SetClientDvar("r_colorMap", "3");
-                    return;
+                    dvars.Add(new Dvar { key = "r_colorMap",                value = "3"});
+                    break;
                 case "11":
-                    sender.SetClientDvar("com_maxfps", "0");
-                    sender.SetClientDvar("con_maxfps", "0");
-                    return;
+                    dvars.Add(new Dvar { key = "com_maxfps",                value = "0"});
+                    dvars.Add(new Dvar { key = "con_maxfps",                value = "0"});
+                    break;
                 case "default":
-                    sender.SetClientDvar("r_filmtweakdarktint", "0.7 0.85 1");
-                    sender.SetClientDvar("r_filmtweakcontrast", "1.4");
-                    sender.SetClientDvar("r_filmtweakdesaturation", "0.2");
-                    sender.SetClientDvar("r_filmusetweaks", "0");
-                    sender.SetClientDvar("r_filmtweaklighttint", "1.1 1.05 0.85");
-                    sender.SetClientDvar("cg_fov", "66");
-                    sender.SetClientDvar("cg_scoreboardpingtext", "1");
-                    sender.SetClientDvar("waypointIconHeight", "13");
-                    sender.SetClientDvar("waypointIconWidth", "13");
-                    sender.SetClientDvar("cl_maxpackets", "100");
-                    sender.SetClientDvar("r_fog", "0");
-                    sender.SetClientDvar("fx_drawclouds", "0");
-                    sender.SetClientDvar("r_distortion", "0");
-                    sender.SetClientDvar("r_dlightlimit", "0");
-                    sender.SetClientDvar("cg_brass", "0");
-                    sender.SetClientDvar("snaps", "30");
-                    sender.SetClientDvar("com_maxfps", "100");
-                    sender.SetClientDvar("clientsideeffects", "0");
-                    sender.SetClientDvar("r_filmTweakBrightness", "0.2");
-                    return;
+                    dvars.Add(new Dvar { key = "r_filmtweakdarktint",       value = "0.7 0.85 1"});
+                    dvars.Add(new Dvar { key = "r_filmtweakcontrast",       value = "1.4"});
+                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation",   value = "0.2"});
+                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "0"});
+                    dvars.Add(new Dvar { key = "r_filmtweaklighttint",      value = "1.1 1.05 0.85"});
+                    dvars.Add(new Dvar { key = "cg_scoreboardpingtext",     value = "1"});
+                    dvars.Add(new Dvar { key = "waypointIconHeight",        value = "13"});
+                    dvars.Add(new Dvar { key = "waypointIconWidth",         value = "13"});
+                    dvars.Add(new Dvar { key = "cl_maxpackets",             value = "100"});
+                    dvars.Add(new Dvar { key = "r_fog",                     value = "0"});
+                    dvars.Add(new Dvar { key = "fx_drawclouds",             value = "0"});
+                    dvars.Add(new Dvar { key = "r_distortion",              value = "0"});
+                    dvars.Add(new Dvar { key = "r_dlightlimit",             value = "0"});
+                    dvars.Add(new Dvar { key = "cg_brass",                  value = "0"});
+                    dvars.Add(new Dvar { key = "snaps",                     value = "30"});
+                    dvars.Add(new Dvar { key = "com_maxfps",                value = "100"});
+                    dvars.Add(new Dvar { key = "clientsideeffects",         value = "0"});
+                    dvars.Add(new Dvar { key = "r_filmTweakBrightness",     value = "0.2" });
+                    dvars.Add(new Dvar { key = "cg_fovScale",               value = "1" });
+                    break;
             }
+            if (PersonalPlayerDvars.ContainsKey(sender.GUID))
+            {
+                if (ft == "0")
+                    PersonalPlayerDvars[sender.GUID] = dvars;
+                else
+                {
+                    Dictionary<string, string> _dvars = PersonalPlayerDvars[sender.GUID].ToDictionary(x => x.key, x => x.value);
+                    foreach (Dvar dvar in dvars)
+                        if (_dvars.ContainsKey(dvar.key))
+                            _dvars[dvar.key] = dvar.value;
+                        else
+                            _dvars.Add(dvar.key, dvar.value);
+                    PersonalPlayerDvars[sender.GUID].Clear();
+                    foreach (KeyValuePair<string, string> dvar in _dvars)
+                        PersonalPlayerDvars[sender.GUID].Add(new Dvar { key = dvar.Key, value = dvar.Value });
+                }
+            }
+            else
+                PersonalPlayerDvars.Add(sender.GUID, dvars);
+            UTILS_SetClientDvars(sender, dvars);
+            if ((ft == "0") && PersonalPlayerDvars.ContainsKey(sender.GUID))
+                PersonalPlayerDvars.Remove(sender.GUID);
+            UTILS_PersonalPlayerDvars_save(PersonalPlayerDvars);
+            
         }
 
         public void CMD_spammessagerainbow(string message, int times = 8, int delay = 500)

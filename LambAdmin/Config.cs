@@ -32,7 +32,7 @@ namespace LambAdmin
             { "Spree_KnifeKill", "^2<attacker> ^3humiliated ^5<victim>"}
         };
 
-        public static Dictionary<string, string> DefaultCDvars = new Dictionary<string, string>();
+        public static List<Dvar> DefaultCDvars = new List<Dvar>();
 
         public static Dictionary<long,string> ChatAlias = new Dictionary<long,string>();
 
@@ -177,7 +177,7 @@ namespace LambAdmin
             {"command_clanvsallspectate_usage" , "^1Usage: !clanvsallspectate <matches...>" },
             {"command_clanvsall_message", "^1<issuer>^5 used ^2clanvsall ^5with terms ^3<identifiers>" },
 
-            {"command_cdvar_usage", "^1Usage: !cdvar <type> <key> <value>" },
+            {"command_cdvar_usage", "^1Usage: !cdvar <type> <key> [value]" },
             {"command_cdvar_message", "^5Dvar (^1<type>^5)^3<key> ^5= ^3<value>" },
 
             {"command_mode_usage", "^1Usage: !mode <DSR>" },
