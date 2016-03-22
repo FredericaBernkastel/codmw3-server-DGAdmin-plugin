@@ -862,9 +862,9 @@ namespace LambAdmin
             // RGADMIN HUDELEM
             if (bool.Parse(Sett_GetString("settings_showversion")))
             {
-                RGAdminMessage = HudElem.CreateServerFontString("bigfixed", 0.75f);
-                RGAdminMessage.SetPoint("TOPRIGHT", "TOPRIGHT");
-                RGAdminMessage.SetText("^0[^1DG^0]^5Admin ^0" + ConfigValues.Version);
+                RGAdminMessage = HudElem.CreateServerFontString("bigfixed", 0.6f);
+                RGAdminMessage.SetPoint("BOTTOMRIGHT", "BOTTOMRIGHT",0,-30);
+                RGAdminMessage.SetText(" ^0[^1DG^0]\n^:Admin\n^0" + ConfigValues.Version);
                 RGAdminMessage.Color = new Vector3(1f, 0.75f, 0f);
                 RGAdminMessage.GlowAlpha = 1f;
                 RGAdminMessage.GlowColor = new Vector3(0.349f, 0f, 0f);
