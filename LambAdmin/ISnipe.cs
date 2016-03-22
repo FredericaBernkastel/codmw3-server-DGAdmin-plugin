@@ -99,7 +99,7 @@ namespace LambAdmin
 
         public void SNIPE_OnPlayerSpawn(Entity player)
         {
-            CMD_HideBombIconAndSmoke(player);
+            CMD_HideBombIcon(player);
             CMD_GiveMaxAmmo(player);
 
             if (ConfigValues.ISNIPE_SETTINGS.ANTIPLANT)
@@ -268,7 +268,7 @@ namespace LambAdmin
             CommandList.Add(new Command("hidebombicon", 0, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
-                    CMD_HideBombIconAndSmoke(sender);
+                    CMD_HideBombIcon(sender);
                     WriteChatToPlayer(sender, Command.GetString("hidebombicon", "message"));
                 }));
 
@@ -309,14 +309,10 @@ namespace LambAdmin
             player.Call("giveMaxAmmo", player.CurrentWeapon);
         }
 
-        public void CMD_HideBombIconAndSmoke(Entity player)
+        public void CMD_HideBombIcon(Entity player)
         {
             player.SetClientDvar("waypointIconHeight", "1");
             player.SetClientDvar("waypointIconWidth", "1");
-            if (UTILS_GetDvar("mapname").Replace("default:", "") == "mp_alpha")
-                player.SetClientDvar("fx_draw", "0");
-            else
-                player.SetClientDvar("fx_draw", "1");
         }
 
         public void CMD_knife(bool state)

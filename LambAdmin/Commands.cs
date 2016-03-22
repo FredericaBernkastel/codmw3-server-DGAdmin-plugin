@@ -2864,7 +2864,7 @@ namespace LambAdmin
                     if (until.Year != 9999)
                     {
                         TimeSpan forhowlong = until - DateTime.Now;
-                        ExecuteCommand(string.Format("dropclient {0} \"^1You are banned from this server for \n^3{1}d {2}m {3}s\"", player.GetEntityNumber(), forhowlong.Days, forhowlong.Hours, forhowlong.Minutes));
+                        ExecuteCommand(string.Format("dropclient {0} \"^1You are banned from this server for ^3{1}d {2}m {3}s\"", player.GetEntityNumber(), forhowlong.Days, forhowlong.Hours, forhowlong.Minutes));
                         return;
                     }
                     else
