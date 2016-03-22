@@ -1,7 +1,7 @@
 ## "DGAdmin" - Call of Duty: MW3 dedicated server plugin
 DG Admin script for Call of Duty: MW3 dedicated server. Based on RGAdmin, modified by **F. Bernkastel**<br>
 Complete admin guide can be found [here](https://github.com/FredericaBernkastel/codmw3-server-DGAdmin-plugin/blob/master/DGAdmin%20guide.docx?raw=true).<br><br>
-**New commands**
+**New commands** (not included in RG Admin)
 ```Javascript
 !apply
     print apply message (commands\apply.txt)
@@ -41,6 +41,21 @@ Complete admin guide can be found [here](https://github.com/FredericaBernkastel/
 !unban-id <ban id>
     Deletes given banentry from banlist.
     You can get banentries by doing !lastbans or !searchbans.
+    
+!report <message>
+    Player can report hackers. Message will be sent to all admins, and saved to history.
+    
+!lastreports [amount]
+    Admins can access to !report history. Count may be 1 – 8, default is 4.
+    
+!setfx <fx> [spawn key]
+    Spawn custom FX at player origin. Triggered by key. If key not specified, default is “activate”.
+    
+!fire
+    Player emit beatiful fire sparks. 
+    
+!suicide
+    Suicide.
 
 ```
 **New features**
