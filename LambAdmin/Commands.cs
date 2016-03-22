@@ -356,7 +356,7 @@ namespace LambAdmin
                 System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\warns.txt", new string[0]);
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\apply.txt"))
-                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\apply.txt", new string[1]{"Wanna join ^1DG^7? Apply at ^2DGClan.pw"});
+                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\apply.txt", new string[1]{"Wanna join ^1DG^7? Apply at ^2dgnetworks.enjin.com"});
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\rules.txt"))
                 System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\rules.txt", new string[1] { "Rule one: ^1No Rules!" });
@@ -2709,29 +2709,36 @@ namespace LambAdmin
                     dvars.Add(new Dvar { key = "cg_fovScale",               value = "1" });
                     break;
             }
-            if (PersonalPlayerDvars.ContainsKey(sender.GUID))
+            try
             {
-                if (ft == "0")
-                    PersonalPlayerDvars[sender.GUID] = dvars;
-                else
+                if (PersonalPlayerDvars.ContainsKey(sender.GUID))
                 {
-                    Dictionary<string, string> _dvars = PersonalPlayerDvars[sender.GUID].ToDictionary(x => x.key, x => x.value);
-                    foreach (Dvar dvar in dvars)
-                        if (_dvars.ContainsKey(dvar.key))
-                            _dvars[dvar.key] = dvar.value;
-                        else
-                            _dvars.Add(dvar.key, dvar.value);
-                    PersonalPlayerDvars[sender.GUID].Clear();
-                    foreach (KeyValuePair<string, string> dvar in _dvars)
-                        PersonalPlayerDvars[sender.GUID].Add(new Dvar { key = dvar.Key, value = dvar.Value });
+                    if (ft == "0")
+                        PersonalPlayerDvars[sender.GUID] = dvars;
+                    else
+                    {
+                        Dictionary<string, string> _dvars = PersonalPlayerDvars[sender.GUID].ToDictionary(x => x.key, x => x.value);
+                        foreach (Dvar dvar in dvars)
+                            if (_dvars.ContainsKey(dvar.key))
+                                _dvars[dvar.key] = dvar.value;
+                            else
+                                _dvars.Add(dvar.key, dvar.value);
+                        PersonalPlayerDvars[sender.GUID].Clear();
+                        foreach (KeyValuePair<string, string> dvar in _dvars)
+                            PersonalPlayerDvars[sender.GUID].Add(new Dvar { key = dvar.Key, value = dvar.Value });
+                    }
                 }
+                else
+                    PersonalPlayerDvars.Add(sender.GUID, dvars);
+                UTILS_SetClientDvars(sender, dvars);
+                if ((ft == "0") && PersonalPlayerDvars.ContainsKey(sender.GUID))
+                    PersonalPlayerDvars.Remove(sender.GUID);
+                UTILS_PersonalPlayerDvars_save(PersonalPlayerDvars);
             }
-            else
-                PersonalPlayerDvars.Add(sender.GUID, dvars);
-            UTILS_SetClientDvars(sender, dvars);
-            if ((ft == "0") && PersonalPlayerDvars.ContainsKey(sender.GUID))
-                PersonalPlayerDvars.Remove(sender.GUID);
-            UTILS_PersonalPlayerDvars_save(PersonalPlayerDvars);
+            catch
+            {
+                WriteLog.Error("Exception at DGAdmin::CMD_applyfilmtweak");
+            }
             
         }
 

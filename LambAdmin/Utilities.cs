@@ -1009,6 +1009,7 @@ namespace LambAdmin
             {
                 player.SetClientDvar(dvar.key, dvar.value);
             }
+            player.SetClientDvar("fx_draw", "1");
             switch (ConfigValues.settings_daytime)
             {
                 case "day": Call("setsunlight", 1f, 1f, 1f); break;
