@@ -2088,6 +2088,16 @@ namespace LambAdmin
             CommandList.Add(new Command("setfx", 1, Command.Behaviour.HasOptionalArguments,
                 (sender, arguments, optarg) =>
                 {
+                    bool fx_valid = true;
+                    Array.ForEach(arguments[0].Split(','), (s) => {
+                        if (!UTILS_ValidateFX(s))
+                            fx_valid = false;
+                    });
+                    if (!fx_valid)
+                    {
+                        WriteChatToPlayer(sender, Command.GetString("setfx", "error"));
+                        return;
+                    }
                     if (!sender.HasField("CMD_SETFX"))
                     {
                         string v = arguments[0];

@@ -360,6 +360,7 @@ namespace LambAdmin
             {"command_setfx_enabled", "FX spawner bound to ^3<key> ^7key"},
             {"command_setfx_changed", "FX spawner set to ^3<fx>"},
             {"command_setfx_spawned", "FX ^3<fx> ^2spawned ^7at ^3<origin>"},
+            {"command_setfx_error", "^1Error: given FX not found."},
 
             {"command_hell_message", "^1Hell ^0Mode ^3Enabled."},
             {"command_hell_usage", "^Usage: !hell"},
