@@ -35,7 +35,7 @@ namespace LambAdmin
         //-------
         public static partial class ConfigValues
         {
-            public static string Version = "v3.2n7";
+            public static string Version = "v3.2n8";
             public static string ConfigPath = @"scripts\DGAdmin\";
             public static string ChatPrefix
             {
@@ -862,10 +862,12 @@ namespace LambAdmin
             // RGADMIN HUDELEM
             if (bool.Parse(Sett_GetString("settings_showversion")))
             {
-                RGAdminMessage = HudElem.CreateServerFontString("hudsmall", 0.5f);
-                RGAdminMessage.SetPoint("BOTTOMRIGHT", "BOTTOMRIGHT");
-                RGAdminMessage.SetText("DG Admin " + ConfigValues.Version);
+                RGAdminMessage = HudElem.CreateServerFontString("bigfixed", 0.75f);
+                RGAdminMessage.SetPoint("TOPRIGHT", "TOPRIGHT");
+                RGAdminMessage.SetText("^0[^1DG^0]^5Admin ^0" + ConfigValues.Version);
                 RGAdminMessage.Color = new Vector3(1f, 0.75f, 0f);
+                RGAdminMessage.GlowAlpha = 1f;
+                RGAdminMessage.GlowColor = new Vector3(0.349f, 0f, 0f);
                 RGAdminMessage.Foreground = true;
                 RGAdminMessage.HideWhenInMenu = true;
             }
@@ -1039,15 +1041,132 @@ namespace LambAdmin
 
         public void UTILS_SetClientNightVision(Entity player)
         {
-            string[,] dvars = new string[5,2] { 
+            string[,] dvars = new string[10,2] { 
                 { "r_filmUseTweaks", "1" }, 
                 { "r_filmTweakEnable", "1" }, 
                 { "r_filmTweakLightTint", "0 0.2 1" }, 
                 { "r_filmTweakDarkTint", "0 0.125 1" },
-                { "r_filmtweakbrightness","0" }
+                { "r_filmtweakbrightness","0" },
+                {"r_glowTweakEnable", "1"},
+                {"r_glowUseTweaks","1"},
+                {"r_glowTweakRadius0","5"},
+                {"r_glowTweakBloomIntensity0","0.5"},
+                {"r_fog", "0"}
             };
-            for (int i = 0; i < 5; i++ )
+            for (int i = 0; i < 10; i++ )
                 player.SetClientDvar(dvars[i,0], dvars[i,1]);
+        }
+
+        public void UTILS_SetHellMod() {
+            string[] list = new string[] { 
+                "fire/car_fire_mp -741.726 127.9078 186.8259",
+                "fire/car_fire_mp -746.7289 -53.34315 192.0534",
+                "fire/car_fire_mp -766.3276 -103.3418 213.1675",
+                "fire/car_fire_mp -561.9498 -132.4966 176.1293",
+                "fire/car_fire_mp -549.1067 -94.50184 199.4765",
+                "fire/car_fire_mp -572.1155 29.96895 201.9723",
+                "fire/car_fire_mp -589.7307 173.5736 246.368",
+                "fire/car_fire_mp -544.9576 67.94726 284.9695",
+                "fire/car_fire_mp -558.2468 86.67757 235.6196",
+                "fire/car_fire_mp -527.1373 94.35648 228.0653",
+                "fire/car_fire_mp -511.9091 99.72758 201.7868",
+                "fire/car_fire_mp -502.6147 153.6443 212.324",
+                "fire/car_fire_mp -499.7265 -52.09038 196.5952",
+                "fire/car_fire_mp -500.0943 -82.36002 189.4241",
+                "fire/car_fire_mp -750.3026 -286.7527 197.5594",
+                "fire/car_fire_mp -820.0682 -299.949 199.7754",
+                "fire/car_fire_mp -833.5555 -382.6624 199.3139",
+                "fire/car_fire_mp -763.6664 -447.7071 209.4525",
+                "fire/car_fire_mp -540.0521 -112.4356 185.476",
+                "fire/car_fire_mp -770.0934 -1358.123 191.3906",
+                "fire/car_fire_mp -800.5062 -1370.291 191.3906",
+                "fire/car_fire_mp -697.7897 -1502.868 237.3132",
+                "fire/car_fire_mp -657.2511 -1529.918 236.0008",
+                "fire/car_fire_mp -739.0823 -1513.038 200.4902",
+                "fire/car_fire_mp -685.9439 -1525.523 216.0745",
+                "fire/car_fire_mp -656.4402 -1557.843 201.057",
+                "fire/car_fire_mp -706.9456 -1566.001 212.2845",
+                "fire/car_fire_mp -735.1216 -1525.2 235.0302",
+                "fire/car_fire_mp -785.8285 -1430.447 159.8727",
+                "fire/car_fire_mp -781.6548 -1393.441 160.6226",
+                "fire/car_fire_mp -721.3155 -1404.557 169.403",
+                "fire/car_fire_mp -1023.336 -1084.734 181.9677",
+                "fire/car_fire_mp -1076.79 -1100.496 177.4189",
+                "fire/car_fire_mp -1092.525 -1081.302 185.7586",
+                "fire/car_fire_mp -1092.419 -1056.805 206.7297",
+                "fire/car_fire_mp -1111.036 -1055.503 171.9781",
+                "fire/car_fire_mp -368.555 -1353.024 216.1874",
+                "fire/car_fire_mp -311.8722 -1348.547 215.7776",
+                "fire/car_fire_mp -263.6784 -1341.829 218.2392",
+                "fire/car_fire_mp -197.5623 -1374.538 223.8046",
+                "fire/car_fire_mp -220.5542 -1420.733 219.851",
+                "fire/car_fire_mp -260.6386 -1432.63 218.2054",
+                "fire/car_fire_mp -282.946 -1395.434 214.258",
+                "fire/car_fire_mp -295.6677 -1402.59 226.7604",
+                "fire/car_fire_mp -312.2665 -1392.842 236.1707",
+                "fire/car_fire_mp -313.3947 -1431.607 240.9264",
+                "fire/car_fire_mp -246.2982 -1419.802 268.4792",
+                "fire/car_fire_mp -203.2566 -1414.628 265.036",
+                "fire/car_fire_mp -230.7615 -1388.27 263.0937",
+                "fire/car_fire_mp -174.7606 -1069.309 481.0146",
+                "fire/car_fire_mp -1373.858 -1223.6 175.7884",
+                "fire/car_fire_mp -1398.202 -1183.905 174.6312",
+                "fire/car_fire_mp -1417.298 -1215.233 185.0096",
+                "fire/car_fire_mp -1144.135 -1453.069 152.1256",
+                "fire/car_fire_mp -586.965 -97.91954 175.2606",
+                "fire/car_fire_mp -592.9798 -46.85965 176.1271",
+                "fire/car_fire_mp -582.035 14.52852 191.125",
+                "fire/car_fire_mp -583.3083 -17.12712 181.7186",
+                "fire/car_fire_mp -554.8394 173.5616 211.0177",
+                "fire/car_fire_mp -554.5637 170.8945 230.507",
+                "fire/car_fire_mp -547.4115 233.4936 215.5837",
+                "fire/car_fire_mp -528.2179 212.7749 213.8737",
+                "fire/car_fire_mp -993.1925 21.8281 348.125",
+                "fire/car_fire_mp -984.5154 -12.24416 373.335",
+                "fire/car_fire_mp -1019.694 3.782988 367.581",
+                "smoke/bg_smoke_plume -313.9216 -1405.47 266.6604",
+                "smoke/bg_smoke_plume -701.9982 -1517.155 225.1734",
+                "smoke/bg_smoke_plume -769.1347 -1376.464 224.798",
+                "smoke/bg_smoke_plume -1281.853 -1456.973 152.1338",
+                "smoke/bg_smoke_plume -1264.148 -1428.778 152.1347",
+                "smoke/bg_smoke_plume -1368.727 -1313.534 154.4869",
+                "smoke/bg_smoke_plume -1415.86 -1238.368 173.8684",
+                "smoke/bg_smoke_plume -1097.656 -1114.722 181.1771",
+                "smoke/bg_smoke_plume -1147.323 -1101.099 174.4035",
+                "smoke/bg_smoke_plume -1251.073 -1148.898 168.4118",
+                "smoke/bg_smoke_plume -1345.156 -1193.335 162.5927",
+                "smoke/bg_smoke_plume -764.8975 -452.6243 227.4975",
+                "smoke/bg_smoke_plume -770.9753 -375.5204 225.8042",
+                "smoke/bg_smoke_plume -774.4709 -91.01746 219.3868",
+                "smoke/bg_smoke_plume -776.0869 58.22653 215.8386",
+                "smoke/bg_smoke_plume -777.2213 151.9467 213.6097",
+                "smoke/bg_smoke_plume -548.829 209.9325 238.3743",
+                "smoke/bg_smoke_plume -536.4377 86.45039 239.1204",
+                "smoke/bg_smoke_plume -528.6058 -41.20591 235.5137",
+                "smoke/bg_smoke_plume -804.9241 -222.3701 174.1253",
+                "smoke/bg_smoke_plume -541.8279 291.3926 176.2325",
+                "smoke/bg_smoke_plume -705.7064 281.2861 174.6353",
+                "smoke/bg_smoke_plume -907.6201 258.1046 175.9906",
+                "smoke/bg_smoke_plume -1066.609 -1460.65 202.0231"
+            };
+            Array.ForEach(list, (row) => {
+                ((Func<string[], bool>)((fx) => {
+                    try
+                    {
+                        Call("triggerfx", 
+                            Call<Entity>("spawnFx", 
+                                Call<int>("loadfx", fx[0]), 
+                                new Vector3(
+                                    Single.Parse(fx[1]), 
+                                    Single.Parse(fx[2]), 
+                                    Single.Parse(fx[3])), 
+                                new Vector3(0, 0, 1), 
+                                new Vector3(0, 0, 0)));
+                        return true;
+                    }
+                    catch{return false;}
+                }))(row.Split(' '));
+            });
         }
 
         public string UTILS_GetDefCDvar(string key)

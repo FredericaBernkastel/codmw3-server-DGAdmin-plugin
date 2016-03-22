@@ -1,3 +1,7 @@
+v3.2.8:
+ * COMMAND: !setfx <fx> [spawn key]
+ * COMMAND: !fire
+ * COMMAND: !suicide
 v3.2.7:
  * FIXED: losing !ft after restart
  * CHANGED: !cdvar <type> <key> <value> -> !cdvar <type> <key> [value]

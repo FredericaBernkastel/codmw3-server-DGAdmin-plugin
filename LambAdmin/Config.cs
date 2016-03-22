@@ -354,7 +354,21 @@ namespace LambAdmin
 
             
             {"command_lastreports_usage", "^1Usage: !lastreports [count]. Cont may be 1..8" },
-            {"command_lastreports_message", "^;<sender>: ^3<message>" }
+            {"command_lastreports_message", "^;<sender>: ^3<message>" },
+
+            {"command_setfx_usage", "^Usage: !setfx <fx> [spawn key]"},
+            {"command_setfx_enabled", "FX spawner bound to ^3<key> ^7key"},
+            {"command_setfx_changed", "FX spawner set to ^3<fx>"},
+            {"command_setfx_spawned", "FX ^3<fx> ^2spawned ^7at ^3<origin>"},
+
+            {"command_hell_message", "^1Hell ^0Mode ^3Enabled."},
+            {"command_hell_usage", "^Usage: !hell"},
+            {"command_hell_error1", "^1Error: Hell mode already active."},
+            {"command_hell_error2", "^1Error: Hell mode avaliable only for ^3Seatown"},
+
+            {"command_fire_usage", "^1Usage: !fire"},
+
+            {"command_suicide_usage", "^Usage: !suicide"}
         };
 
         public static void CFG_ReadConfig()

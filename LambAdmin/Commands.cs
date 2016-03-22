@@ -14,6 +14,8 @@ namespace LambAdmin
         public static partial class ConfigValues
         {
             private static string DayTime = "day";
+            public static bool HellMode = false;
+ 
             public static int settings_warn_maxwarns
             {
                 get
@@ -2080,6 +2082,101 @@ namespace LambAdmin
                     {
                         WriteChatToPlayer(sender, reports[i]);
                     }
+                }));
+
+            // SETFX
+            CommandList.Add(new Command("setfx", 1, Command.Behaviour.HasOptionalArguments,
+                (sender, arguments, optarg) =>
+                {
+                    if (!sender.HasField("CMD_SETFX"))
+                    {
+                        string v = arguments[0];
+                        sender.SetField("CMD_SETFX", new Parameter(v));
+                        string key = String.IsNullOrEmpty(optarg) ? "+activate" : optarg;
+                        if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\setfx.txt"))
+                            System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\setfx.txt", new string[] { }); 
+                        sender.Call("notifyonplayercommand", "spawnfx", key);
+                        sender.OnNotify("spawnfx", ent =>
+                        {
+                            using (StreamWriter file = File.AppendText(ConfigValues.ConfigPath + @"Commands\internal\setfx.txt"))
+                            {
+                                Array.ForEach(sender.GetField<string>("CMD_SETFX").Split(','), (s) =>
+                                {
+                                    Call("triggerfx",Call<Entity>("spawnFx", Call<int>("loadfx", s), sender.Origin, new Vector3(0, 0, 1), new Vector3(0, 0, 0)));
+                                    WriteChatToPlayer(sender, Command.GetString("setfx", "spawned").Format(new Dictionary<string, string>()
+                                    {
+                                        {"<fx>", s },
+                                        {"<origin>", sender.Origin.ToString() },
+                                    }));
+                                    file.WriteLine("<fx> <x> <y> <z>".Format(new Dictionary<string,string>(){
+                                        {"<fx>", s},
+                                        {"<x>", sender.Origin.X.ToString()},
+                                        {"<y>", sender.Origin.Y.ToString()},
+                                        {"<z>", sender.Origin.Z.ToString()}
+                                    }));
+                                });
+                            };
+                        });
+                        WriteChatToPlayer(sender, Command.GetString("setfx", "enabled").Format(new Dictionary<string, string>()
+                        {
+                            {"<key>", @"[[{" + key + @"}]]"}
+                        }));
+                    }
+                    else
+                    {
+                        sender.SetField("CMD_SETFX", arguments[0]);
+                        WriteChatToPlayer(sender, Command.GetString("setfx", "changed").Format(new Dictionary<string, string>()
+                        {
+                            {"<fx>", arguments[0]}
+                        }));
+                    }
+                }));
+
+
+            // HELL
+            CommandList.Add(new Command("hell", 0, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    if (!ConfigValues.HellMode)
+                    {
+                        if (UTILS_GetDvar("mapname") == "mp_seatown")
+                        {
+                            ConfigValues.HellMode = true;
+                            UTILS_SetHellMod();
+                            WriteChatToAll(Command.GetString("hell", "message"));
+                        }
+                        else
+                        {
+                            WriteChatToPlayer(sender, Command.GetString("hell", "error2"));
+                        }
+                    }
+                    else
+                    {
+                        WriteChatToPlayer(sender, Command.GetString("hell", "error1"));
+                    }
+                }));
+
+            // FIRE
+            CommandList.Add(new Command("fire", 0, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    //Entity fx = Call<Entity>("playfxontag", Call<int>("loadfx", "fire/car_fire_mp"), sender, "tag_origin");
+                    int addr = Call<int>("loadfx", "misc/flares_cobra");
+                    OnInterval(200, () => {
+                        Call("playfx", addr, sender.Call<Vector3>("GetEye"));
+                        return true;
+                    });
+                    WriteChatToPlayer(sender, "^1FIREEEEEEEEEEEE");
+                }));
+
+            // SUICIDE
+            CommandList.Add(new Command("suicide", 0, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    AfterDelay(100, () => {
+                        sender.Suicide();
+                    });                       
+                    
                 }));
 
             if (ConfigValues.settings_enable_misccommands)
