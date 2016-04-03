@@ -1,3 +1,8 @@
+v3.2.9:
+ * COMMAND: !swpassword [password]
+ * COMMAND: !yes
+ * COMMAND: !no
+ * COMMAND: !sdvar <key> [value]
 v3.2.8:
  * COMMAND: !setfx <fx> [spawn key]
  * COMMAND: !fire

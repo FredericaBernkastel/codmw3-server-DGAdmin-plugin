@@ -180,6 +180,9 @@ namespace LambAdmin
             {"command_cdvar_usage", "^1Usage: !cdvar <type> <key> [value]" },
             {"command_cdvar_message", "^5Dvar (^1<type>^5)^3<key> ^5= ^3<value>" },
 
+            {"command_sdvar_usage", "^1Usage: !sdvar <key> [value]" },
+            {"command_sdvar_message", "^5Server Dvar ^3<key> ^5= ^3<value>" },
+
             {"command_mode_usage", "^1Usage: !mode <DSR>" },
             {"command_mode_message", "^5DSR was changed by ^1<issuer>^5 to ^2<dsr>^5." },
 
@@ -369,7 +372,13 @@ namespace LambAdmin
 
             {"command_fire_usage", "^1Usage: !fire"},
 
-            {"command_suicide_usage", "^Usage: !suicide"}
+            {"command_suicide_usage", "^1Usage: !suicide"},
+
+            {"command_svpassword_usage", "^1Usage !svpassword [password]"},
+
+            {"command_yes_usage", "^1Usage: !yes"},
+
+            {"command_no_usage", "^1Usage: !no"},
         };
 
         public static void CFG_ReadConfig()

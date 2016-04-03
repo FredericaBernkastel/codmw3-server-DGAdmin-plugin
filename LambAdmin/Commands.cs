@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using InfinityScript;
 using System.IO;
@@ -85,9 +86,13 @@ namespace LambAdmin
 
         public class Command
         {
-            public enum Behaviour
+            [Flags]
+            public enum Behaviour : int
             {
-                Normal, HasOptionalArguments, OptionalIsRequired
+                Normal = 1, 
+                HasOptionalArguments = 2,
+                OptionalIsRequired = 3, 
+                MustBeConfirmed = 4
             };
 
             private Action<Entity, string[], string> action;
@@ -116,7 +121,7 @@ namespace LambAdmin
                 {
                     if (behaviour.HasFlag(Behaviour.OptionalIsRequired) && string.IsNullOrWhiteSpace(optionalargument))
                     {
-                        script.WriteChatToPlayer(sender, GetString(name, "usage"));
+                        script.WriteChatToPlayer(sender, "2"+GetString(name, "usage"));
                         return;
                     }
                 }
@@ -124,6 +129,21 @@ namespace LambAdmin
                 {
                     script.WriteChatToPlayer(sender, GetString(name, "usage"));
                     return;
+                }
+                if (behaviour.HasFlag(Behaviour.MustBeConfirmed))
+                {
+                    if (sender.GetField<string>("CurrentCommand") != message)
+                    {
+                        script.WriteChatToPlayerMultiline(sender, new string[] { 
+                            "^5-->You trying ^1UNSAFE ^5command", 
+                            "^5-->^3" + message,
+                            "^5-->Confirm (^1!yes ^5/ ^2!no^5)"
+                        }, 50);
+                        sender.SetField("CurrentCommand", message);
+                        return;
+                    }
+                    else
+                        sender.SetField("CurrentCommand", "");
                 }
                 try
                 {
@@ -1094,13 +1114,27 @@ namespace LambAdmin
                     }
                     else
                     {
+                        string dvar = UTILS_GetDefCDvar(arguments[1]);
                         WriteChatToPlayer(sender, Command.GetString("cdvar", "message").Format(new Dictionary<string, string>()
                         {
                             {"<type>", "string" },
                             {"<key>", arguments[1] },
-                            {"<value>", UTILS_GetDefCDvar(arguments[1]) }
+                            {"<value>",String.IsNullOrEmpty(dvar)?"NULL":dvar }
                         }));
                     }
+                    return;
+                }));
+
+            // SDVAR
+            CommandList.Add(new Command("sdvar", 1, Command.Behaviour.HasOptionalArguments,
+                (sender, arguments, optarg) =>
+                {
+                    Call("setdvar", arguments[0], optarg);
+                    WriteChatToPlayer(sender, Command.GetString("sdvar", "message").Format(new Dictionary<string, string>()
+                    {
+                        {"<key>", arguments[0] },
+                        {"<value>", String.IsNullOrEmpty(optarg)?"NULL":optarg },
+                    }));
                     return;
                 }));
 
@@ -2189,6 +2223,92 @@ namespace LambAdmin
                     
                 }));
 
+            // SVPASSWORD
+            CommandList.Add(new Command("svpassword", 0, Command.Behaviour.HasOptionalArguments | Command.Behaviour.MustBeConfirmed,
+                (sender, arguments, optarg) =>
+                {
+                    string path = @"players2\server.cfg";
+                    optarg = String.IsNullOrEmpty(optarg) ? "" : optarg;
+                    if (optarg.IndexOf('"') != -1)
+                    {
+                        WriteChatToPlayer(sender, "^1Error: Password has forbidden characters. Try another.");
+                        return;
+                    }
+                    if (!System.IO.File.Exists(path))
+                    {
+                        WriteChatToPlayer(sender, "^1Error: ^3" + path + "^1 not found.");
+                        return;
+                    }
+
+                    WriteChatToAll(@"^3<issuer> ^1executed ^3!svpassword".Format(new Dictionary<string, string>()
+                        {
+                            {"<issuer>", sender.Name },
+                        }));
+
+                    AfterDelay(2000, () =>
+                    {
+                        WriteChatToAllMultiline(new string[] { 
+                                "^1Server will be killed in:", 
+                                "^35", 
+                                "^34", 
+                                "^33", 
+                                "^32", 
+                                "^31", 
+                                "^30" 
+                            }, 1000);
+                    });
+                    AfterDelay(8000, () =>
+                    {
+                        string password = "seta g_password \"" + optarg + "\"";
+                        List<string> lines = File.ReadAllLines(path).ToList();
+                        Regex regex = new Regex(@"seta g_password ""[^""]*""");
+
+                        bool found = false;
+                        for (int i = 0; i < lines.Count; i++)
+                        {
+                            if (regex.Matches(lines[i]).Count == 1)
+                            {
+                                found = true;
+                                lines[i] = password;
+                                break;
+                            }
+                        }
+                        if (!found)
+                            lines.Add(password);
+                        File.WriteAllLines(path, lines.ToArray());
+                        foreach (Entity player in Players)
+                            CMD_kick(player, "^3Server killed");
+                        AfterDelay(1000, () => Environment.Exit(-1));
+                    });
+                }));
+
+            // YES
+            CommandList.Add(new Command("yes", 0, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    string command = sender.GetField<string>("CurrentCommand");
+                    if (String.IsNullOrEmpty(command))
+                    {
+                        WriteChatToPlayer(sender, "^3Warning: Command buffer is empty.");
+                        return;
+                    }
+                    ProcessCommand(sender, sender.Name, command);
+                }));
+
+            // NO
+            CommandList.Add(new Command("no", 0, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    string command = sender.GetField<string>("CurrentCommand");
+                    if (String.IsNullOrEmpty(command))
+                    {
+                        WriteChatToPlayer(sender, "^3Warning: Command buffer is empty.");
+                        return;
+                    }
+                    sender.SetField("CurrentCommand", "");
+                    WriteChatToPlayer(sender, "^3Command execution aborted (^1"+command+"^3)");
+                }));
+
             if (ConfigValues.settings_enable_misccommands)
             {
                 // FORCECOMMAND // FC
@@ -2241,6 +2361,7 @@ namespace LambAdmin
                             {"<targetf>", target.GetFormattedName(database) },
                         }));
                     }));
+
             }
 
             #endregion
@@ -2881,7 +3002,8 @@ namespace LambAdmin
                     }
                 });
             }
-
+            if (!player.HasField("CurrentCommand"))
+                player.SetField("CurrentCommand", new Parameter((string)""));
         }
 
         public void CMDS_OnConnecting(Entity player)
