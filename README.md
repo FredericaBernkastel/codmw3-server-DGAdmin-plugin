@@ -12,9 +12,14 @@ Complete admin guide can be found [here](https://github.com/FredericaBernkastel/
 !sunlight <float RED> <float GREEN> <float BLUE>
     set sunlight color multiplier
     
-!cdvar <int/foat/string/direct> <key> <value>
+!cdvar <int/foat/string/direct> <key> [value]
     set custom cdvar. In direct mode, 
-    you can separate multiple values by comma.
+    you can separate multiple values by space.
+    If value not specified, default value will be returned.
+    
+!sdvar <key> [value]
+    Set server dvar. If value not specified, NULL value will be set. 
+    Multiple values separated by space.
     
 !alias <player> [alias]
     set chat alias *(leave [alias] field to reset it)*
@@ -56,6 +61,16 @@ Complete admin guide can be found [here](https://github.com/FredericaBernkastel/
     
 !suicide
     Suicide.
+    
+!svpassword [password]
+    Will set server password in “players2\server.cfg”, and kill server.
+    Server should be run under daemon, i.e. “Alani’s server manager” to be auto-restarted.
+    
+!yes
+    Confirm command execution.
+    
+!no
+    Abort command execution.
 
 ```
 **New features**
