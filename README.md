@@ -1,5 +1,5 @@
 ## "DGAdmin" - Call of Duty: MW3 dedicated server plugin
-DG Admin script for Call of Duty: MW3 dedicated server. Based on RGAdmin, modified by **F. Bernkastel**<br>
+DG Admin script for Call of Duty: MW3 dedicated server. Based on RGAdmin v1.05, modified by **F. Bernkastel**<br>
 Complete admin guide can be found [here](https://docs.google.com/document/d/1zOgLHob12t7Cgs304sQ7K9-yhTJxivdSPJ-9qRftodo/edit?pref=2&pli=1).<br><br>
 **New commands** (not included in RG Admin)
 ```Javascript
@@ -71,7 +71,15 @@ Complete admin guide can be found [here](https://docs.google.com/document/d/1zOg
     
 !no
     Abort command execution.
+    
+    
+*Misc comands (not enabled by default)*
 
+!ac130 <player>
+    Hand-held AC130 gun
+
+!3rdperson
+    Forced 3rd person mode.
 ```
 **New features**
  - Spree messages (option: settings_enable_spree_messages)
