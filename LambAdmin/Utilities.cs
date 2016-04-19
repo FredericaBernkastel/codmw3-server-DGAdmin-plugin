@@ -35,7 +35,7 @@ namespace LambAdmin
         //-------
         public static partial class ConfigValues
         {
-            public static string Version = "v3.2n9";
+            public static string Version = "v3.3n10";
             public static string ConfigPath = @"scripts\DGAdmin\";
             public static string ChatPrefix
             {
@@ -1058,6 +1058,23 @@ namespace LambAdmin
                 player.SetClientDvar(dvars[i,0], dvars[i,1]);
         }
 
+        public void UTILS_SetClientInShadowFX(Entity player)
+        {
+            player.SetClientDvar("r_filmUseTweaks", "1");
+            player.SetClientDvar("r_filmTweakEnable", "1");
+            player.SetClientDvar("r_filmTweakDesaturation", "1");
+            player.SetClientDvar("r_filmTweakDesaturationDark", "1");
+            player.SetClientDvar("r_filmTweakInvert", "1");
+            player.SetClientDvar("r_glowTweakEnable", "1");
+            player.SetClientDvar("r_glowUseTweaks", "1");
+            player.SetClientDvar("r_glowTweakRadius0", "10");
+            player.SetClientDvar("r_filmTweakContrast", "3");
+            player.SetClientDvar("r_filmTweakBrightness", "1");
+            player.SetClientDvar("r_filmTweakLightTint", "1 0.125 0");
+            player.SetClientDvar("r_filmTweakDarkTint", "0 0 0");
+            player.Call("ThermalVisionOn");
+        }
+
         public void UTILS_SetHellMod() {
             string[] list = new string[] { 
                 "fire/car_fire_mp -741.726 127.9078 186.8259",
@@ -1771,6 +1788,20 @@ namespace LambAdmin
                         break;
                 }
             }
+        }
+
+        public T UTILS_GetFieldSafe<T>(Entity player, string field)
+        {
+            if (player.HasField(field))
+                return player.GetField<T>(field);
+            return default(T);
+        }
+
+        public string UTILS_ResolveGUID(long GUID)
+        {
+            if (System.IO.File.Exists(string.Format(ConfigValues.ConfigPath + @"Utils\playerlogs\{0}.txt", GUID)))
+                return System.IO.File.ReadAllLines(string.Format(ConfigValues.ConfigPath + @"Utils\playerlogs\{0}.txt", GUID)).Last();
+            return "unknown";
         }
 
         public SerializableDictionary<long, List<Dvar>> UTILS_PersonalPlayerDvars_load()

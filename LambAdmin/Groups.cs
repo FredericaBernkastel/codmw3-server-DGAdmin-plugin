@@ -72,7 +72,7 @@ namespace LambAdmin
                         "developer:password:*all*:^0[^;D^0]^",
                         "owner:password:*all*:^0[^1O^2w^3n^4e^5r^0]^3",
                         "admin:password:scream,whois,changeteam,yell,gametype,mode,login,map,status,unban,unban-id,kick,tmpban,ban,warn,unwarn,getwarns,res,setafk,setteam,balance,clanvsall,clanvsallspectate,login,lastreports:^0[^1Admin^0]^7",
-                        "leader:DGLeader:*all*:^0[^1L^2e^3a^4d^5e^7r^0]^2",
+                        "leader:password:*all*:^0[^1L^2e^3a^4d^5e^7r^0]^2",
                         "trial:password:login,warn,unwarn,kick:^0[^5Trial^0]^7",
                         "member:password:login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,lastreports:^0[^5Member^0]^7",
                         "friend:password:login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,map,mode,tmpban,lastreports:^0[^6Friend^0]^7",

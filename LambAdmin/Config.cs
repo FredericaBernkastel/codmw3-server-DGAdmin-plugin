@@ -23,12 +23,15 @@ namespace LambAdmin
             { "FormattedNameRankless", "<name>" },
             { "Message_HardscopingNotAllowed", "^1Hardscoping is not allowed!" },
             { "Message_PlantingNotAllowed", "^1Planting not allowed!" },
+            { "Message_CRTK_NotAllowed", "^1CRTK not allowed!"},
+            { "Message_CRNS_NotAllowed", "^1Close Range No Scope not allowed!"},
+            { "Message_BoltCancel_NotAllowed", "^1Boltcancel not allowed!"},
             { "Spree_Headshot", "^3<attacker> ^7killed ^3<victim> ^7by ^2 Headshot"},
             { "Spree_Kills_5", "Nice spree, ^2<attacker>! ^7got ^35 ^7kills in a row."},
             { "Spree_Kills_10", "Nice spree, ^2<attacker>! ^7got ^310 ^7kills in a row!"},
             { "Spree_Ended", "^2<victim>'s ^7killing spree ended (^3<killstreak> ^7kills). He was killed by ^3<attacker>!"},
             { "Spree_Explosivekill", "^3<victim> ^7has exploded!"},
-            { "Spree_Trophykill", "^1L^2O^1L^9Z!!!! ^3<attacker> ^7killed ^3<victim> ^7by ^2Trophy^1!!!"},
+            { "Spree_Trophykill", "^1L^2O^1L^9Z! ^3<attacker> ^7killed ^3<victim> ^7by ^2Trophy^1!"},
             { "Spree_KnifeKill", "^2<attacker> ^3humiliated ^5<victim>"}
         };
 
@@ -41,9 +44,13 @@ namespace LambAdmin
             { "settings_isnipe", "true" },
             { "settings_isnipe_antiplant", "true" },
             { "settings_isnipe_antihardscope", "true" },
+            { "settings_isnipe_antinoscope", "true"},
+            { "settings_isnipe_anticrtk", "false"},
+            { "settings_isnipe_antiboltcancel", "false"},
             { "settings_isnipe_antiknife", "true" },
             { "settings_isnipe_antifalldamage", "true" },
             { "settings_isnipe_antiweaponhack", "true" },
+            { "settings_enable_xlrstats","true"},
             { "settings_teamnames_allies", "^0[^1DG^0] ^7Clan" },
             { "settings_teamnames_axis", "^7Noobs" },
             { "settings_teamicons_allies", "cardicon_weed" },
@@ -156,6 +163,7 @@ namespace LambAdmin
 
             {"command_savegroups_usage", "^1Usage: !savegroups" },
             {"command_savegroups_message", "^2Groups have been saved." },
+            {"command_savegroups_message_xlr", "^2XLRStats db have been saved." },
 
             {"command_res_usage", "^1Usage: !res" },
 
@@ -199,11 +207,11 @@ namespace LambAdmin
             {"command_pban_message", "^3<target> ^7 was ^1permanently banned ^7by ^1<issuer>" },
 
             {"command_unban_usage", "^1Usage: !unban <name>"},
-            {"command_unban_message", "^3Ban entry removed. ^1<banid>: <name>, <guid>, <ip>, <hwid>, <time>"},
+            {"command_unban_message", "^3Ban entry removed. ^1<banid>: <name>, <guid>, <hwid>, <time>"},
             {"command_unban_multiple_entries_found", "^1Error: Multiple entries found. Use ^3!searchbans > !unban-id"},
 
-            {"command_unban-id_usage", "^1Usage: !unban-id <playerinfo>" },
-            {"command_unban-id_message", "^3Ban entry removed." },
+            {"command_unban-id_usage", "^1Usage: !unban-id <ban ID>" },
+            {"command_unban-id_message", "^3Ban entry removed. ^1<banid>: <name>, <guid>, <hwid>, <time>" },
 
             {"command_lastbans_usage", "^1Usage: !lastbans [amount]" },
             {"command_lastbans_firstline", "^2Last <nr> bans:" },
@@ -221,7 +229,7 @@ namespace LambAdmin
             {"command_rage_usage", "^1Usage: !rage" },
             {"command_rage_message", "^3<issuer> ^5ragequit." },
             {"command_rage_kickmessage", "RAGEEEEEEEEE" },
-            {"command_rage_custommessagenames", "lambder,juice,future,hotshot,destiny,peppah,moskvish,myst" },
+            {"command_rage_custommessagenames", "lambder,juice,future,hotshot,destiny,peppah,moskvish,myst,bernkastel" },
             {"command_rage_message_lambder", "^3<issuerf> ^5went back to fucking coding." },
             {"command_rage_message_juice", "^3<issuer> ^5squeezed outta here." },
             {"command_rage_message_future", "^3<issuer> ^5ragequit again." },
@@ -230,6 +238,7 @@ namespace LambAdmin
             {"command_rage_message_peppah", "^3<issuer> ^5went back to the fap cave." },
             {"command_rage_message_moskvish", "^3<issuer> ^5is done with this fucking lag." },
             {"command_rage_message_myst", "^3<issuer> ^5will rek you scrubs later." },
+            {"command_rage_message_bernkastel", "^3<issuer>^5: Sayonara, BAKEMI. ^6nipa~ ^1=^_^="},
 
             {"command_loadgroups_usage", "^1Usage: !loadgroups" },
             {"command_loadgroups_message", "^2Groups configuration loaded." },
@@ -329,8 +338,9 @@ namespace LambAdmin
             {"command_dbsearch_message_found", "^3<playerinfo>" },
             {"command_dbsearch_message_notfound", "^1Player info not found in the database." },
 
-            {"command_ac130_usage", "^1Usage: !ac130 <player>" },
-            {"command_ac130_message", "^7AC130 Given to ^1<target>^7." },
+            {"command_ac130_usage", "^1Usage: !ac130 <all | <player>> [-p]" },
+            {"command_ac130_message", "^1AC130 ^7Given to ^1<target>^7." },
+            {"command_ac130_all", "^1AC130 ^7Given to ALL by ^1<issuerf>"},
 
             {"command_fixplayergroup_usage", "^1Usage: !fixplayergroup <player>" },
             {"command_fixplayergroup_message", "^2User group fixed." },
@@ -379,6 +389,37 @@ namespace LambAdmin
             {"command_yes_usage", "^1Usage: !yes"},
 
             {"command_no_usage", "^1Usage: !no"},
+
+            {"command_3rdperson_usage", "^1Usage: !3rdperson"},
+            {"command_3rdperson_message", "^33RD person mode enabled by ^2<issuerf>"},
+
+            {"command_fly_usage", "^1Usage: !fly <on|off> [spawn key]"},
+            {"command_fly_enabled", "^3Fly mode ^2enabled. ^3Key: <key>"},
+            {"command_fly_disabled", "^3Fly mode ^1disabled."},
+
+            {"command_jump_usage", "^1Usage: !jump <<height> | default>"},
+            {"command_jump_message", "^3Jump height has been set to: ^2<height>"},
+
+            {"command_speed_usage", "^1Usage: !speed <<speed> | default>"},
+            {"command_speed_message", "^3Speed has been set to: ^2<speed>"},
+
+            {"command_gravity_usage", "^1Usage: !gravity <<g> | default>"},
+            {"command_gravity_message", "^3Gravity has been set to: ^2<g> m / s ^ 2"},
+
+            {"command_teleport_usage", "^1Usage: !teleport <player1> <player2>"},
+            {"command_teleport_message", "^3<player1> ^2teleported to ^3<player2>"},
+
+            {"command_register_usage", "^1Usage: !register"},
+            {"command_register_message", "^3You ^2registered ^3to XLRStats"},
+            {"command_register_error", "^1Error: ^3you already registered to XLRStats"},
+
+            {"command_xlrstats_usage", "^1Usage: !xlrstats [player]"},
+            {"command_xlrstats_message", "^3Score:^2<score> ^3kills:^2<kills> ^3deaths:^2<deaths>^3 k/d:^2<kd>^3 headshots:^2<headshots>^3 TK_kills:^2<tk_kills> ^3 accuracy:^2<precision>°/."},
+            {"command_xlrstats_error", "^1Error: ^3Player not registered to XLRStats"},
+
+            {"command_xlrtop_usage", "^1Usage: !xlrtop [amount]. 1 <= amount <= 8"},
+            {"command_xlrtop_error", "^1Error: ^2XLR db is empty."},
+            {"command_xlrtop_message", "^1<place>) ^6<player>: ^3score:^2<score> ^3k:^2<kills> ^3kd:^2<kd> ^3acc:^2<precision>°/."}
         };
 
         public static void CFG_ReadConfig()

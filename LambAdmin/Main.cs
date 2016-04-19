@@ -43,6 +43,14 @@ namespace LambAdmin
             {
                 SNIPE_OnServerStart();
             }
+            PersonalPlayerDvars = UTILS_PersonalPlayerDvars_load();
+            if (ConfigValues.settings_enable_chat_alias)
+                InitChatAlias();
+            if (ConfigValues.settings_enable_xlrstats)
+            {
+                XLR_OnServerStart();
+                XLR_InitCommands();
+            }
             #endregion
 
         }
@@ -85,6 +93,9 @@ namespace LambAdmin
         {
             WriteLog.Info("Saving groups...");
             database.SaveGroups();
+            if (ConfigValues.settings_enable_xlrstats)
+                xlr_database.Save();
+            UTILS_PersonalPlayerDvars_save(PersonalPlayerDvars);
             MAIN_ResetSpawnAction();
             base.OnExitLevel();
         }

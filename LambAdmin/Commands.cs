@@ -52,6 +52,13 @@ namespace LambAdmin
                     return bool.Parse(Sett_GetString("settings_enable_spree_messages"));
                 }
             }
+            public static bool settings_enable_xlrstats
+            {
+                get
+                {
+                    return bool.Parse(Sett_GetString("settings_enable_xlrstats"));
+                }
+            }
             public static string settings_daytime
             {
                 get
@@ -86,13 +93,12 @@ namespace LambAdmin
 
         public class Command
         {
-            [Flags]
-            public enum Behaviour : int
+            [Flags] public enum Behaviour
             {
                 Normal = 1, 
                 HasOptionalArguments = 2,
-                OptionalIsRequired = 3, 
-                MustBeConfirmed = 4
+                OptionalIsRequired = 4, 
+                MustBeConfirmed = 8
             };
 
             private Action<Entity, string[], string> action;
@@ -352,6 +358,7 @@ namespace LambAdmin
             PlayerConnected += CMDS_OnConnect;
             PlayerConnecting += CMDS_OnConnecting;
             PlayerDisconnected += CMDS_OnDisconnect;
+            PlayerActuallySpawned += CMDS_OnPlayerSpawned;
             OnPlayerKilledEvent += CMDS_OnPlayerKilled;
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\bannedplayers.txt"))
@@ -420,9 +427,6 @@ namespace LambAdmin
             InitCommands();
             InitCommandAliases();
             InitCDVars();
-            PersonalPlayerDvars = UTILS_PersonalPlayerDvars_load();
-            if(ConfigValues.settings_enable_chat_alias)
-                InitChatAlias();
 
             BanList = System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\bannedplayers.txt").ToList();
             XBanList = System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\xbans.txt").ToList();
@@ -926,12 +930,22 @@ namespace LambAdmin
                         {"<issuer>", sender.Name },
                         {"<issuerf>", sender.GetFormattedName(database) },
                     }));
+                    if (ConfigValues.settings_enable_xlrstats)
+                    {
+                        xlr_database.Save();
+                        WriteChatToAll(Command.GetString("savegroups", "message_xlr").Format(new Dictionary<string, string>()
+                        {
+                            {"<issuer>", sender.Name },
+                            {"<issuerf>", sender.GetFormattedName(database) },
+                        }));
+                    }
                 }));
 
             // FAST RESTART // RES
             CommandList.Add(new Command("res", 0, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
+                    OnExitLevel();
                     ExecuteCommand("fast_restart");
                 }));
 
@@ -1263,17 +1277,26 @@ namespace LambAdmin
                 (sender, arguments, optarg) =>
                 {
                     int bannumber;
+                    BanEntry entry;
                     if (!int.TryParse(arguments[0], out bannumber))
                     {
                         WriteChatToPlayer(sender, Command.GetMessage("InvalidNumber"));
                         return;
                     }
-                    if (CMD_unban(bannumber) != 0)
+                    if ((entry = CMD_unban(bannumber)) == null)
                     {
                         WriteChatToPlayer(sender, Command.GetMessage("DefaultError"));
                         return;
                     }
-                    WriteChatToPlayer(sender, Command.GetString("unban", "message"));
+                    WriteChatToAll(Command.GetString("unban-id", "message").Format(
+                        new Dictionary<string, string>()
+                        {
+                            {"<banid>", entry.banid.ToString() },
+                            {"<name>",  entry.playername },
+                            {"<guid>",  entry.playerinfo.GetGUIDString() },
+                            {"<hwid>",  entry.playerinfo.GetHWIDString() },
+                            {"<time>",  entry.until.Year == 9999 ? "^6PERMANENT" : entry.until.ToString("yyyy MMM d HH:mm") }
+                        }));
                 }));
 
             // UNBAN BY NAME
@@ -1291,26 +1314,22 @@ namespace LambAdmin
                         WriteChatToPlayer(sender,Command.GetString("unban", "multiple_entries_found"));
                         return;
                     }
-                    switch (CMD_unban(entries[0].banid))
+                    if (CMD_unban(entries[0].banid) != null)
                     {
-                        case 0:
-                            WriteChatToPlayer(sender,
-                                Command.GetString("unban", "message").Format(new Dictionary<string, string>()
-                                {
-                                    {"<banid>", entries[0].banid.ToString() },
-                                    {"<name>",  entries[0].playername },
-                                    {"<guid>",  entries[0].playerinfo.GetGUIDString() },
-                                    {"<ip>",    entries[0].playerinfo.GetIPString() },
-                                    {"<hwid>",  entries[0].playerinfo.GetHWIDString() },
-                                    {"<time>",  entries[0].until.Year == 9999 ? "^6PERMANENT" : entries[0].until.ToString("yyyy MMM d HH:mm") }
-                                }));
-                            break;
-                        default: 
-                            WriteChatToPlayer(sender, "Unknown error at DGAdmin::cmd_unban"); 
-                            break;
+                        WriteChatToAll(Command.GetString("unban", "message").Format(new Dictionary<string, string>()
+                            {
+                                {"<banid>", entries[0].banid.ToString() },
+                                {"<name>",  entries[0].playername },
+                                {"<guid>",  entries[0].playerinfo.GetGUIDString() },
+                                {"<hwid>",  entries[0].playerinfo.GetHWIDString() },
+                                {"<time>",  entries[0].until.Year == 9999 ? "^6PERMANENT" : entries[0].until.ToString("yyyy MMM d HH:mm") }
+                            }));
                     }
+                    else
+                        WriteChatToPlayer(sender, "Unknown error at DGAdmin::cmd_unban"); 
                 }
             ));
+
             //LASTBANS
             CommandList.Add(new Command("lastbans", 0, Command.Behaviour.HasOptionalArguments,
                 (sender, arguments, optarg) =>
@@ -2223,65 +2242,6 @@ namespace LambAdmin
                     
                 }));
 
-            // SVPASSWORD
-            CommandList.Add(new Command("svpassword", 0, Command.Behaviour.HasOptionalArguments | Command.Behaviour.MustBeConfirmed,
-                (sender, arguments, optarg) =>
-                {
-                    string path = @"players2\server.cfg";
-                    optarg = String.IsNullOrEmpty(optarg) ? "" : optarg;
-                    if (optarg.IndexOf('"') != -1)
-                    {
-                        WriteChatToPlayer(sender, "^1Error: Password has forbidden characters. Try another.");
-                        return;
-                    }
-                    if (!System.IO.File.Exists(path))
-                    {
-                        WriteChatToPlayer(sender, "^1Error: ^3" + path + "^1 not found.");
-                        return;
-                    }
-
-                    WriteChatToAll(@"^3<issuer> ^1executed ^3!svpassword".Format(new Dictionary<string, string>()
-                        {
-                            {"<issuer>", sender.Name },
-                        }));
-
-                    AfterDelay(2000, () =>
-                    {
-                        WriteChatToAllMultiline(new string[] { 
-                                "^1Server will be killed in:", 
-                                "^35", 
-                                "^34", 
-                                "^33", 
-                                "^32", 
-                                "^31", 
-                                "^30" 
-                            }, 1000);
-                    });
-                    AfterDelay(8000, () =>
-                    {
-                        string password = "seta g_password \"" + optarg + "\"";
-                        List<string> lines = File.ReadAllLines(path).ToList();
-                        Regex regex = new Regex(@"seta g_password ""[^""]*""");
-
-                        bool found = false;
-                        for (int i = 0; i < lines.Count; i++)
-                        {
-                            if (regex.Matches(lines[i]).Count == 1)
-                            {
-                                found = true;
-                                lines[i] = password;
-                                break;
-                            }
-                        }
-                        if (!found)
-                            lines.Add(password);
-                        File.WriteAllLines(path, lines.ToArray());
-                        foreach (Entity player in Players)
-                            CMD_kick(player, "^3Server killed");
-                        AfterDelay(1000, () => Environment.Exit(-1));
-                    });
-                }));
-
             // YES
             CommandList.Add(new Command("yes", 0, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
@@ -2307,6 +2267,225 @@ namespace LambAdmin
                     }
                     sender.SetField("CurrentCommand", "");
                     WriteChatToPlayer(sender, "^3Command execution aborted (^1"+command+"^3)");
+                }));
+
+            // 3RDPERSON
+            CommandList.Add(new Command("3rdperson", 0, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    OnInterval(33, () =>
+                    {
+                        foreach (Entity player in Players)
+                        {
+                            player.SetClientDvar("cg_thirdPerson", " 1");
+                            player.SetClientDvar("cg_thirdPersonMode", " 1");
+                            player.SetClientDvar("cg_thirdPersonSpectator", " 1");
+                            player.SetClientDvar("scr_thirdPerson", " 1");
+                            player.SetClientDvar("camera_thirdPerson", " 1");
+                        }
+                        return true;
+                    });
+                    WriteChatToAll(Command.GetString("3rdperson", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<issuer>", sender.Name },
+                            {"<issuerf>", sender.GetFormattedName(database) }
+                        }));
+                }));
+
+            // TELEPORT
+            CommandList.Add(new Command("teleport",2,Command.Behaviour.Normal,
+                (sender,arguments, optarg)=>
+                {
+                    Entity player1 = FindSinglePlayer(arguments[0]);
+                    Entity player2 = FindSinglePlayer(arguments[1]);
+                    if ((player1 != null) && (player2 != null))
+                    {
+                        player2.Call("setOrigin", player1.Origin);
+                        WriteChatToPlayer(sender, Command.GetString("teleport", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<player1>", player1.Name },
+                            {"<player2>", player2.Name }
+                        }));
+                    }
+                    else
+                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                }));
+
+            // FLY ; exports: CMD_FLY (0 .. 3)
+            // 0 = disabled; 1 = EventHandleds set; 2 = EventHandlers active; 3 = Effects active
+            // path: 0 > 2; 2 <> 3; 2 <> 1;
+            CommandList.Add(new Command("fly", 1, Command.Behaviour.HasOptionalArguments,
+                (sender, arguments, optarg) =>
+                {
+                    const int DISABLED = 0;
+                    const int EVENTHANDLERS_SET = 1;
+                    const int EVENTHANDLERS_ACTIVE = 2;
+                    const int EFFECTS_ACTIVE = 3;
+
+                    if ((arguments[0] != "on") && (arguments[0] != "off"))
+                    {
+                        WriteChatToPlayer(sender, Command.GetString("fly", "usage"));
+                        return;
+                    }
+                    if (!sender.HasField("CMD_FLY"))
+                        sender.SetField("CMD_FLY", new Parameter(DISABLED));
+
+                    string key = String.IsNullOrEmpty(optarg) ? "activate" : optarg;
+
+                    if (UTILS_GetFieldSafe<int>(sender, "CMD_FLY") == DISABLED)
+                    {
+                        sender.OnNotify("fly_on", new Action<Entity>((_player) =>
+                        {
+                            if (UTILS_GetFieldSafe<int>(_player, "CMD_FLY") == EVENTHANDLERS_ACTIVE && 
+                                _player.GetField<string>("sessionstate") == "playing")
+                            {
+                                sender.SetField("CMD_FLY", EFFECTS_ACTIVE);
+                                _player.Call("allowspectateteam", "freelook", true);
+                                _player.SetField("sessionstate", "spectator");
+                                _player.Call("setcontents", 0);
+                                UTILS_SetClientInShadowFX(_player);
+                                int iter = 0;
+                                _player.OnInterval(100, __player =>
+                                {
+                                    if (iter % 10 == 0)
+                                        __player.Call("playlocalsound", "ui_mp_nukebomb_timer");
+                                    if (iter % 30 == 0)
+                                        __player.Call("playlocalsound", "breathing_hurt");
+                                    iter += 1;
+                                    return UTILS_GetFieldSafe<int>(_player, "CMD_FLY") == EFFECTS_ACTIVE;
+                                });
+                            }
+                        }));
+                        sender.OnNotify("fly_off", new Action<Entity>((_player) =>
+                        {
+                            if (UTILS_GetFieldSafe<int>(_player, "CMD_FLY") == EFFECTS_ACTIVE && 
+                                _player.GetField<string>("sessionstate") == "spectator")
+                            {
+                                _player.SetField("CMD_FLY", EVENTHANDLERS_ACTIVE);
+                                _player.Call("allowspectateteam", "freelook", false);
+                                _player.SetField("sessionstate", "playing");
+                                _player.Call("setcontents", 100);
+                                _player.Call("ThermalVisionOff");
+                                UTILS_SetCliDefDvars(_player);
+                            }
+                        }));
+                    }
+
+                    switch (arguments[0])
+                    {
+                        case "on":
+                            {
+                                int CMD_FLY = UTILS_GetFieldSafe<int>(sender, "CMD_FLY");
+                                if (CMD_FLY == DISABLED)
+                                {
+                                    sender.Call("notifyonplayercommand", "fly_on", "+" + key);
+                                    sender.Call("notifyonplayercommand", "fly_off","-" + key);
+                                }
+                                WriteChatToPlayer(sender, Command.GetString("fly", "enabled").Format(new Dictionary<string, string>()
+                                {
+                                    {"<key>", (CMD_FLY == EVENTHANDLERS_SET)? "" : @"[[{" + key + @"}]]" }
+                                }));
+                                sender.SetField("CMD_FLY", EVENTHANDLERS_ACTIVE);
+                                break;
+                            }
+                        case "off":
+                            {
+                                sender.SetField("CMD_FLY", EVENTHANDLERS_SET);
+                                WriteChatToPlayer(sender, Command.GetString("fly", "disabled").Format(new Dictionary<string, string>()
+                                {
+                                    {"<state>", "enabled" }
+                                }));
+                                break;
+                            }
+                    }
+                        
+                }));
+
+            // JUMP
+            CommandList.Add(new Command("jump", 1, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    float height = 0;
+                    if (arguments[0].StartsWith("def"))
+                        CMD_JUMP(39);
+                    else if (float.TryParse(arguments[0], out height))
+                        CMD_JUMP(height);
+                    WriteChatToAll(Command.GetString("jump", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<height>", arguments[0].StartsWith("def")?"default" : height.ToString() },
+                            {"<issuer>", sender.Name },
+                            {"<issuerf>", sender.GetFormattedName(database) }
+                        }));
+                }));
+
+            // SPEED
+            CommandList.Add(new Command("speed", 1, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    float speed = 0;
+                    if (arguments[0].StartsWith("def"))
+                        foreach(Entity player in Players)
+                            CMD_SPEED(player, 1F);
+                    else if (float.TryParse(arguments[0], out speed))
+                        foreach (Entity player in Players)
+                            CMD_SPEED(player, speed);
+                    WriteChatToAll(Command.GetString("speed", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<speed>", arguments[0].StartsWith("def")?"default" : speed.ToString() },
+                            {"<issuer>", sender.Name },
+                            {"<issuerf>", sender.GetFormattedName(database) }
+                        }));
+                }));
+
+            // GRAVITY
+            CommandList.Add(new Command("gravity", 1, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    float gravity = 0;
+                    if (arguments[0].StartsWith("def"))
+                        CMD_GRAVITY(800);
+                    else if (float.TryParse(arguments[0], out gravity))
+                        CMD_GRAVITY((int)Math.Round(gravity / 9.8 * 800));     
+                    WriteChatToAll(Command.GetString("gravity", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<g>", arguments[0].StartsWith("def")?"9.8" : gravity.ToString() },
+                            {"<issuer>", sender.Name },
+                            {"<issuerf>", sender.GetFormattedName(database) }
+                        }));
+                }));
+
+            // AC130
+            CommandList.Add(new Command("ac130", 1, Command.Behaviour.HasOptionalArguments,
+                (sender, arguments, optarg) =>
+                {
+                    if (arguments[0] == "all")
+                    {
+                        foreach (Entity player in Players)
+                            CMD_AC130(player, optarg == "-p");
+                        WriteChatToAll(Command.GetString("ac130", "all").Format(new Dictionary<string, string>()
+                        {
+                            {"<issuer>", sender.Name },
+                            {"<issuerf>", sender.GetFormattedName(database) },
+                        }));
+                        return;
+                    }
+
+                    Entity target = FindSinglePlayer(arguments[0]);
+                    if (target == null)
+                    {
+                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                        return;
+                    }
+
+                    CMD_AC130(target, optarg == "-p");
+
+                    WriteChatToAll(Command.GetString("ac130", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<issuer>", sender.Name },
+                            {"<issuerf>", sender.GetFormattedName(database) },
+                            {"<target>", target.Name },
+                            {"<targetf>", target.GetFormattedName(database) },
+                        }));
                 }));
 
             if (ConfigValues.settings_enable_misccommands)
@@ -2339,29 +2518,64 @@ namespace LambAdmin
                         }
                     }));                
 
-                // AC130
-                CommandList.Add(new Command("ac130", 1, Command.Behaviour.Normal,
+                // SVPASSWORD
+                CommandList.Add(new Command("svpassword", 0, Command.Behaviour.HasOptionalArguments | Command.Behaviour.MustBeConfirmed,
                     (sender, arguments, optarg) =>
                     {
-                        Entity target = FindSinglePlayer(arguments[0]);
-                        if (target == null)
+                        string path = @"players2\server.cfg";
+                        optarg = String.IsNullOrEmpty(optarg) ? "" : optarg;
+                        if (optarg.IndexOf('"') != -1)
                         {
-                            WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                            WriteChatToPlayer(sender, "^1Error: Password has forbidden characters. Try another.");
                             return;
                         }
-                        target.GiveWeapon("ac130_105mm_mp");
-                        target.GiveWeapon("ac130_40mm_mp");
-                        target.GiveWeapon("ac130_25mm_mp");
-                        target.SwitchToWeaponImmediate("ac130_25mm_mp");
-                        WriteChatToAll(Command.GetString("ac130", "message").Format(new Dictionary<string, string>()
+                        if (!System.IO.File.Exists(path))
+                        {
+                            WriteChatToPlayer(sender, "^1Error: ^3" + path + "^1 not found.");
+                            return;
+                        }
+
+                        WriteChatToAll(@"^3<issuer> ^1executed ^3!svpassword".Format(new Dictionary<string, string>()
                         {
                             {"<issuer>", sender.Name },
-                            {"<issuerf>", sender.GetFormattedName(database) },
-                            {"<target>", target.Name },
-                            {"<targetf>", target.GetFormattedName(database) },
                         }));
-                    }));
 
+                        AfterDelay(2000, () =>
+                        {
+                            WriteChatToAllMultiline(new string[] { 
+                                "^1Server will be killed in:", 
+                                "^35", 
+                                "^34", 
+                                "^33", 
+                                "^32", 
+                                "^31", 
+                                "^30" 
+                            }, 1000);
+                        });
+                        AfterDelay(8000, () =>
+                        {
+                            string password = "seta g_password \"" + optarg + "\"";
+                            List<string> lines = File.ReadAllLines(path).ToList();
+                            Regex regex = new Regex(@"seta g_password ""[^""]*""");
+
+                            bool found = false;
+                            for (int i = 0; i < lines.Count; i++)
+                            {
+                                if (regex.Matches(lines[i]).Count == 1)
+                                {
+                                    found = true;
+                                    lines[i] = password;
+                                    break;
+                                }
+                            }
+                            if (!found)
+                                lines.Add(password);
+                            File.WriteAllLines(path, lines.ToArray());
+                            foreach (Entity player in Players)
+                                CMD_kick(player, "^3Server killed");
+                            AfterDelay(1000, () => Environment.Exit(-1));
+                        });
+                    }));
             }
 
             #endregion
@@ -2483,6 +2697,7 @@ namespace LambAdmin
 
         public void CMD_changemap(string devmapname)
         {
+            OnExitLevel();
             ChangeMap(devmapname);
         }
 
@@ -2597,7 +2812,7 @@ namespace LambAdmin
                 DSPLStream.WriteLine(map + "," + dsrname + ",1000");
             }
             MapRotation = UTILS_GetDvar("sv_maprotation");
-
+            OnExitLevel();
             ExecuteCommand("sv_maprotation RG");
             CMD_rotate();
             ExecuteCommand("sv_maprotation " + MapRotation);
@@ -2617,20 +2832,26 @@ namespace LambAdmin
             });
         }
 
-        public int CMD_unban(int banentry)
+        public BanEntry CMD_unban(int id)
         {
+            BanEntry entry = null;
             try
             {
-                if (banentry < BanList.Count && banentry >= 0)
-                    BanList.Remove(BanList[banentry]);
+                if (id < BanList.Count && id >= 0)
+                {
+                    string[] parts = BanList[id].Split(';');
+                    string playername = string.Join(";", parts.Skip(2));
+                    entry = new BanEntry(id, PlayerInfo.Parse(parts[1]), playername, DateTime.ParseExact(parts[0], "yyyy MMM d HH:mm", Culture));
+                    BanList.Remove(BanList[id]);
+                }
                 CMDS_SaveBanList();
-                return 0;
+                return entry;
             }
             catch (Exception ex)
             {
                 WriteLog.Error("Error while running unban command");
                 WriteLog.Error(ex.Message);
-                return 1;
+                return null;
             }
         }
 
@@ -2854,7 +3075,6 @@ namespace LambAdmin
                 UTILS_SetClientDvars(sender, dvars);
                 if ((ft == "0") && PersonalPlayerDvars.ContainsKey(sender.GUID))
                     PersonalPlayerDvars.Remove(sender.GUID);
-                UTILS_PersonalPlayerDvars_save(PersonalPlayerDvars);
             }
             catch
             {
@@ -2874,6 +3094,35 @@ namespace LambAdmin
             WriteChatToAllMultiline(messages.ToArray(), delay);
         }
 
+        public unsafe void CMD_JUMP(float height)
+        {
+            *(float*)new IntPtr(7186184) = (float)height;
+        }
+
+        public void CMD_SPEED(Entity player, float speed)
+        {
+            player.Call("setmovespeedscale", new Parameter[] { speed });
+        }
+
+        public unsafe void CMD_GRAVITY(int g)
+        {
+            *(int*)new IntPtr(4679878) = g;
+        }
+
+        public void CMD_AC130(Entity player, bool permanent)
+        {
+            AfterDelay(500, () => {
+                player.TakeAllWeapons();
+                player.GiveWeapon("ac130_105mm_mp");
+                player.GiveWeapon("ac130_40mm_mp");
+                player.GiveWeapon("ac130_25mm_mp");
+                player.SwitchToWeaponImmediate("ac130_25mm_mp");           
+            });
+
+            if(permanent)
+                player.SetField("CMD_AC130", new Parameter((int)1));
+        }
+
         #endregion
 
         #region other useful crap
@@ -2884,6 +3133,12 @@ namespace LambAdmin
             player.setMuted(false);
             player.SetField("rekt", 0);
             return;
+        }
+
+        public void CMDS_OnPlayerSpawned(Entity player)
+        {
+            if (UTILS_GetFieldSafe<int>(player, "CMD_AC130") == 1)
+                CMD_AC130(player, false);
         }
 
         public void CMDS_AddToBanList(Entity player, DateTime until)
@@ -2943,7 +3198,6 @@ namespace LambAdmin
                     ent.TakeAllWeapons();
                     ent.Call("disableweapons");
                     ent.Call("disableoffhandweapons");
-                    ent.Call("disableoffhandsecondaryweapons");
                     ent.Call("disableweaponswitch");
                     /*
                     ent.Call("closemenu");

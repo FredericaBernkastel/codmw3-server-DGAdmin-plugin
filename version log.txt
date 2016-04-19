@@ -1,3 +1,23 @@
+v3.3.10:
+ * COMMAND: !3rdperson
+ * COMMAND: !teleport <player1> <player2>
+ * COMMAND: !fly <on|off> [bound key]
+ * COMMAND: !register
+ * COMMAND: !xlrstats
+ * COMMAND: !xlrtop
+ * COMMAND: !jump <<height> | default>
+ * COMMAND: !speed <<speed> | default>
+ * COMMAND: !gravity <<g> | default>
+
+ * CHANGED: !ac130 <player> -> !ac130 <all | <player>> [-p]
+
+ * NEW FEATURE: AntiNoScope (settings_isnipe_antinoscope)
+ * NEW FEATURE: AntiCRTK (settings_isnipe_anticrtk)
+ * NEW FEATURE: AntiBoltCancel (settings_isnipe_antiboltcancel)
+ * NEW FEATURE: XLRStats (settings_enable_xlrstats)
+
+ * FIXED issue #1
+ * FIXED issue with !ac130 in isnipe mode (when issuer gets banned for it)
 v3.2.9:
  * COMMAND: !swpassword [password]
  * COMMAND: !yes

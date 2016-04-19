@@ -27,6 +27,27 @@ namespace LambAdmin
                         return bool.Parse(Sett_GetString("settings_isnipe_antihardscope"));
                     }
                 }
+                public static bool ANTINOSCOPE
+                {
+                    get
+                    {
+                        return bool.Parse(Sett_GetString("settings_isnipe_antinoscope"));
+                    }
+                }
+                public static bool ANTIBOLTCANCEL
+                {
+                    get
+                    {
+                        return bool.Parse(Sett_GetString("settings_isnipe_antiboltcancel"));
+                    }
+                }
+                public static bool ANTICRTK
+                {
+                    get
+                    {
+                        return bool.Parse(Sett_GetString("settings_isnipe_anticrtk"));
+                    }
+                }
                 public static bool ANTIKNIFE
                 {
                     get
@@ -67,7 +88,10 @@ namespace LambAdmin
                     "barrel_mp",
                     "destructible_toy",
                     "knife",
-                    "trophy_mp"
+                    "trophy_mp",
+                    "ac130_105mm_mp",
+                    "ac130_40mm_mp",
+                    "ac130_25mm_mp"
                 };
             }
         }
@@ -163,6 +187,16 @@ namespace LambAdmin
                 return;
             if (weapon == "iw5_usp45_mp_tactical" && Call<string>("getdvar", "g_gametype") == "infect" && attacker.GetTeam() != "allies")
                 return;
+            if (ConfigValues.ISNIPE_SETTINGS.ANTINOSCOPE && (UTILS_GetFieldSafe<int>(attacker, "weapon_fired_noscope") == 1))
+                player.Health += damage * 2;
+            if (ConfigValues.ISNIPE_SETTINGS.ANTICRTK && (weapon == "throwingknife_mp") && (attacker.Origin.DistanceTo2D(player.Origin) < 200f))
+            {
+                player.Health += damage;
+                player.Call("iprintlnbold", new Parameter[] { Lang_GetString("Message_CRTK_NotAllowed") });
+            }
+            if (ConfigValues.ISNIPE_SETTINGS.ANTIBOLTCANCEL && (UTILS_GetFieldSafe<int>(attacker, "weapon_fired_boltcancel") == 1))
+                player.Health += damage;
+
             if (ConfigValues.ISNIPE_SETTINGS.ANTIWEAPONHACK && !SNIPE_IsWeaponAllowed(weapon) && !CMDS_IsRekt(attacker))
             {
                 try
@@ -211,6 +245,12 @@ namespace LambAdmin
 
         public void SNIPE_OnPlayerConnect(Entity player)
         {
+            if (ConfigValues.ISNIPE_SETTINGS.ANTINOSCOPE)
+                EventDispatcher_AntiNoScope(player);
+
+            if (ConfigValues.ISNIPE_SETTINGS.ANTIBOLTCANCEL)
+                EventDispatcher_AntiBoltCancel(player);
+
             player.OnNotify("giveLoadout", (ent) =>
             {
                 CMD_GiveMaxAmmo(ent);
@@ -326,5 +366,82 @@ namespace LambAdmin
         #endregion
 
         #endregion
+        private void EventDispatcher_AntiNoScope(Entity player)
+        {
+            player.SetField("weapon_fired_noscope", new Parameter((int)0));
+
+            player.OnNotify("weapon_fired", new Action<Entity, Parameter>((_player, args) =>
+            {
+                if (_player.Call<float>("playerads", new Parameter[0]) == 0f ||
+                    _player.Call<int>("adsbuttonpressed", new Parameter[0]) == 0)
+                {
+                    string currentWeapon = _player.CurrentWeapon;
+                    if (currentWeapon.Contains("iw5_l96a1") || currentWeapon.Contains("iw5_msr"))
+                    {
+                        player.SetField("weapon_fired_noscope", (int)1);
+                        _player.Call("iprintlnbold", new Parameter[] { Lang_GetString("Message_CRNS_NotAllowed") });
+                        _player.Call("stunplayer", new Parameter[] { 1 });
+                        _player.AfterDelay(2000, new Action<Entity>((__player) =>
+                        {
+                            __player.SetField("weapon_fired_noscope", (int)0);
+                            __player.Call("stunplayer", new Parameter[] { 0 });
+                        }));
+                    }
+                }
+            }));
+        }
+
+        private void EventDispatcher_AntiBoltCancel(Entity player)
+        {
+            //Asynchronous hell
+
+            player.SetField("fired", 0);
+            player.SetField("weapon_fired_boltcancel", 0);
+
+            player.Call("notifyOnPlayerCommand", new Parameter[]
+			    {
+				    "weapon_reloading",
+				    "+reload"
+			    });
+            player.OnNotify("weapon_fired", new Action<Entity, Parameter>((_player, args) =>
+            {
+                _player.SetField("fired", 1);
+                _player.AfterDelay(300, new Action<Entity>((__player) =>
+                {
+                    __player.SetField("fired", 0);
+                }));
+            }));
+            player.OnNotify("weapon_reloading",
+                new Action<Entity>((_player) =>
+                {
+                    if (UTILS_GetFieldSafe<int>(_player, "fired") == 1)
+                    {
+                        if (UTILS_GetFieldSafe<int>(_player, "weapon_fired_boltcancel") == 0)
+                        {
+                            _player.SetField("weapon_fired_boltcancel", 1);
+                            _player.AfterDelay(2000, new Action<Entity>((__player) =>
+                            {
+                                __player.SetField("weapon_fired_boltcancel", 0);
+                            }));
+                        }
+                        else
+                        {
+                            _player.Call("iprintlnbold", new Parameter[] { Lang_GetString("Message_BoltCancel_NotAllowed") });
+                            _player.Call("allowads", new Parameter[] { false });
+                            _player.Call("stunplayer", new Parameter[] { 1 });
+                            _player.AfterDelay(300,
+                                new Action<Entity>((__player) =>
+                                {
+                                    __player.Call("allowads", new Parameter[] { true });
+                                    __player.SetField("fired", 0);
+                                    __player.SetField("weapon_fired_boltcancel", 0);
+                                    __player.Call("stunplayer", new Parameter[] { 0 });
+                                })
+                            );
+                        }
+                    }
+                })
+            );  
+        }
     }
 }
