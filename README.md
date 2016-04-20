@@ -111,5 +111,6 @@ Complete admin guide can be found [here](https://docs.google.com/document/d/1SFe
  - XLR Stats (option: settings_enable_xlrstats)
  - Advanced cdvar manager - you can set default client dvars in "Utils\cdvars.txt"
 
- Fixed issue with trophy-kill (when victim gets banned for it)
+ Fixed issue with trophy-kill (when victim gets banned for it);
+
  Fixed issue with !ac130 in isnipe mode (when issuer gets banned for it)

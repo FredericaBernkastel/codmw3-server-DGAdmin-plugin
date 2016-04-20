@@ -53,6 +53,7 @@ namespace LambAdmin
                 {
                     xlr_players = (SerializableDictionary<long, XLREntry>)xmlSerializer.Deserialize(fs);
                 }
+
             }
 
             public void Update(long GUID, XLRUpdateFlags flags)
@@ -126,7 +127,6 @@ namespace LambAdmin
             WriteLog.Info("Initializing XLRstats...");
             xlr_database = new XLR_database();
             xlr_database.Init();
-
             PlayerConnected += XLR_OnPlayerConnected;
             OnPlayerKilledEvent += XLR_OnPlayerKilled;
             WriteLog.Info("Done initializing XLRstats.");

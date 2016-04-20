@@ -1,3 +1,5 @@
+v3.3.11:
+ * FIXED: XLR stats not saving in S&D mode
 v3.3.10:
  * COMMAND: !3rdperson
  * COMMAND: !teleport <player1> <player2>

@@ -93,9 +93,14 @@ namespace LambAdmin
         {
             WriteLog.Info("Saving groups...");
             database.SaveGroups();
+
+            // Save xlr stats
             if (ConfigValues.settings_enable_xlrstats)
                 xlr_database.Save();
+
+            // Save FilmTweak settings
             UTILS_PersonalPlayerDvars_save(PersonalPlayerDvars);
+
             MAIN_ResetSpawnAction();
             base.OnExitLevel();
         }

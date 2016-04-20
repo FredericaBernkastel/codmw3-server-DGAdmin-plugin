@@ -35,7 +35,7 @@ namespace LambAdmin
         //-------
         public static partial class ConfigValues
         {
-            public static string Version = "v3.3n10";
+            public static string Version = "v3.3n11";
             public static string ConfigPath = @"scripts\DGAdmin\";
             public static string ChatPrefix
             {
@@ -887,9 +887,7 @@ namespace LambAdmin
                 });
             }
 
-            // UNFREEZE PLAYERS ON GAME END
-            if (bool.Parse(Sett_GetString("settings_unfreezeongameend")))
-                OnGameEnded += UTILS_OnGameEnded;
+            OnGameEnded += UTILS_OnGameEnded;
 
             // BETTER BALANCE
             Call("setdvarifuninitialized", "betterbalance", bool.Parse(Sett_GetString("settings_betterbalance_enable")) ? "1" : "0");
@@ -945,11 +943,21 @@ namespace LambAdmin
         public void UTILS_OnGameEnded()
         {
             AfterDelay(1100, () =>
-            {
-                foreach (Entity player in Players)
-                    if (!CMDS_IsRekt(player))
-                        player.Call("freezecontrols", false);
+            {            
+                // UNFREEZE PLAYERS ON GAME END
+                if (bool.Parse(Sett_GetString("settings_unfreezeongameend")))
+                    foreach (Entity player in Players)
+                        if (!CMDS_IsRekt(player))
+                            player.Call("freezecontrols", false);
+
+                // Save xlr stats
+                if (ConfigValues.settings_enable_xlrstats)
+                    xlr_database.Save();
+
+                // Save FilmTweak settings
+                UTILS_PersonalPlayerDvars_save(PersonalPlayerDvars);
             });
+
         }
 
         public void UTILS_OnPlayerConnecting(Entity player)
