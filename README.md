@@ -94,6 +94,14 @@ Complete admin guide can be found [here](https://docs.google.com/document/d/1SFe
     XLR Top scores. 
     Amount should’nt be greather than 8, and smaller than 1.
 
+!playfxontag <fx> [tag = j_head]
+    Like !setfx, but effect is linked to the player's origin.
+
+!setclantag <player> [tag]
+    Set clan tag of player. Up to 7 characters.
+
+!rotatescreen <player> <degree>
+    Set camera roll of player. Very abusive.
 
 *Misc comands (not enabled by default)*
 

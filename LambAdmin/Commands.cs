@@ -2148,7 +2148,7 @@ namespace LambAdmin
                     });
                     if (!fx_valid)
                     {
-                        WriteChatToPlayer(sender, Command.GetString("setfx", "error"));
+                        WriteChatToPlayer(sender, Command.GetMessage("FX_not_found"));
                         return;
                     }
                     if (!sender.HasField("CMD_SETFX"))
@@ -2311,9 +2311,10 @@ namespace LambAdmin
                         WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
                 }));
 
-            // FLY ; exports: CMD_FLY (0 .. 3)
-            // 0 = disabled; 1 = EventHandleds set; 2 = EventHandlers active; 3 = Effects active
-            // path: 0 > 2; 2 <> 3; 2 <> 1;
+            // FLY <on | off> [bound key]
+            // ; exports: CMD_FLY (0 .. 3)
+            // ; 0 = disabled; 1 = EventHandleds set; 2 = EventHandlers active; 3 = Effects active
+            // ; path: 0 > 2; 2 <> 3; 2 <> 1;
             CommandList.Add(new Command("fly", 1, Command.Behaviour.HasOptionalArguments,
                 (sender, arguments, optarg) =>
                 {
@@ -2454,7 +2455,7 @@ namespace LambAdmin
                         }));
                 }));
 
-            // AC130
+            // AC130 <all | <player>> [-p]
             CommandList.Add(new Command("ac130", 1, Command.Behaviour.HasOptionalArguments,
                 (sender, arguments, optarg) =>
                 {
@@ -2487,6 +2488,64 @@ namespace LambAdmin
                             {"<targetf>", target.GetFormattedName(database) },
                         }));
                 }));
+
+            // PLAYFXONTAG <fx> [tag = j_head]
+            CommandList.Add(new Command("playfxontag", 1, Command.Behaviour.HasOptionalArguments,
+            (sender, arguments, optarg) =>
+            {
+                if (!UTILS_ValidateFX(arguments[0]))
+                {
+                    WriteChatToPlayer(sender, Command.GetMessage("FX_not_found"));
+                    return;
+                }
+                string tag = String.IsNullOrEmpty(optarg) ? "j_head" : optarg;
+                Entity fx = Call<Entity>("playfxontag", new Parameter[] { Call<int>("loadfx", arguments[0]), sender, tag });
+                WriteChatToPlayer(sender, Command.GetString("playfxontag", "message").Format(new Dictionary<string, string>()
+                {
+                    {"<fx>", arguments[0]},
+                    {"<tag>", tag}
+                }));
+            }));
+
+            // SETCLANTAG <player> [tag]
+            CommandList.Add(new Command("setclantag", 1, Command.Behaviour.HasOptionalArguments,
+            (sender, arguments, optarg) =>
+            {
+                Entity target = FindSinglePlayer(arguments[0]);
+                if (target == null)
+                {
+                    WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                    return;
+                }
+                string tag = String.IsNullOrEmpty(optarg) ? "" : optarg;
+                target.SetClantag(tag);
+            }));
+
+            // ROTATESCREEN <player> <degree>
+            CommandList.Add(new Command("rotatescreen", 2, Command.Behaviour.Normal,
+            (sender, arguments, optarg) =>
+            {
+                Entity target = FindSinglePlayer(arguments[0]);
+                if (target == null)
+                {
+                    WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                    return;
+                }
+                Vector3 angles = target.Call<Vector3>("getplayerangles");
+                if(!float.TryParse(arguments[1], out angles.Z))
+                {
+                    WriteChatToPlayer(sender, Command.GetString("rotatescreen", "usage"));
+                    return;
+                }
+                
+                target.Call("setplayerangles", new Parameter[] { angles });
+
+                WriteChatToPlayer(sender, Command.GetString("rotatescreen", "message").Format(new Dictionary<string, string>()
+                {
+                    {"<player>", sender.Name},
+                    {"<roll>", angles.Z.ToString()}
+                }));
+            }));
 
             if (ConfigValues.settings_enable_misccommands)
             {

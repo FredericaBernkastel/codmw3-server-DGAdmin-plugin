@@ -1,3 +1,7 @@
+v3.3.12:
+ * COMMAND: !playfxontag <fx> [tag = j_head]
+ * COMMAND: !setclantag <player> [tag]
+ * COMMAND: !rotatescreen <player> <degree>
 v3.3.11:
  * FIXED: XLR stats not saving in S&D mode
 v3.3.10:

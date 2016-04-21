@@ -95,6 +95,7 @@ namespace LambAdmin
             {"Message_DefaultError", "^1Something went wrong. Check console for more details." },
             {"Message_NoEntriesFound", "^1No entries found." },
             {"Message_blockedByNightMode", "^1You cant use this command when night mode is active" },
+            {"Message_FX_not_found", "^1Error: given FX not found."},
 
             #endregion
 
@@ -366,14 +367,13 @@ namespace LambAdmin
             {"command_report_message", "^7<senderf>^7 reported: ^3<message>" },
 
             
-            {"command_lastreports_usage", "^1Usage: !lastreports [count]. Cont may be 1..8" },
+            {"command_lastreports_usage", "^1Usage: !lastreports [count = 4]. Cont may be 1..8" },
             {"command_lastreports_message", "^;<sender>: ^3<message>" },
 
-            {"command_setfx_usage", "^Usage: !setfx <fx> [spawn key]"},
+            {"command_setfx_usage", "^Usage: !setfx <fx> [spawn key = activate]"},
             {"command_setfx_enabled", "FX spawner bound to ^3<key> ^7key"},
             {"command_setfx_changed", "FX spawner set to ^3<fx>"},
             {"command_setfx_spawned", "FX ^3<fx> ^2spawned ^7at ^3<origin>"},
-            {"command_setfx_error", "^1Error: given FX not found."},
 
             {"command_hell_message", "^1Hell ^0Mode ^3Enabled."},
             {"command_hell_usage", "^Usage: !hell"},
@@ -393,7 +393,7 @@ namespace LambAdmin
             {"command_3rdperson_usage", "^1Usage: !3rdperson"},
             {"command_3rdperson_message", "^33RD person mode enabled by ^2<issuerf>"},
 
-            {"command_fly_usage", "^1Usage: !fly <on|off> [spawn key]"},
+            {"command_fly_usage", "^1Usage: !fly <on|off> [spawn key = activate]"},
             {"command_fly_enabled", "^3Fly mode ^2enabled. ^3Key: <key>"},
             {"command_fly_disabled", "^3Fly mode ^1disabled."},
 
@@ -417,9 +417,17 @@ namespace LambAdmin
             {"command_xlrstats_message", "^3Score:^2<score> ^3kills:^2<kills> ^3deaths:^2<deaths>^3 k/d:^2<kd>^3 headshots:^2<headshots>^3 TK_kills:^2<tk_kills> ^3 accuracy:^2<precision>°/."},
             {"command_xlrstats_error", "^1Error: ^3Player not registered to XLRStats"},
 
-            {"command_xlrtop_usage", "^1Usage: !xlrtop [amount]. 1 <= amount <= 8"},
+            {"command_xlrtop_usage", "^1Usage: !xlrtop [amount = 4]. 1 <= amount <= 8"},
             {"command_xlrtop_error", "^1Error: ^2XLR db is empty."},
-            {"command_xlrtop_message", "^1<place>) ^6<player>: ^3score:^2<score> ^3k:^2<kills> ^3kd:^2<kd> ^3acc:^2<precision>°/."}
+            {"command_xlrtop_message", "^1<place>) ^6<player>: ^3score:^2<score> ^3k:^2<kills> ^3kd:^2<kd> ^3acc:^2<precision>°/."},
+
+            {"command_playfxontag_usage", "^1Usage: !playfxontag <fx> [tag = j_head]"},
+            {"command_playfxontag_message", "^3FX ''^2<fx>^3'' spawned on ^2<tag>"},
+
+            {"command_rotatescreen_usage", "^1Usage: !rotatescreen <player> <degree>"},
+            {"command_rotatescreen_message", "^2<player>'s ^3roll has been set to ^2<roll>°"},
+
+            {"command_setclantag_usage", "^1Usage: !setclantag <player> [tag]"}
         };
 
         public static void CFG_ReadConfig()
