@@ -56,7 +56,7 @@ namespace LambAdmin
             { "settings_teamicons_allies", "cardicon_weed" },
             { "settings_teamicons_axis", "cardicon_thebomb" },
             { "settings_enable_connectmessage", "false" },
-            { "format_connectmessage", "^3<player> ^7connected." },
+            { "format_connectmessage", "^3#^1<hour>:<min> ^3#^1<clientnumber> ^3#^1<rank> ^3#^1<player> ^7Connected." },
             { "settings_enable_misccommands", "false" },
             { "settings_maxwarns", "3" },
             { "settings_groups_autosave", "true" },

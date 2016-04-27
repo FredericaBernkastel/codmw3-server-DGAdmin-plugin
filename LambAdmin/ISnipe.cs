@@ -185,10 +185,14 @@ namespace LambAdmin
             }
             if (!attacker.IsPlayer)
                 return;
+
+            if (attacker.IsSpectating())
+                player.Health += damage;
+
             if (weapon == "iw5_usp45_mp_tactical" && Call<string>("getdvar", "g_gametype") == "infect" && attacker.GetTeam() != "allies")
                 return;
             if (ConfigValues.ISNIPE_SETTINGS.ANTINOSCOPE && (UTILS_GetFieldSafe<int>(attacker, "weapon_fired_noscope") == 1))
-                player.Health += damage * 2;
+                player.Health += damage;
             if (ConfigValues.ISNIPE_SETTINGS.ANTICRTK && (weapon == "throwingknife_mp") && (attacker.Origin.DistanceTo2D(player.Origin) < 200f))
             {
                 player.Health += damage;

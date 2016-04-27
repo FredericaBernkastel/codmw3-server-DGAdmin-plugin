@@ -46,7 +46,24 @@ namespace LambAdmin
 
                 public bool CanDo(string permission)
                 {
+                    List<string> abusive = new List<string>() {
+                        "freeze",       "unfreeze",     "mute",         "unmute",
+                        "kill",         "sunlight",     "rotatescreen", "fakesay",
+                        "rek",          "rektroll",     "nootnoot",     "daytime",
+                        "kd",           "setfx",        "hell",         "fire",
+                        "3rdperson",    "teleport",     "fly",          "jump",
+                        "speed",        "gravity",      "ac130",        "setclantag",
+                        "letmehardscope"
+                    };
+                    List<string> _unsafe = new List<string>() {
+                        "sdvar",        "server",       "setclantag",   "fc",
+                        "foreach",      "svpassword"
+                    };
                     if (permissions.Contains("-" + permission))
+                        return false;
+                    if (permissions.Contains("-*abusive*") && abusive.Contains(permission))
+                        return false;
+                    if (permissions.Contains("-*unsafe*")  && _unsafe.Contains(permission))
                         return false;
                     if (permissions.Contains(permission) || permissions.Contains("*all*"))
                         return true;
@@ -68,7 +85,7 @@ namespace LambAdmin
                         "default::pm,admins,guid,version,rules,afk,credits,hidebombicon,help,rage,maps,time,amsg,ft,hwid,apply,night,fillammo,report,suicide,yes,no,register,xlrstats,xlrtop",
                         "moderator:password:login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,changeteam,lastreports:^0[^5Moderator^0]^7",
                         "family:password:kickhacker,kill,mute,unmute,end,tmpbantime,cdvar,getplayerinfo,say,sayto,resetwarns,setgroup,scream,whois,changeteam,yell,gametype,mode,login,map,status,kick,tmpban,ban,warn,unwarn,getwarns,res,setafk,setteam,balance,clanvsall,clanvsallspectate,sunlight,alias,lastreports,fire:^0[^3F^0]^7",
-                        "elder:password:*all*:^0[^4Elder^0]^7",
+                        "elder:password:-*unsafe*,*all*:^0[^4Elder^0]^7",
                         "developer:password:*all*:^0[^;D^0]^",
                         "owner:password:*all*:^0[^1O^2w^3n^4e^5r^0]^3",
                         "admin:password:scream,whois,changeteam,yell,gametype,mode,login,map,status,unban,unban-id,kick,tmpban,ban,warn,unwarn,getwarns,res,setafk,setteam,balance,clanvsall,clanvsallspectate,login,lastreports:^0[^1Admin^0]^7",
@@ -79,8 +96,8 @@ namespace LambAdmin
                         "vip:password:ban,kick,tmpban,warn,unwarn,map,balance,mode,whois,status,login,setafk,changeteam,scream,fakesay,myalias,fire:^0[^3V.I.P.^0]^7",
                         "founder:password:*all*:^0[^1F^2o^3u^4n^5d^6e^8r^0]^6",
                         "donator:password:kick,warn,tmpban,unwarn,mute,unmute,login,balance,setafk,changeteam,myalias,lastreports,fire:^0[^2Donator^0]^7",
-                        "nab:password:kick,warn,unwarn,tmpbantime,tmpban,mute,unmute,balance,setafk,changeteam,login,lastreports:^0[^1N^2A^3B^0]^7",
-                        "coleader:password:*all*:^0[^3CoLeader^0]^7"
+                        "banned::-pm,-admins,-guid,-version,-rules,-afk,-credits,-hidebombicon,-help,-rage,-maps,-time,-amsg,-ft,-hwid,-apply,-night,-fillammo,-report,-yes,-no,-register,-xlrstats,-xlrtop:^0[^1BANNED]^7",
+                        "coleader:password:-*abusive*,-*unsafe*,*all*:^0[^3CoLeader^0]^7"
                     });
                 }
 

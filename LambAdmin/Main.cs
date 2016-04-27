@@ -211,6 +211,10 @@ namespace LambAdmin
                 {
                     { "<player>", player.Name },
                     { "<playerf>", player.GetFormattedName(database) },
+                    { "<clientnumber>", player.GetEntityNumber().ToString() },
+                    { "<hour>", DateTime.Now.Hour.ToString() },
+                    { "<min>", DateTime.Now.Minute.ToString() },
+                    { "<rank>",  player.GetGroup(database).group_name.ToString() }
                 }));
             }
 

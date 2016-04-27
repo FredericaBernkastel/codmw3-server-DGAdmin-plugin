@@ -2300,7 +2300,7 @@ namespace LambAdmin
                     Entity player2 = FindSinglePlayer(arguments[1]);
                     if ((player1 != null) && (player2 != null))
                     {
-                        player2.Call("setOrigin", player1.Origin);
+                        player1.Call("setOrigin", player2.Origin);
                         WriteChatToPlayer(sender, Command.GetString("teleport", "message").Format(new Dictionary<string, string>()
                         {
                             {"<player1>", player1.Name },
@@ -2337,8 +2337,8 @@ namespace LambAdmin
                     {
                         sender.OnNotify("fly_on", new Action<Entity>((_player) =>
                         {
-                            if (UTILS_GetFieldSafe<int>(_player, "CMD_FLY") == EVENTHANDLERS_ACTIVE && 
-                                _player.GetField<string>("sessionstate") == "playing")
+                            if (UTILS_GetFieldSafe<int>(_player, "CMD_FLY") == EVENTHANDLERS_ACTIVE/* && 
+                                _player.GetField<string>("sessionstate") == "playing"*/)
                             {
                                 sender.SetField("CMD_FLY", EFFECTS_ACTIVE);
                                 _player.Call("allowspectateteam", "freelook", true);
@@ -2359,8 +2359,8 @@ namespace LambAdmin
                         }));
                         sender.OnNotify("fly_off", new Action<Entity>((_player) =>
                         {
-                            if (UTILS_GetFieldSafe<int>(_player, "CMD_FLY") == EFFECTS_ACTIVE && 
-                                _player.GetField<string>("sessionstate") == "spectator")
+                            if (UTILS_GetFieldSafe<int>(_player, "CMD_FLY") == EFFECTS_ACTIVE/* && 
+                                _player.GetField<string>("sessionstate") == "spectator"*/)
                             {
                                 _player.SetField("CMD_FLY", EVENTHANDLERS_ACTIVE);
                                 _player.Call("allowspectateteam", "freelook", false);

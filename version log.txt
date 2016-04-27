@@ -1,3 +1,9 @@
+v3.3.13:
+ * FIXED: Player connect message with additional info.
+ * GROUPS:: NEW FEATURE: -*unsafe* and -*abusive* group rules. Let you easily disable all abusive and unsafe commands. Check docs for more info.
+ * GROUPS:: New group "banned". Each command are blocked, even if command allowed for default group, except "!suicide".
+ * CHANGED: !fly : If command executed by spectator, he will be spawned. He can't kill, and can't be killed.
+ * CHANGED: !teleport <player2> <player1> -> !teleport <player1> <player2>
 v3.3.12:
  * COMMAND: !playfxontag <fx> [tag = j_head]
  * COMMAND: !setclantag <player> [tag]
