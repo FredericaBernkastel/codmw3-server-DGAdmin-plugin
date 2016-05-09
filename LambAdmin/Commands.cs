@@ -726,6 +726,15 @@ namespace LambAdmin
                 {
                     WriteChatToPlayerMultiline(sender, System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\apply.txt"));
                 }));
+                CommandList.Add(new Command("app", 0, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    string[] lines = File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\apply.txt");
+                    foreach (string line in lines)
+                    {
+                        WriteChatToAll(line);
+                    }
+                }));
             }
 
             // WARN
