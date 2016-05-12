@@ -5,6 +5,9 @@ Complete admin guide can be found [here](https://docs.google.com/document/d/1SFe
 ```Javascript
 !apply
     print apply message (commands\apply.txt)
+ 
+!app
+    print server wide apply message (commands\apply.txt)
     
 !night <on/off>
     turn night mode for you
