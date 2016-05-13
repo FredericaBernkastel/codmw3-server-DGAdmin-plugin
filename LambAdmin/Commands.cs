@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +16,7 @@ namespace LambAdmin
         {
             private static string DayTime = "day";
             public static bool HellMode = false;
- 
+
             public static int settings_warn_maxwarns
             {
                 get
@@ -93,11 +93,12 @@ namespace LambAdmin
 
         public class Command
         {
-            [Flags] public enum Behaviour
+            [Flags]
+            public enum Behaviour
             {
-                Normal = 1, 
+                Normal = 1,
                 HasOptionalArguments = 2,
-                OptionalIsRequired = 4, 
+                OptionalIsRequired = 4,
                 MustBeConfirmed = 8
             };
 
@@ -127,7 +128,7 @@ namespace LambAdmin
                 {
                     if (behaviour.HasFlag(Behaviour.OptionalIsRequired) && string.IsNullOrWhiteSpace(optionalargument))
                     {
-                        script.WriteChatToPlayer(sender, "2"+GetString(name, "usage"));
+                        script.WriteChatToPlayer(sender, "2" + GetString(name, "usage"));
                         return;
                     }
                 }
@@ -140,8 +141,8 @@ namespace LambAdmin
                 {
                     if (sender.GetField<string>("CurrentCommand") != message)
                     {
-                        script.WriteChatToPlayerMultiline(sender, new string[] { 
-                            "^5-->You trying ^1UNSAFE ^5command", 
+                        script.WriteChatToPlayerMultiline(sender, new string[] {
+                            "^5-->You trying ^1UNSAFE ^5command",
                             "^5-->^3" + message,
                             "^5-->Confirm (^1!yes ^5/ ^2!no^5)"
                         }, 50);
@@ -383,13 +384,13 @@ namespace LambAdmin
                 System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\warns.txt", new string[0]);
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\apply.txt"))
-                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\apply.txt", new string[1]{"Wanna join ^1DG^7? Apply at ^2dgnetworks.enjin.com"});
+                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\apply.txt", new string[1] { "Wanna join ^1DG^7? Apply at ^2dgnetworks.enjin.com" });
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\rules.txt"))
                 System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\rules.txt", new string[1] { "Rule one: ^1No Rules!" });
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\cdvars.txt"))
-                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\cdvars.txt", new string[] {            
+                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\cdvars.txt", new string[] {
                     "cg_chatTime=30000",
                     "cg_chatHeight=8",
                     "cg_hudChatIntermissionPosition=5 240",
@@ -410,7 +411,7 @@ namespace LambAdmin
                 });
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\PersonalPlayerDvars.xml"))
-                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\internal\PersonalPlayerDvars.xml", new string[] { 
+                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\internal\PersonalPlayerDvars.xml", new string[] {
                     "<?xml version=\"1.0\" encoding=\"utf-8\"?>",
                     "<dictionary />",
                 });
@@ -419,10 +420,10 @@ namespace LambAdmin
                 System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\chatalias.txt", new string[] { });
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))
-                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt", new string[] {"day"});
+                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt", new string[] { "day" });
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\ChatReports.txt"))
-                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\ChatReports.txt", new string[] {  });
+                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\ChatReports.txt", new string[] { });
 
             InitCommands();
             InitCommandAliases();
@@ -488,7 +489,10 @@ namespace LambAdmin
                 (sender, arguments, optarg) =>
                 {
                     WriteChatToPlayer(sender, Command.GetString("admins", "firstline"));
-                    WriteChatToPlayerCondensed(sender, database.GetAdminsString(Players), 1000, 40, Command.GetString("admins", "separator"));
+                    //going to clean out certain group names
+
+                    string[] cookies = database.GetAdminsString(Players);
+                    WriteChatToPlayerCondensed(sender, cookies, 1000, 40, Command.GetString("admins", "separator"));
                 }));
 
             // STATUS
@@ -727,7 +731,36 @@ namespace LambAdmin
                     WriteChatToPlayerMultiline(sender, System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\apply.txt"));
                 }));
             }
-
+            CommandList.Add(new Command("gl", 1, Command.Behaviour.Normal, (sender, arguments, optarg) =>
+            {
+                int delay = 750;
+                if (arguments[0] == "rules")
+                {
+                    if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\rules.txt"))
+                    {
+                        string[] lines = File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\rules.txt");
+                        WriteChatToAllMultiline(lines, delay);
+                    }
+                    else
+                    {
+                        WriteChatToPlayer(sender, "^1Error: Rules file not found");
+                        return;
+                    }
+                }
+                if (arguments[0] == "apply")
+                {
+                    if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\apply.txt"))
+                    {
+                        string[] lines = File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\apply.txt");
+                        WriteChatToAllMultiline(lines, delay);
+                    }
+                    else
+                    {
+                        WriteChatToPlayer(sender, "^1Error: apply file not found");
+                        return;
+                    }
+                }
+            }));
             // WARN
             CommandList.Add(new Command("warn", 1, Command.Behaviour.HasOptionalArguments,
                 (sender, arguments, optarg) =>
@@ -810,6 +843,7 @@ namespace LambAdmin
                         {"<reason>", optarg },
                     }));
                 }));
+
 
             // GETWARNS
             CommandList.Add(new Command("getwarns", 1, Command.Behaviour.HasOptionalArguments,
@@ -908,12 +942,12 @@ namespace LambAdmin
                 (sender, arguments, optarg) =>
                 {
                     Entity target = FindSinglePlayer(arguments[0]);
-                    if(target == null)
+                    if (target == null)
                     {
                         WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
                         return;
                     }
-                    if(target.FixPlayerIdentifiers(database))
+                    if (target.FixPlayerIdentifiers(database))
                         WriteChatToPlayer(sender, Command.GetString("fixplayergroup", "message"));
                     else
                         WriteChatToPlayer(sender, Command.GetString("fixplayergroup", "notfound"));
@@ -1306,12 +1340,12 @@ namespace LambAdmin
                     List<BanEntry> entries = CMD_SearchBanEntries(arguments[0]);
                     if (entries.Count == 0)
                     {
-                        WriteChatToPlayer(sender,Command.GetMessage("NoEntriesFound"));
+                        WriteChatToPlayer(sender, Command.GetMessage("NoEntriesFound"));
                         return;
                     }
                     if (entries.Count > 1)
                     {
-                        WriteChatToPlayer(sender,Command.GetString("unban", "multiple_entries_found"));
+                        WriteChatToPlayer(sender, Command.GetString("unban", "multiple_entries_found"));
                         return;
                     }
                     if (CMD_unban(entries[0].banid) != null)
@@ -1326,7 +1360,7 @@ namespace LambAdmin
                             }));
                     }
                     else
-                        WriteChatToPlayer(sender, "Unknown error at DGAdmin::cmd_unban"); 
+                        WriteChatToPlayer(sender, "Unknown error at DGAdmin::cmd_unban");
                 }
             ));
 
@@ -1746,16 +1780,18 @@ namespace LambAdmin
                     }
                     switch (arguments[0])
                     {
-                        case "on": { 
-                            UTILS_SetClientNightVision(sender);
-                            WriteChatToPlayer(sender, "^4NigthMod ^2Activated");
-                            break;
-                        }
-                        case "off": { 
-                            UTILS_SetCliDefDvars(sender);
-                            WriteChatToPlayer(sender, "^4NightMod ^1Deactivated"); 
-                            break; 
-                        }
+                        case "on":
+                            {
+                                UTILS_SetClientNightVision(sender);
+                                WriteChatToPlayer(sender, "^4NigthMod ^2Activated");
+                                break;
+                            }
+                        case "off":
+                            {
+                                UTILS_SetCliDefDvars(sender);
+                                WriteChatToPlayer(sender, "^4NightMod ^1Deactivated");
+                                break;
+                            }
                     }
                 }));
 
@@ -1777,7 +1813,7 @@ namespace LambAdmin
             CommandList.Add(new Command("alias", 1, Command.Behaviour.HasOptionalArguments,
             (sender, arguments, optarg) =>
             {
-                if(ConfigValues.settings_enable_chat_alias)
+                if (ConfigValues.settings_enable_chat_alias)
                     UTILS_SetChatAlias(sender, arguments[0], optarg);
                 else
                     WriteChatToPlayer(sender, Command.GetString("alias", "disabled"));
@@ -2157,7 +2193,7 @@ namespace LambAdmin
                         sender.SetField("CMD_SETFX", new Parameter(v));
                         string key = String.IsNullOrEmpty(optarg) ? "+activate" : optarg;
                         if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\setfx.txt"))
-                            System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\setfx.txt", new string[] { }); 
+                            System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\setfx.txt", new string[] { });
                         sender.Call("notifyonplayercommand", "spawnfx", key);
                         sender.OnNotify("spawnfx", ent =>
                         {
@@ -2165,13 +2201,13 @@ namespace LambAdmin
                             {
                                 Array.ForEach(sender.GetField<string>("CMD_SETFX").Split(','), (s) =>
                                 {
-                                    Call("triggerfx",Call<Entity>("spawnFx", Call<int>("loadfx", s), sender.Origin, new Vector3(0, 0, 1), new Vector3(0, 0, 0)));
+                                    Call("triggerfx", Call<Entity>("spawnFx", Call<int>("loadfx", s), sender.Origin, new Vector3(0, 0, 1), new Vector3(0, 0, 0)));
                                     WriteChatToPlayer(sender, Command.GetString("setfx", "spawned").Format(new Dictionary<string, string>()
                                     {
                                         {"<fx>", s },
                                         {"<origin>", sender.Origin.ToString() },
                                     }));
-                                    file.WriteLine("<fx> <x> <y> <z>".Format(new Dictionary<string,string>(){
+                                    file.WriteLine("<fx> <x> <y> <z>".Format(new Dictionary<string, string>(){
                                         {"<fx>", s},
                                         {"<x>", sender.Origin.X.ToString()},
                                         {"<y>", sender.Origin.Y.ToString()},
@@ -2238,8 +2274,8 @@ namespace LambAdmin
                 {
                     AfterDelay(100, () => {
                         sender.Suicide();
-                    });                       
-                    
+                    });
+
                 }));
 
             // YES
@@ -2266,7 +2302,7 @@ namespace LambAdmin
                         return;
                     }
                     sender.SetField("CurrentCommand", "");
-                    WriteChatToPlayer(sender, "^3Command execution aborted (^1"+command+"^3)");
+                    WriteChatToPlayer(sender, "^3Command execution aborted (^1" + command + "^3)");
                 }));
 
             // 3RDPERSON
@@ -2293,8 +2329,8 @@ namespace LambAdmin
                 }));
 
             // TELEPORT
-            CommandList.Add(new Command("teleport",2,Command.Behaviour.Normal,
-                (sender,arguments, optarg)=>
+            CommandList.Add(new Command("teleport", 2, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
                 {
                     Entity player1 = FindSinglePlayer(arguments[0]);
                     Entity player2 = FindSinglePlayer(arguments[1]);
@@ -2380,7 +2416,7 @@ namespace LambAdmin
                                 if (CMD_FLY == DISABLED)
                                 {
                                     sender.Call("notifyonplayercommand", "fly_on", "+" + key);
-                                    sender.Call("notifyonplayercommand", "fly_off","-" + key);
+                                    sender.Call("notifyonplayercommand", "fly_off", "-" + key);
                                 }
                                 WriteChatToPlayer(sender, Command.GetString("fly", "enabled").Format(new Dictionary<string, string>()
                                 {
@@ -2399,7 +2435,7 @@ namespace LambAdmin
                                 break;
                             }
                     }
-                        
+
                 }));
 
             // JUMP
@@ -2425,7 +2461,7 @@ namespace LambAdmin
                 {
                     float speed = 0;
                     if (arguments[0].StartsWith("def"))
-                        foreach(Entity player in Players)
+                        foreach (Entity player in Players)
                             CMD_SPEED(player, 1F);
                     else if (float.TryParse(arguments[0], out speed))
                         foreach (Entity player in Players)
@@ -2446,7 +2482,7 @@ namespace LambAdmin
                     if (arguments[0].StartsWith("def"))
                         CMD_GRAVITY(800);
                     else if (float.TryParse(arguments[0], out gravity))
-                        CMD_GRAVITY((int)Math.Round(gravity / 9.8 * 800));     
+                        CMD_GRAVITY((int)Math.Round(gravity / 9.8 * 800));
                     WriteChatToAll(Command.GetString("gravity", "message").Format(new Dictionary<string, string>()
                         {
                             {"<g>", arguments[0].StartsWith("def")?"9.8" : gravity.ToString() },
@@ -2532,12 +2568,12 @@ namespace LambAdmin
                     return;
                 }
                 Vector3 angles = target.Call<Vector3>("getplayerangles");
-                if(!float.TryParse(arguments[1], out angles.Z))
+                if (!float.TryParse(arguments[1], out angles.Z))
                 {
                     WriteChatToPlayer(sender, Command.GetString("rotatescreen", "usage"));
                     return;
                 }
-                
+
                 target.Call("setplayerangles", new Parameter[] { angles });
 
                 WriteChatToPlayer(sender, Command.GetString("rotatescreen", "message").Format(new Dictionary<string, string>()
@@ -2575,7 +2611,7 @@ namespace LambAdmin
                                 continue;
                             ProcessCommand(sender, sender.Name, optarg.Replace("<player>", "#" + player.GetEntityNumber().ToString()));
                         }
-                    }));                
+                    }));
 
                 // SVPASSWORD
                 CommandList.Add(new Command("svpassword", 0, Command.Behaviour.HasOptionalArguments | Command.Behaviour.MustBeConfirmed,
@@ -2601,14 +2637,14 @@ namespace LambAdmin
 
                         AfterDelay(2000, () =>
                         {
-                            WriteChatToAllMultiline(new string[] { 
-                                "^1Server will be killed in:", 
-                                "^35", 
-                                "^34", 
-                                "^33", 
-                                "^32", 
-                                "^31", 
-                                "^30" 
+                            WriteChatToAllMultiline(new string[] {
+                                "^1Server will be killed in:",
+                                "^35",
+                                "^34",
+                                "^33",
+                                "^32",
+                                "^31",
+                                "^30"
                             }, 1000);
                         });
                         AfterDelay(8000, () =>
@@ -2682,7 +2718,8 @@ namespace LambAdmin
             }
         }
 
-        public void InitChatAlias() {
+        public void InitChatAlias()
+        {
             if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\chatalias.txt"))
             {
                 foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Utils\chatalias.txt"))
@@ -2707,9 +2744,9 @@ namespace LambAdmin
         public void CMD_kick(Entity target, string reason = "You have been kicked")
         {
             AfterDelay(100, () =>
-                {
-                    ExecuteCommand("dropclient " + target.GetEntityNumber() + " \"" + reason + "\"");
-                });
+            {
+                ExecuteCommand("dropclient " + target.GetEntityNumber() + " \"" + reason + "\"");
+            });
         }
 
         public void CMD_tmpban(Entity target, string reason = "You have been tmpbanned")
@@ -3009,105 +3046,105 @@ namespace LambAdmin
             switch (ft)
             {
                 case "0":
-                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "0" });
-                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "0" });
-                    dvars.Add(new Dvar { key = "r_filmtweakenable",         value = "0" });
-                    dvars.Add(new Dvar { key = "r_colorMap",                value = "1" });
-                    dvars.Add(new Dvar { key = "r_specularMap",             value = "1" });
-                    dvars.Add(new Dvar { key = "r_normalMap",               value = "1" });
+                    dvars.Add(new Dvar { key = "r_filmusetweaks", value = "0" });
+                    dvars.Add(new Dvar { key = "r_filmusetweaks", value = "0" });
+                    dvars.Add(new Dvar { key = "r_filmtweakenable", value = "0" });
+                    dvars.Add(new Dvar { key = "r_colorMap", value = "1" });
+                    dvars.Add(new Dvar { key = "r_specularMap", value = "1" });
+                    dvars.Add(new Dvar { key = "r_normalMap", value = "1" });
                     break;
                 case "1":
-                    dvars.Add(new Dvar { key = "r_filmtweakdarktint",       value = "0.65 0.7 0.8"});
-                    dvars.Add(new Dvar { key = "r_filmtweakcontrast",       value = "1.3"});
-                    dvars.Add(new Dvar { key = "r_filmtweakbrightness",     value = "0.15"});
-                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation",   value = "0"});
-                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "1"});
-                    dvars.Add(new Dvar { key = "r_filmtweaklighttint",      value = "1.8 1.8 1.8"});
-                    dvars.Add(new Dvar { key = "r_filmtweakenable",         value = "1" });
+                    dvars.Add(new Dvar { key = "r_filmtweakdarktint", value = "0.65 0.7 0.8" });
+                    dvars.Add(new Dvar { key = "r_filmtweakcontrast", value = "1.3" });
+                    dvars.Add(new Dvar { key = "r_filmtweakbrightness", value = "0.15" });
+                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation", value = "0" });
+                    dvars.Add(new Dvar { key = "r_filmusetweaks", value = "1" });
+                    dvars.Add(new Dvar { key = "r_filmtweaklighttint", value = "1.8 1.8 1.8" });
+                    dvars.Add(new Dvar { key = "r_filmtweakenable", value = "1" });
                     break;
                 case "2":
-                    dvars.Add(new Dvar { key = "r_filmtweakdarktint",       value = "1.15 1.1 1.3"});
-                    dvars.Add(new Dvar { key = "r_filmtweakcontrast",       value = "1.6"});
-                    dvars.Add(new Dvar { key = "r_filmtweakbrightness",     value = "0.2"});
-                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation",   value = "0"});
-                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "1"});
-                    dvars.Add(new Dvar { key = "r_filmtweaklighttint",      value = "1.35 1.3 1.25"});
-                    dvars.Add(new Dvar { key = "r_filmtweakenable",         value = "1" });
+                    dvars.Add(new Dvar { key = "r_filmtweakdarktint", value = "1.15 1.1 1.3" });
+                    dvars.Add(new Dvar { key = "r_filmtweakcontrast", value = "1.6" });
+                    dvars.Add(new Dvar { key = "r_filmtweakbrightness", value = "0.2" });
+                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation", value = "0" });
+                    dvars.Add(new Dvar { key = "r_filmusetweaks", value = "1" });
+                    dvars.Add(new Dvar { key = "r_filmtweaklighttint", value = "1.35 1.3 1.25" });
+                    dvars.Add(new Dvar { key = "r_filmtweakenable", value = "1" });
                     break;
                 case "3":
-                    dvars.Add(new Dvar { key = "r_filmtweakdarktint",       value = "0.8 0.8 1.1"});
-                    dvars.Add(new Dvar { key = "r_filmtweakcontrast",       value = "1.3"});
-                    dvars.Add(new Dvar { key = "r_filmtweakbrightness",     value = "0.48"});
-                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation",   value = "0"});
-                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "1"});
-                    dvars.Add(new Dvar { key = "r_filmtweaklighttint",      value = "1 1 1.4"});
-                    dvars.Add(new Dvar { key = "r_filmtweakenable",         value = "1" });
+                    dvars.Add(new Dvar { key = "r_filmtweakdarktint", value = "0.8 0.8 1.1" });
+                    dvars.Add(new Dvar { key = "r_filmtweakcontrast", value = "1.3" });
+                    dvars.Add(new Dvar { key = "r_filmtweakbrightness", value = "0.48" });
+                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation", value = "0" });
+                    dvars.Add(new Dvar { key = "r_filmusetweaks", value = "1" });
+                    dvars.Add(new Dvar { key = "r_filmtweaklighttint", value = "1 1 1.4" });
+                    dvars.Add(new Dvar { key = "r_filmtweakenable", value = "1" });
                     break;
                 case "4":
-                    dvars.Add(new Dvar { key = "r_filmtweakdarktint",       value = "1.8 1.8 2"});
-                    dvars.Add(new Dvar { key = "r_filmtweakcontrast",       value = "1.25"});
-                    dvars.Add(new Dvar { key = "r_filmtweakbrightness",     value = "0.02"});
-                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation",   value = "0"});
-                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "1"});
-                    dvars.Add(new Dvar { key = "r_filmtweaklighttint",      value = "0.8 0.8 1"});
-                    dvars.Add(new Dvar { key = "r_filmtweakenable",         value = "1"});
+                    dvars.Add(new Dvar { key = "r_filmtweakdarktint", value = "1.8 1.8 2" });
+                    dvars.Add(new Dvar { key = "r_filmtweakcontrast", value = "1.25" });
+                    dvars.Add(new Dvar { key = "r_filmtweakbrightness", value = "0.02" });
+                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation", value = "0" });
+                    dvars.Add(new Dvar { key = "r_filmusetweaks", value = "1" });
+                    dvars.Add(new Dvar { key = "r_filmtweaklighttint", value = "0.8 0.8 1" });
+                    dvars.Add(new Dvar { key = "r_filmtweakenable", value = "1" });
                     break;
                 case "5":
-                    dvars.Add(new Dvar { key = "r_filmtweakdarktint",       value = "1 1 2"});
-                    dvars.Add(new Dvar { key = "r_filmtweakcontrast",       value = "1.5"});
-                    dvars.Add(new Dvar { key = "r_filmtweakbrightness",     value = "0.07"});
-                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation",   value = "0"});
-                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "1"});
-                    dvars.Add(new Dvar { key = "r_filmtweaklighttint",      value = "1 1.2 1"});
-                    dvars.Add(new Dvar { key = "r_filmtweakenable",         value = "1"});
+                    dvars.Add(new Dvar { key = "r_filmtweakdarktint", value = "1 1 2" });
+                    dvars.Add(new Dvar { key = "r_filmtweakcontrast", value = "1.5" });
+                    dvars.Add(new Dvar { key = "r_filmtweakbrightness", value = "0.07" });
+                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation", value = "0" });
+                    dvars.Add(new Dvar { key = "r_filmusetweaks", value = "1" });
+                    dvars.Add(new Dvar { key = "r_filmtweaklighttint", value = "1 1.2 1" });
+                    dvars.Add(new Dvar { key = "r_filmtweakenable", value = "1" });
                     break;
                 case "6":
-                    dvars.Add(new Dvar { key = "r_filmtweakdarktint",       value = "1.5 1.5 2"});
-                    dvars.Add(new Dvar { key = "r_filmtweakcontrast",       value = "1"});
-                    dvars.Add(new Dvar { key = "r_filmtweakbrightness",     value = "0.0.4"});
-                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation",   value = "0"});
-                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "1"});
-                    dvars.Add(new Dvar { key = "r_filmtweaklighttint",      value = "1.5 1.5 1"});
-                    dvars.Add(new Dvar { key = "r_filmtweakenable",         value = "1"});
+                    dvars.Add(new Dvar { key = "r_filmtweakdarktint", value = "1.5 1.5 2" });
+                    dvars.Add(new Dvar { key = "r_filmtweakcontrast", value = "1" });
+                    dvars.Add(new Dvar { key = "r_filmtweakbrightness", value = "0.0.4" });
+                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation", value = "0" });
+                    dvars.Add(new Dvar { key = "r_filmusetweaks", value = "1" });
+                    dvars.Add(new Dvar { key = "r_filmtweaklighttint", value = "1.5 1.5 1" });
+                    dvars.Add(new Dvar { key = "r_filmtweakenable", value = "1" });
                     break;
                 case "7":
-                    dvars.Add(new Dvar { key = "r_specularMap",             value = "2"});
-                    dvars.Add(new Dvar { key = "r_normalMap",               value = "0"});
+                    dvars.Add(new Dvar { key = "r_specularMap", value = "2" });
+                    dvars.Add(new Dvar { key = "r_normalMap", value = "0" });
                     break;
                 case "8":
-                    dvars.Add(new Dvar { key = "cg_drawFPS",                value = "1"});
-                    dvars.Add(new Dvar { key = "cg_fovScale",               value = "1.5"});
+                    dvars.Add(new Dvar { key = "cg_drawFPS", value = "1" });
+                    dvars.Add(new Dvar { key = "cg_fovScale", value = "1.5" });
                     break;
                 case "9":
-                    dvars.Add(new Dvar { key = "r_debugShader",             value = "1"});
+                    dvars.Add(new Dvar { key = "r_debugShader", value = "1" });
                     break;
                 case "10":
-                    dvars.Add(new Dvar { key = "r_colorMap",                value = "3"});
+                    dvars.Add(new Dvar { key = "r_colorMap", value = "3" });
                     break;
                 case "11":
-                    dvars.Add(new Dvar { key = "com_maxfps",                value = "0"});
-                    dvars.Add(new Dvar { key = "con_maxfps",                value = "0"});
+                    dvars.Add(new Dvar { key = "com_maxfps", value = "0" });
+                    dvars.Add(new Dvar { key = "con_maxfps", value = "0" });
                     break;
                 case "default":
-                    dvars.Add(new Dvar { key = "r_filmtweakdarktint",       value = "0.7 0.85 1"});
-                    dvars.Add(new Dvar { key = "r_filmtweakcontrast",       value = "1.4"});
-                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation",   value = "0.2"});
-                    dvars.Add(new Dvar { key = "r_filmusetweaks",           value = "0"});
-                    dvars.Add(new Dvar { key = "r_filmtweaklighttint",      value = "1.1 1.05 0.85"});
-                    dvars.Add(new Dvar { key = "cg_scoreboardpingtext",     value = "1"});
-                    dvars.Add(new Dvar { key = "waypointIconHeight",        value = "13"});
-                    dvars.Add(new Dvar { key = "waypointIconWidth",         value = "13"});
-                    dvars.Add(new Dvar { key = "cl_maxpackets",             value = "100"});
-                    dvars.Add(new Dvar { key = "r_fog",                     value = "0"});
-                    dvars.Add(new Dvar { key = "fx_drawclouds",             value = "0"});
-                    dvars.Add(new Dvar { key = "r_distortion",              value = "0"});
-                    dvars.Add(new Dvar { key = "r_dlightlimit",             value = "0"});
-                    dvars.Add(new Dvar { key = "cg_brass",                  value = "0"});
-                    dvars.Add(new Dvar { key = "snaps",                     value = "30"});
-                    dvars.Add(new Dvar { key = "com_maxfps",                value = "100"});
-                    dvars.Add(new Dvar { key = "clientsideeffects",         value = "0"});
-                    dvars.Add(new Dvar { key = "r_filmTweakBrightness",     value = "0.2" });
-                    dvars.Add(new Dvar { key = "cg_fovScale",               value = "1" });
+                    dvars.Add(new Dvar { key = "r_filmtweakdarktint", value = "0.7 0.85 1" });
+                    dvars.Add(new Dvar { key = "r_filmtweakcontrast", value = "1.4" });
+                    dvars.Add(new Dvar { key = "r_filmtweakdesaturation", value = "0.2" });
+                    dvars.Add(new Dvar { key = "r_filmusetweaks", value = "0" });
+                    dvars.Add(new Dvar { key = "r_filmtweaklighttint", value = "1.1 1.05 0.85" });
+                    dvars.Add(new Dvar { key = "cg_scoreboardpingtext", value = "1" });
+                    dvars.Add(new Dvar { key = "waypointIconHeight", value = "13" });
+                    dvars.Add(new Dvar { key = "waypointIconWidth", value = "13" });
+                    dvars.Add(new Dvar { key = "cl_maxpackets", value = "100" });
+                    dvars.Add(new Dvar { key = "r_fog", value = "0" });
+                    dvars.Add(new Dvar { key = "fx_drawclouds", value = "0" });
+                    dvars.Add(new Dvar { key = "r_distortion", value = "0" });
+                    dvars.Add(new Dvar { key = "r_dlightlimit", value = "0" });
+                    dvars.Add(new Dvar { key = "cg_brass", value = "0" });
+                    dvars.Add(new Dvar { key = "snaps", value = "30" });
+                    dvars.Add(new Dvar { key = "com_maxfps", value = "100" });
+                    dvars.Add(new Dvar { key = "clientsideeffects", value = "0" });
+                    dvars.Add(new Dvar { key = "r_filmTweakBrightness", value = "0.2" });
+                    dvars.Add(new Dvar { key = "cg_fovScale", value = "1" });
                     break;
             }
             try
@@ -3139,7 +3176,7 @@ namespace LambAdmin
             {
                 WriteLog.Error("Exception at DGAdmin::CMD_applyfilmtweak");
             }
-            
+
         }
 
         public void CMD_spammessagerainbow(string message, int times = 8, int delay = 500)
@@ -3175,10 +3212,10 @@ namespace LambAdmin
                 player.GiveWeapon("ac130_105mm_mp");
                 player.GiveWeapon("ac130_40mm_mp");
                 player.GiveWeapon("ac130_25mm_mp");
-                player.SwitchToWeaponImmediate("ac130_25mm_mp");           
+                player.SwitchToWeaponImmediate("ac130_25mm_mp");
             });
 
-            if(permanent)
+            if (permanent)
                 player.SetField("CMD_AC130", new Parameter((int)1));
         }
 
@@ -3348,7 +3385,7 @@ namespace LambAdmin
                         {"<victim>", player.Name}
                     }));
 
-                if(attacker_killstreak == 5)
+                if (attacker_killstreak == 5)
                     WriteChatToAll(Lang_GetString("Spree_Kills_5").Format(new Dictionary<string, string>()
                     {
                         {"<attacker>", attacker.Name}
@@ -3363,7 +3400,7 @@ namespace LambAdmin
                 switch (weapon)
                 {
                     case "moab":
-                    case "briefcase_bomb_mp": 
+                    case "briefcase_bomb_mp":
                     case "destructible_car":
                     case "barrel_mp":
                     case "destructible_toy":
@@ -3388,7 +3425,7 @@ namespace LambAdmin
                         break;
                 }
 
-                if(victim_killstreak >= 5)
+                if (victim_killstreak >= 5)
                     WriteChatToAll(Lang_GetString("Spree_Ended").Format(new Dictionary<string, string>()
                     {
                         {"<attacker>", attacker.Name},

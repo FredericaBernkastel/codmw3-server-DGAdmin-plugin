@@ -106,6 +106,8 @@ namespace LambAdmin
             {"command_pm_message", "^1<sender>^0: ^2<message>" },
             {"command_pm_confirmation", "^2PM SENT." },
 
+            {"command_gl_usage", "^1Usage: !gl <apply/rules>" },
+
             {"command_admins_usage", "^1Usage: !admins" },
             {"command_admins_firstline", "^1Online Admins: ^7" },
             {"command_admins_formatting", "<formattedname>" },
