@@ -3,6 +3,11 @@ DG Admin script for Call of Duty: MW3 dedicated server. Based on RGAdmin v1.05, 
 Complete admin guide can be found [here](https://docs.google.com/document/d/1SFeFLtie7718nz9ctME5oN99iv3-p2XiIQqsHDqasAo/edit?usp=sharing).<br><br>
 **New commands** (not included in RG Admin)
 ```Javascript
+!gl <apply/rules>
+    print apply message (commands\apply.txt)
+	or
+	print rules message (commands\rules.txt)
+
 !apply
     print apply message (commands\apply.txt)
     
