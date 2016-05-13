@@ -488,7 +488,10 @@ namespace LambAdmin
                 (sender, arguments, optarg) =>
                 {
                     WriteChatToPlayer(sender, Command.GetString("admins", "firstline"));
-                    WriteChatToPlayerCondensed(sender, database.GetAdminsString(Players), 1000, 40, Command.GetString("admins", "separator"));
+                    //going to clean out certain group names
+
+                    string[] cookies = database.GetAdminsString(Players);
+                    WriteChatToPlayerCondensed(sender, cookies, 1000, 40, Command.GetString("admins", "separator"));
                 }));
 
             // STATUS
@@ -716,6 +719,15 @@ namespace LambAdmin
                 {
                     WriteChatToPlayerMultiline(sender, System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\rules.txt"));
                 }));
+                CommandList.Add(new Command("rules", 0, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    string[] lines = File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\apply.txt");
+                    foreach (string line in lines)
+                    {
+                        WriteChatToAll(line);
+                    }
+                }));
             }
 
             if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\apply.txt"))
@@ -736,7 +748,48 @@ namespace LambAdmin
                     }
                 }));
             }
-
+            CommandList.Add(new Command("gl", 1, Command.Behaviour.Normal, (sender, arguments, optarg) =>
+            {
+                if (arguments[0] == "")
+                {
+                    WriteChatToPlayer(sender, "^1Error you suck try again");
+                    return;
+                }
+                // RULES
+                if (arguments[0] == "rules")
+                {
+                    if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\rules.txt"))
+                    {
+                        string[] lines = File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\rules.txt");
+                        foreach (string line in lines)
+                        {
+                            WriteChatToAll(line);
+                        }
+                    }
+                    else
+                    {
+                        WriteChatToPlayer(sender, "^1Error: Rules file not found");
+                        return;
+                    }
+                }
+                // apply
+                if (arguments[0] == "apply")
+                {
+                    if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\apply.txt"))
+                    {
+                        string[] lines = File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\apply.txt");
+                        foreach (string line in lines)
+                        {
+                            WriteChatToAll(line);
+                        }
+                    }
+                    else
+                    {
+                        WriteChatToPlayer(sender, "^1Error: apply file not found");
+                        return;
+                    }
+                }
+            }));
             // WARN
             CommandList.Add(new Command("warn", 1, Command.Behaviour.HasOptionalArguments,
                 (sender, arguments, optarg) =>
@@ -819,6 +872,7 @@ namespace LambAdmin
                         {"<reason>", optarg },
                     }));
                 }));
+
 
             // GETWARNS
             CommandList.Add(new Command("getwarns", 1, Command.Behaviour.HasOptionalArguments,
@@ -2643,7 +2697,7 @@ namespace LambAdmin
                                 CMD_kick(player, "^3Server killed");
                             AfterDelay(1000, () => Environment.Exit(-1));
                         });
-                    }));
+                    }));              
             }
 
             #endregion
