@@ -35,7 +35,7 @@ namespace LambAdmin
         //-------
         public static partial class ConfigValues
         {
-            public static string Version = "v3.3n13";
+            public static string Version = "v3.4n14";
             public static string ConfigPath = @"scripts\DGAdmin\";
             public static string ChatPrefix
             {
@@ -574,7 +574,7 @@ namespace LambAdmin
             }
         }
 
-        public void WriteChatToAll(string message)
+        public static void WriteChatToAll(string message)
         {
             Utilities.RawSayAll(ConfigValues.ChatPrefix + " " + message);
         }
@@ -593,6 +593,11 @@ namespace LambAdmin
                 AfterDelay(num * delay, (() => WriteChatToAll(message)));
                 ++num;
             }
+        }
+
+        public void WriteChatToAllCondensed(string[] messages, int delay = 1000, int condenselevel = 40, string separator = ", ")
+        {
+            WriteChatToAllMultiline(messages.Condense(condenselevel, separator), delay);
         }
 
         public void WriteChatToPlayerMultiline(Entity player, string[] messages, int delay = 500)
@@ -1035,7 +1040,7 @@ namespace LambAdmin
                 player.SetClientDvar(dvar.key, dvar.value);
         }
 
-        public void ExecuteCommand(string command)
+        public static void ExecuteCommand(string command)
         {
             Utilities.ExecuteCommand(command);
         }
@@ -1827,6 +1832,14 @@ namespace LambAdmin
             {
                 xmlSerializer.Serialize(fs, db);
             }
+        }
+
+        public static void Delay(int ms, System.Timers.ElapsedEventHandler action)
+        {
+            System.Timers.Timer _timer = new System.Timers.Timer(ms);
+            _timer.Elapsed += (o, e) => { _timer.Enabled = false; };
+            _timer.Elapsed += action;
+            _timer.Enabled = true;
         }
 
     }

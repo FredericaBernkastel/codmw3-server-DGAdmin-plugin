@@ -186,8 +186,9 @@ namespace LambAdmin
             if (!attacker.IsPlayer)
                 return;
 
-            if (attacker.IsSpectating())
-                player.Health += damage;
+            if (attacker.HasField("CMD_FLY"))
+                if(attacker.IsSpectating() || !attacker.IsAlive)
+                    player.Health += damage;
 
             if (weapon == "iw5_usp45_mp_tactical" && Call<string>("getdvar", "g_gametype") == "infect" && attacker.GetTeam() != "allies")
                 return;

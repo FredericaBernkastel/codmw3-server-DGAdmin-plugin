@@ -1,6 +1,6 @@
 ## "DGAdmin" - Call of Duty: MW3 dedicated server plugin
 DG Admin script for Call of Duty: MW3 dedicated server. Based on RGAdmin v1.05, modified by **F. Bernkastel**<br>
-Complete admin guide can be found [here](https://docs.google.com/document/d/1SFeFLtie7718nz9ctME5oN99iv3-p2XiIQqsHDqasAo/edit?usp=sharing).<br><br>
+Complete admin guide can be found [here](https://drive.google.com/file/d/0B4OfimTH0gRhdGxoSHBJY194UWs/view?usp=sharing).<br><br>
 **New commands** (not included in RG Admin)
 ```Javascript
 !apply
@@ -103,11 +103,22 @@ Complete admin guide can be found [here](https://docs.google.com/document/d/1SFe
 !rotatescreen <player> <degree>
     Set camera roll of player. Very abusive.
 
+!votekick <player> [reason]
+    Start a vote to kick player.
+
 *Misc comands (not enabled by default)*
 
 !svpassword [password]
     Will set server password in “players2\server.cfg”, and kill server.
     *Server should be run under daemon*, i.e. “Alani’s server manager” to be auto-restarted.
+
+*New set of broadcast commands (print to the public chat)*:
+  - !@admins
+  - !@rules
+  - !@apply
+  - !@time
+  - !@xlrstats
+  - !@xlrtop
 
 ```
 **New features**
@@ -118,6 +129,7 @@ Complete admin guide can be found [here](https://docs.google.com/document/d/1SFe
  - AntiBoltCancel  (option: settings_isnipe_antiboltcancel)
  - XLR Stats (option: settings_enable_xlrstats)
  - Advanced cdvar manager - you can set default client dvars in "Utils\cdvars.txt"
+ - Voting
 
  Fixed issue with trophy-kill (when victim gets banned for it);
 

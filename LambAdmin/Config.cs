@@ -69,7 +69,9 @@ namespace LambAdmin
             { "settings_enable_autofpsunlock", "true" },
             { "settings_enable_dlcmaps", "true" },
             { "settings_enable_chat_alias", "true" },
-            { "settings_enable_spree_messages", "true"}
+            { "settings_enable_spree_messages", "true"},
+            { "commands_vote_time", "30"},
+            { "commands_vote_threshold", "2"}
         };
 
         public static Dictionary<string, string> DefaultCmdLang = new Dictionary<string, string>()
@@ -130,6 +132,10 @@ namespace LambAdmin
 
             {"command_ban_usage", "^1Usage: !ban <player> [reason]" },
             {"command_ban_message", "^3<target>^7 was ^1banned^7 by ^1<issuer>^7. Reason: ^6<reason>" },
+
+            {"command_rules_usage", "^1Usage: !rules"},
+
+            {"command_apply_usage", "^1Usage: !apply"},
 
             {"command_say_usage", "^1Usage: !say <message>" },
 
@@ -216,11 +222,11 @@ namespace LambAdmin
 
             {"command_lastbans_usage", "^1Usage: !lastbans [amount]" },
             {"command_lastbans_firstline", "^2Last <nr> bans:" },
-            {"command_lastbans_message", "^1<banid>: <name>, <guid>, <ip>, <hwid>, <time>" },
+            {"command_lastbans_message", "^1<banid>: <name>, <guid>, <hwid>, <time>" },
 
             {"command_searchbans_usage", "^1Usage: !searchbans <name/playerinfo>" },
             {"command_searchbans_firstline", "^2Search results:" },
-            {"command_searchbans_message", "^1<banid>: <name>, <guid>, <ip>, <hwid>, <time>" },
+            {"command_searchbans_message", "^1<banid>: <name>, <guid>, <hwid>, <time>" },
 
             {"command_help_usage", "^1Usage: !help [command]" },
             {"command_help_firstline", "^5Available commands:" },
@@ -354,7 +360,7 @@ namespace LambAdmin
             {"command_alias_usage", "^1Usage: !alias <player> [alias]"},
             {"command_alias_reset", "^2<player> ^7alias has been ^2reset"},
             {"command_alias_message", "^2<player> ^7alias has been set to «<alias>^7»"},
-            {"command_alias_disabled", "^1Chat alias feature disabled in settings"},
+            {"command_alias_disabled", "^1Chat alias feature has been disabled in settings."},
 
             {"command_myalias_usage", "^1Usage: !myalias [alias]"},
 
@@ -367,7 +373,7 @@ namespace LambAdmin
             {"command_report_message", "^7<senderf>^7 reported: ^3<message>" },
 
             
-            {"command_lastreports_usage", "^1Usage: !lastreports [count = 4]. Cont may be 1..8" },
+            {"command_lastreports_usage", "^1Usage: !lastreports [count = 4]^3; 1 <= Count <= 8" },
             {"command_lastreports_message", "^;<sender>: ^3<message>" },
 
             {"command_setfx_usage", "^Usage: !setfx <fx> [spawn key = activate]"},
@@ -387,8 +393,10 @@ namespace LambAdmin
             {"command_svpassword_usage", "^1Usage !svpassword [password]"},
 
             {"command_yes_usage", "^1Usage: !yes"},
+            {"command_yes_message", "^3<player> voted ^2yes"},
 
             {"command_no_usage", "^1Usage: !no"},
+            {"command_no_message", "^3<player> voted ^1no"},
 
             {"command_3rdperson_usage", "^1Usage: !3rdperson"},
             {"command_3rdperson_message", "^33RD person mode enabled by ^2<issuerf>"},
@@ -413,11 +421,11 @@ namespace LambAdmin
             {"command_register_message", "^3You ^2registered ^3to XLRStats"},
             {"command_register_error", "^1Error: ^3you already registered to XLRStats"},
 
-            {"command_xlrstats_usage", "^1Usage: !xlrstats [player]"},
+            {"command_xlrstats_usage", "^1Usage: !xlrstats [player = self]"},
             {"command_xlrstats_message", "^3Score:^2<score> ^3kills:^2<kills> ^3deaths:^2<deaths>^3 k/d:^2<kd>^3 headshots:^2<headshots>^3 TK_kills:^2<tk_kills> ^3 accuracy:^2<precision>°/."},
             {"command_xlrstats_error", "^1Error: ^3Player not registered to XLRStats"},
 
-            {"command_xlrtop_usage", "^1Usage: !xlrtop [amount = 4]. 1 <= amount <= 8"},
+            {"command_xlrtop_usage", "^1Usage: !xlrtop [amount = 4]^3; 1 <= amount <= 8"},
             {"command_xlrtop_error", "^1Error: ^2XLR db is empty."},
             {"command_xlrtop_message", "^1<place>) ^6<player>: ^3score:^2<score> ^3k:^2<kills> ^3kd:^2<kd> ^3acc:^2<precision>°/."},
 
@@ -427,7 +435,31 @@ namespace LambAdmin
             {"command_rotatescreen_usage", "^1Usage: !rotatescreen <player> <degree>"},
             {"command_rotatescreen_message", "^2<player>'s ^3roll has been set to ^2<roll>°"},
 
-            {"command_setclantag_usage", "^1Usage: !setclantag <player> [tag]"}
+            {"command_setclantag_usage", "^1Usage: !setclantag <player> [tag]"},
+
+            {"command_votekick_usage", "^1Usage: !votekick <player> [reason]"},
+            {"command_votekick_message1", "^2<issuer> ^7wants to kick ^3<player>. ^7Reason: ^1<reason>"},
+            {"command_votekick_message2", "^7Type ^3(^1!yes ^3/ ^1!no^3) ^7to vote."},
+            {"command_votekick_HUD", @"^3Voting: ^1kick ^2<player> ^3for ^2<reason>\n^3Time remaining: ^2<time>s\n^3Votes: ^2+<posvotes>^3 / ^1-<negvotes>"},
+            {"command_votekick_error1", "^1Voting failed: ^3player leaved the game."},
+            {"command_votekick_error2", "^1Voting failed: ^3not enough votes"},
+            {"command_votekick_error3", "^1Voting failed: ^3issuer leaved the game."},
+            {"command_votekick_error4", "^1Error: ^3Voting already occur"},
+            {"command_votekick_error5", "^1Error: ^3You already voted"},
+
+            {"command_@admins_usage", "^1Usage: !@admins" },
+
+            {"command_@rules_usage", "^1Usage: !@rules"},
+
+            {"command_@apply_usage", "^1Usage: !@apply"},
+
+            {"command_@time_usage", "^1Usage: !@time" },
+
+            {"command_@xlrstats_usage", "^1Usage: !@xlrstats [player = self]"},
+            {"command_@xlrstats_message", "^1<player>| ^3Score:^2<score> ^3kills:^2<kills> ^3deaths:^2<deaths>^3 k/d:^2<kd>^3 headshots:^2<headshots>^3 TK_kills:^2<tk_kills> ^3 accuracy:^2<precision>°/."},
+
+            {"command_@xlrtop_usage", "^1Usage: !@xlrtop [amount = 4]^3; 1 <= amount <= 8"},
+
         };
 
         public static void CFG_ReadConfig()

@@ -79,6 +79,20 @@ namespace LambAdmin
                     }
                 }
             }
+            public static int commands_vote_time
+            {
+                get
+                {
+                    return int.Parse(Sett_GetString("commands_vote_time"));
+                }
+            }
+            public static float commands_vote_threshold
+            {
+                get
+                {
+                    return float.Parse(Sett_GetString("commands_vote_threshold"));
+                }
+            }
         }
 
         public volatile List<Command> CommandList = new List<Command>();
@@ -90,6 +104,8 @@ namespace LambAdmin
         public volatile Dictionary<string, string> CommandAliases = new Dictionary<string, string>();
 
         public volatile SerializableDictionary<long, List<Dvar>> PersonalPlayerDvars = new SerializableDictionary<long, List<Dvar>>();
+
+        public volatile Voting voting = new Voting();
 
         public class Command
         {
@@ -208,6 +224,152 @@ namespace LambAdmin
                 until = puntil;
             }
         }
+
+        public class Voting 
+        {
+            int MaxTime;
+            float Threshold;
+            int PosVotes, NegVotes;
+            HudElem VoteStatsHUD = null;
+            private bool Active;
+            Entity issuer, target;
+            string reason;
+            List<long> VotedPlayers;
+
+            public bool isActive(){
+                return Active;
+            }
+            public void Start(Entity issuer, Entity target, string reason)
+            {
+                if(Active)
+                    return;
+                Active = true;
+                WriteLog.Info("Voting started");
+                this.issuer = issuer; //cmd owner
+                this.target = target; // player to be kicked
+                this.reason = reason;
+                this.MaxTime = ConfigValues.commands_vote_time;
+                this.Threshold = ConfigValues.commands_vote_threshold;
+                this.PosVotes = 0;
+                this.NegVotes = 0;
+                this.VotedPlayers = new List<long>();
+                int time = MaxTime;
+                CreateHUD();
+                System.Timers.Timer _timer = new System.Timers.Timer(1000);
+                _timer.Elapsed +=
+                    (object sender, System.Timers.ElapsedEventArgs e) =>
+                    {
+                        try
+                        {
+                            time--;
+                            UpdateHUD(time);
+                            if (time % 5 == 0)
+                            {
+                                WriteLog.Info("Votekick: " + time.ToString() + "s remain");
+                            }
+                            if ((issuer == null) || (target == null) || (time <= 0) || !Active)
+                            {
+                                _timer.Enabled = false;
+                                _timer.Close();
+                                VoteStatsHUD.SetText("");
+                            }
+                            if ((target == null) || (issuer == null))
+                                return;
+                            if (time <= 0)
+                                End();
+                        }
+                        catch
+                        {
+                            WriteLog.Error("Exception at DGAdmin.Voting::TimerEvent");
+                        }
+                    };
+                _timer.Enabled = true;
+            }
+            private void End()
+            {
+                if (!Active)
+                    return;
+                Active = false;                
+                if (PosVotes - NegVotes >= Threshold)
+                {
+                    WriteChatToAll(Command.GetString("kick", "message").Format(new Dictionary<string, string>()
+                    {
+                        {"<target>", target.Name },
+                        {"<issuer>", issuer.Name },
+                        {"<reason>", reason },
+                    }));
+                    Delay(100, (o, e) =>
+                    {
+                        ExecuteCommand("dropclient " + target.GetEntityNumber() + " \"" + reason + "\"");
+                        WriteLog.Info("Voting passed successfully.");
+                    });
+                }
+                else {
+                    WriteChatToAll(Command.GetString("votekick", "error2"));
+                    WriteLog.Info("Voting failed.");
+                    return;
+                }
+            }
+            public void Abort() {
+                Active = false;
+                WriteLog.Info("Voting aborted.");
+            }
+            public void OnPlayerDisconnect(Entity player)
+            {
+                if (player == target)
+                {
+                    WriteChatToAll(Command.GetString("votekick", "error1"));
+                    Abort();
+                }
+                else if (player == issuer)
+                {
+                    WriteChatToAll(Command.GetString("votekick", "error3"));
+                    Abort();
+                }
+            }
+            private void CreateHUD()
+            {
+                if (VoteStatsHUD == null)
+                {
+                    VoteStatsHUD = HudElem.CreateServerFontString("hudsmall", 0.6f);
+                    VoteStatsHUD.SetPoint("TOPLEFT", "TOPLEFT", 10, 290);
+                    VoteStatsHUD.Foreground = true;
+                    VoteStatsHUD.HideWhenInMenu = true;
+                    VoteStatsHUD.Archived = false;
+                }
+            }
+            private void UpdateHUD(int time)
+            {
+                if (VoteStatsHUD != null)
+                    VoteStatsHUD.SetText(Command.GetString("votekick", "HUD").Format(
+                        new Dictionary<string, string>(){
+                            {"<player>", target.Name},
+                            {"<reason>", String.IsNullOrEmpty(reason)?"nothing":reason},
+                            {"<time>", time.ToString()},
+                            {"<posvotes>", PosVotes.ToString()},
+                            {"<negvotes>", NegVotes.ToString()},
+                            {@"\n", "\n"}
+                    }));
+            }
+
+            public bool PositiveVote(Entity player)
+            {
+                if(VotedPlayers.Contains(player.GUID))
+                    return false; //whatever the vote is accepted, or not
+                VotedPlayers.Add(player.GUID);
+                PosVotes++;
+                return true;
+            }
+            public bool NegativeVote(Entity player)
+            {
+                if (VotedPlayers.Contains(player.GUID))
+                    return false;
+                VotedPlayers.Add(player.GUID);
+                NegVotes++;
+                return true;
+            }
+        }
+
 
         public void ProcessCommand(Entity sender, string name, string message)
         {
@@ -383,7 +545,9 @@ namespace LambAdmin
                 System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\warns.txt", new string[0]);
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\apply.txt"))
-                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\apply.txt", new string[1]{"Wanna join ^1DG^7? Apply at ^2dgnetworks.enjin.com"});
+                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\apply.txt", new string[1]{
+                    "Wanna join ^1DG^7? Apply at ^2DGClan.eu^3/apply"
+                });
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\rules.txt"))
                 System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\rules.txt", new string[1] { "Rule one: ^1No Rules!" });
@@ -407,6 +571,9 @@ namespace LambAdmin
                     "r_filmTweakBrightness=0",
                     "r_filmTweakLightTint=1.1 1.05 0.85",
                     "r_filmTweakDarkTint=0.7 0.85 1",
+                    "lowAmmoWarningColor1=1 1 0 1",
+                    "lowAmmoWarningColor2=1 0 0 1",
+                    "lowAmmoWarningPulseFreq=5"
                 });
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\PersonalPlayerDvars.xml"))
@@ -720,7 +887,7 @@ namespace LambAdmin
 
             if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\apply.txt"))
             {
-                // RULES
+                // APPLY
                 CommandList.Add(new Command("apply", 0, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
@@ -2195,30 +2362,6 @@ namespace LambAdmin
                     }
                 }));
 
-
-            // HELL
-            CommandList.Add(new Command("hell", 0, Command.Behaviour.Normal,
-                (sender, arguments, optarg) =>
-                {
-                    if (!ConfigValues.HellMode)
-                    {
-                        if (UTILS_GetDvar("mapname") == "mp_seatown")
-                        {
-                            ConfigValues.HellMode = true;
-                            UTILS_SetHellMod();
-                            WriteChatToAll(Command.GetString("hell", "message"));
-                        }
-                        else
-                        {
-                            WriteChatToPlayer(sender, Command.GetString("hell", "error2"));
-                        }
-                    }
-                    else
-                    {
-                        WriteChatToPlayer(sender, Command.GetString("hell", "error1"));
-                    }
-                }));
-
             // FIRE
             CommandList.Add(new Command("fire", 0, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
@@ -2248,11 +2391,15 @@ namespace LambAdmin
                 {
                     string command = sender.GetField<string>("CurrentCommand");
                     if (String.IsNullOrEmpty(command))
-                    {
-                        WriteChatToPlayer(sender, "^3Warning: Command buffer is empty.");
-                        return;
-                    }
-                    ProcessCommand(sender, sender.Name, command);
+                        if (voting.isActive())
+                            if (voting.PositiveVote(sender))
+                                WriteChatToAll(Command.GetString("yes", "message").Format(new Dictionary<string, string>() { { "<player>", sender.Name } }));
+                            else //...
+                                WriteChatToPlayer(sender, Command.GetString("votekick", "error5"));
+                        else
+                            WriteChatToPlayer(sender, "^3Warning: Command buffer is empty.");
+                    else
+                        ProcessCommand(sender, sender.Name, command);
                 }));
 
             // NO
@@ -2261,12 +2408,18 @@ namespace LambAdmin
                 {
                     string command = sender.GetField<string>("CurrentCommand");
                     if (String.IsNullOrEmpty(command))
+                        if (voting.isActive())
+                            if (voting.NegativeVote(sender))
+                                WriteChatToAll(Command.GetString("no", "message").Format(new Dictionary<string, string>() { { "<player>", sender.Name } }));
+                            else //more else for god of else
+                                WriteChatToPlayer(sender, Command.GetString("votekick", "error5"));
+                        else
+                            WriteChatToPlayer(sender, "^3Warning: Command buffer is empty.");
+                    else
                     {
-                        WriteChatToPlayer(sender, "^3Warning: Command buffer is empty.");
-                        return;
+                        sender.SetField("CurrentCommand", "");
+                        WriteChatToPlayer(sender, "^3Command execution aborted (^1" + command + "^3)");
                     }
-                    sender.SetField("CurrentCommand", "");
-                    WriteChatToPlayer(sender, "^3Command execution aborted (^1"+command+"^3)");
                 }));
 
             // 3RDPERSON
@@ -2372,32 +2525,28 @@ namespace LambAdmin
                         }));
                     }
 
-                    switch (arguments[0])
+                    if (UTILS_ParseBool(arguments[0]))
                     {
-                        case "on":
-                            {
-                                int CMD_FLY = UTILS_GetFieldSafe<int>(sender, "CMD_FLY");
-                                if (CMD_FLY == DISABLED)
-                                {
-                                    sender.Call("notifyonplayercommand", "fly_on", "+" + key);
-                                    sender.Call("notifyonplayercommand", "fly_off","-" + key);
-                                }
-                                WriteChatToPlayer(sender, Command.GetString("fly", "enabled").Format(new Dictionary<string, string>()
+                        int CMD_FLY = UTILS_GetFieldSafe<int>(sender, "CMD_FLY");
+                        if (CMD_FLY == DISABLED)
+                        {
+                            sender.Call("notifyonplayercommand", "fly_on", "+" + key);
+                            sender.Call("notifyonplayercommand", "fly_off", "-" + key);
+                        }
+                        WriteChatToPlayer(sender, Command.GetString("fly", "enabled").Format(new Dictionary<string, string>()
                                 {
                                     {"<key>", (CMD_FLY == EVENTHANDLERS_SET)? "" : @"[[{" + key + @"}]]" }
                                 }));
-                                sender.SetField("CMD_FLY", EVENTHANDLERS_ACTIVE);
-                                break;
-                            }
-                        case "off":
-                            {
-                                sender.SetField("CMD_FLY", EVENTHANDLERS_SET);
-                                WriteChatToPlayer(sender, Command.GetString("fly", "disabled").Format(new Dictionary<string, string>()
+                        sender.SetField("CMD_FLY", EVENTHANDLERS_ACTIVE);
+                    }
+                    else
+                    {
+                        sender.SetField("CMD_FLY", EVENTHANDLERS_SET);
+                        WriteChatToPlayer(sender, Command.GetString("fly", "disabled").Format(new Dictionary<string, string>()
                                 {
                                     {"<state>", "enabled" }
                                 }));
-                                break;
-                            }
+
                     }
                         
                 }));
@@ -2542,10 +2691,175 @@ namespace LambAdmin
 
                 WriteChatToPlayer(sender, Command.GetString("rotatescreen", "message").Format(new Dictionary<string, string>()
                 {
-                    {"<player>", sender.Name},
+                    {"<player>", target.Name},
                     {"<roll>", angles.Z.ToString()}
                 }));
             }));
+
+            // VOTEKICK <player> [reason]
+            CommandList.Add(new Command("votekick", 1, Command.Behaviour.HasOptionalArguments,
+            (sender, arguments, optarg) =>
+            {
+                if (voting.isActive())
+                {
+                    WriteChatToPlayer(sender, Command.GetString("votekick", "error4"));
+                    return;
+                }
+                Entity target = FindSinglePlayer(arguments[0]);
+                if (target == null)
+                {
+                    WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                    return;
+                }
+                if (target.isImmune(database))
+                {
+                    WriteChatToPlayer(sender, Command.GetMessage("TargetIsImmune"));
+                    return;
+                }
+                string reason = String.IsNullOrEmpty(optarg)?"":optarg;
+                WriteChatToAll(Command.GetString("votekick", "message1").Format(
+                            new Dictionary<string, string>()
+                            {
+                                {"<issuer>", sender.Name},
+                                {"<player>", target.Name},
+                                {"<reason>", reason}
+                            }));
+                string message2 = Command.GetString("votekick", "message2");
+                if (!String.IsNullOrEmpty(message2))
+                    WriteChatToAll(message2);
+
+                voting.Start(sender, target, reason);
+                //CMD_Votekick_CreateHUD();
+            }));
+#if DEBUG   
+            
+            
+/* -------------- Commands, not included in release build -------------- */
+
+
+
+
+            // giveweapon <player> <weapon> <camo ID> <akimbo>
+            CommandList.Add(new Command("giveweapon", 4, Command.Behaviour.Normal,
+            (sender, arguments, optarg) =>
+            {
+                Entity target = FindSinglePlayer(arguments[0]);
+                if (target == null)
+                {
+                    WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                    return;
+                }
+                int camo = 0;
+                if(int.TryParse(arguments[2], out camo))
+                {
+
+                }
+                target.TakeAllWeapons();
+                target.AfterDelay(50, (ent) => {
+                    target.GiveWeapon(arguments[1]);
+                    target.AfterDelay(50, (_ent) => {
+                        target.SwitchToWeaponImmediate(arguments[1]);
+                        WriteChatSpyToPlayer(sender, "giveweapon::callback");
+                    });
+                });
+            }));
+
+            // shellshock <name> <time>
+            CommandList.Add(new Command("shellshock", 2, Command.Behaviour.Normal,
+            (sender, arguments, optarg) =>
+            {
+                Call("precacheshellshock", arguments[0]);
+                sender.Call("shellshock", 
+                    arguments[0],
+                    float.Parse(arguments[1])
+                );
+                WriteChatSpyToPlayer(sender, "shellshock::callback");
+            }));
+
+            // setviewmodel <name>
+            CommandList.Add(new Command("setviewmodel", 1, Command.Behaviour.Normal,
+            (sender, arguments, optarg) =>
+            {
+                sender.Call("setviewmodel",
+                    arguments[0]
+                );
+                WriteChatSpyToPlayer(sender, "setviewmodel::callback");
+            }));
+
+            // OpenMenu <name>
+            CommandList.Add(new Command("openmenu", 1, Command.Behaviour.Normal,
+            (sender, arguments, optarg) =>
+            {
+                sender.Call("openmenu",
+                    arguments[0]
+                );
+                WriteChatSpyToPlayer(sender, "openmenu::callback");
+            }));
+
+            // HELL
+            CommandList.Add(new Command("hell", 0, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    if (!ConfigValues.HellMode)
+                    {
+                        if (UTILS_GetDvar("mapname") == "mp_seatown")
+                        {
+                            ConfigValues.HellMode = true;
+                            UTILS_SetHellMod();
+                            WriteChatToAll(Command.GetString("hell", "message"));
+                        }
+                        else
+                        {
+                            WriteChatToPlayer(sender, Command.GetString("hell", "error2"));
+                        }
+                    }
+                    else
+                    {
+                        WriteChatToPlayer(sender, Command.GetString("hell", "error1"));
+                    }
+                }));
+#endif
+
+
+
+/* -------------- Broadcast commands -------------- */
+
+
+
+            // ADMINS
+            CommandList.Add(new Command("@admins", 0, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    WriteChatToAll(Command.GetString("admins", "firstline"));
+                    WriteChatToAllCondensed(database.GetAdminsString(Players), 1000, 40, Command.GetString("admins", "separator"));
+                }));
+
+            if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\rules.txt"))
+            {
+                // RULES
+                CommandList.Add(new Command("@rules", 0, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    WriteChatToAllMultiline(System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\rules.txt"));
+                }));
+            }
+
+            if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\apply.txt"))
+            {
+                // APPLY
+                CommandList.Add(new Command("@apply", 0, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    WriteChatToAllMultiline(System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\apply.txt"));
+                }));
+            }
+
+            // TIME
+            CommandList.Add(new Command("@time", 0, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    WriteChatToAll(string.Format(Command.GetString("time", "message"), DateTime.Now));
+                }));
 
             if (ConfigValues.settings_enable_misccommands)
             {
@@ -3191,6 +3505,8 @@ namespace LambAdmin
             player.setSpying(false);
             player.setMuted(false);
             player.SetField("rekt", 0);
+            if (voting.isActive())
+                voting.OnPlayerDisconnect(player);
             return;
         }
 
@@ -3305,7 +3621,7 @@ namespace LambAdmin
                     if (until.Year != 9999)
                     {
                         TimeSpan forhowlong = until - DateTime.Now;
-                        ExecuteCommand(string.Format("dropclient {0} \"^1You are banned from this server for ^3{1}d {2}m {3}s\"", player.GetEntityNumber(), forhowlong.Days, forhowlong.Hours, forhowlong.Minutes));
+                        ExecuteCommand(string.Format("dropclient {0} \"^1You are banned from this server for ^3{1}d {2}h {3}m\"", player.GetEntityNumber(), forhowlong.Days, forhowlong.Hours, forhowlong.Minutes));
                         return;
                     }
                     else

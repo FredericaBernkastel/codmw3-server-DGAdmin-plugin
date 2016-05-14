@@ -164,6 +164,7 @@ namespace LambAdmin
                 xlr_database.Update(player.GUID, XLR_database.XLRUpdateFlags.weapon_fired);
             }));
         }
+
         #region COMMANDS
 
         public void XLR_InitCommands()
@@ -194,20 +195,55 @@ namespace LambAdmin
                     }
                     else
                         target = sender;
-                    if (xlr_database.xlr_players.ContainsKey(target.GUID))
-                    {
+                    if (xlr_database.xlr_players.ContainsKey(target.GUID)){
                         XLR_database.XLREntry xlr_entry = xlr_database.xlr_players[target.GUID];
                         WriteChatToPlayer(sender, Command.GetString("xlrstats", "message").Format(
                             new Dictionary<string, string>()
-                            {
-                                {"<score>", xlr_entry.score.ToString()},
-                                {"<kills>", xlr_entry.kills.ToString()},
-                                {"<deaths>", xlr_entry.deaths.ToString()},
-                                {"<kd>", xlr_database.math_kd(xlr_entry).ToString() },
-                                {"<headshots>", xlr_entry.headshots.ToString()},
-                                {"<tk_kills>", xlr_entry.tk_kills.ToString()},
-                                {"<precision>", (xlr_database.math_precision(xlr_entry) * 100).ToString()},
-                            }));
+                                {
+                                    {"<score>", xlr_entry.score.ToString()},
+                                    {"<kills>", xlr_entry.kills.ToString()},
+                                    {"<deaths>", xlr_entry.deaths.ToString()},
+                                    {"<kd>", xlr_database.math_kd(xlr_entry).ToString() },
+                                    {"<headshots>", xlr_entry.headshots.ToString()},
+                                    {"<tk_kills>", xlr_entry.tk_kills.ToString()},
+                                    {"<precision>", (xlr_database.math_precision(xlr_entry) * 100).ToString()},
+                                }));
+                    }
+                    else
+                        WriteChatToPlayer(sender, Command.GetString("xlrstats", "error"));
+                }));
+
+            // @XLRSTATS
+            CommandList.Add(new Command("@xlrstats", 0, Command.Behaviour.HasOptionalArguments,
+                (sender, arguments, optarg) =>
+                {
+                    Entity target;
+                    if (!String.IsNullOrEmpty(optarg))
+                    {
+                        target = FindSinglePlayer(optarg);
+                        if (target == null)
+                        {
+                            WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                            return;
+                        }
+                    }
+                    else
+                        target = sender;
+                    if (xlr_database.xlr_players.ContainsKey(target.GUID))
+                    {
+                        XLR_database.XLREntry xlr_entry = xlr_database.xlr_players[target.GUID];
+                        WriteChatToAll(Command.GetString("@xlrstats", "message").Format(
+                            new Dictionary<string, string>()
+                                {
+                                    {"<player>", target.Name},
+                                    {"<score>", xlr_entry.score.ToString()},
+                                    {"<kills>", xlr_entry.kills.ToString()},
+                                    {"<deaths>", xlr_entry.deaths.ToString()},
+                                    {"<kd>", xlr_database.math_kd(xlr_entry).ToString() },
+                                    {"<headshots>", xlr_entry.headshots.ToString()},
+                                    {"<tk_kills>", xlr_entry.tk_kills.ToString()},
+                                    {"<precision>", (xlr_database.math_precision(xlr_entry) * 100).ToString()},
+                                }));
                     }
                     else
                         WriteChatToPlayer(sender, Command.GetString("xlrstats", "error"));
@@ -245,6 +281,41 @@ namespace LambAdmin
                             }));
                     }
                     WriteChatToPlayerMultiline(sender, output.ToArray(), 1500);
+                }));
+
+            // @XLRTOP
+            CommandList.Add(new Command("@xlrtop", 0, Command.Behaviour.HasOptionalArguments,
+                (sender, arguments, optarg) =>
+                {
+                    int amount = 4;
+                    if (!String.IsNullOrEmpty(optarg))
+                        if (!int.TryParse(optarg, out amount))
+                        {
+                            WriteChatToPlayer(sender, Command.GetString("xlrtop", "usage"));
+                            return;
+                        }
+                    List<KeyValuePair<long, XLR_database.XLREntry>> topscores = xlr_database.CMD_XLRTOP(amount);
+                    if (topscores.Count == 0)
+                    {
+                        WriteChatToPlayer(sender, Command.GetString("xlrtop", "error"));
+                        return;
+                    }
+                    List<string> output = new List<string>();
+                    for (int i = 0; i < topscores.Count; i++)
+                    {
+                        XLR_database.XLREntry entry = topscores.ElementAt(i).Value;
+                        output.Add(Command.GetString("xlrtop", "message").Format(
+                            new Dictionary<string, string>()
+                            {
+                                {"<place>",(topscores.Count - i).ToString()},
+                                {"<player>", UTILS_ResolveGUID(topscores.ElementAt(i).Key)},
+                                {"<score>",entry.score.ToString()},
+                                {"<kills>",entry.kills.ToString()},
+                                {"<kd>", xlr_database.math_kd(entry).ToString()},
+                                {"<precision>",(xlr_database.math_precision(entry)*100).ToString()}
+                            }));
+                    }
+                    WriteChatToAllMultiline(output.ToArray(), 1500);
                 }));
         }
         #endregion

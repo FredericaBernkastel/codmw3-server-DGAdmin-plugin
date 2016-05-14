@@ -1,3 +1,14 @@
+v3.4.14
+ * New set of broadcast commands (print to the public chat):
+    - !@admins
+    - !@rules
+    - !@apply
+    - !@time
+    - !@xlrstats
+    - !@xlrtop
+ * COMMAND: !votekick <player> [reason]
+ * FIXED issue #2
+ * Updated documentation
 v3.3.13:
  * FIXED: Player connect message with additional info.
  * GROUPS:: NEW FEATURE: -*unsafe* and -*abusive* group rules. Let you easily disable all abusive and unsafe commands. Check docs for more info.
