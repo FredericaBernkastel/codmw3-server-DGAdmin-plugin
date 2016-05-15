@@ -134,4 +134,5 @@ Complete admin guide can be found [here](https://drive.google.com/file/d/0B4Ofim
 ` Fixed issue with trophy-kill (when victim gets banned for it);`
 
  `Fixed issue with !ac130 in isnipe mode (when issuer gets banned for it)`
+
 ![nipaa~ =^_^=](http://anime.net.kg/uploads/pictures/Furude.Rika.low.1153817.png)
