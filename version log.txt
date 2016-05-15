@@ -1,3 +1,5 @@
+v3.3.15
+ * FIXED: HudElem.SetText in DGAdmin.Voting::TimerEvent produce unhandled exception in the server core (server crashed). So, i moved HUD processing outside the class. Hope it will fix this bug.
 v3.4.14
  * New set of broadcast commands (print to the public chat):
     - !@admins

@@ -230,11 +230,12 @@ namespace LambAdmin
             int MaxTime;
             float Threshold;
             int PosVotes, NegVotes;
-            HudElem VoteStatsHUD = null;
+            //HudElem VoteStatsHUD = null;
             private bool Active;
             Entity issuer, target;
             string reason;
             List<long> VotedPlayers;
+            public string hudText = "";
 
             public bool isActive(){
                 return Active;
@@ -254,7 +255,7 @@ namespace LambAdmin
                 this.NegVotes = 0;
                 this.VotedPlayers = new List<long>();
                 int time = MaxTime;
-                CreateHUD();
+                //CreateHUD();
                 System.Timers.Timer _timer = new System.Timers.Timer(1000);
                 _timer.Elapsed +=
                     (object sender, System.Timers.ElapsedEventArgs e) =>
@@ -271,7 +272,8 @@ namespace LambAdmin
                             {
                                 _timer.Enabled = false;
                                 _timer.Close();
-                                VoteStatsHUD.SetText("");
+                                //VoteStatsHUD.SetText("");
+                                hudText = "";
                             }
                             if ((target == null) || (issuer == null))
                                 return;
@@ -327,29 +329,45 @@ namespace LambAdmin
                     Abort();
                 }
             }
-            private void CreateHUD()
-            {
-                if (VoteStatsHUD == null)
-                {
-                    VoteStatsHUD = HudElem.CreateServerFontString("hudsmall", 0.6f);
-                    VoteStatsHUD.SetPoint("TOPLEFT", "TOPLEFT", 10, 290);
-                    VoteStatsHUD.Foreground = true;
-                    VoteStatsHUD.HideWhenInMenu = true;
-                    VoteStatsHUD.Archived = false;
-                }
-            }
+            //private void CreateHUD()
+            //{
+            //    if (VoteStatsHUD == null)
+            //    {
+            //        VoteStatsHUD = HudElem.CreateServerFontString("hudsmall", 0.6f);
+            //        VoteStatsHUD.SetPoint("TOPLEFT", "TOPLEFT", 10, 290);
+            //        VoteStatsHUD.Foreground = true;
+            //        VoteStatsHUD.HideWhenInMenu = true;
+            //        VoteStatsHUD.Archived = false;
+            //    }
+            //}
             private void UpdateHUD(int time)
             {
-                if (VoteStatsHUD != null)
-                    VoteStatsHUD.SetText(Command.GetString("votekick", "HUD").Format(
+                //if (VoteStatsHUD != null)
+                //    VoteStatsHUD.SetText(Command.GetString("votekick", "HUD").Format(
+                //        new Dictionary<string, string>(){
+                //            {"<player>", target.Name},
+                //            {"<reason>", String.IsNullOrEmpty(reason)?"nothing":reason},
+                //            {"<time>", time.ToString()},
+                //            {"<posvotes>", PosVotes.ToString()},
+                //            {"<negvotes>", NegVotes.ToString()},
+                //            {@"\n", "\n"}
+                //    }));
+                List<string> lines = Command.GetString("votekick", "HUD").Format(
                         new Dictionary<string, string>(){
                             {"<player>", target.Name},
                             {"<reason>", String.IsNullOrEmpty(reason)?"nothing":reason},
-                            {"<time>", time.ToString()},
+                            {"<time>", (time - 1).ToString()},
                             {"<posvotes>", PosVotes.ToString()},
                             {"<negvotes>", NegVotes.ToString()},
-                            {@"\n", "\n"}
-                    }));
+                    }).Split(new string[]{@"\n"},StringSplitOptions.None).ToList();
+                int maxlen = 0;
+                lines.ForEach((s) => { maxlen = Math.Max(maxlen, s.Length); });
+                for (int i = 0; i < lines.Count; i++ )
+                    lines[i] = "^3| " + lines[i];
+                lines.Insert(0, "^3" + new string('-', maxlen));
+                lines.Add("^3" + new string('-', maxlen));
+                hudText = "";
+                lines.ForEach((s) => { hudText += s + "\n"; });
             }
 
             public bool PositiveVote(Entity player)
@@ -2729,7 +2747,7 @@ namespace LambAdmin
                     WriteChatToAll(message2);
 
                 voting.Start(sender, target, reason);
-                //CMD_Votekick_CreateHUD();
+                CMD_Votekick_CreateHUD();
             }));
 #if DEBUG   
             
@@ -3651,8 +3669,13 @@ namespace LambAdmin
         {
             if (ConfigValues.settings_enable_spree_messages)
             {
-                int attacker_killstreak = attacker.GetField<int>("killstreak") + 1;
-                int victim_killstreak = player.GetField<int>("killstreak");
+                if (!attacker.HasField("killstreak"))
+                    attacker.SetField("killstreak", new Parameter((int)0));
+                if (!player.HasField("killstreak"))
+                    player.SetField("killstreak", new Parameter((int)0));
+
+                int attacker_killstreak = UTILS_GetFieldSafe<int>(attacker, "killstreak") + 1;
+                int victim_killstreak = UTILS_GetFieldSafe<int>(player,"killstreak");
 
                 attacker.SetField("killstreak", attacker_killstreak);
                 player.SetField("killstreak", (int)0);

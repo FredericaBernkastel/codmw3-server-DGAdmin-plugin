@@ -22,6 +22,7 @@ namespace LambAdmin
 
         HudElem RGAdminMessage;
         HudElem OnlineAdmins;
+        HudElem VoteStatsHUD = null;
 
         //typedef
         public struct Dvar
@@ -35,7 +36,7 @@ namespace LambAdmin
         //-------
         public static partial class ConfigValues
         {
-            public static string Version = "v3.4n14";
+            public static string Version = "v3.4n15";
             public static string ConfigPath = @"scripts\DGAdmin\";
             public static string ChatPrefix
             {
@@ -908,6 +909,31 @@ namespace LambAdmin
             //DLCMAPS
             if (bool.Parse(Sett_GetString("settings_enable_dlcmaps")))
                 ConfigValues.AvailableMaps = Data.AllMapNames;
+        }
+
+        public void CMD_Votekick_CreateHUD()
+        {
+            if (VoteStatsHUD == null)
+            {
+                VoteStatsHUD = HudElem.CreateServerFontString("hudsmall", 0.7f);
+                VoteStatsHUD.SetPoint("TOPLEFT", "TOPLEFT", 10, 290);
+                VoteStatsHUD.Foreground = true;
+                VoteStatsHUD.HideWhenInMenu = true;
+                VoteStatsHUD.Archived = false;
+            }
+            OnInterval(1000, () =>
+            {
+                if (voting.isActive())
+                {
+                    VoteStatsHUD.SetText(voting.hudText);
+                    return true;
+                }
+                else
+                {
+                    VoteStatsHUD.SetText("");
+                    return false;
+                }
+            });
         }
 
         public void UTILS_BetterBalance(Entity player, Entity inflictor, Entity attacker, int damage, string mod, string weapon, Vector3 dir, string hitLoc)
