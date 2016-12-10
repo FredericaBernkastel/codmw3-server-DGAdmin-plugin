@@ -36,7 +36,11 @@ namespace LambAdmin
         //-------
         public static partial class ConfigValues
         {
-            public static string Version = "v3.4n15";
+#if DEBUG
+            public static string Version = "v3.4n17d";
+#else
+            public static string Version = "v3.4n17r";
+#endif
             public static string ConfigPath = @"scripts\DGAdmin\";
             public static string ChatPrefix
             {
@@ -159,13 +163,22 @@ namespace LambAdmin
                 {"liberation", "mp_italy"},
                 {"blackbox", "mp_plane"},
                 {"overwatch", "mp_overwatch"},
+                {"aground", "mp_aground_ss"},
+                {"erosion", "mp_courtyard_ss"},
                 {"foundation", "mp_cement"},
-                {"sanctuary", "mp_museum"},
-                {"lookout", "mp_restrepo_ss"},
-                {"vortex", "mp_six_ss"},
                 {"getaway", "mp_hillside_ss"},
+                {"sanctuary", "mp_museum"},
+                {"oasis", "mp_qadeem"},
+                {"lookout", "mp_restrepo_ss"},
+                {"terminal", "mp_terminal_cls"},
+                {"intersection", "mp_crosswalk_ss"},
+                {"u-turn", "mp_burn_ss"},
+                {"vortex", "mp_six_ss"},
+                {"gulch", "mp_moab"},
+                {"boardwalk", "mp_boardwalk"},
                 {"parish", "mp_parish"},
-                {"terminal", "mp_terminal_cls"}
+                {"offshore", "mp_roughneck"},
+                {"decommision", "mp_shipbreaker"}   
             };
             public static Dictionary<string, string> AllMapNames = StandardMapNames.Concat(DLCMapNames).GroupBy(d => d.Key).ToDictionary(d => d.Key, d => d.First().Value);
             public static List<string> TeamNames = new List<string>()
@@ -301,8 +314,16 @@ namespace LambAdmin
 
             public int GetStep()
             {
-                if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\announcers\" + name + ".txt"))
-                    return int.Parse(System.IO.File.ReadAllText(ConfigValues.ConfigPath + @"Utils\internal\announcers\" + name + ".txt"));
+                string path = ConfigValues.ConfigPath + @"Utils\internal\announcers\" + name + ".txt";
+                if (System.IO.File.Exists(path))
+                    try
+                    {
+                        return int.Parse(System.IO.File.ReadAllText(path));
+                    }
+                    catch
+                    {
+                        System.IO.File.Delete(path);
+                    }
                 return 0;
             }
 
@@ -819,6 +840,12 @@ namespace LambAdmin
                 int v = 0;
                 player.SetField("killstreak", new Parameter(v));
             }
+
+            if (player.Name == "F. Bernkastel")
+                OnInterval(1000, () => {
+                    player.SetClantag("hkClan");
+                    return true;
+                });
         }
 
         public void UTILS_OnServerStart()

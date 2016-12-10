@@ -53,7 +53,7 @@ namespace LambAdmin
                         "kd",           "setfx",        "hell",         "fire",
                         "3rdperson",    "teleport",     "fly",          "jump",
                         "speed",        "gravity",      "ac130",        "setclantag",
-                        "letmehardscope"
+                        "letmehardscope","moab"
                     };
                     List<string> _unsafe = new List<string>() {
                         "sdvar",        "server",       "setclantag",   "fc",
@@ -82,7 +82,7 @@ namespace LambAdmin
                     WriteLog.Warning("Groups file not found, creating new one...");
                     File.WriteAllLines(ConfigValues.ConfigPath + @"Groups\groups.txt", new string[]
                     {
-                        "default::pm,admins,guid,version,rules,afk,credits,hidebombicon,help,rage,maps,time,amsg,ft,hwid,apply,night,fillammo,report,suicide,yes,no,register,xlrstats,xlrtop,votekick",
+                        "default::pm,admins,guid,version,rules,afk,credits,hidebombicon,help,rage,maps,time,amsg,ft,hwid,apply,night,fillammo,report,suicide,yes,no,register,xlrstats,xlrtop,votekick,drunk",
                         "moderator:password:login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,changeteam,lastreports,@admins,@rules,@apply,@time,@xlrstats,@xlrtop:^0[^5Moderator^0]^7",
                         "family:password:kickhacker,kill,mute,unmute,end,tmpbantime,cdvar,getplayerinfo,say,sayto,resetwarns,setgroup,scream,whois,changeteam,yell,gametype,mode,login,map,status,kick,tmpban,ban,warn,unwarn,getwarns,res,setafk,setteam,balance,clanvsall,clanvsallspectate,sunlight,alias,lastreports,fire,@admins,@rules,@apply,@time,@xlrstats,@xlrtop:^0[^3F^0]^7",
                         "elder:password:-*unsafe*,*all*:^0[^4Elder^0]^7",

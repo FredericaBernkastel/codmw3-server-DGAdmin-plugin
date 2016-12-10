@@ -41,6 +41,9 @@
       <HintPath>..\..\..\..\Servers\Mw3\InfinityScript.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="nuke">
+      <HintPath>..\..\..\InfinityScript_Nuke\nuke.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

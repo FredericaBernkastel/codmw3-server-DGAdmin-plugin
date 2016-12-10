@@ -46,6 +46,8 @@ namespace LambAdmin
             PersonalPlayerDvars = UTILS_PersonalPlayerDvars_load();
             if (ConfigValues.settings_enable_chat_alias)
                 InitChatAlias();
+            if (ConfigValues.settings_enable_alive_counter)
+                PlayerConnected += hud_alive_players;
             if (ConfigValues.settings_enable_xlrstats)
             {
                 XLR_OnServerStart();
@@ -234,6 +236,39 @@ namespace LambAdmin
         {
             foreach (Entity player in Players)
                 player.SetField("spawnevent", 0);
+        }
+
+        private void hud_alive_players(Entity player)
+        {
+            HudElem fontString1 = HudElem.CreateFontString(player, "hudbig", 0.6f);
+            fontString1.SetPoint("DOWNRIGHT", "DOWNRIGHT", -19, 60);
+            fontString1.SetText("^3Allies^7:");
+            fontString1.HideWhenInMenu = true;
+            HudElem fontString2 = HudElem.CreateFontString(player, "hudbig", 0.6f);
+            fontString2.SetPoint("DOWNRIGHT", "DOWNRIGHT", -19, 80);
+            fontString2.SetText("^1Enemy^7:");
+            fontString2.HideWhenInMenu = true;
+            HudElem hudElem2 = HudElem.CreateFontString(player, "hudbig", 0.6f);
+            hudElem2.SetPoint("DOWNRIGHT", "DOWNRIGHT", -8, 60);
+            hudElem2.HideWhenInMenu = true;
+            HudElem hudElem3 = HudElem.CreateFontString(player, "hudbig", 0.6f);
+            hudElem3.SetPoint("DOWNRIGHT", "DOWNRIGHT", -8, 80);
+            hudElem3.HideWhenInMenu = true;
+            this.OnInterval(50, (Func<bool>)(() =>
+            {
+                string str1 = (string)player.GetField<string>("sessionteam");
+                string str2 = ((int)this.Call<int>("getteamplayersalive", new Parameter[1]
+                    {
+            "axis"
+                    })).ToString();
+                string str3 = ((int)this.Call<int>("getteamplayersalive", new Parameter[1]
+                    {
+             "allies"
+                    })).ToString();
+                hudElem2.SetText(str1.Equals("allies") ? str3 : str2);
+                hudElem3.SetText(str1.Equals("allies") ? str2 : str3);
+                return true;
+            }));
         }
     }
 

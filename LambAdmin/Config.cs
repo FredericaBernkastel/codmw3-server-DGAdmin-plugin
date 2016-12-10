@@ -44,7 +44,7 @@ namespace LambAdmin
             { "settings_isnipe", "true" },
             { "settings_isnipe_antiplant", "true" },
             { "settings_isnipe_antihardscope", "true" },
-            { "settings_isnipe_antinoscope", "true"},
+            { "settings_isnipe_antinoscope", "false"},
             { "settings_isnipe_anticrtk", "false"},
             { "settings_isnipe_antiboltcancel", "false"},
             { "settings_isnipe_antiknife", "true" },
@@ -63,6 +63,7 @@ namespace LambAdmin
             { "settings_enable_spy_onlogin", "false" },
             { "settings_showversion", "true" },
             { "settings_adminshudelem", "true"},
+            { "settings_enable_alive_counter", "true"},
             { "settings_unfreezeongameend", "true" },
             { "settings_betterbalance_enable", "true" },
             { "settings_betterbalance_message", "^3<player> ^2got teamchanged for balance." },
@@ -446,6 +447,13 @@ namespace LambAdmin
             {"command_votekick_error3", "^1Voting failed: ^3issuer leaved the game."},
             {"command_votekick_error4", "^1Error: ^3Voting already occur"},
             {"command_votekick_error5", "^1Error: ^3You already voted"},
+
+            {"command_moab_usage", "^1Usage: !moab <<player | all>"},
+            {"command_moab_message", "^7A ^1MOAB ^3given to ^2<player>"},
+            {"command_moab_message_all", "^7A ^1MOAB ^3given to ^1Everyone by ^2<issuer>"},
+
+            {"command_drunk_usage", "^1Usage: !drunk"},
+            {"command_drunk_message", "^3<player> ^2is ^1drunk"},
 
             {"command_@admins_usage", "^1Usage: !@admins" },
 

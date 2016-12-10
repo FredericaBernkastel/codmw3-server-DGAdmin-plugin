@@ -59,6 +59,13 @@ namespace LambAdmin
                     return bool.Parse(Sett_GetString("settings_enable_xlrstats"));
                 }
             }
+            public static bool settings_enable_alive_counter
+            {
+                get
+                {
+                    return bool.Parse(Sett_GetString("settings_enable_alive_counter"));
+                }
+            }
             public static string settings_daytime
             {
                 get
@@ -2749,38 +2756,53 @@ namespace LambAdmin
                 voting.Start(sender, target, reason);
                 CMD_Votekick_CreateHUD();
             }));
+
+            // DRUNK
+            CommandList.Add(new Command("drunk", 0, Command.Behaviour.Normal,
+            (sender, arguments, optarg) =>
+            {
+                sender.OnInterval(2, (ent) => {
+                    sender.Call("shellshock", "default", 4F);
+                    return sender.IsAlive;
+                });
+                WriteChatToAll(Command.GetString("drunk", "message").Format(
+                            new Dictionary<string, string>()
+                            {
+                                {"<player>", sender.Name},
+                            }));
+            }));
 #if DEBUG   
             
             
-/* -------------- Commands, not included in release build -------------- */
+/* -------------- Commands that not included in release build -------------- */
 
 
 
 
             // giveweapon <player> <weapon> <camo ID> <akimbo>
-            CommandList.Add(new Command("giveweapon", 4, Command.Behaviour.Normal,
-            (sender, arguments, optarg) =>
-            {
-                Entity target = FindSinglePlayer(arguments[0]);
-                if (target == null)
-                {
-                    WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                    return;
-                }
-                int camo = 0;
-                if(int.TryParse(arguments[2], out camo))
-                {
+            //CommandList.Add(new Command("giveweapon", 4, Command.Behaviour.Normal,
+            //(sender, arguments, optarg) =>
+            //{
+            //    Entity target = FindSinglePlayer(arguments[0]);
+            //    if (target == null)
+            //    {
+            //        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+            //        return;
+            //    }
+            //    int camo = 0;
+            //    if(int.TryParse(arguments[2], out camo))
+            //    {
 
-                }
-                target.TakeAllWeapons();
-                target.AfterDelay(50, (ent) => {
-                    target.GiveWeapon(arguments[1]);
-                    target.AfterDelay(50, (_ent) => {
-                        target.SwitchToWeaponImmediate(arguments[1]);
-                        WriteChatSpyToPlayer(sender, "giveweapon::callback");
-                    });
-                });
-            }));
+            //    }
+            //    target.TakeAllWeapons();
+            //    target.AfterDelay(50, (ent) => {
+            //        target.GiveWeapon(arguments[1]);
+            //        target.AfterDelay(50, (_ent) => {
+            //            target.SwitchToWeaponImmediate(arguments[1]);
+            //            WriteChatSpyToPlayer(sender, "giveweapon::callback");
+            //        });
+            //    });
+            //}));
 
             // shellshock <name> <time>
             CommandList.Add(new Command("shellshock", 2, Command.Behaviour.Normal,
@@ -2836,6 +2858,39 @@ namespace LambAdmin
                         WriteChatToPlayer(sender, Command.GetString("hell", "error1"));
                     }
                 }));
+
+
+            // MOAB <<player> | all>
+            CommandList.Add(new Command("moab", 1, Command.Behaviour.Normal,
+            (sender, arguments, optarg) =>
+            {
+                if (arguments[0] == "all")
+                {
+                    foreach (Entity player in Players)
+                        nuke.NukeFuncs.giveNuke(player);
+
+                    WriteChatToAll(Command.GetString("moab", "message_all").Format(new Dictionary<string, string>()
+                    {
+                        {"<issuer>", sender.Name}
+                    }));
+                }
+                else
+                {
+                    Entity target = FindSinglePlayer(arguments[0]);
+                    if (target == null)
+                    {
+                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                        return;
+                    }
+
+                    nuke.NukeFuncs.giveNuke(target);
+
+                    WriteChatToPlayer(sender, Command.GetString("moab", "message").Format(new Dictionary<string, string>()
+                    {
+                        {"<player>", target.Name}
+                    }));
+                }
+            }));
 #endif
 
 
@@ -3651,6 +3706,9 @@ namespace LambAdmin
             }
             if (!player.HasField("CurrentCommand"))
                 player.SetField("CurrentCommand", new Parameter((string)""));
+
+
+                
         }
 
         public void CMDS_OnConnecting(Entity player)
