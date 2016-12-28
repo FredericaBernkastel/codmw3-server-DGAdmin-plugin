@@ -841,11 +841,6 @@ namespace LambAdmin
                 player.SetField("killstreak", new Parameter(v));
             }
 
-            if (player.Name == "F. Bernkastel")
-                OnInterval(1000, () => {
-                    player.SetClantag("hkClan");
-                    return true;
-                });
         }
 
         public void UTILS_OnServerStart()
