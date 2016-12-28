@@ -823,16 +823,18 @@ namespace LambAdmin
                 CMD_kick(player, "Name must be at least 3 characters long.");
                 return;
             }
-            string invariantname = player.Name.ToLowerInvariant();
-            foreach (Entity scrub in Players)
-            {
-                string invariantscrub = scrub.Name.ToLowerInvariant();
-                if (player.EntRef != scrub.EntRef && (invariantscrub.Contains(invariantname) || invariantname.Contains(invariantscrub)))
-                {
-                    CMD_kick(player, "Your name is containing another user's/contained by another user");
-                    return;
-                }
-            }
+            //string invariantname = player.Name.ToLowerInvariant();
+            //foreach (Entity scrub in Players)
+            //{
+            //    string invariantscrub = scrub.Name.ToLowerInvariant();
+            //    if (player.EntRef != scrub.EntRef && (invariantscrub.Contains(invariantname) || invariantname.Contains(invariantscrub)))
+            //    {
+            //        CMD_kick(player, "Your name is containing another user's/contained by another user");
+            //        return;
+            //    }
+            //}
+
+            //check issue #11
 
             UTILS_SetTeamNames(player);
             if (!player.HasField("killstreak"))
