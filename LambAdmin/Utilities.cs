@@ -37,9 +37,9 @@ namespace LambAdmin
         public static partial class ConfigValues
         {
 #if DEBUG
-            public static string Version = "v3.4n17d";
+            public static string Version = "v3.4n18d";
 #else
-            public static string Version = "v3.4n17r";
+            public static string Version = "v3.4n18r";
 #endif
             public static string ConfigPath = @"scripts\DGAdmin\";
             public static string ChatPrefix
@@ -1809,9 +1809,9 @@ namespace LambAdmin
                 if (hasAlias)
                     ChatAlias.Remove(target.GUID);
                 WriteChatToAll(Command.GetString("alias", "reset").Format(new Dictionary<string, string>()
-                    {
-                        {"<player>", target.Name }
-                    }));
+                {
+                    {"<player>", target.Name }
+                }));
             }
             else
             {
@@ -1820,10 +1820,10 @@ namespace LambAdmin
                 else
                     ChatAlias.Add(target.GUID, alias);
                 WriteChatToAll(Command.GetString("alias", "message").Format(new Dictionary<string, string>()
-                    {
-                        {"<player>", target.Name },
-                        {"<alias>", alias}
-                    }));
+                {
+                    {"<player>", target.Name },
+                    {"<alias>", alias}
+                }));
             }
             //save settings
             List<string> aliases = new List<string>();
@@ -1832,6 +1832,51 @@ namespace LambAdmin
                 aliases.Add(entry.Key.ToString() + "=" + entry.Value);
             }
             System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\chatalias.txt", aliases.ToArray());
+        }
+
+        public void UTILS_SetForcedClantag(Entity sender, string player, string tag)
+        {
+            Entity target = FindSinglePlayer(player);
+            if (target == null)
+            {
+                WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                return;
+            }
+            bool hasTag = forced_clantags.Keys.Contains(target.GUID);
+            if (string.IsNullOrEmpty(tag))
+            {
+                if (hasTag)
+                    forced_clantags.Remove(target.GUID);
+                target.SetClantag("");
+                WriteChatToAll(Command.GetString("clantag", "reset").Format(new Dictionary<string, string>()
+                {
+                    {"<player>", target.Name }
+                }));
+            }
+            else
+            {
+                if (tag.Length > 7)
+                {
+                    WriteChatToPlayer(sender, Command.GetString("clantag", "error"));
+                    return;
+                }
+                if (hasTag)
+                    forced_clantags[target.GUID] = tag;
+                else
+                    forced_clantags.Add(target.GUID, tag);
+                WriteChatToAll(Command.GetString("clantag", "message").Format(new Dictionary<string, string>()
+                {
+                    {"<player>", target.Name },
+                    {"<tag>", tag}
+                }));
+            }
+            //save settings
+            List<string> tags = new List<string>();
+            foreach (KeyValuePair<long, string> entry in forced_clantags)
+            {
+                tags.Add(entry.Key.ToString() + "=" + entry.Value);
+            }
+            System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\forced_clantags.txt", tags.ToArray());
         }
 
         public void UTILS_GetTeamPlayers(out int axis, out int allies)

@@ -1985,6 +1985,13 @@ namespace LambAdmin
                     WriteChatToPlayer(sender, Command.GetString("alias", "disabled"));
             }));
 
+            // CLANTAG <player> [tag]
+            CommandList.Add(new Command("clantag", 1, Command.Behaviour.HasOptionalArguments,
+            (sender, arguments, optarg) =>
+            {
+                UTILS_SetForcedClantag(sender, arguments[0], optarg);
+            }));
+
             // SCREAM
             CommandList.Add(new Command("scream", 0, Command.Behaviour.HasOptionalArguments | Command.Behaviour.OptionalIsRequired,
                 (sender, arguments, optarg) =>
@@ -2681,20 +2688,6 @@ namespace LambAdmin
                 }));
             }));
 
-            // SETCLANTAG <player> [tag]
-            CommandList.Add(new Command("setclantag", 1, Command.Behaviour.HasOptionalArguments,
-            (sender, arguments, optarg) =>
-            {
-                Entity target = FindSinglePlayer(arguments[0]);
-                if (target == null)
-                {
-                    WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                    return;
-                }
-                string tag = String.IsNullOrEmpty(optarg) ? "" : optarg;
-                target.SetClantag(tag);
-            }));
-
             // ROTATESCREEN <player> <degree>
             CommandList.Add(new Command("rotatescreen", 2, Command.Behaviour.Normal,
             (sender, arguments, optarg) =>
@@ -3069,7 +3062,8 @@ namespace LambAdmin
             }
         }
 
-        public void InitChatAlias() {
+        public void InitChatAlias()
+        {
             if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\chatalias.txt"))
             {
                 foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Utils\chatalias.txt"))
@@ -3087,8 +3081,35 @@ namespace LambAdmin
                     }
                 }
             }
-        }
+            if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\forced_clantags.txt"))
+            {
+                foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Utils\forced_clantags.txt"))
+                {
+                    string[] parts = line.Split('=');
+                    for (int i = 2; i < parts.Length; i++)
+                        parts[1] += "=" + parts[i];
+                    try
+                    {
+                        forced_clantags.Add(Convert.ToInt64(parts[0]), parts[1]);
+                    }
+                    catch
+                    {
+                        WriteLog.Error("Error reading forced clantag entry: " + line);
+                    }
+                }
+            }
 
+            // clantag worker
+            OnInterval(1000, () => {
+                //iterate over connected players
+                foreach(Entity player in Players)
+                {
+                    if (forced_clantags.Keys.Contains(player.GUID))
+                        player.SetClantag(forced_clantags[player.GUID]);
+                }
+                return true;
+            });
+        }
         #region ACTUAL COMMANDS
 
         public void CMD_kick(Entity target, string reason = "You have been kicked")

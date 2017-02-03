@@ -1,3 +1,7 @@
+v3.4.18
+ * CHANGED: !setclantag <player> [tag] -> !clantag <player> [tag]; 
+            Clantag is saved permanently, like !alias
+ * CLOSED issue #12
 v3.4.17
  * HUD: alive players counter (option: settings_enable_alive_counter)
  * FIXED issue #9

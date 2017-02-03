@@ -39,6 +39,8 @@ namespace LambAdmin
 
         public static Dictionary<long,string> ChatAlias = new Dictionary<long,string>();
 
+        public static Dictionary<long, string> forced_clantags = new Dictionary<long, string>();
+
         public static Dictionary<string, string> DefaultSettings = new Dictionary<string, string>()
         {
             { "settings_isnipe", "true" },
@@ -362,6 +364,11 @@ namespace LambAdmin
             {"command_alias_reset", "^2<player> ^7alias has been ^2reset"},
             {"command_alias_message", "^2<player> ^7alias has been set to «<alias>^7»"},
             {"command_alias_disabled", "^1Chat alias feature has been disabled in settings."},
+
+            {"command_clantag_usage", "^1Usage: !clantag <player> [tag]"},
+            {"command_clantag_reset", "^2<player> ^7clantag has been ^2reset"},
+            {"command_clantag_message", "^2<player> ^7clantag has been set to «<tag>^7»"},
+            {"command_clantag_error", "^1Error: 7 characters is max"},
 
             {"command_myalias_usage", "^1Usage: !myalias [alias]"},
 
