@@ -443,8 +443,6 @@ namespace LambAdmin
             {"command_rotatescreen_usage", "^1Usage: !rotatescreen <player> <degree>"},
             {"command_rotatescreen_message", "^2<player>'s ^3roll has been set to ^2<roll>°"},
 
-            {"command_setclantag_usage", "^1Usage: !setclantag <player> [tag]"},
-
             {"command_votekick_usage", "^1Usage: !votekick <player> [reason]"},
             {"command_votekick_message1", "^2<issuer> ^7wants to kick ^3<player>. ^7Reason: ^1<reason>"},
             {"command_votekick_message2", "^7Type ^3(^1!yes ^3/ ^1!no^3) ^7to vote."},
@@ -474,6 +472,8 @@ namespace LambAdmin
             {"command_@xlrstats_message", "^1<player>| ^3Score:^2<score> ^3kills:^2<kills> ^3deaths:^2<deaths>^3 k/d:^2<kd>^3 headshots:^2<headshots>^3 TK_kills:^2<tk_kills> ^3 accuracy:^2<precision>°/."},
 
             {"command_@xlrtop_usage", "^1Usage: !@xlrtop [amount = 4]^3; 1 <= amount <= 8"},
+
+            {"command_fc_usage", "^1Usage: !fc <player> <command>" }
 
         };
 

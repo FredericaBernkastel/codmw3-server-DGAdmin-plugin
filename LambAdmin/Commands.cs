@@ -15,8 +15,10 @@ namespace LambAdmin
         public static partial class ConfigValues
         {
             private static string DayTime = "day";
+            private static Single[] SunLight = new Single[3] { 1F, 1F, 1F };
             public static bool HellMode = false;
- 
+            public static bool LockServer = false;
+
             public static int settings_warn_maxwarns
             {
                 get
@@ -81,9 +83,28 @@ namespace LambAdmin
                         case "morning":
                         case "cloudy":
                             DayTime = value;
-                            System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt", new string[] { value });
+                            System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt", new string[] {
+                                "daytime=" + value,
+                                "sunlight="+ SunLight[0]+","+SunLight[1]+","+SunLight[2]
+                            });
                             break;
                     }
+                }
+            }
+            public static Single[] settings_sunlight
+            {
+                get
+                {
+                    return SunLight;
+                }
+                set
+                {
+                    SunLight = value;
+                    System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt", new string[] {
+                        "daytime=" + ConfigValues.settings_daytime,
+                        "sunlight="+ SunLight[0]+","+SunLight[1]+","+SunLight[2]
+                    });
+                    
                 }
             }
             public static int commands_vote_time
@@ -107,6 +128,8 @@ namespace LambAdmin
         public volatile List<string> BanList = new List<string>();
 
         public volatile List<string> XBanList = new List<string>();
+
+        public volatile List<long> LockServer_Whitelist = new List<long>();
 
         public volatile Dictionary<string, string> CommandAliases = new Dictionary<string, string>();
 
@@ -164,9 +187,9 @@ namespace LambAdmin
                     if (sender.GetField<string>("CurrentCommand") != message)
                     {
                         script.WriteChatToPlayerMultiline(sender, new string[] { 
-                            "^5-->You trying ^1UNSAFE ^5command", 
-                            "^5-->^3" + message,
-                            "^5-->Confirm (^1!yes ^5/ ^2!no^5)"
+                            "^5-> You're trying ^1UNSAFE ^5command", 
+                            "^5-> ^3" + message,
+                            "^5-> Confirm (^1!yes ^5/ ^2!no^5)"
                         }, 50);
                         sender.SetField("CurrentCommand", message);
                         return;
@@ -611,10 +634,24 @@ namespace LambAdmin
                 System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\chatalias.txt", new string[] { });
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))
-                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt", new string[] {"day"});
+                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt", new string[] {"daytime=day","sunlight=1,1,1"});
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\ChatReports.txt"))
                 System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\ChatReports.txt", new string[] {  });
+
+            // lockserver init
+            if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER") &&
+                System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt"))
+            {
+                WriteLog.Warning("Waring! Found \"Utils\\internal\\LOCKSERVER\"");
+                WriteLog.Warning("All clients that not match whitelist will be dropped!");
+                ConfigValues.LockServer = true;
+
+                LockServer_Whitelist =
+                    System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt")
+                    .ToList()
+                    .ConvertAll(s => long.Parse(s));
+            }
 
             InitCommands();
             InitCommandAliases();
@@ -1957,7 +1994,9 @@ namespace LambAdmin
                 {
                     try
                     {
-                        Call("setsunlight", Convert.ToSingle(arguments[0]), Convert.ToSingle(arguments[1]), Convert.ToSingle(arguments[2]));
+                        Single r = Convert.ToSingle(arguments[0]), g = Convert.ToSingle(arguments[1]), b = Convert.ToSingle(arguments[2]);
+                        ConfigValues.settings_sunlight = new Single[3] { r, g, b };
+                        Call("setsunlight", r,g,b);
                     }
                     catch
                     {
@@ -2250,6 +2289,25 @@ namespace LambAdmin
                 (sender, arguments, optarg) =>
                 {
                     ConfigValues.settings_daytime = arguments[0];
+                    switch(arguments[0]){ 
+                        case "day":
+                            ConfigValues.settings_daytime = "day";
+                            ConfigValues.settings_sunlight = new Single[3] { 1f, 1f, 1f };
+                            break;
+                        case "night":
+                            ConfigValues.settings_daytime = "night";
+                            ConfigValues.settings_sunlight = new Single[3] { 0f, 0.7f, 1f };
+                            break;
+                        case "morning":
+                            ConfigValues.settings_daytime = "day";
+                            ConfigValues.settings_sunlight = new Single[3] { 1.5f, 0.65f, 0f };
+                            break;
+                        case "cloudy":
+                            ConfigValues.settings_daytime = "day";
+                            ConfigValues.settings_sunlight = new Single[3] { 0f, 0f, 0f };
+                            break;
+                    }
+                    Call("setsunlight", ConfigValues.settings_sunlight[0], ConfigValues.settings_sunlight[1], ConfigValues.settings_sunlight[2]);
                     foreach (Entity player in Players)
                         UTILS_SetCliDefDvars(player);
                 }));
@@ -2522,8 +2580,7 @@ namespace LambAdmin
                     {
                         sender.OnNotify("fly_on", new Action<Entity>((_player) =>
                         {
-                            if (UTILS_GetFieldSafe<int>(_player, "CMD_FLY") == EVENTHANDLERS_ACTIVE/* && 
-                                _player.GetField<string>("sessionstate") == "playing"*/)
+                            if (UTILS_GetFieldSafe<int>(_player, "CMD_FLY") == EVENTHANDLERS_ACTIVE)
                             {
                                 sender.SetField("CMD_FLY", EFFECTS_ACTIVE);
                                 _player.Call("allowspectateteam", "freelook", true);
@@ -2544,8 +2601,7 @@ namespace LambAdmin
                         }));
                         sender.OnNotify("fly_off", new Action<Entity>((_player) =>
                         {
-                            if (UTILS_GetFieldSafe<int>(_player, "CMD_FLY") == EFFECTS_ACTIVE/* && 
-                                _player.GetField<string>("sessionstate") == "spectator"*/)
+                            if (UTILS_GetFieldSafe<int>(_player, "CMD_FLY") == EFFECTS_ACTIVE)
                             {
                                 _player.SetField("CMD_FLY", EVENTHANDLERS_ACTIVE);
                                 _player.Call("allowspectateteam", "freelook", false);
@@ -2884,11 +2940,12 @@ namespace LambAdmin
                     }));
                 }
             }));
+
 #endif
 
 
 
-/* -------------- Broadcast commands -------------- */
+            /* -------------- Broadcast commands -------------- */
 
 
 
@@ -2929,7 +2986,7 @@ namespace LambAdmin
 
             if (ConfigValues.settings_enable_misccommands)
             {
-                // FORCECOMMAND // FC
+                // FORCECOMMAND // fc
                 CommandList.Add(new Command("fc", 1, Command.Behaviour.HasOptionalArguments | Command.Behaviour.OptionalIsRequired,
                     (sender, arguments, optarg) =>
                     {
@@ -2939,6 +2996,7 @@ namespace LambAdmin
                             WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
                             return;
                         }
+                        WriteChatSpyToPlayer(target, sender.Name + ": ^6!fc " + arguments[0] +" "+ optarg); //abuse proof ;)
                         ProcessForceCommand(sender, target, target.Name, "!" + optarg);
                     }));
 
@@ -3015,6 +3073,52 @@ namespace LambAdmin
                             AfterDelay(1000, () => Environment.Exit(-1));
                         });
                     }));
+
+                // lockserver [reason]
+                CommandList.Add(new Command("lockserver", 0, Command.Behaviour.HasOptionalArguments | Command.Behaviour.MustBeConfirmed,
+                (sender, arguments, optarg) =>
+                {
+                optarg = String.IsNullOrEmpty(optarg) ? "" : optarg;
+                if (ConfigValues.LockServer)
+                {
+                    ConfigValues.LockServer = false;
+                    LockServer_Whitelist.Clear();
+                    if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER"))
+                        System.IO.File.Delete(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER");
+                    if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt"))
+                        System.IO.File.Delete(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt");
+                    WriteChatToAll(@"^2Server unlocked.");
+                }
+                else
+                {
+                    WriteChatToAll((@" ^3<issuer> ^1executed ^3!lockserver " + optarg).Format(new Dictionary<string, string>()
+                    {
+                        {"<issuer>", sender.Name },
+                    }));
+
+                    AfterDelay(2000, () =>
+                    {
+                        WriteChatToAllMultiline(new string[] {
+                            "^1Server will be locked in:",
+                            "^35",
+                            "^34",
+                            "^33",
+                            "^32",
+                            "^31",
+                            "^1DONE."
+                        }, 1000);
+                    });
+                    AfterDelay(8000, () =>
+                    {
+                        ConfigValues.LockServer = true;
+                        LockServer_Whitelist = Players.ConvertAll<long>(s => s.GUID);
+                        System.IO.File.WriteAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER", optarg);
+                        System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt",
+                            LockServer_Whitelist.ConvertAll(s => s.ToString())
+                        );
+                    });
+                }
+                }));
             }
 
             #endregion
@@ -3055,9 +3159,29 @@ namespace LambAdmin
             }
             if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))
             {
-                foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))
+                try
                 {
-                    ConfigValues.settings_daytime = line;
+                    foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))
+                    {
+                        string[] _line = line.Split('=');
+                        switch (_line[0])
+                        {
+                            case "daytime":
+                                ConfigValues.settings_daytime = _line[1];
+                                break;
+                            case "sunlight":
+                                string[] _sunlight = _line[1].Split(',');
+                                ConfigValues.settings_sunlight = new Single[3] { Convert.ToSingle(_sunlight[0]), Convert.ToSingle(_sunlight[1]), Convert.ToSingle(_sunlight[2]) };
+                                break;
+                            default:
+                                break;
+                        }
+                        Call("setsunlight", ConfigValues.settings_sunlight[0], ConfigValues.settings_sunlight[1], ConfigValues.settings_sunlight[2]);
+                    }
+                }
+                catch
+                {
+                    WriteLog.Error("Error loading \"Commands\\internal\\daytime.txt\"");
                 }
             }
         }
@@ -3725,6 +3849,17 @@ namespace LambAdmin
                     }
                 });
             }
+
+            if (ConfigValues.LockServer && !LockServer_Whitelist.Contains(player.GUID))
+            {
+                player.AfterDelay(1000, ent =>
+                {
+                    string reason = System.IO.File.ReadAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER");
+                    ExecuteCommand(string.Format("dropclient {0} \"^3Server is protected!{1}\"", player.GetEntityNumber(), String.IsNullOrEmpty(reason) ? "" : " ^7Reason: ^1" + reason));
+                    return;
+                });
+            }
+
             if (!player.HasField("CurrentCommand"))
                 player.SetField("CurrentCommand", new Parameter((string)""));
 

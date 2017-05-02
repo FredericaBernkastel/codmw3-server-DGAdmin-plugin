@@ -52,11 +52,11 @@ namespace LambAdmin
                         "rek",          "rektroll",     "nootnoot",     "daytime",
                         "kd",           "setfx",        "hell",         "fire",
                         "3rdperson",    "teleport",     "fly",          "jump",
-                        "speed",        "gravity",      "ac130",        "setclantag",
+                        "speed",        "gravity",      "ac130",        /*"setclantag",*/
                         "letmehardscope","moab"
                     };
                     List<string> _unsafe = new List<string>() {
-                        "sdvar",        "server",       "setclantag",   "fc",
+                        "sdvar",        "server",       /*"setclantag",*/   "fc",
                         "foreach",      "svpassword"
                     };
                     if (permissions.Contains("-" + permission))

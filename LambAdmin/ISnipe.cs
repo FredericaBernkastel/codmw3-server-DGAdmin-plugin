@@ -197,7 +197,7 @@ namespace LambAdmin
             if (ConfigValues.ISNIPE_SETTINGS.ANTICRTK && (weapon == "throwingknife_mp") && (attacker.Origin.DistanceTo2D(player.Origin) < 200f))
             {
                 player.Health += damage;
-                player.Call("iprintlnbold", new Parameter[] { Lang_GetString("Message_CRTK_NotAllowed") });
+                attacker.Call("iprintlnbold", new Parameter[] { Lang_GetString("Message_CRTK_NotAllowed") });
             }
             if (ConfigValues.ISNIPE_SETTINGS.ANTIBOLTCANCEL && (UTILS_GetFieldSafe<int>(attacker, "weapon_fired_boltcancel") == 1))
                 player.Health += damage;

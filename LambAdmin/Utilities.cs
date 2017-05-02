@@ -37,9 +37,9 @@ namespace LambAdmin
         public static partial class ConfigValues
         {
 #if DEBUG
-            public static string Version = "v3.4n18d";
+            public static string Version = "v3.4n19d";
 #else
-            public static string Version = "v3.4n18r";
+            public static string Version = "v3.4n19r";
 #endif
             public static string ConfigPath = @"scripts\DGAdmin\";
             public static string ChatPrefix
@@ -766,22 +766,24 @@ namespace LambAdmin
                     }));
                     return;
                 }
-
-            //check if bad clantag
-            foreach (string identifier in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Utils\badclantags.txt"))
+            if (!forced_clantags.Keys.Contains(player.GUID))
+            {
+                //check if bad clantag
+                foreach (string identifier in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Utils\badclantags.txt"))
                 if (player.GetClantag() == identifier)
                 {
-                    CMD_tmpban(player, "^1Piss off, hacker.");
-                    WriteChatToAll(Command.GetString("tmpban", "message").Format(new Dictionary<string, string>()
-                    {
-                        {"<target>", "^:" + player.Name },
-                        {"<targetf>", "^:" + player.GetFormattedName(database) },
-                        {"<issuer>", ConfigValues.ChatPrefix },
-                        {"<issuerf>", ConfigValues.ChatPrefix },
-                        {"<reason>", "Piss off, hacker." },
-                    }));
-                    return;
-                }
+                        CMD_tmpban(player, "^1Piss off, hacker.");
+                        WriteChatToAll(Command.GetString("tmpban", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<target>", "^:" + player.Name },
+                            {"<targetf>", "^:" + player.GetFormattedName(database) },
+                            {"<issuer>", ConfigValues.ChatPrefix },
+                            {"<issuerf>", ConfigValues.ChatPrefix },
+                            {"<reason>", "Piss off, hacker." },
+                        }));
+                        return;
+                    }
+            }
 
             //check if bad xnaddr
             if (player.GetXNADDR() == null || string.IsNullOrEmpty(player.GetXNADDR().ToString()))
@@ -1073,14 +1075,10 @@ namespace LambAdmin
                 player.SetClientDvar(dvar.key, dvar.value);
             }
             player.SetClientDvar("fx_draw", "1");
-            switch (ConfigValues.settings_daytime)
-            {
-                case "day": Call("setsunlight", 1f, 1f, 1f); break;
-                case "night": UTILS_SetClientNightVision(player); Call("setsunlight", 0f, 0.7f, 1f); break;
-                case "morning": Call("setsunlight", 1.5f, 0.65f, 0f); break;
-                case "cloudy": Call("setsunlight", 0f, 0f, 0f); break;
-            }
-            if ((ConfigValues.settings_daytime != "night") && PersonalPlayerDvars.ContainsKey(player.GUID))
+            if(ConfigValues.settings_daytime == "night")
+                UTILS_SetClientNightVision(player);
+            else
+            if (PersonalPlayerDvars.ContainsKey(player.GUID))
                 foreach (Dvar dvar in PersonalPlayerDvars[player.GUID])
                     player.SetClientDvar(dvar.key, dvar.value);
         }

@@ -1,3 +1,7 @@
+v3.4.19
+ * COMMAND (unsafe): !lockserver [reason]
+ * FIXED: !sunlight saved permanently
+ * CLOSED issue #13
 v3.4.18
  * CHANGED: !setclantag <player> [tag] -> !clantag <player> [tag]; 
             Clantag is saved permanently, like !alias
