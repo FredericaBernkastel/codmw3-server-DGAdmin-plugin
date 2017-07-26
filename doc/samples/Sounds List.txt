@@ -1,0 +1,141 @@
+NOTE: This list is far from complete and were categorized based on the GSC.
+
+Killstreaks
+- NUKE (aka MOAB) (lazy lazy IW)
+nuke_incoming
+nuke_wave
+ui_mp_nukebomb_timer
+- REMOTE MORTAR
+reaper_fire
+reaper_damaged
+- REMOTE TANK
+talon_reload_plr
+talon_missile_fire_plr
+talon_rocket_reload_plr
+talon_destroyed
+talon_damaged
+talon_reload
+talon_rocket_reload
+talon_missile_fire
+bmp_fire
+- REMOTE UAV
+recondrone_lockon
+recondrone_tag
+recondrone_destroyed
+- HARRIER
+harrier_fly_away
+harrier_jet_crash
+- PREDATOR MISSILE (i guess, not sure)
+remotemissile_explode (also mentioned in 'explosions' category)
+
+Equipment
+- Scrambler
+scrambler_beep
+- Sentry
+sentry_gun_beep
+sentry_explode (also mentioned in 'explosions' category)
+sentry_gun_plant
+sentry_explode_smoke
+- Claymore
+claymore_activated
+- Betty
+mine_betty_click
+mine_betty_spin
+- IMS
+ims_destroyed
+ims_fire
+ims_plant
+ims_trigger
+ims_launch
+
+Voices
+mp_war_objective_lost
+mp_war_objective_taken
+mp_enemy_obj_captured
+mp_obj_captured
+mp_war_objective_taken
+mp_war_objective_lost
+fasten_seatbelts
+missile_incoming
+
+Explosions'n'shit
+sentry_explode
+exp_suitcase_bomb_main
+grenade_explode_metal
+cobra_helicopter_crash
+exp_airstrike_bomb
+veh_mig29_sonic_boom (no idea what sonic boom is, guess it's a explosion)
+veh_b2_sonic_boom
+exp_stinger_armor_destroy
+explo_mine
+remotemissile_explode
+
+SD
+mp_bomb_plant
+mp_bomb_defuse
+mp_suitcase_pickup
+ui_mp_suitcasebomb_timer
+
+Health
+breathing_better
+breathing_hurt
+player_hit_while_ads_hurt
+
+OMA
+foly_onemanarmy_bag3_plr
+foly_onemanarmy_bag6_plr
+
+Weapons
+- JAVELIN
+javelin_clu_lock (BEEEEEEEEEEEEEEEEEEEP BEEPBEEPBEEPBEEP)
+- STINGER
+missile_locking
+exp_stinger_armor_destroy (also mentioned in 'explosions' category)
+
+Death sounds
+generic_death_russian_1
+generic_death_russian_2
+generic_death_russian_3
+generic_death_russian_4
+generic_death_russian_5
+generic_death_russian_6
+generic_death_russian_7
+generic_death_russian_8
+generic_death_american_1
+generic_death_american_2
+generic_death_american_3
+generic_death_american_4
+generic_death_american_5
+generic_death_american_6
+generic_death_american_7
+generic_death_american_8
+
+Elevator (idk, gsc said they were MP)
+elev_door_open
+elev_door_close
+elev_run_start
+elev_door_interupt
+elev_run_end
+elev_bell_ding
+
+Kill confirmed
+mp_killconfirm_tags_deny
+mp_killconfirm_tags_pickup
+
+AC130
+veh_ac130_ext_dist_fade (???)
+ac130_flare_burst
+veh_ac130_sonic_boom
+
+Random shit (please help to categorise these...)
+fast_artillery_round
+WEAP_SHOTGUNATTACH_FIRE_NPC
+item_blast_shield_on
+juggernaut_breathing_sound
+mp_killstreak_radar
+ammo_crate_use
+scavenger_pack_pickup
+mp_suitcase_pickup
+bullet_impact_headshot_2
+MP_hit_alert
+scavenger_pack_pickup

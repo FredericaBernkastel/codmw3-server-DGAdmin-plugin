@@ -1,0 +1,5 @@
+viewmodel_base_viewhands
+viewmodel_briefcase_bomb_mp
+viewmodel_knife                               x = 10, y = -5
+viewmodel_default
+viewmodel_ak47

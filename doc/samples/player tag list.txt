@@ -1,0 +1,9 @@
+//just some of them
+
+tag_origin
+tag_weapon_left
+tag_weapon_right
+tag_shield_back
+tag_eye
+j_head
+J_Spine4

@@ -1,0 +1,55 @@
+STD map names:
+
+Lockdown (mp_alpha)
+Bootleg (mp_bootleg)
+Mission (mp_bravo)
+Carbon (mp_carbon)
+Dome (mp_dome)
+Downturn (mp_exchange)
+Hardhat (mp_hardhat)
+Interchange (mp_interchange)
+Fallen (mp_lambeth)
+Bakaara (mp_mogadishu)
+Resistance (mp_paris)
+Arkaden (mp_plaza2)
+Outpost (mp_radar)
+Seatown (mp_seatown)
+Underground (mp_underground)
+Village (mp_village)
+
+DLC1 map names:
+
+Piazza (mp_italy)
+Liberation (mp_park)
+Blackbox (mp_morningwood)
+Overwatch (mp_overwatch)
+
+DLC2 map names:
+
+Aground (mp_aground_ss)
+Erosion (mp_courtyard_ss)
+Foundation (mp_cement)
+Getaway (mp_hillside_ss)
+Sanctuary (mp_meteora)
+Oasis (mp_qadeem)
+Lookout (mp_restrepo_ss)
+Terminal (mp_terminal_cls)
+
+DLC3 map names:
+
+Intersection (mp_crosswalk_ss)
+U-Turn (mp_burn_ss)
+Vortex (mp_six_ss)
+
+DLC4 map names:
+
+Gulch (mp_moab)
+Boardwalk (mp_boardwalk)
+Parish (mp_nola)
+Off Shore (mp_roughneck)
+Decommision (mp_shipbreaker)
+
+**SS at the end of a map name denotes that it is a "Face Off" map. 
+
+DG iSnipe:
+mp_courtyard_ss,mp_terminal_cls,mp_aground_ss

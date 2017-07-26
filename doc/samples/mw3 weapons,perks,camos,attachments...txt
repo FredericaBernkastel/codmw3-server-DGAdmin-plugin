@@ -1,0 +1,667 @@
+﻿Hello
+
+I know that this was already posted, but I wanted to make my own version, OMA . You need to add on weapons: _mp at the end. Example: iw5_m4_mp.
+
+Primary Weapons:
+
+Assault Rifles
+
+iw5_m4
+iw5_ak47
+iw5_m16
+iw5_fad
+iw5_acr
+iw5_type95
+iw5_mk14
+iw5_scar
+iw5_g36c
+iw5_cm901
+
+Submachine Guns
+
+iw5_mp5
+iw5_mp7
+iw5_m9
+iw5_p90
+iw5_pp90m1
+iw5_ump45
+
+Sniper Rifles
+
+iw5_barrett
+iw5_rsass
+iw5_dragunov
+iw5_msr
+iw5_l96a1
+iw5_as50
+
+Shotguns
+
+iw5_ksg
+iw5_1887
+iw5_striker
+iw5_aa12
+iw5_usas12
+iw5_spas12
+
+Launchers
+
+xm25
+
+Light Machine Guns
+
+iw5_m60
+iw5_mk46
+iw5_pecheneg
+iw5_sa80
+iw5_mg36
+
+Riotshield and Juggernaut Weapons
+
+iw5_m60jugg
+iw5_riotshieldjugg
+riotshield
+
+Secondary Weapons:
+
+Handguns
+
+iw5_44magnum
+iw5_usp45
+iw5_deserteagle
+iw5_mp412
+iw5_p99
+iw5_fnfiveseven
+
+Machine Pistols
+
+iw5_g18
+iw5_fmg9
+iw5_mp9
+iw5_skorpion
+
+Launchers
+
+m320
+rpg
+iw5_smaw
+stinger
+javelin
+xm25
+
+OPA (armor vest)
+
+deployable_vest_marker_mp
+
+NZ3 Designator
+
+uav_strike_marker_mp
+
+Phone
+
+killstreak_emp_mp
+
+Laptop
+
+killstreak_remote_tank_laptop
+
+Recon Heli on your hand
+
+killstreak_remote_uav_mp
+
+Juggernaut Weapons
+
+iw5_usp45jugg
+iw5_mp412jugg
+
+Primary Weapons using the 2 Primaries Perk
+
+iw5_m4
+iw5_ak47
+iw5_m16
+iw5_fad
+iw5_acr
+iw5_type95
+iw5_mk14
+iw5_scar
+iw5_g36c
+iw5_cm901
+iw5_mp5
+iw5_mp7
+iw5_m9
+iw5_p90
+iw5_pp90m1
+iw5_ump45
+iw5_barrett
+iw5_rsass
+iw5_dragunov
+iw5_msr
+iw5_l96a1
+iw5_as50
+iw5_ksg
+iw5_1887
+iw5_striker
+iw5_aa12
+iw5_usas12
+iw5_spas12
+iw5_m60
+iw5_mk46
+iw5_pecheneg
+iw5_sa80
+iw5_mg36
+riotshield
+
+Other weapons which I dont know if they work:
+
+iw5_beretta393
+iw5_beretta393akimbo
+m79_mp
+mortar_remote_zoom_mp
+mortar_remote_mp
+manned_minigun_turret
+manned_littlebird_sniper
+manned_littlebird_minigun
+manned_gl_turret
+portable_radar
+remote_mortar_missile
+remote_turret_mp
+defaultweapon
+scrambler
+uav_remote_mp
+
+Attachments:
+
+none
+acog
+acogsmg
+reflex
+reflexsmg
+reflexlmg
+silencer
+silencer02
+silencer03
+grip
+gl
+gp25
+m320
+akimbo
+thermal
+thermalsmg
+shotgun
+heartbeat
+fmj
+rof
+xmags
+eotech
+eotechsmg
+eotechlmg
+tactical
+vzscope
+hamrhybrid
+hybrid
+zoomscope
+
+Weapon Perks/Buffs:
+
+specialty_bulletpenetration
+specialty_marksman
+specialty_bling
+specialty_sharp_focus
+specialty_armorpiercing
+specialty_holdbreathwhileads
+specialty_longerrange
+specialty_fastermelee
+specialty_reducedsway
+specialty_lightweight
+specialty_moredamage
+
+Camos:
+
+none
+classic
+snow
+multi
+d_urban
+hex
+choco
+marine
+snake
+winter
+blue
+red
+autumn
+gold
+
+Reticles:
+
+none
+ret1
+ret2
+ret3
+ret4
+ret5
+ret6
+
+Grenades/Equipment:
+
+frag_grenade_mp
+semtex_mp
+throwingknife_mp
+claymore_mp
+c4_mp
+bouncingbetty_mp
+specialty_portable_radar
+
+Special Grenades/Offhand:
+
+flash_grenade_mp
+concussion_grenade_mp
+smoke_grenade_mp
+emp_grenade_mp
+trophy_mp
+specialty_tacticalinsertion
+specialty_scrambler
+specialty_portable_radar
+
+Perks 1:
+
+specialty_longersprint
+specialty_fastreload
+specialty_scavenger
+specialty_blindeye
+specialty_paint
+
+Perks 2:
+
+Spoiler (Click to View)
+
+Perks 3:
+
+specialty_detectexplosive
+specialty_autospot
+specialty_bulletaccuracy
+specialty_quieter
+specialty_stalker
+
+DeathStreaks:
+
+specialty_juiced
+specialty_grenadepulldeath
+specialty_finalstand
+specialty_revenge
+specialty_stopping_power
+specialty_c4death
+specialty_uav
+specialty_null
+
+Killstreaks:
+
+Assault
+
+uav
+airdrop_assault
+predator_missile
+ims
+airdrop_sentry_minigun
+precision_airstrike
+helicopter
+littlebird_flock
+littlebird_support
+remote_mortar
+airdrop_remote_tank
+helicopter_flares
+ac130
+airdrop_juggernaut
+osprey_gunner
+
+Support
+
+uav_support
+counter_uav
+deployable_vest
+airdrop_trap
+sam_turret
+remote_uav
+triple_uav
+remote_mg_turret
+stealth_airstrike
+emp
+airdrop_juggernaut_recon
+escort_airdrop
+
+Other( some are from above )
+
+mp_killstreak_radar
+uavrecon
+uav_2
+uav_strike
+directional_uav
+airstrike
+mp_killstreak_jet
+mp_killstreak_heli
+helisupport
+helicopter_minigun
+helicopter_mk19
+helicopter_blackbox
+nuke
+double_uav
+auto_shotgun
+harrier_airstrike
+super_airstrike
+sentry
+sentry_gl
+aamissile
+thumper
+airdrop_trophy
+airdrop_support
+airdrop_engineer
+airdrop_demolitions
+tank
+airdrop_juggernaut_def
+airdrop_juggernaut_gl
+airdrop_predator_missile
+airdrop_mega
+ammo
+explosive_ammo
+explosive_ammo_2
+airdrop_team_ammo
+minigun_turret
+gl_turret
+mobile_mortar
+a10_support
+deployable_ammo
+deployable_exp_ammo
+team_ammo_refill
+heli_sniper
+heli_minigunner
+aastrike
+remote_tank
+mp_killstreak_sentrygun
+
+Perk Killstreaks:
+
+specialty_longersprint_ks
+specialty_fastreload_ks
+specialty_scavenger_ks
+specialty_blindeye_ks
+specialty_paint_ks
+specialty_hardline_ks
+specialty_coldblooded_ks
+specialty_quickdraw_ks
+specialty_assists_ks
+_specialty_blastshield_ks
+specialty_detectexplosive_ks
+specialty_autospot_ks
+specialty_bulletaccuracy_ks
+specialty_quieter_ks
+specialty_stalker_ks
+all_perks_bonus
+
+All Perks and Deathstreaks(some are leftovers from mw2 unused stuff, others I dont know what they are and the rest were on mw2 and maybe work here too):
+
+specialty_akimbo
+specialty_amplify
+specialty_anytwo
+specialty_ap
+specialty_armorpiercing
+specialty_armorvest
+specialty_assists
+specialty_assists_ks
+specialty_automantle
+specialty_autospot
+specialty_autospot_ks
+specialty_blackbox
+specialty_blastshield
+_specialty_blastshield_ks
+specialty_blindeye
+specialty_blindeye_ks
+specialty_bling
+specialty_bombsquad
+specialty_bulletaccuracy
+specialty_bulletaccuracy2
+specialty_bulletaccuracy_ks
+specialty_bulletdamage
+specialty_bulletpenetration
+specialty_burstfire
+specialty_carepackage
+specialty_challenger
+specialty_coldblooded
+specialty_coldblooded_ks
+specialty_combathigh
+specialty_commando
+specialty_concussiongrenade
+specialty_copycat
+specialty_c4death
+specialty_dangerclose
+specialty_delaymine
+specialty_detectexplosive
+specialty_detectexplosive_ks
+specialty_double_load
+specialty_empimmune
+specialty_empgrenade
+specialty_endgame
+specialty_explosivebullets
+specialty_explosivedamage
+specialty_exposeenemy
+specialty_extendedmags
+specialty_extendedmelee
+specialty_extraammo
+specialty_extraspecialduration
+specialty_falldamage
+specialty_fasterlockon
+specialty_fastermelee
+specialty_fastmantle
+specialty_fastmeleerecovery
+specialty_fastoffhand
+specialty_fastreload
+specialty_fastreload_ks
+specialty_fastsnipe
+specialty_fastsprintrecovery
+specialty_feigndeath
+specialty_finalstand
+specialty_flashgrenade
+specialty_fmj
+specialty_fraggrenade
+specialty_freerunner
+specialty_gpsjammer
+specialty_grenadepulldeath
+specialty_hard_shell
+specialty_hardjack
+specialty_hardline
+specialty_hardline_ks
+specialty_heartbreaker
+specialty_holdbreath
+specialty_holdbreathwhileads
+specialty_improvedholdbreath
+specialty_ironlungs
+specialty_jhp
+specialty_juiced
+specialty_jumpdive
+specialty_ks_null
+specialty_laststandoffhand
+specialty_light_armor
+specialty_lightweight
+specialty_littlebird_support
+specialty_localjammer
+specialty_longerrange
+specialty_longersprint
+specialty_longersprint_ks
+specialty_lowprofile
+specialty_luckycharm
+specialty_marathon
+specialty_marksman
+specialty_moredamage
+specialty_null
+specialty_null_attachment
+specialty_null_gl
+specialty_null_grip
+specialty_null_shotgun
+specialty_omaquickchange
+specialty_onemanarmy
+specialty_overkillpro
+specialty_paint
+specialty_paint_ks
+specialty_paint_pro
+specialty_parabolic
+specialty_perks_all
+specialty_pistoldeath
+specialty_portable_radar
+specialty_primarydeath
+specialty_quickdraw
+specialty_quickdraw_ks
+specialty_quickswap
+specialty_quieter
+specialty_radararrow
+specialty_radarblip
+specialty_radarjuggernaut
+specialty_rearview
+specialty_reducedsway
+specialty_regenspeed
+specialty_revenge
+specialty_rof
+specialty_rollover
+specialty_saboteur
+specialty_scavenger
+specialty_scavenger_ks
+specialty_scrambler
+specialty_secondarybling
+specialty_selectivehearing
+specialty_sharp_focus
+specialty_shellshock
+specialty_shield
+specialty_siege
+specialty_sitrep
+specialty_smokegrenade
+specialty_specialgrenade
+specialty_spygame
+specialty_spygame2
+specialty_stalker
+specialty_stalker_ks
+specialty_steadyaim
+specialty_steadyaimpro
+specialty_steelnerves
+specialty_stopping_power
+specialty_stun_resistance
+specialty_tacticalinsertion
+specialty_thermal
+specialty_throwback
+specialty_twoprimaries
+specialty_uav
+
+More info:
+
+Visions:
+
+http://www.itsmods.com/forum/Thread-Tuto...-List.html
+
+FX list per map:
+
+http://www.itsmods.com/forum/Thread-Tuto...st-V1.html
+
+Shellshocks:
+
+http://www.itsmods.com/forum/Thread-Tuto...-list.html
+
+Developers:
+
+CSHARP Code
+
+    public static string[] AllWeapons /*credits to jaydi & yamato*/ = { "iw5_l96a1_mp",
+    "iw5_44magnum_mp",
+    "iw5_usp45_mp",
+    "iw5_deserteagle_mp",
+    "iw5_mp412_mp",
+    "iw5_g18_mp",
+    "iw5_fmg9_mp",
+    "iw5_mp9_mp",
+    "iw5_skorpion_mp",
+    "iw5_p99_mp",
+    "iw5_fnfiveseven_mp",
+    "rpg_mp",
+    "iw5_smaw_mp",
+    "stinger_mp",
+    "javelin_mp",
+    "xm25_mp",
+    "iw5_usp45jugg_mp",
+    "iw5_mp412jugg_mp",
+    "iw5_m60jugg_mp",
+    "iw5_riotshieldjugg_mp",
+    "iw5_m4_mp",
+    "riotshield_mp",
+    "iw5_ak47_mp",
+    "iw5_m16_mp",
+    "iw5_fad_mp",
+    "iw5_acr_mp",
+    "iw5_type95_mp",
+    "iw5_mk14_mp",
+    "iw5_scar_mp",
+    "iw5_g36c_mp",
+    "iw5_cm901_mp",
+    "iw5_mp5_mp",
+    "iw5_mp7_mp",
+    "iw5_m9_mp",
+    "iw5_p90_mp",
+    "iw5_pp90m1_mp",
+    "iw5_ump45_mp",
+    "iw5_barrett_mp",
+    "iw5_rsass_mp",
+    "iw5_dragunov_mp",
+    "iw5_msr_mp",
+    "iw5_as50_mp",
+    "iw5_ksg_mp",
+    "iw5_1887_mp",
+    "iw5_striker_mp",
+    "iw5_aa12_mp",
+    "iw5_usas12_mp",
+    "iw5_spas12_mp",
+    "iw5_m60_mp",
+    "iw5_mk46_mp",
+    "iw5_pecheneg_mp",
+    "iw5_sa80_mp",
+    "emp_grenade_mp",
+    "iw5_mg36_mp", };
+    public static string[] AllPerks /*credits to jaydi & yamato*/ = { "specialty_longersprint",
+    "specialty_fastreload",
+    "specialty_scavenger",
+    "specialty_blindeye",
+    "specialty_paint",
+    "specialty_hardline",
+    "specialty_coldblooded",
+    "specialty_quickdraw",
+    "specialty_twoprimaries",
+    "specialty_assists",
+    "specialty_blastshield",
+    "specialty_detectexplosive",
+    "specialty_autospot",
+    "specialty_bulletaccuracy",
+    "specialty_quieter",
+    "specialty_stalker", };
+    public static string[] AllOffhand /*credits to jaydi & yamato*/ = { "flash_grenade_mp",
+    "concussion_grenade_mp",
+    "smoke_grenade_mp",
+    "emp_grenade_mp",
+    "trophy_mp",
+    "specialty_tacticalinsertion",
+    "specialty_scrambler",
+    "specialty_portable_radar" };
+    public static string[] AllEquipment /*credits to jaydi & yamato*/ = { "frag_grenade_mp",
+    "semtex_mp",
+    "throwingknife_mp",
+    "claymore_mp",
+    "c4_mp",
+    "bouncingbetty_mp",
+    "specialty_portable_radar" };
+
+Most of this needs testing:
+
+Killstreak Weapons (separated by .):
+
+a10_30mm_mp.abrams_minigun_mp.ac130_105mm_mp.ac130_25mm_mp.ac130_40mm_mp.ac130_m​p.airdrop_escort_marker.airdrop_juggernaut_gl.airdrop_mega_marker.airdrop_sentry​_marker.airdrop_tank_marker.airdrop_trap_explosive_mp.airdrop_trap_marker.apache​_minigun_mp.artillery_mp.barrel_mp.bmp_turret_mp.bomb_site_mp.bradley_turret_mp.​bullet_ricochet_mp.cobra_20mm_mp.cobra_ffar_mp.cobra_player_minigun_mp.defaultwe​apon_mp.deployable_vest_marker.destructible.destructible_car.frag_grenade_short.​harrier_20mm_mp.harrier_ffar_mp.helicopter_mp.hind_ffar_mp.humvee_50cal_mp.ims_g​renade_mp.ims_projectile_mp.littlebird_guard_minigun_mp.m1a1_turret_mp.manned_gl​_turret_mp.manned_littlebird_minigun_mp.manned_littlebird_sniper_mp.manned_minig​un_turret_mp.minigun_littlebird_mp.nuke_mp.osprey_minigun_mp.osprey_player_minig​un_mp.pavelow_minigun_mp.remote_mortar_missile_mp.remote_tank_projectile_mp.remo​temissile_mp.remotemissile_projectile_mp.ricochet_mp.sam_projectile_mp.saw_bipod​_stand_mp.sentry_gun_mp.sentry_minigun_mp.smartarrow.stealth_bomb_mp.train_mp.tu​rret_minigun_mp.uav_strike_projectile_mp.ugv_gl_turret_mp.ugv_turret_mp.weapon_c​obra_mk19_mp
+
+Camos (separated by .):
+arctic.beachhead.blue_tiger.bottlecap.desert.digital.orange_fall.red_tiger.red_u​rban.woodland
+
+
+Thats it, Big Grin
+
+Free OMA for all the people who readed and thanks to @JariZ for trying some of these.

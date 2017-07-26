@@ -1,0 +1,57 @@
+Hello guys
+
+This is a new tutorial, half mw2, half mw3. I have been looking at some mw3 gsc files, and I thought of explaining some commands, the first one of all is setreverb, is a sound command, I recomend you to search on google what does reverb means.
+
+self SetReverb("priority","roomtype",drylevel,wetlevel,fadetime);
+
+An example(I dont know very well the priority thing, but this one is in the gsc file, so it should work, the rest of parametres is just change parametres):
+
+self SetReverb("snd_enveffectsprio_level","quarry",1,0.5,0);
+
+Roomtype list(taken from mw3 gsc files)
+
+alley
+arena
+auditorium
+bathroom
+carpetedhallway
+cave
+city
+concerthall
+default
+dizzy
+drugged
+forest
+generic
+hallway
+hangar
+livingroom
+mountains
+paddedcell
+plain
+parkinglot
+psychotic
+quarry
+room
+sewerpipe
+stonecorridor
+stoneroom
+underwater
+
+Now second command, viewkick, it changes your angles as if they have shot you, Smile
+
+self ViewKick(power,origin);
+
+Examples:
+
+self ViewKick(3,self.origin); //small
+self ViewKick(100,self.origin); //big
+
+I found a command at mw3 gsc files which has something in relation with this and I am fully sure that works like this:
+
+self SetViewKickScale(scale);
+
+Examples:
+
+self setViewKickScale(0); //no effect of bullet hits on your aiming
+self setViewKickScale(0.5); //sharpfocus effect

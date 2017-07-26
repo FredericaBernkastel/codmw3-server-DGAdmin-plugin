@@ -1,0 +1,11366 @@
+1894 total dvars
+
+
+Name: accessToSubscriberContent
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: actionSlotsHide
+Flags 0x0040
+Type: Bool
+Latched: False
+Value: False
+
+Name: activeAction
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: aim_autoaim_enabled
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: aim_target_sentient_radius
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 10
+
+Name: allusersinactive
+Flags 0x0100
+Type: String
+Latched: True
+Value: "0"
+
+Name: ammoCounterHide
+Flags 0x0040
+Type: Bool
+Latched: False
+Value: False
+
+Name: band_12players
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 384000
+
+Name: band_18players
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 580000
+
+Name: band_2players
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 64000
+
+Name: band_4players
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 128000
+
+Name: band_8players
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 256000
+
+Name: bg_bulletExplDmgFactor
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: bg_bulletExplRadius
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 250
+
+Name: bg_foliagesnd_fastinterval
+Flags 0x008C
+Type: Int
+Latched: False
+Value: 500
+
+Name: bg_foliagesnd_maxspeed
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 180
+
+Name: bg_foliagesnd_minspeed
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 40
+
+Name: bg_foliagesnd_resetinterval
+Flags 0x008C
+Type: Int
+Latched: False
+Value: 500
+
+Name: bg_foliagesnd_slowinterval
+Flags 0x008C
+Type: Int
+Latched: False
+Value: 1500
+
+Name: bg_legYawTolerance
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 20
+
+Name: bg_shieldHitEncodeHeightVM
+Flags 0x0084
+Type: Vec2
+Latched: False
+Value: [ -10, 10 ]
+
+Name: bg_shieldHitEncodeHeightWorld
+Flags 0x0084
+Type: Vec2
+Latched: False
+Value: [ -25, 20 ]
+
+Name: bg_shieldHitEncodeWidthVM
+Flags 0x0084
+Type: Vec2
+Latched: False
+Value: [ -16, 16 ]
+
+Name: bg_shieldHitEncodeWidthWorld
+Flags 0x0084
+Type: Vec2
+Latched: False
+Value: [ -14, 14 ]
+
+Name: bg_shock_lookControl
+Flags 0x0005
+Type: Bool
+Latched: True
+Value: False
+
+Name: bg_shock_lookControl_fadeTime
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.001
+
+Name: bg_shock_lookControl_maxpitchspeed
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0
+
+Name: bg_shock_lookControl_maxyawspeed
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0
+
+Name: bg_shock_lookControl_mousesensitivityscale
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0
+
+Name: bg_shock_movement
+Flags 0x0005
+Type: Bool
+Latched: True
+Value: True
+
+Name: bg_shock_screenBlurBlendFadeTime
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.001
+
+Name: bg_shock_screenBlurBlendTime
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.001
+
+Name: bg_shock_screenFlashShotFadeTime
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0
+
+Name: bg_shock_screenFlashWhiteFadeTime
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0
+
+Name: bg_shock_screenType
+Flags 0x0005
+Type: 
+Latched: True
+Value: ?
+
+Name: bg_shock_sound
+Flags 0x0005
+Type: Bool
+Latched: True
+Value: False
+
+Name: bg_shock_soundDryLevel
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 1
+
+Name: bg_shock_soundEnd
+Flags 0x0005
+Type: String
+Latched: True
+Value: "shellshock_end"
+
+Name: bg_shock_soundEndAbort
+Flags 0x0005
+Type: String
+Latched: True
+Value: "shellshock_end_abort"
+
+Name: bg_shock_soundFadeInTime
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.25
+
+Name: bg_shock_soundFadeOutTime
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 2.5
+
+Name: bg_shock_soundLoop
+Flags 0x0005
+Type: String
+Latched: True
+Value: "shellshock_loop"
+
+Name: bg_shock_soundLoopEndDelay
+Flags 0x0005
+Type: Float
+Latched: True
+Value: -1.5
+
+Name: bg_shock_soundLoopFadeTime
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 2
+
+Name: bg_shock_soundLoopSilent
+Flags 0x0005
+Type: String
+Latched: True
+Value: "shellshock_loop_silent"
+
+Name: bg_shock_soundModEndDelay
+Flags 0x0005
+Type: Float
+Latched: True
+Value: -0.75
+
+Name: bg_shock_soundRoomType
+Flags 0x0005
+Type: 
+Latched: True
+Value: ?
+
+Name: bg_shock_soundWetLevel
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_viewKickFadeTime
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.001
+
+Name: bg_shock_viewKickPeriod
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.75
+
+Name: bg_shock_viewKickRadius
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0
+
+Name: bg_shock_volume_aircraft
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.1
+
+Name: bg_shock_volume_alarm
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_ambdist1
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_ambdist2
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_ambient
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.2
+
+Name: bg_shock_volume_announcer
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.9
+
+Name: bg_shock_volume_auto
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_auto2
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_auto2d
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_autodog
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.9
+
+Name: bg_shock_volume_body
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.2
+
+Name: bg_shock_volume_body2d
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.2
+
+Name: bg_shock_volume_bulletflesh1
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_bulletflesh2
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_bulletimpact
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_bulletwhizby
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_critical
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.9
+
+Name: bg_shock_volume_effects1
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_effects2
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_effects2d1
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_effects2d2
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_effects3
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_element
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_element_ext
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_element_int
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_explosion1
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_explosion2
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_explosion3
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_explosion4
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_explosion5
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_explosiondist1
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_explosiondist2
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_explosiveimpact
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_grondo2d
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_grondo3d
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_hurt
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.4
+
+Name: bg_shock_volume_item
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.2
+
+Name: bg_shock_volume_local
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.2
+
+Name: bg_shock_volume_local2
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.2
+
+Name: bg_shock_volume_local3
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.2
+
+Name: bg_shock_volume_menu
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 1
+
+Name: bg_shock_volume_mission
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.9
+
+Name: bg_shock_volume_music
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_musicnopause
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_nonshock
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_nonshock2
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_norestrict
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_norestrict2d
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_physics
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_player1
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.4
+
+Name: bg_shock_volume_player2
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.4
+
+Name: bg_shock_volume_reload
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.2
+
+Name: bg_shock_volume_reload2d
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.2
+
+Name: bg_shock_volume_shellshock
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 1
+
+Name: bg_shock_volume_vehicle
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.1
+
+Name: bg_shock_volume_vehicle2d
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_vehiclelimited
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.1
+
+Name: bg_shock_volume_voice
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.2
+
+Name: bg_shock_volume_weapon
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_weapon2d
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_weapon_dist
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_shock_volume_weapon_mid
+Flags 0x0005
+Type: Float
+Latched: True
+Value: 0.5
+
+Name: bg_swingSpeed
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.2
+
+Name: bg_viewBobAmplitudeBase
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.16
+
+Name: bg_viewBobAmplitudeDucked
+Flags 0x00CC
+Type: Vec2
+Latched: False
+Value: [ 0.0075, 0.0075 ]
+
+Name: bg_viewBobAmplitudeDuckedAds
+Flags 0x00CC
+Type: Vec2
+Latched: False
+Value: [ 0.0075, 0.0075 ]
+
+Name: bg_viewBobAmplitudeProne
+Flags 0x008C
+Type: Vec2
+Latched: False
+Value: [ 0.02, 0.005 ]
+
+Name: bg_viewBobAmplitudeRoll
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 1.5
+
+Name: bg_viewBobAmplitudeSprinting
+Flags 0x008C
+Type: Vec2
+Latched: False
+Value: [ 0.02, 0.014 ]
+
+Name: bg_viewBobAmplitudeStanding
+Flags 0x00CC
+Type: Vec2
+Latched: False
+Value: [ 0.007, 0.007 ]
+
+Name: bg_viewBobAmplitudeStandingAds
+Flags 0x00CC
+Type: Vec2
+Latched: False
+Value: [ 0.007, 0.007 ]
+
+Name: bg_viewBobLag
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 0.25
+
+Name: bg_viewKickMax
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 90
+
+Name: bg_viewKickMin
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 5
+
+Name: bg_viewKickRandom
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 0.4
+
+Name: bg_viewKickScale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.2
+
+Name: bg_weaponBobAmplitudeBase
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.16
+
+Name: bg_weaponBobAmplitudeDucked
+Flags 0x008C
+Type: Vec2
+Latched: False
+Value: [ 0.045, 0.025 ]
+
+Name: bg_weaponBobAmplitudeProne
+Flags 0x008C
+Type: Vec2
+Latched: False
+Value: [ 0.02, 0.005 ]
+
+Name: bg_weaponBobAmplitudeRoll
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 1.5
+
+Name: bg_weaponBobAmplitudeSprinting
+Flags 0x008C
+Type: Vec2
+Latched: False
+Value: [ 0.02, 0.014 ]
+
+Name: bg_weaponBobAmplitudeStanding
+Flags 0x00CC
+Type: Vec2
+Latched: False
+Value: [ 0.055, 0.025 ]
+
+Name: bg_weaponBobLag
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 0.25
+
+Name: bg_weaponBobMax
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 8
+
+Name: bullet_penetrationMinFxDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 30
+
+Name: bullet_ricochetBaseChance
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: camera_thirdPerson
+Flags 0x009C
+Type: Bool
+Latched: False
+Value: False
+
+Name: camera_thirdPersonCrosshairOffset
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.35
+
+Name: camera_thirdPersonOffset
+Flags 0x008C
+Type: Vec3
+Latched: False
+Value: [ -120, 0, 14 ]
+
+Name: camera_thirdPersonOffsetAds
+Flags 0x008C
+Type: Vec3
+Latched: False
+Value: [ -60, -20, 4 ]
+
+Name: camera_thirdPersonOffsetTurretAds
+Flags 0x008C
+Type: Vec3
+Latched: False
+Value: [ -80, 0, 14 ]
+
+Name: cameraShakeRemoteHelo_Angles
+Flags 0x0004
+Type: Vec3
+Latched: False
+Value: [ 0.221, 0.15, 2 ]
+
+Name: cameraShakeRemoteHelo_Freqs
+Flags 0x0004
+Type: Vec3
+Latched: False
+Value: [ 31, 90, 0.5 ]
+
+Name: cameraShakeRemoteHelo_SpeedRange
+Flags 0x0004
+Type: Vec2
+Latched: False
+Value: [ 2000, 5000 ]
+
+Name: cameraShakeRemoteMissile_Angles
+Flags 0x0004
+Type: Vec3
+Latched: False
+Value: [ 0.05, 0.7, 0.07 ]
+
+Name: cameraShakeRemoteMissile_Freqs
+Flags 0x0004
+Type: Vec3
+Latched: False
+Value: [ 42, 0.7, 100 ]
+
+Name: cameraShakeRemoteMissile_SpeedRange
+Flags 0x0004
+Type: Vec2
+Latched: False
+Value: [ 1000, 4000 ]
+
+Name: cg_airstrikeKillCamFarBlur
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 2
+
+Name: cg_airstrikeKillCamFarBlurDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 300
+
+Name: cg_airstrikeKillCamFarBlurStart
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 100
+
+Name: cg_airstrikeKillCamFov
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 50
+
+Name: cg_airstrikeKillCamNearBlur
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 4
+
+Name: cg_airstrikeKillCamNearBlurEnd
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 100
+
+Name: cg_airstrikeKillCamNearBlurStart
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0
+
+Name: cg_blood
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_brass
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_centertime
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 5
+
+Name: cg_chatHeight
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 4
+
+Name: cg_chatTime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 12000
+
+Name: cg_ColorBlind_EnemyTeam
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_ColorBlind_MyParty
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_ColorBlind_MyTeam
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_connectionIconSize
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0
+
+Name: cg_constantSizeHeadIcons
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_crosshairAlpha
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: cg_crosshairAlphaMin
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: cg_crosshairDynamic
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_crosshairEnemyColor
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_crosshairVerticalOffset
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0
+
+Name: cg_cullBulletAngle
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 50
+
+Name: cg_cullBullets
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_cursorHints
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 4
+
+Name: cg_deadChatWithDead
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_deadChatWithTeam
+Flags 0x0004
+Type: Bool
+Latched: True
+Value: True
+
+Name: cg_deadHearAllLiving
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_deadHearTeamLiving
+Flags 0x0004
+Type: Bool
+Latched: True
+Value: True
+
+Name: cg_descriptiveText
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_draw2D
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_drawBreathHint
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_drawCrosshair
+Flags 0x0014
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_drawCrosshairNames
+Flags 0x0014
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_drawCrosshairNamesPosX
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 300
+
+Name: cg_drawCrosshairNamesPosY
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 180
+
+Name: cg_drawDamageDirection
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_drawDamageFlash
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_drawEffectNum
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_drawFPS
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_drawFPSLabels
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_drawFriendlyNames
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_drawGun
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_drawHealth
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_drawMantleHint
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_drawMaterial
+Flags 0x0004
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_drawpaused
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_drawScriptUsage
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_drawSnapshot
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_drawStatsSource
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_drawTalk
+Flags 0x0010
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_drawTurretCrosshair
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_drawViewpos
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_errordecay
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 100
+
+Name: cg_everyoneHearsEveryone
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_explosiveKillCamBackDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 35
+
+Name: cg_explosiveKillCamGroundBackDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 30
+
+Name: cg_explosiveKillCamGroundUpDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 15
+
+Name: cg_explosiveKillCamStopDecelDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 100
+
+Name: cg_explosiveKillCamStopDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 350
+
+Name: cg_explosiveKillCamUpDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 5
+
+Name: cg_explosiveKillCamWallOutDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 10
+
+Name: cg_explosiveKillCamWallSideDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 30
+
+Name: cg_flashbangNameFadeIn
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 1000
+
+Name: cg_flashbangNameFadeOut
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 50
+
+Name: cg_footsteps
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_fov
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 65
+
+Name: cg_fovMin
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1
+
+Name: cg_fovScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1
+
+Name: cg_friendlyNameFadeIn
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 0
+
+Name: cg_friendlyNameFadeOut
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 1500
+
+Name: cg_gameBoldMessageWidth
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 390
+
+Name: cg_gameMessageWidth
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 455
+
+Name: cg_gun_x
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0
+
+Name: cg_gun_y
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0
+
+Name: cg_gun_z
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0
+
+Name: cg_headIconMinScreenRadius
+Flags 0x0000
+Type: Float
+Latched: True
+Value: 0.03
+
+Name: cg_hearKillerTime
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 2000
+
+Name: cg_hearVictimEnabled
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_hearVictimTime
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 2000
+
+Name: cg_heliKillCamFarBlur
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 2
+
+Name: cg_heliKillCamFarBlurDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 300
+
+Name: cg_heliKillCamFarBlurStart
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 100
+
+Name: cg_heliKillCamFov
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 15
+
+Name: cg_heliKillCamNearBlur
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 4
+
+Name: cg_heliKillCamNearBlurEnd
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 100
+
+Name: cg_heliKillCamNearBlurStart
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0
+
+Name: cg_hintFadeTime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 100
+
+Name: cg_hudChatIntermissionPosition
+Flags 0x0000
+Type: Vec2
+Latched: False
+Value: [ 5, 110 ]
+
+Name: cg_hudChatPosition
+Flags 0x0000
+Type: Vec2
+Latched: False
+Value: [ 5, 200 ]
+
+Name: cg_hudDamageIconHeight
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 64
+
+Name: cg_hudDamageIconInScope
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_hudDamageIconOffset
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 128
+
+Name: cg_hudDamageIconTime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 6000
+
+Name: cg_hudDamageIconWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 128
+
+Name: cg_hudGrenadeIconEnabledFlash
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_hudGrenadeIconHeight
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 25
+
+Name: cg_hudGrenadeIconInScope
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_hudGrenadeIconMaxHeight
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 104
+
+Name: cg_hudGrenadeIconMaxRangeFlash
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 500
+
+Name: cg_hudGrenadeIconMaxRangeFrag
+Flags 0x0054
+Type: Float
+Latched: False
+Value: 250
+
+Name: cg_hudGrenadeIconOffset
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 50
+
+Name: cg_hudGrenadeIconWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 25
+
+Name: cg_hudGrenadePointerHeight
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 12
+
+Name: cg_hudGrenadePointerPivot
+Flags 0x0000
+Type: Vec2
+Latched: False
+Value: [ 12, 27 ]
+
+Name: cg_hudGrenadePointerPulseFreq
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1.7
+
+Name: cg_hudGrenadePointerPulseMax
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1.85
+
+Name: cg_hudGrenadePointerPulseMin
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: cg_hudGrenadePointerWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 25
+
+Name: cg_hudLegacySplitscreenScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2
+
+Name: cg_hudMapBorderWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2
+
+Name: cg_hudMapFriendlyHeight
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 15
+
+Name: cg_hudMapFriendlyWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 15
+
+Name: cg_hudMapPlayerHeight
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 20
+
+Name: cg_hudMapPlayerWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 20
+
+Name: cg_hudMapRadarLineThickness
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.15
+
+Name: cg_hudObjectiveTextScale
+Flags 0x0100
+Type: String
+Latched: True
+Value: "0.37"
+
+Name: cg_hudProneY
+Flags 0x0000
+Type: Float
+Latched: False
+Value: -160
+
+Name: cg_hudSayPosition
+Flags 0x0000
+Type: Vec2
+Latched: False
+Value: [ 5, 175 ]
+
+Name: cg_hudSplitscreenBannerScoreboardScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2
+
+Name: cg_hudSplitscreenCompassElementScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1.5
+
+Name: cg_hudSplitscreenCompassScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1.5
+
+Name: cg_hudSplitscreenOffsetsUseScale
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_hudSplitscreenScoreboardScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2
+
+Name: cg_hudSplitscreenStanceScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2
+
+Name: cg_hudStanceFlash
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_hudVotePosition
+Flags 0x0000
+Type: Vec2
+Latched: False
+Value: [ 5, 220 ]
+
+Name: cg_invalidCmdHintBlinkInterval
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 600
+
+Name: cg_invalidCmdHintDuration
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1800
+
+Name: cg_javelinKillCamCloseZDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 128
+
+Name: cg_javelinKillCamDownDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 150
+
+Name: cg_javelinKillCamFov
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 60
+
+Name: cg_javelinKillCamLookLerpDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 3000
+
+Name: cg_javelinKillCamPassDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 50
+
+Name: cg_javelinKillCamPassTime
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 5
+
+Name: cg_javelinKillCamUpDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 200
+
+Name: cg_killCamDefaultLerpTime
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 300
+
+Name: cg_killCamTurretLerpTime
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 900
+
+Name: cg_mapLocationSelectionCursorSpeed
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.6
+
+Name: cg_marks_ents_player_only
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_minCullBulletDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 128
+
+Name: cg_onlineSplitscreenScoreboardWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1000
+
+Name: cg_overheadIconSize
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1.1
+
+Name: cg_overheadNamesFarDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 512
+
+Name: cg_overheadNamesFarScale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.7
+
+Name: cg_overheadNamesFont
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 2
+
+Name: cg_overheadNamesGlow
+Flags 0x0004
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_overheadNamesMaxDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 10000
+
+Name: cg_overheadNamesNearDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 64
+
+Name: cg_overheadNamesSize
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: cg_overheadRankSize
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: cg_overheadTitlesFont
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 2
+
+Name: cg_overheadTitleSize
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: cg_remoteMissileKillCamBackDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 300
+
+Name: cg_remoteMissileKillCamUpDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 60
+
+Name: cg_rocketKillCamBackDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 70
+
+Name: cg_rocketKillCamUpDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 10
+
+Name: cg_scoreboard_externalmute_notice_duration
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 4000
+
+Name: cg_scoreboard_externalmute_notice_fadein
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 100
+
+Name: cg_scoreboard_externalmute_notice_fadeout
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 500
+
+Name: cg_scoreboardBannerHeight
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 35
+
+Name: cg_scoreboardFont
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 3
+
+Name: cg_scoreboardHeaderFontScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: cg_scoreboardHeight
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 435
+
+Name: cg_scoreboardItemHeight
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 18
+
+Name: cg_scoreboardMyColor
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_scoreboardMyPartyColor
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_scoreboardPingGraph
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_scoreboardPingHeight
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.7
+
+Name: cg_scoreboardPingText
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_scoreboardPingWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.036
+
+Name: cg_scoreboardRankFontScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: cg_scoreboardScrollStep
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 3
+
+Name: cg_scoreboardTextOffset
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: cg_scoreboardWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 500
+
+Name: cg_ScoresPing_BgColor
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_ScoresPing_HighColor
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_ScoresPing_Interval
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 100
+
+Name: cg_ScoresPing_LowColor
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_ScoresPing_MaxBars
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 4
+
+Name: cg_ScoresPing_MedColor
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_scriptIconSize
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0
+
+Name: cg_showmiss
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: cg_splitscreenSpectatorScaleIncrease
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: cg_sprintMeterDisabledColor
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 0.8, 0.1, 0.1, 0.2 ]
+
+Name: cg_sprintMeterEmptyColor
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 0.7, 0.5, 0.2, 0.8 ]
+
+Name: cg_sprintMeterFullColor
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 0.8, 0.8, 0.8, 0.8 ]
+
+Name: cg_subtitleMinTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 3
+
+Name: cg_subtitleWidthStandard
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 480
+
+Name: cg_subtitleWidthWidescreen
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 600
+
+Name: cg_teamChatsOnly
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_TeamColor_Allies
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_TeamColor_Axis
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_TeamColor_EnemyTeam
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_TeamColor_Free
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_TeamColor_MyParty
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_TeamColor_MyTeam
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_TeamColor_Spectator
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_thirdPerson
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: cg_thirdPersonAngle
+Flags 0x0014
+Type: Float
+Latched: True
+Value: 356
+
+Name: cg_thirdPersonMode
+Flags 0x0004
+Type: 
+Latched: False
+Value: ?
+
+Name: cg_thirdPersonRange
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 120
+
+Name: cg_thirdPersonSpectator
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_turretKillCamBackDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 10
+
+Name: cg_turretKillCamFov
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 50
+
+Name: cg_turretKillCamUpDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 10
+
+Name: cg_turretRemoteKillCamBackDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 100
+
+Name: cg_turretRemoteKillCamFov
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 50
+
+Name: cg_turretRemoteKillCamUpDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 40
+
+Name: cg_viewVehicleInfluence
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 1
+
+Name: cg_viewZSmoothingMax
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 16
+
+Name: cg_viewZSmoothingMin
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1
+
+Name: cg_viewZSmoothingTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.1
+
+Name: cg_voiceIconSize
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0
+
+Name: cg_waterSheeting_distortionScaleFactor
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 0.021961, 1, 0, 0 ]
+
+Name: cg_waterSheeting_magnitude
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.0655388
+
+Name: cg_waterSheeting_radius
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 4.44051
+
+Name: cg_weapHitCullAngle
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 45
+
+Name: cg_weapHitCullEnable
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: cg_weaponCycleDelay
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: cg_weaponHintsCoD1Style
+Flags 0x0040
+Type: Bool
+Latched: True
+Value: False
+
+Name: cg_weaponVisInterval
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 4
+
+Name: cg_youInKillCamSize
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 6
+
+Name: changeusers0_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: changeusers1_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: changeusers2_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: changeusers3_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: cl_anglespeedkey
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1.5
+
+Name: cl_bypassMouseInput
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: cl_connectionAttempts
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 10
+
+Name: cl_connectTimeout
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 40
+
+Name: cl_deathMessageWidth
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 320
+
+Name: cl_demo_client
+Flags 0x0000
+Type: Int
+Latched: False
+Value: -1
+
+Name: cl_demo_enabled
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: cl_demo_errormessage
+Flags 0x2000
+Type: String
+Latched: False
+Value: ""
+
+Name: cl_demo_errortitle
+Flags 0x2000
+Type: String
+Latched: False
+Value: ""
+
+Name: cl_demo_keyframerate
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 10
+
+Name: cl_demo_pause
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: cl_demo_playercard_display_start_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: cl_demo_recordPrivateMatch
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: cl_demo_render_fps
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 30
+
+Name: cl_demo_render_height
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 720
+
+Name: cl_demo_render_width_wide
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 960
+
+Name: cl_demo_ui_segment_position
+Flags 0x0000
+Type: Int
+Latched: False
+Value: -1
+
+Name: cl_demo_ui_selected_segment
+Flags 0x0000
+Type: Int
+Latched: False
+Value: -1
+
+Name: cl_demo_uploadfb
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: cl_dirSelConvergenceTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.05
+
+Name: cl_freelook
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: cl_hudDrawsBehindUI
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: cl_ingame
+Flags 0x2001
+Type: Bool
+Latched: True
+Value: True
+
+Name: cl_maxpackets
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 30
+
+Name: cl_maxPing
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 800
+
+Name: cl_migrationTimeout
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 40
+
+Name: cl_motdString
+Flags 0x2000
+Type: String
+Latched: False
+Value: ""
+
+Name: cl_mouseAccel
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0
+
+Name: cl_noprint
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: cl_packetdup
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 2
+
+Name: cl_paused
+Flags 0x2000
+Type: Int
+Latched: True
+Value: 0
+
+Name: cl_pitchspeed
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 140
+
+Name: cl_serverStatusResendTime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 750
+
+Name: cl_showmouserate
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: cl_timeout
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 10
+
+Name: cl_yawspeed
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 140
+
+Name: clientSideEffects
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: com_animCheck
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: com_attractmode
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: com_attractmodeduration
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 90
+
+Name: com_cinematicEndInWhite
+Flags 0x0040
+Type: Bool
+Latched: False
+Value: False
+
+Name: com_completionResolveCommand
+Flags 0x2000
+Type: String
+Latched: False
+Value: ""
+
+Name: com_errorMessage
+Flags 0x0100
+Type: String
+Latched: False
+Value: ""
+
+Name: com_errorResolveCommand
+Flags 0x2000
+Type: String
+Latched: False
+Value: ""
+
+Name: com_filter_output
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: com_gameMsgWindow1LineCount
+Flags 0x0100
+Type: String
+Latched: False
+Value: "5"
+
+Name: com_maxfps
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 60
+
+Name: com_maxFrameTime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 100
+
+Name: com_timescale
+Flags 0x204C
+Type: Float
+Latched: False
+Value: 1
+
+Name: compass
+Flags 0x0040
+Type: Bool
+Latched: False
+Value: True
+
+Name: compassClampIcons
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: compassCoords
+Flags 0x0000
+Type: Vec3
+Latched: False
+Value: [ 740, 3590, 400 ]
+
+Name: compassECoordCutoff
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 37
+
+Name: compassFriendlyHeight
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 16
+
+Name: compassFriendlyWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 16
+
+Name: compassHellfireTargetSpot
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: compassHideSansObjectivePointer
+Flags 0x0044
+Type: Bool
+Latched: False
+Value: False
+
+Name: compassHideVehicles
+Flags 0x0044
+Type: Bool
+Latched: False
+Value: False
+
+Name: compassMaxRange
+Flags 0x004C
+Type: Float
+Latched: False
+Value: 2500
+
+Name: compassMinRadius
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.0001
+
+Name: compassMinRange
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.0001
+
+Name: compassObjectiveArrowHeight
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 20
+
+Name: compassObjectiveArrowOffset
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2
+
+Name: compassObjectiveArrowRotateDist
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 5
+
+Name: compassObjectiveArrowWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 20
+
+Name: compassObjectiveDetailDist
+Flags 0x0040
+Type: Float
+Latched: False
+Value: 10
+
+Name: compassObjectiveDrawLines
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: compassObjectiveHeight
+Flags 0x0000
+Type: Float
+Latched: True
+Value: 14
+
+Name: compassObjectiveIconHeight
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 16
+
+Name: compassObjectiveIconWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 16
+
+Name: compassObjectiveMaxHeight
+Flags 0x0040
+Type: Float
+Latched: False
+Value: 70
+
+Name: compassObjectiveMaxRange
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2048
+
+Name: compassObjectiveMinAlpha
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1
+
+Name: compassObjectiveMinDistRange
+Flags 0x0040
+Type: Float
+Latched: False
+Value: 1
+
+Name: compassObjectiveMinHeight
+Flags 0x0040
+Type: Float
+Latched: False
+Value: -70
+
+Name: compassObjectiveNearbyDist
+Flags 0x0040
+Type: Float
+Latched: False
+Value: 4
+
+Name: compassObjectiveNumRings
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 10
+
+Name: compassObjectiveRingSize
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 80
+
+Name: compassObjectiveRingTime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 10000
+
+Name: compassObjectiveTextHeight
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 18
+
+Name: compassObjectiveTextScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: compassObjectiveWidth
+Flags 0x0000
+Type: Float
+Latched: True
+Value: 14
+
+Name: compassPlayerHeight
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 18.75
+
+Name: compassPlayerWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 18.75
+
+Name: compassPortableRadarMinVelocity
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0
+
+Name: compassPortableRadarRadius
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 850
+
+Name: compassPortableRadarSweepTime
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 2000
+
+Name: compassRadarLineThickness
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.4
+
+Name: compassRadarPingFadeTime
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 4
+
+Name: compassRotation
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: compassSize
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1
+
+Name: compassSoundPingFadeTime
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 2
+
+Name: compassTickertapeStretch
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: con_gameMsgWindow0FadeInTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.25
+
+Name: con_gameMsgWindow0FadeOutTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: con_gameMsgWindow0Filter
+Flags 0x0002
+Type: String
+Latched: False
+Value: "gamenotify obituary"
+
+Name: con_gameMsgWindow0LineCount
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 4
+
+Name: con_gameMsgWindow0MsgTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 5
+
+Name: con_gameMsgWindow0ScrollTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.25
+
+Name: con_gameMsgWindow0SplitscreenScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1.5
+
+Name: con_gameMsgWindow1FadeInTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.25
+
+Name: con_gameMsgWindow1FadeOutTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: con_gameMsgWindow1Filter
+Flags 0x0002
+Type: String
+Latched: False
+Value: "boldgame"
+
+Name: con_gameMsgWindow1LineCount
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1
+
+Name: con_gameMsgWindow1MsgTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 3
+
+Name: con_gameMsgWindow1ScrollTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.25
+
+Name: con_gameMsgWindow1SplitscreenScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1.5
+
+Name: con_gameMsgWindow2FadeInTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.75
+
+Name: con_gameMsgWindow2FadeOutTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: con_gameMsgWindow2Filter
+Flags 0x0002
+Type: String
+Latched: False
+Value: "subtitle"
+
+Name: con_gameMsgWindow2LineCount
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 7
+
+Name: con_gameMsgWindow2MsgTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 5
+
+Name: con_gameMsgWindow2ScrollTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.25
+
+Name: con_gameMsgWindow2SplitscreenScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1.5
+
+Name: con_gameMsgWindow3FadeInTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.25
+
+Name: con_gameMsgWindow3FadeOutTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: con_gameMsgWindow3Filter
+Flags 0x0002
+Type: String
+Latched: False
+Value: ""
+
+Name: con_gameMsgWindow3LineCount
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 5
+
+Name: con_gameMsgWindow3MsgTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 5
+
+Name: con_gameMsgWindow3ScrollTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.25
+
+Name: con_gameMsgWindow3SplitscreenScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1.5
+
+Name: con_matchPrefixOnly
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: con_typewriterColorBase
+Flags 0x0040
+Type: Vec3
+Latched: False
+Value: [ 1, 1, 1 ]
+
+Name: con_typewriterColorGlowCheckpoint
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 0.6, 0.5, 0.6, 1 ]
+
+Name: con_typewriterColorGlowCompleted
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 0, 0.3, 0.8, 1 ]
+
+Name: con_typewriterColorGlowFailed
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 0.8, 0, 0, 1 ]
+
+Name: con_typewriterColorGlowUpdated
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 0, 0.6, 0.18, 1 ]
+
+Name: con_typewriterDecayDuration
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 700
+
+Name: con_typewriterDecayStartTime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 6000
+
+Name: con_typewriterPrintSpeed
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 50
+
+Name: consoleGame
+Flags 0x2000
+Type: String
+Latched: False
+Value: "true"
+
+Name: consoleLBFetchInterval
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 10
+
+Name: counterDownloadInterval
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 15
+
+Name: counterUploadInterval
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 15
+
+Name: dcacheSimulateNoHDD
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: dcacheThrottleEnabled
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: dcacheThrottleKBytesPerSec
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 32
+
+Name: demonwareConsideredConnectedTime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 5000
+
+Name: developer
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: didyouknow
+Flags 0x0100
+Type: String
+Latched: False
+Value: "@PLATFORM_DYK_IW5_MSG33"
+
+Name: drawEntityCount
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: drawEntityCountPos
+Flags 0x0000
+Type: Vec2
+Latched: False
+Value: [ -55, -180 ]
+
+Name: drawEntityCountSize
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 32
+
+Name: drawKillcamData
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: drawKillcamDataPos
+Flags 0x0000
+Type: Vec2
+Latched: False
+Value: [ -55, -340 ]
+
+Name: drawKillcamDataSize
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 32
+
+Name: drawLagometer
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: drawServerBandwidth
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: drawServerBandwidthPos
+Flags 0x0000
+Type: Vec2
+Latched: False
+Value: [ -55, -340 ]
+
+Name: dw_leaderboard_write_active
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1
+
+Name: dw_logging_frequency
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1
+
+Name: dw_logging_level
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: dw_logging_level_chance
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0
+
+Name: dw_presence_active
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: dw_presence_coop_join_active
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1
+
+Name: dw_presence_get_delay
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 5000
+
+Name: dw_presence_get_rate
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 60000
+
+Name: dw_presence_put_delay
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 5000
+
+Name: dw_presence_put_rate
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 15000
+
+Name: dynEnt_bulletForce
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1000
+
+Name: dynEnt_damageScale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: dynEnt_explodeForce
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 12500
+
+Name: dynEnt_explodeMaxEnts
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 20
+
+Name: dynEnt_explodeMinForce
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 40
+
+Name: dynEnt_explodeSpinScale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 3
+
+Name: dynEnt_explodeUpbias
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: dynEnt_explodingBulletForce
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 3500
+
+Name: dynEnt_explodingBulletMaxEnts
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 5
+
+Name: dynEnt_explodingBulletMinForce
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 5
+
+Name: dynEnt_explodingBulletSpinScale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: dynEnt_explodingBulletUpbias
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: elite_clan_active
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: elite_clan_cool_off_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 60000
+
+Name: elite_clan_delay
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: elite_clan_get_clan_max_retry_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 30000
+
+Name: elite_clan_get_clan_retry_step
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: elite_clan_get_members_max_retry_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 30000
+
+Name: elite_clan_get_members_retry_step
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: elite_clan_get_private_profile_max_retry_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 30000
+
+Name: elite_clan_get_private_profile_retry_step
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: elite_clan_get_public_profile_max_retry_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 30000
+
+Name: elite_clan_get_public_profile_retry_step
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: elite_clan_motd_throttle_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 2000
+
+Name: elite_clan_using_title
+Flags 0x2000
+Type: Bool
+Latched: False
+Value: False
+
+Name: entitlements_active
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: entitlements_config_file_max_retry_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 30000
+
+Name: entitlements_config_file_retry_step
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: entitlements_cool_off_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 60000
+
+Name: entitlements_delay
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 500
+
+Name: entitlements_key_archive_max_retry_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 30000
+
+Name: entitlements_key_archive_retry_step
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: entitlementSystemOk
+Flags 0x2000
+Type: Bool
+Latched: False
+Value: False
+
+Name: facebook_active
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: facebook_delay
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 750
+
+Name: facebook_friends_active
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: facebook_friends_max_retry_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 30000
+
+Name: facebook_friends_refresh_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 660
+
+Name: facebook_friends_retry_step
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: facebook_friends_showing_count
+Flags 0x2000
+Type: Int
+Latched: False
+Value: 0
+
+Name: facebook_friends_throttle_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: facebook_max_retry_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 30000
+
+Name: facebook_password
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: facebook_password_asterisk
+Flags 0x2000
+Type: String
+Latched: False
+Value: ""
+
+Name: facebook_popup_text
+Flags 0x2000
+Type: String
+Latched: False
+Value: ""
+
+Name: facebook_posting_popup_text
+Flags 0x2000
+Type: String
+Latched: False
+Value: ""
+
+Name: facebook_retry_step
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: facebook_upload_photo_active
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: facebook_upload_video_active
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: facebook_username
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: fixedtime
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 0
+
+Name: FoFIconMaxSize
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 640
+
+Name: FoFIconMinSize
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 30
+
+Name: FoFIconScale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1.3
+
+Name: FoFIconSpawnTimeDelay
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: FoFIconSpawnTimeFade
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 5
+
+Name: fx_alphaThreshold
+Flags 0x0044
+Type: Int
+Latched: False
+Value: 0
+
+Name: fx_count
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: fx_cull_elem_draw
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: fx_cull_elem_spawn
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: fx_debugBolt
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0
+
+Name: fx_deferelem
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: fx_draw
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: fx_draw_omniLight
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: fx_draw_simd
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: fx_draw_spotLight
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: fx_drawClouds
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: fx_enable
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: fx_freeze
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: fx_killEffectOnRewind
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: fx_mark_profile
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 0
+
+Name: fx_marks
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: fx_marks_ents
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: fx_marks_smodels
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: fx_profile
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 0
+
+Name: fx_profileFilter
+Flags 0x0004
+Type: String
+Latched: False
+Value: ""
+
+Name: fx_profileSkip
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 0
+
+Name: fx_profileSort
+Flags 0x0004
+Type: 
+Latched: False
+Value: ?
+
+Name: fx_visMinTraceDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 80
+
+Name: g_allowvote
+Flags 0x0080
+Type: Bool
+Latched: False
+Value: True
+
+Name: g_banIPs
+Flags 0x0080
+Type: String
+Latched: False
+Value: ""
+
+Name: g_clonePlayerMaxVelocity
+Flags 0x0080
+Type: Float
+Latched: False
+Value: 80
+
+Name: g_compassShowEnemies
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: g_deadChat
+Flags 0x0080
+Type: Bool
+Latched: True
+Value: True
+
+Name: g_dropForwardSpeed
+Flags 0x0080
+Type: Float
+Latched: False
+Value: 10
+
+Name: g_dropHorzSpeedRand
+Flags 0x0080
+Type: Float
+Latched: False
+Value: 100
+
+Name: g_dropUpSpeedBase
+Flags 0x0080
+Type: Float
+Latched: False
+Value: 10
+
+Name: g_dropUpSpeedRand
+Flags 0x0080
+Type: Float
+Latched: False
+Value: 5
+
+Name: g_earthquakeEnable
+Flags 0x0084
+Type: Bool
+Latched: False
+Value: True
+
+Name: g_fogColorReadOnly
+Flags 0x2044
+Type: 
+Latched: False
+Value: ?
+
+Name: g_fogHalfDistReadOnly
+Flags 0x2044
+Type: Float
+Latched: False
+Value: 0.1
+
+Name: g_fogMaxOpacityReadOnly
+Flags 0x2044
+Type: Float
+Latched: False
+Value: 1
+
+Name: g_fogStartDistReadOnly
+Flags 0x2044
+Type: Float
+Latched: False
+Value: 0
+
+Name: g_friendlyfireDist
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 256
+
+Name: g_friendlyNameDist
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 15000
+
+Name: g_gametype
+Flags 0x0482
+Type: String
+Latched: False
+Value: "war"
+
+Name: g_giveAll
+Flags 0x2084
+Type: Bool
+Latched: False
+Value: False
+
+Name: g_hardcore
+Flags 0x0480
+Type: Bool
+Latched: False
+Value: False
+
+Name: g_inactivity
+Flags 0x0080
+Type: Int
+Latched: False
+Value: 0
+
+Name: g_knockback
+Flags 0x0080
+Type: Float
+Latched: False
+Value: 1000
+
+Name: g_listEntity
+Flags 0x0080
+Type: Bool
+Latched: False
+Value: False
+
+Name: g_mantleBlockTimeBuffer
+Flags 0x0084
+Type: Int
+Latched: False
+Value: 500
+
+Name: g_maxDroppedWeapons
+Flags 0x0080
+Type: Int
+Latched: False
+Value: 16
+
+Name: g_minGrenadeDamageSpeed
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 400
+
+Name: g_motd
+Flags 0x0080
+Type: String
+Latched: False
+Value: ""
+
+Name: g_password
+Flags 0x0080
+Type: String
+Latched: False
+Value: ""
+
+Name: g_playerCollisionEjectSpeed
+Flags 0x0080
+Type: Int
+Latched: False
+Value: 25
+
+Name: g_radiusDamageMax
+Flags 0x0080
+Type: Float
+Latched: False
+Value: 256
+
+Name: g_redCrosshairs
+Flags 0x0082
+Type: Bool
+Latched: False
+Value: True
+
+Name: g_ScoresColor_Allies
+Flags 0x0088
+Type: 
+Latched: True
+Value: ?
+
+Name: g_ScoresColor_Axis
+Flags 0x0088
+Type: 
+Latched: True
+Value: ?
+
+Name: g_ScoresColor_EnemyTeam
+Flags 0x0088
+Type: 
+Latched: False
+Value: ?
+
+Name: g_ScoresColor_Free
+Flags 0x0088
+Type: 
+Latched: True
+Value: ?
+
+Name: g_ScoresColor_MyParty
+Flags 0x0088
+Type: 
+Latched: False
+Value: ?
+
+Name: g_ScoresColor_MyTeam
+Flags 0x0088
+Type: 
+Latched: False
+Value: ?
+
+Name: g_ScoresColor_Spectator
+Flags 0x0088
+Type: 
+Latched: True
+Value: ?
+
+Name: g_sunFogBeginFadeAngleReadOnly
+Flags 0x2044
+Type: Float
+Latched: False
+Value: 0
+
+Name: g_sunFogColorReadOnly
+Flags 0x2044
+Type: 
+Latched: False
+Value: ?
+
+Name: g_sunFogDirReadOnly
+Flags 0x2044
+Type: Vec3
+Latched: False
+Value: [ 1, 0, 0 ]
+
+Name: g_sunFogEnabledReadOnly
+Flags 0x2044
+Type: Bool
+Latched: False
+Value: False
+
+Name: g_sunFogEndFadeAngleReadOnly
+Flags 0x2044
+Type: Float
+Latched: False
+Value: 180
+
+Name: g_sunFogScaleReadOnly
+Flags 0x2044
+Type: Float
+Latched: False
+Value: 1
+
+Name: g_TeamIcon_Allies
+Flags 0x0088
+Type: String
+Latched: True
+Value: "faction_128_pmc"
+
+Name: g_TeamIcon_Axis
+Flags 0x0088
+Type: String
+Latched: True
+Value: "faction_128_af"
+
+Name: g_TeamIcon_EnemyAllies
+Flags 0x0088
+Type: String
+Latched: True
+Value: "faction_128_pmc"
+
+Name: g_TeamIcon_EnemyAxis
+Flags 0x0088
+Type: String
+Latched: True
+Value: "faction_128_af"
+
+Name: g_TeamIcon_Free
+Flags 0x0088
+Type: String
+Latched: False
+Value: ""
+
+Name: g_TeamIcon_MyAllies
+Flags 0x0088
+Type: String
+Latched: True
+Value: "faction_128_pmc"
+
+Name: g_TeamIcon_MyAxis
+Flags 0x0088
+Type: String
+Latched: True
+Value: "faction_128_af"
+
+Name: g_TeamIcon_Spectator
+Flags 0x0088
+Type: String
+Latched: False
+Value: ""
+
+Name: g_TeamName_Allies
+Flags 0x0088
+Type: String
+Latched: True
+Value: "MP_PMC_SHORT_NAME"
+
+Name: g_TeamName_Axis
+Flags 0x0088
+Type: String
+Latched: True
+Value: "MP_AFRICA_MILITIA_NAME"
+
+Name: g_TeamTitleColor_EnemyTeam
+Flags 0x0088
+Type: 
+Latched: True
+Value: ?
+
+Name: g_TeamTitleColor_MyTeam
+Flags 0x0088
+Type: 
+Latched: True
+Value: ?
+
+Name: g_TeamTitleColor_Spectator
+Flags 0x0088
+Type: 
+Latched: False
+Value: ?
+
+Name: g_useholdspawndelay
+Flags 0x0084
+Type: Int
+Latched: False
+Value: 1
+
+Name: g_useholdtime
+Flags 0x0080
+Type: Int
+Latched: False
+Value: 250
+
+Name: g_voiceChatTalkingDuration
+Flags 0x0080
+Type: Int
+Latched: False
+Value: 500
+
+Name: gameMode
+Flags 0x2080
+Type: 
+Latched: False
+Value: ?
+
+Name: glass_angular_vel
+Flags 0x0000
+Type: Vec2
+Latched: False
+Value: [ 5, 35 ]
+
+Name: glass_break
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: glass_damageToDestroy
+Flags 0x0044
+Type: Int
+Latched: False
+Value: 100
+
+Name: glass_damageToWeaken
+Flags 0x0044
+Type: Int
+Latched: False
+Value: 25
+
+Name: glass_edge_angle
+Flags 0x0000
+Type: Vec2
+Latched: False
+Value: [ 5, 10 ]
+
+Name: glass_fall_delay
+Flags 0x0000
+Type: Vec2
+Latched: False
+Value: [ 0.2, 0.9 ]
+
+Name: glass_fall_gravity
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 800
+
+Name: glass_fall_ratio
+Flags 0x0000
+Type: Vec2
+Latched: False
+Value: [ 1.5, 3 ]
+
+Name: glass_fringe_maxcoverage
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.2
+
+Name: glass_fringe_maxsize
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 150
+
+Name: glass_fx_chance
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.25
+
+Name: glass_hinge_friction
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 50
+
+Name: glass_linear_vel
+Flags 0x0000
+Type: Vec2
+Latched: False
+Value: [ 200, 400 ]
+
+Name: glass_max_pieces_per_frame
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 100
+
+Name: glass_max_shatter_fx_per_frame
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 6
+
+Name: glass_meleeDamage
+Flags 0x0044
+Type: Int
+Latched: False
+Value: 1000
+
+Name: glass_physics_chance
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.15
+
+Name: glass_physics_maxdist
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 512
+
+Name: glass_radiusDamageMultiplier
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 4
+
+Name: glass_shard_maxsize
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 300
+
+Name: glass_shattered_scale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 48
+
+Name: glass_trace_interval
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 100
+
+Name: gpad_button_deadzone
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.13
+
+Name: gpad_button_lstick_deflect_max
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1.0"
+
+Name: gpad_button_rstick_deflect_max
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1.0"
+
+Name: gpad_dpadDebounceTime
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 0
+
+Name: gpad_menu_scroll_delay_first
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 420
+
+Name: gpad_menu_scroll_delay_rest
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 210
+
+Name: gpad_stick_deadzone_max
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.01
+
+Name: gpad_stick_deadzone_min
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.2
+
+Name: gpad_stick_pressed
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.4
+
+Name: gpad_stick_pressed_hysteresis
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.1
+
+Name: grenadeBounceRestitutionMax
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: grenadeBumpFreq
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: grenadeBumpMag
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0.4
+
+Name: grenadeBumpMax
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 100
+
+Name: grenadeCurveMax
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 4
+
+Name: grenadeFrictionHigh
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0.4
+
+Name: grenadeFrictionLow
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0.01
+
+Name: grenadeFrictionMaxThresh
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 100
+
+Name: grenadeRestThreshold
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 20
+
+Name: grenadeRollingEnabled
+Flags 0x00C4
+Type: Bool
+Latched: False
+Value: True
+
+Name: grenadeWobbleFreq
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0.08
+
+Name: grenadeWobbleFwdMag
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 10
+
+Name: grenadeWobbleSideDamp
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0.01
+
+Name: grenadeWobbleSideMag
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 1
+
+Name: groupDownloadInterval
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 900
+
+Name: groupUploadInterval
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 300
+
+Name: heli_barrelMaxVelocity
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1250
+
+Name: heli_barrelRotation
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 70
+
+Name: heli_barrelSlowdown
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 360
+
+Name: hiDef
+Flags 0x2000
+Type: Bool
+Latched: True
+Value: False
+
+Name: hud_bloodOverlayLerpRate
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: hud_deathQuoteFadeTime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: hud_fade_ammodisplay
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0
+
+Name: hud_fade_compass
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0
+
+Name: hud_fade_healthbar
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2
+
+Name: hud_fade_offhand
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0
+
+Name: hud_fade_sprint
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1.7
+
+Name: hud_flash_period_offhand
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: hud_flash_time_offhand
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2
+
+Name: hud_health_pulserate_critical
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: hud_health_pulserate_injured
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1
+
+Name: hud_health_startpulse_critical
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.33
+
+Name: hud_health_startpulse_injured
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1
+
+Name: hudElemPausedBrightness
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.4
+
+Name: intro
+Flags 0x0000
+Type: Bool
+Latched: True
+Value: False
+
+Name: iwnet_sessionFullHeartbeat
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 20000
+
+Name: iwnet_sessionHeartbeat
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 5000
+
+Name: joingame0_vis
+Flags 0x0100
+Type: String
+Latched: True
+Value: "0"
+
+Name: joingame1_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: joingame2_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: joingame3_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: koth_autodestroytime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "60"
+
+Name: koth_capturetime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "20"
+
+Name: koth_delayPlayer
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: koth_destroytime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "10"
+
+Name: koth_extraDelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: koth_kothmode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: koth_proMode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: koth_spawnDelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "60"
+
+Name: koth_spawntime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "30"
+
+Name: laserDebug
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: laserEndOffset
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: laserFlarePct
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 0.2
+
+Name: laserFlarePct_alt
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 0
+
+Name: laserLight
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: laserLightBeginOffset
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 13
+
+Name: laserLightBodyTweak
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 15
+
+Name: laserLightEndOffset
+Flags 0x0044
+Type: Float
+Latched: False
+Value: -3
+
+Name: laserLightRadius
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 3
+
+Name: laserLightRadius_alt
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 100
+
+Name: laserLightWithoutNightvision
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: laserRadius
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 0.8
+
+Name: laserRadius_alt
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 30
+
+Name: laserRange
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 1500
+
+Name: laserRange_alt
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 5000
+
+Name: laserRangePlayer
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 1500
+
+Name: lb_filter
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: lb_maxrows
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 50
+
+Name: lb_minrefresh
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 0
+
+Name: lb_readDelay
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 1
+
+Name: leavegame0_vis
+Flags 0x0100
+Type: String
+Latched: True
+Value: "1"
+
+Name: leavegame1_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: leavegame2_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: leavegame3_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: live_qosec_firstupdatems
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: live_qosec_lastupdatems
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 250
+
+Name: live_qosec_maxtime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 4000
+
+Name: live_qosec_minpercent
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 25
+
+Name: live_qosec_minprobes
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1
+
+Name: liveanticheatunknowndvar
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: loading_sre_fatal
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: lobby_animationSpeed
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 30
+
+Name: lobby_animationTilesHigh
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 4
+
+Name: lobby_animationTilesWide
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 8
+
+Name: lobby_numAnimationFrames
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 30
+
+Name: lobby_searchingPartyColor
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: loc_forceEnglish
+Flags 0x0002
+Type: Bool
+Latched: False
+Value: False
+
+Name: loc_language
+Flags 0x0002
+Type: Int
+Latched: False
+Value: 0
+
+Name: loc_translate
+Flags 0x0002
+Type: Bool
+Latched: False
+Value: True
+
+Name: lowAmmoWarningColor1
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: lowAmmoWarningColor2
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: lowAmmoWarningNoAmmoColor1
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: lowAmmoWarningNoAmmoColor2
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: lowAmmoWarningNoReloadColor1
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: lowAmmoWarningNoReloadColor2
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: lowAmmoWarningPulseFreq
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2.3
+
+Name: lowAmmoWarningPulseMax
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1.5
+
+Name: lowAmmoWarningPulseMin
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0
+
+Name: lsp_debug
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: m_filter
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: m_forward
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.25
+
+Name: m_pitch
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.022
+
+Name: m_side
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.25
+
+Name: m_yaw
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.022
+
+Name: mantle_check_radius
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 0.1
+
+Name: mantle_max_vertical_end_velocity
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 0
+
+Name: mantle_view_yawcap
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 60
+
+Name: mapname
+Flags 0x2400
+Type: String
+Latched: True
+Value: "mp_mogadishu"
+
+Name: matchdata_active
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1
+
+Name: matchmaking_debug
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: melee_debug
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: migration_dvarErrors
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: missileExplosionLiftDistance
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 32
+
+Name: missileGlassShatterVel
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 600
+
+Name: missileHellfireMaxSlope
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: missileHellfireUpAccel
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 1000
+
+Name: missileJavAccelClimb
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 300
+
+Name: missileJavAccelDescend
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 4500
+
+Name: missileJavClimbAngleDirect
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 85
+
+Name: missileJavClimbAngleTop
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 50
+
+Name: missileJavClimbCeilingDirect
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0
+
+Name: missileJavClimbCeilingTop
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 3000
+
+Name: missileJavClimbHeightDirect
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 10000
+
+Name: missileJavClimbHeightTop
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 15000
+
+Name: missileJavClimbToOwner
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 700
+
+Name: missileJavDuds
+Flags 0x0084
+Type: Bool
+Latched: False
+Value: False
+
+Name: missileJavSpeedLimitClimb
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 1000
+
+Name: missileJavSpeedLimitDescend
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 2500
+
+Name: missileJavTurnDecel
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0.05
+
+Name: missileJavTurnRateDirect
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 60
+
+Name: missileJavTurnRateTop
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 100
+
+Name: missileMacross
+Flags 0x0084
+Type: Bool
+Latched: False
+Value: False
+
+Name: missileRemoteFOV
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 15
+
+Name: missileRemoteSpeedDown
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 500
+
+Name: missileRemoteSpeedTargetRange
+Flags 0x00C4
+Type: Vec2
+Latched: False
+Value: [ 3000, 6000 ]
+
+Name: missileRemoteSpeedUp
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 2000
+
+Name: missileRemoteSteerPitchRange
+Flags 0x00C4
+Type: Vec2
+Latched: False
+Value: [ 1, 87 ]
+
+Name: missileRemoteSteerPitchRate
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 15
+
+Name: missileRemoteSteerYawRate
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 20
+
+Name: missileWaterMaxDepth
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 60
+
+Name: monkeytoy
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: motd
+Flags 0x0000
+Type: String
+Latched: False
+Value: "Connect to Xbox LIVE to get Modern Warfare 3 news and updates"
+
+Name: motionTrackerBlurDuration
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.2
+
+Name: motionTrackerCenterX
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0
+
+Name: motionTrackerCenterY
+Flags 0x0000
+Type: Float
+Latched: False
+Value: -0.37
+
+Name: motionTrackerPingFadeTime
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 3
+
+Name: motionTrackerPingPitchAddPerEnemy
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0
+
+Name: motionTrackerPingPitchBase
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1
+
+Name: motionTrackerPingPitchNearby
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2
+
+Name: motionTrackerPingSize
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.2
+
+Name: motionTrackerSweepSpeed
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 2000
+
+Name: name
+Flags 0x0200
+Type: String
+Latched: False
+Value: "Unknown Soldier"
+
+Name: net_ip
+Flags 0x0002
+Type: String
+Latched: False
+Value: "localhost"
+
+Name: net_port
+Flags 0x0002
+Type: Int
+Latched: False
+Value: 1000
+
+Name: newsFeed_updateInterval
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 600
+
+Name: nextmap
+Flags 0x0000
+Type: String
+Latched: True
+Value: "map_restart"
+
+Name: nightVisionDisableEffects
+Flags 0x0040
+Type: Bool
+Latched: False
+Value: False
+
+Name: nightVisionFadeInOutTime
+Flags 0x0040
+Type: Float
+Latched: False
+Value: 0.1
+
+Name: nightVisionPowerOnTime
+Flags 0x0040
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: objectiveFontSize
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 0.6
+
+Name: objectiveTextOffsetY
+Flags 0x0004
+Type: Float
+Latched: False
+Value: -5.33
+
+Name: onlinegame
+Flags 0x0080
+Type: Bool
+Latched: False
+Value: False
+
+Name: onlinevault_active
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: onlinevault_maxslots_sub0
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: onlinevault_maxslots_sub1
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: onlinevault_maxslots_sub2
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: overrideNVGModelWithKnife
+Flags 0x0040
+Type: Bool
+Latched: False
+Value: False
+
+Name: painReverbDryLevel
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: painReverbRoomType
+Flags 0x0004
+Type: 
+Latched: False
+Value: ?
+
+Name: painReverbWetLevel
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.4
+
+Name: painVisionLerpOutRate
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: painVisionTriggerHealth
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.55
+
+Name: party_alternateMapVoteStatus
+Flags 0x0001
+Type: String
+Latched: False
+Value: ""
+
+Name: party_firstSubpartyIndex
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: party_followPartyHostOutOfGames
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: party_gamesize
+Flags 0x2000
+Type: String
+Latched: False
+Value: ""
+
+Name: party_gametype
+Flags 0x2000
+Type: String
+Latched: False
+Value: ""
+
+Name: party_IsLocalClientSelected
+Flags 0x2000
+Type: Bool
+Latched: False
+Value: False
+
+Name: party_kickplayerquestion
+Flags 0x2000
+Type: String
+Latched: False
+Value: ""
+
+Name: party_lobbyPlayerCount
+Flags 0x2000
+Type: String
+Latched: False
+Value: ""
+
+Name: party_mapname
+Flags 0x2000
+Type: String
+Latched: False
+Value: ""
+
+Name: party_mapvote_entrya_mapname
+Flags 0x2000
+Type: String
+Latched: False
+Value: ""
+
+Name: party_mapvote_entryb_mapname
+Flags 0x2000
+Type: String
+Latched: False
+Value: ""
+
+Name: party_matchedPlayerCount
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 4
+
+Name: party_maxplayers
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 16
+
+Name: party_maxPrivatePartyPlayers
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 18
+
+Name: party_maxTeamDiff
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1
+
+Name: party_membersMissingMapPack
+Flags 0x2000
+Type: Bool
+Latched: False
+Value: False
+
+Name: party_minLobbyTime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 60
+
+Name: party_minplayers
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 2
+
+Name: party_nextMapVoteStatus
+Flags 0x0001
+Type: String
+Latched: False
+Value: ""
+
+Name: party_partyPlayerCount
+Flags 0x2000
+Type: String
+Latched: False
+Value: ""
+
+Name: party_playervisible
+Flags 0x2000
+Type: Bool
+Latched: False
+Value: False
+
+Name: party_selectedIndex
+Flags 0x2000
+Type: Int
+Latched: False
+Value: 0
+
+Name: party_selectedIndexChangedTime
+Flags 0x2000
+Type: Int
+Latched: False
+Value: 0
+
+Name: party_statusString
+Flags 0x0001
+Type: String
+Latched: False
+Value: ""
+
+Name: party_teambased
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: party_teamsVisible
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: party_timer
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: partyChatDisallowed
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: partyChatDisconnectTimer
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 2000
+
+Name: partymigrate_broadcast_interval
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 200
+
+Name: partymigrate_makeHostTimeout
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 2000
+
+Name: partymigrate_selectiontime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1200
+
+Name: partymigrate_timeout
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 8000
+
+Name: partymigrate_timeoutmax
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 15000
+
+Name: password
+Flags 0x0200
+Type: String
+Latched: False
+Value: ""
+
+Name: past_title_data_active
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: past_title_data_read_failure_interval_hours
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 24
+
+Name: past_title_data_read_success_interval_hours
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 72
+
+Name: perk_armorPiercingDamage
+Flags 0x0100
+Type: String
+Latched: False
+Value: "40"
+
+Name: perk_blastShield
+Flags 0x0100
+Type: String
+Latched: False
+Value: "65"
+
+Name: perk_bulletPenetrationMultiplier
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 2
+
+Name: perk_diveDistanceCheck
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 64
+
+Name: perk_diveGravityScale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.75
+
+Name: perk_diveVelocity
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 250
+
+Name: perk_diveViewRollResetSpeed
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 4
+
+Name: perk_diveViewRollSpeed
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: perk_diveViewRollTarget
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 45
+
+Name: perk_extendedMagsMGAmmo
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 10
+
+Name: perk_extendedMagsPistolAmmo
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 5
+
+Name: perk_extendedMagsRifleAmmo
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 10
+
+Name: perk_extendedMagsSMGAmmo
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 10
+
+Name: perk_extendedMagsSpreadAmmo
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 5
+
+Name: perk_extraBreath
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 5
+
+Name: perk_fastSnipeScale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 2
+
+Name: perk_footstepVolumeAlly
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.25
+
+Name: perk_footstepVolumeEnemy
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 4
+
+Name: perk_footstepVolumePlayer
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.25
+
+Name: perk_grenadeDeath
+Flags 0x0004
+Type: String
+Latched: False
+Value: "frag_grenade_short_mp"
+
+Name: perk_improvedExtraBreath
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 5
+
+Name: perk_lightWeightViewBobScale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.75
+
+Name: perk_parabolicAngle
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 180
+
+Name: perk_parabolicIcon
+Flags 0x0004
+Type: String
+Latched: False
+Value: "specialty_parabolic"
+
+Name: perk_parabolicRadius
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 400
+
+Name: perk_quickDrawSpeedScale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1.5
+
+Name: perk_scavengerMode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: perk_sprintMultiplier
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 2
+
+Name: perk_sprintRecoveryMultiplierActual
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.6
+
+Name: perk_sprintRecoveryMultiplierVisual
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.6
+
+Name: perk_weapRateMultiplier
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.75
+
+Name: perk_weapReloadMultiplier
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: perk_weapSpreadMultiplier
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.65
+
+Name: phys_autoDisableAngular
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 57
+
+Name: phys_autoDisableFastAngular
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 270
+
+Name: phys_autoDisableFastLinear
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 40
+
+Name: phys_autoDisableFastTime
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: phys_autoDisableLinear
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 20
+
+Name: phys_autoDisableTime
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.9
+
+Name: phys_bulletSpinScale
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 3
+
+Name: phys_bulletUpBias
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: phys_cfm
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.0001
+
+Name: phys_collUseEntities
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: phys_contact_cfm
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1E-05
+
+Name: phys_contact_cfm_ragdoll
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.001
+
+Name: phys_contact_cfm_vehicle
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.001
+
+Name: phys_contact_cfm_vehicleSoft
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.05
+
+Name: phys_contact_erp
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.8
+
+Name: phys_contact_erp_ragdoll
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: phys_contact_erp_vehicle
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: phys_contact_erp_vehicleSoft
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.05
+
+Name: phys_csl
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: phys_dragAngular
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: phys_dragLinear
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.03
+
+Name: phys_erp
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.8
+
+Name: phys_frictionScale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: phys_gravity
+Flags 0x0004
+Type: Float
+Latched: False
+Value: -800
+
+Name: phys_gravity_ragdoll
+Flags 0x0004
+Type: Float
+Latched: False
+Value: -800
+
+Name: phys_gravityChangeWakeupRadius
+Flags 0x0040
+Type: Float
+Latched: False
+Value: 120
+
+Name: phys_jitterMaxMass
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 200
+
+Name: phys_joint_cfm
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.0001
+
+Name: phys_joint_stop_cfm
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.0001
+
+Name: phys_joint_stop_erp
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.8
+
+Name: phys_jointPullThreshold
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 4
+
+Name: phys_mcv
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 20
+
+Name: phys_mcv_ragdoll
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1000
+
+Name: phys_mcv_vehicle
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 300
+
+Name: phys_noIslands
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: phys_qsi
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 15
+
+Name: phys_reorderConst
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: phys_worker_cmds
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: physVeh_collideWithClipOnly
+Flags 0x0044
+Type: Bool
+Latched: False
+Value: False
+
+Name: physVeh_explodeForce
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 800
+
+Name: physVeh_explodeSpinScale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 3
+
+Name: physVeh_jump
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: physVeh_minImpactMomentum
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 17.6
+
+Name: physVeh_pathConstraintCfm
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1E-06
+
+Name: physVeh_pathConstraintErp
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.8
+
+Name: physVeh_slideReductionForHighSpeed
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0
+
+Name: physVeh_StepsPerFrame
+Flags 0x0044
+Type: Int
+Latched: False
+Value: 3
+
+Name: pickupPrints
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: ping_default_min
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 50
+
+Name: ping_increment
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 10
+
+Name: ping_searches_per
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 2
+
+Name: player_breath_snd_delay
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 1
+
+Name: player_breath_snd_lerp
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 2
+
+Name: player_dmgtimer_flinchTime
+Flags 0x000C
+Type: Int
+Latched: False
+Value: 500
+
+Name: player_dmgtimer_maxTime
+Flags 0x000C
+Type: Float
+Latched: False
+Value: 750
+
+Name: player_dmgtimer_stumbleTime
+Flags 0x000C
+Type: Int
+Latched: False
+Value: 500
+
+Name: player_dmgtimer_timePerPoint
+Flags 0x000C
+Type: Float
+Latched: False
+Value: 100
+
+Name: player_lean_rotate_crouch_left
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 0.8
+
+Name: player_lean_rotate_crouch_right
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: player_lean_rotate_left
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 0.8
+
+Name: player_lean_rotate_right
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 0.4
+
+Name: player_lean_shift_crouch_left
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 4
+
+Name: player_lean_shift_crouch_right
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 15
+
+Name: player_lean_shift_left
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 5
+
+Name: player_lean_shift_right
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 9
+
+Name: player_MGUseRadius
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 128
+
+Name: player_moveThreshhold
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 1
+
+Name: player_runThreshhold
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 110
+
+Name: player_spectateSpeedScale
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 1
+
+Name: player_strafeAnimCosAngle
+Flags 0x008C
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: player_stunWhiteFlash
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: player_throwbackInnerRadius
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 90
+
+Name: player_throwbackOuterRadius
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 160
+
+Name: player_turnAnims
+Flags 0x008C
+Type: Bool
+Latched: False
+Value: False
+
+Name: player_useRadius
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 128
+
+Name: playercard_cache_download_max_retry_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 30000
+
+Name: playercard_cache_download_retry_step
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: playercard_cache_upload_max_retry_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 30000
+
+Name: playercard_cache_upload_retry_step
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: playercard_cache_validity_life
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1800000
+
+Name: playerLBFetchInterval
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 10
+
+Name: playername0
+Flags 0x0100
+Type: String
+Latched: True
+Value: "Guest 1"
+
+Name: playername1
+Flags 0x0100
+Type: String
+Latched: False
+Value: ""
+
+Name: playername2
+Flags 0x0100
+Type: String
+Latched: False
+Value: ""
+
+Name: playername3
+Flags 0x0100
+Type: String
+Latched: False
+Value: ""
+
+Name: playlist
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: playlistAggrFilename
+Flags 0x0000
+Type: String
+Latched: False
+Value: "playlists.aggr"
+
+Name: playlistFilename
+Flags 0x0000
+Type: String
+Latched: False
+Value: "playlists.info"
+
+Name: playListUpdateCheckMinutes
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 5
+
+Name: pm_gamesetup_mode_altmodes
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: pm_gamesetup_mode_altmodes_dropzone
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: pm_gamesetup_mode_altmodes_gungame
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: pm_gamesetup_mode_altmodes_infected
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: pm_gamesetup_mode_altmodes_jug
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: pm_gamesetup_mode_altmodes_oneinthechamber
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: pm_gamesetup_mode_altmodes_teamjug
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: pm_gamesetup_options_createdefaultclass
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: pm_gamesetup_options_customclassrestrictions
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: prestige_shop_active
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: profileMenuOption_blacklevel
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0
+
+Name: profileMenuOption_gamma
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: profileMenuOption_offensiveContentMode
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: profileMenuOption_safeAreaHorz
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.85
+
+Name: profileMenuOption_safeAreaVert
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.85
+
+Name: profileMenuOption_sensitivity
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 2
+
+Name: profileMenuOption_volume
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.8
+
+Name: protocol
+Flags 0x2400
+Type: Int
+Latched: False
+Value: 86
+
+Name: pt_AdjustableQoSbitsPerSec
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: pt_allMembersDoQoS
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: pt_allMembersDoQoSTimeout
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 4000
+
+Name: pt_connectAttempts
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 22
+
+Name: pt_connectTimeout
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: pt_currentSearchTier
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1
+
+Name: pt_defaultSearchTier
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1
+
+Name: pt_GameQoSbitsMinOpenSlots
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 6
+
+Name: pt_GameQoSbitsPerSecMax
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 17408
+
+Name: pt_GameQoSbitsPerSecMin
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 4096
+
+Name: pt_gameStartTimerLength
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 8
+
+Name: pt_LobbyQoSbitsPerSec
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 65536
+
+Name: pt_maxSearchTier
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 6
+
+Name: pt_memberTimeout
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 24000
+
+Name: pt_migrateBeforeAdvertise
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: pt_msPerTier
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 50
+
+Name: pt_percentUnacceptableQoS
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.15
+
+Name: pt_pregameStartTimerLength
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 5
+
+Name: pt_rejoin
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: pt_reservedAnonymousSlotTime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 2000
+
+Name: pt_reservedCommittedSlotTime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 12000
+
+Name: pt_reservedJoiningSlotTime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 8000
+
+Name: pt_searchConnectAttempts
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 5
+
+Name: pt_searchPauseTime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 3000
+
+Name: pt_searchRandomDelay
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: pt_searchResultsLifetime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 45000
+
+Name: pt_searchResultsMin
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 3000
+
+Name: pt_startAllowingUnacceptableQos
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 7
+
+Name: pt_stillConnectingWaitTime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 4000
+
+Name: r_atlasAnimFPS
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 15
+
+Name: r_blacklevel
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0
+
+Name: r_blur
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0
+
+Name: r_brightness
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0
+
+Name: r_cacheModelLighting
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_cacheSModelLighting
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_charLightAmbient
+Flags 0x0004
+Type: Color
+Latched: False
+Value: ?
+
+Name: r_clear
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: r_clearColor
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: r_clearColor2
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: r_cmdbuf_worker
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_colorMap
+Flags 0x0004
+Type: 
+Latched: False
+Value: ?
+
+Name: r_contrast
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_debugLineWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_depthPrepassFar
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_desaturation
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_detailMap
+Flags 0x0004
+Type: 
+Latched: False
+Value: ?
+
+Name: r_diffuseColorScale
+Flags 0x004C
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_distortion
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_dlightLimit
+Flags 0x0040
+Type: Int
+Latched: False
+Value: 4
+
+Name: r_dof_bias
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: r_dof_enable
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_dof_farBlur
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1.8
+
+Name: r_dof_farEnd
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 7000
+
+Name: r_dof_farStart
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1000
+
+Name: r_dof_nearBlur
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 6
+
+Name: r_dof_nearEnd
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 60
+
+Name: r_dof_nearStart
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 10
+
+Name: r_dof_tweak
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_dof_viewModelEnd
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 8
+
+Name: r_dof_viewModelStart
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 2
+
+Name: r_drawWater
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_envMapExponent
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 5
+
+Name: r_envMapMaxIntensity
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: r_envMapMinIntensity
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.2
+
+Name: r_envMapOverride
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_envMapSunIntensity
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2
+
+Name: r_filmAltShader
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_filmTweakBrightness
+Flags 0x0040
+Type: Float
+Latched: False
+Value: 0
+
+Name: r_filmTweakContrast
+Flags 0x0040
+Type: Float
+Latched: False
+Value: 1.4
+
+Name: r_filmTweakDarkTint
+Flags 0x0040
+Type: Color
+Latched: False
+Value: ?
+
+Name: r_filmTweakDesaturation
+Flags 0x0040
+Type: Float
+Latched: False
+Value: 0.2
+
+Name: r_filmTweakDesaturationDark
+Flags 0x0040
+Type: Float
+Latched: False
+Value: 0.2
+
+Name: r_filmTweakEnable
+Flags 0x0040
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_filmTweakHeroSaturation
+Flags 0x0040
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_filmTweakInvert
+Flags 0x0040
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_filmTweakLightTint
+Flags 0x0040
+Type: Color
+Latched: False
+Value: ?
+
+Name: r_filmTweakMediumTint
+Flags 0x0040
+Type: Color
+Latched: False
+Value: ?
+
+Name: r_filmUseTweaks
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_fog
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_fog_depthhack_scale
+Flags 0x2000
+Type: Float
+Latched: False
+Value: -1
+
+Name: r_forceLod
+Flags 0x0004
+Type: 
+Latched: False
+Value: ?
+
+Name: r_fullbright
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_fullscreen
+Flags 0x0002
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_gamma
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_glow
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_glow_allowed
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_glow_allowed_script_forced
+Flags 0x0040
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_glowTweakBloomCutoff
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: r_glowTweakBloomDesaturation
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0
+
+Name: r_glowTweakBloomIntensity0
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_glowTweakEnable
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_glowTweakRadius0
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 5
+
+Name: r_glowUseTweaks
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_heroLighting
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_highLodDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: -1
+
+Name: r_ignore
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: r_ignorehwgamma
+Flags 0x0002
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_inGameVideo
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_lightCacheLessFrequentMaxDistance
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 64
+
+Name: r_lightCacheLessFrequentPeriod
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 10
+
+Name: r_lightGridContrast
+Flags 0x0048
+Type: Float
+Latched: False
+Value: 0
+
+Name: r_lightGridEnableTweaks
+Flags 0x0048
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_lightGridIntensity
+Flags 0x0048
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_lightGridUseTweakedValues
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_lightMap
+Flags 0x0004
+Type: 
+Latched: False
+Value: ?
+
+Name: r_lockPvs
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_lowestLodDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: -1
+
+Name: r_lowLodDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: -1
+
+Name: r_mediumLodDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: -1
+
+Name: r_normalMap
+Flags 0x0004
+Type: 
+Latched: False
+Value: ?
+
+Name: r_outdoorFeather
+Flags 0x0040
+Type: Float
+Latched: False
+Value: 8
+
+Name: r_pixelShaderGPRReallocation
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 96
+
+Name: r_polygonOffsetBias
+Flags 0x0000
+Type: Float
+Latched: False
+Value: -1
+
+Name: r_polygonOffsetBiasMult
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_polygonOffsetScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: -1
+
+Name: r_portalBevels
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.7
+
+Name: r_portalBevelsOnly
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_portalMinClipArea
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.02
+
+Name: r_portalMinRecurseDepth
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 2
+
+Name: r_portalWalkLimit
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 0
+
+Name: r_primaryLightTweakDiffuseStrength
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_primaryLightTweakSpecularStrength
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_primaryLightUseTweaks
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_resampleScene
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_scaleViewport
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_screenFilterQuads
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: r_showFbColorDebug
+Flags 0x0004
+Type: 
+Latched: False
+Value: ?
+
+Name: r_showFloatZDebug
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 0
+
+Name: r_showLightGrid
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 0
+
+Name: r_showMissingLightGrid
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_showModelLightingLowWaterMark
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_singleCell
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_skipPvs
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_smp_backend
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_smp_worker
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_smp_worker_thread0
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_smp_worker_thread1
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_smp_worker_thread2
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_specularColorScale
+Flags 0x004C
+Type: Float
+Latched: False
+Value: 2.5
+
+Name: r_specularMap
+Flags 0x0004
+Type: 
+Latched: False
+Value: ?
+
+Name: r_spotLightEntityShadows
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_spotLightShadows
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_subwindow
+Flags 0x0004
+Type: Vec4
+Latched: False
+Value: [ 0, 1, 0, 1 ]
+
+Name: r_sun_from_dvars
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_sun_fx_position
+Flags 0x0000
+Type: Vec3
+Latched: False
+Value: [ 0, 0, 0 ]
+
+Name: r_sunblind_fadein
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: r_sunblind_fadeout
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 3
+
+Name: r_sunblind_max_angle
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 5
+
+Name: r_sunblind_max_darken
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.75
+
+Name: r_sunblind_min_angle
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 30
+
+Name: r_sunflare_fadein
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_sunflare_fadeout
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_sunflare_max_alpha
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_sunflare_max_angle
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2
+
+Name: r_sunflare_max_size
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2500
+
+Name: r_sunflare_min_angle
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 45
+
+Name: r_sunflare_min_size
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0
+
+Name: r_sunflare_shader
+Flags 0x0000
+Type: String
+Latched: False
+Value: "sun_flare"
+
+Name: r_sunglare_fadein
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: r_sunglare_fadeout
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 3
+
+Name: r_sunglare_max_angle
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 5
+
+Name: r_sunglare_max_lighten
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.75
+
+Name: r_sunglare_min_angle
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 30
+
+Name: r_sunsprite_shader
+Flags 0x0000
+Type: String
+Latched: False
+Value: "sun"
+
+Name: r_sunsprite_size
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 16
+
+Name: r_texFilterAnisoMax
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 16
+
+Name: r_texFilterAnisoMin
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1
+
+Name: r_texFilterDisable
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_texFilterMipBias
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0
+
+Name: r_texFilterMipMode
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: r_thermalColorOffset
+Flags 0x004C
+Type: Float
+Latched: False
+Value: 0
+
+Name: r_thermalColorScale
+Flags 0x004C
+Type: Float
+Latched: True
+Value: 1.25
+
+Name: r_thermalDetailScale
+Flags 0x004C
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_vc_makelog
+Flags 0x0002
+Type: Int
+Latched: False
+Value: 0
+
+Name: r_vc_showlog
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: r_viewModelLightAmbient
+Flags 0x0004
+Type: Color
+Latched: False
+Value: ?
+
+Name: r_viewModelPrimaryLightTweakDiffuseStrength
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_viewModelPrimaryLightTweakSpecularStrength
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: r_viewModelPrimaryLightUseTweaks
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: r_vsync
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: r_zfar
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0
+
+Name: radarjamDistMax
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 800
+
+Name: radarjamDistMin
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 350
+
+Name: radarjamSinCurve
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: radius_damage_debug
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: ragdoll_baselerp_time
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 1000
+
+Name: ragdoll_bullet_force
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 500
+
+Name: ragdoll_bullet_upbias
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: ragdoll_debug
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 0
+
+Name: ragdoll_dump_anims
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: ragdoll_enable
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: ragdoll_explode_force
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 18000
+
+Name: ragdoll_explode_upbias
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.8
+
+Name: ragdoll_exploding_bullet_force
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 5000
+
+Name: ragdoll_exploding_bullet_upbias
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.8
+
+Name: ragdoll_fps
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 20
+
+Name: ragdoll_idle_min_velsq
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2
+
+Name: ragdoll_jitter_scale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: ragdoll_jointlerp_time
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 3000
+
+Name: ragdoll_max_life
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 4500
+
+Name: ragdoll_max_simulating
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 16
+
+Name: ragdoll_max_stretch_pct
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 10
+
+Name: ragdoll_rotvel_scale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: ragdoll_self_collision_scale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1.2
+
+Name: ragdoll_stretch_iters
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 10
+
+Name: rate
+Flags 0x0200
+Type: Int
+Latched: False
+Value: 20000
+
+Name: RemoteCameraSounds_DryLevel
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.1
+
+Name: RemoteCameraSounds_RoomType
+Flags 0x0004
+Type: 
+Latched: False
+Value: ?
+
+Name: RemoteCameraSounds_WetLevel
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: safeArea_adjusted_horizontal
+Flags 0x2000
+Type: Float
+Latched: True
+Value: 0.85
+
+Name: safeArea_adjusted_vertical
+Flags 0x2000
+Type: Float
+Latched: True
+Value: 0.85
+
+Name: safeArea_horizontal
+Flags 0x0004
+Type: Float
+Latched: True
+Value: 0.85
+
+Name: safeArea_vertical
+Flags 0x0004
+Type: Float
+Latched: True
+Value: 0.85
+
+Name: scr_arena_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_arena_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_arena_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_arena_roundswitch
+Flags 0x0100
+Type: String
+Latched: False
+Value: "3"
+
+Name: scr_arena_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_arena_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "2.5"
+
+Name: scr_arena_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "4"
+
+Name: scr_bgm_halftime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_bgm_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_bgm_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_bgm_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_bgm_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "2"
+
+Name: scr_bgm_roundswitch
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_bgm_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "3"
+
+Name: scr_bgm_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "6"
+
+Name: scr_bgm_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_bgm_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_conf_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_conf_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_conf_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_conf_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_conf_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "65"
+
+Name: scr_conf_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "10"
+
+Name: scr_conf_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_conf_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_ctf_halftime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_ctf_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_ctf_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_ctf_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_ctf_returntime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "30"
+
+Name: scr_ctf_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_ctf_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "3"
+
+Name: scr_ctf_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "5"
+
+Name: scr_ctf_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "10"
+
+Name: scr_ctf_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_ctfpro_halftime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_ctfpro_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_ctfpro_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_ctfpro_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_ctfpro_returntime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "30"
+
+Name: scr_ctfpro_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "2"
+
+Name: scr_ctfpro_roundswitch
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_ctfpro_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1000"
+
+Name: scr_ctfpro_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "6"
+
+Name: scr_ctfpro_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_ctfpro_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "2"
+
+Name: scr_dd_addtime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "2.5"
+
+Name: scr_dd_bombtimer
+Flags 0x0100
+Type: String
+Latched: False
+Value: "45"
+
+Name: scr_dd_defusetime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "5"
+
+Name: scr_dd_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_dd_planttime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "5"
+
+Name: scr_dd_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_dd_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_dd_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "3"
+
+Name: scr_dd_roundswitch
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_dd_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_dd_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "2.5"
+
+Name: scr_dd_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_dd_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "2"
+
+Name: scr_diehard
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_dm_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_dm_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_dm_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_dm_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_dm_scorelimit
+Flags 0x0100
+Type: String
+Latched: True
+Value: "1000"
+
+Name: scr_dm_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "10"
+
+Name: scr_dm_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_dm_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_dom_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_dom_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_dom_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_dom_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_dom_scorelimit
+Flags 0x0100
+Type: String
+Latched: True
+Value: "100"
+
+Name: scr_dom_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_dom_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_dom_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_explBulletMod
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_game_allowkillcam
+Flags 0x0480
+Type: Int
+Latched: False
+Value: 1
+
+Name: scr_game_deathpointloss
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_game_forceuav
+Flags 0x0100
+Type: String
+Latched: True
+Value: "0"
+
+Name: scr_game_graceperiod
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_game_hardpoints
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_game_killstreakdelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_game_onlyheadshots
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_game_perks
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_game_spectatetype
+Flags 0x0100
+Type: String
+Latched: True
+Value: "2"
+
+Name: scr_game_suicidepointloss
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_gameended
+Flags 0x0110
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_grnd_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_grnd_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_grnd_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_grnd_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_grnd_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "20000"
+
+Name: scr_grnd_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "10"
+
+Name: scr_grnd_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_grnd_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_gtnw_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_gtnw_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_gtnw_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_gtnw_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_gtnw_roundswitch
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_gtnw_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "101"
+
+Name: scr_gtnw_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "10"
+
+Name: scr_gtnw_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_gtnw_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_gun_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_gun_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_gun_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_gun_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_gun_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_gun_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "10"
+
+Name: scr_gun_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_gun_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_hardcore
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_hardpoint_allowartillery
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_hardpoint_allowhelicopter
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_hardpoint_allowuav
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_infect_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_infect_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_infect_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_infect_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_infect_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "10"
+
+Name: scr_infect_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_infect_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_jugg_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_jugg_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_jugg_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_jugg_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_jugg_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "10"
+
+Name: scr_jugg_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "10"
+
+Name: scr_jugg_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_jugg_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_koth_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_koth_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_koth_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_koth_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_koth_roundswitch
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_koth_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "500"
+
+Name: scr_koth_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "15"
+
+Name: scr_koth_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_koth_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_maxPerPlayerExplosives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "2"
+
+Name: scr_nukeCancelMode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_nukeTimer
+Flags 0x0100
+Type: String
+Latched: False
+Value: "10"
+
+Name: scr_oic_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "2"
+
+Name: scr_oic_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_oic_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_oic_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_oic_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_oic_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "10"
+
+Name: scr_oic_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_oic_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_oldschool
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_oneflag_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_oneflag_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_oneflag_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_oneflag_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_oneflag_roundswitch
+Flags 0x0100
+Type: String
+Latched: False
+Value: "3"
+
+Name: scr_oneflag_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_oneflag_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "3"
+
+Name: scr_oneflag_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_oneflag_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "4"
+
+Name: scr_patientZero
+Flags 0x0100
+Type: String
+Latched: False
+Value: ""
+
+Name: scr_player_forcerespawn
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_player_healthregentime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "5"
+
+Name: scr_player_maxhealth
+Flags 0x0100
+Type: String
+Latched: False
+Value: "100"
+
+Name: scr_player_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_player_respawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_player_sprinttime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "4"
+
+Name: scr_player_suicidespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_RequiredMapAspectratio
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_restxp_cap
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0.5"
+
+Name: scr_restxp_enable
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_restxp_levelsPerDay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0.5"
+
+Name: scr_restxp_minRestTime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "4"
+
+Name: scr_restxp_restedAwardScale
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0.5"
+
+Name: scr_restxp_timescale
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_riotShieldXPBullets
+Flags 0x0100
+Type: String
+Latched: False
+Value: "15"
+
+Name: scr_sab_bombtimer
+Flags 0x0100
+Type: String
+Latched: False
+Value: "30"
+
+Name: scr_sab_defusetime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "5"
+
+Name: scr_sab_hotpotato
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_sab_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_sab_planttime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "2.5"
+
+Name: scr_sab_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "7.5"
+
+Name: scr_sab_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_sab_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_sab_roundswitch
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_sab_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_sab_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "20"
+
+Name: scr_sab_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_sab_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_sd_bombtimer
+Flags 0x0100
+Type: String
+Latched: False
+Value: "45"
+
+Name: scr_sd_defusetime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "5"
+
+Name: scr_sd_multibomb
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_sd_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_sd_planttime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "5"
+
+Name: scr_sd_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_sd_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_sd_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_sd_roundswitch
+Flags 0x0100
+Type: String
+Latched: False
+Value: "3"
+
+Name: scr_sd_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_sd_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "2.5"
+
+Name: scr_sd_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_sd_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "4"
+
+Name: scr_tdef_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_tdef_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_tdef_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_tdef_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_tdef_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "7500"
+
+Name: scr_tdef_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "10"
+
+Name: scr_tdef_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_tdef_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_team_fftype
+Flags 0x0480
+Type: Int
+Latched: False
+Value: 0
+
+Name: scr_team_kickteamkillers
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_team_respawntime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_team_teamkillpointloss
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_team_teamkillspawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "20"
+
+Name: scr_thirdPerson
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_tispawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_tjugg_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_tjugg_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_tjugg_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_tjugg_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_tjugg_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "10000"
+
+Name: scr_tjugg_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "10"
+
+Name: scr_tjugg_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_tjugg_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_vip_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_vip_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_vip_roundlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "3"
+
+Name: scr_vip_roundswitch
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_vip_scorelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_vip_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "2.5"
+
+Name: scr_vip_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "2"
+
+Name: scr_war_halftime
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_war_numlives
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_war_playerrespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_war_promode
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_war_roundlimit
+Flags 0x0180
+Type: Int
+Latched: False
+Value: 1
+
+Name: scr_war_roundswitch
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_war_scorelimit
+Flags 0x0180
+Type: Int
+Latched: True
+Value: 7500
+
+Name: scr_war_timelimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "10"
+
+Name: scr_war_waverespawndelay
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: scr_war_winlimit
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: scr_xpscale
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: search_weight_country_code
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.9
+
+Name: search_weight_country_code_and_region
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0
+
+Name: search_weight_hilbert_enum
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.09
+
+Name: search_weight_mappack_count
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.009
+
+Name: sensitivity
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 5
+
+Name: sentry_placement_debug
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: sentry_placement_feet_offset
+Flags 0x0000
+Type: Vec3
+Latched: False
+Value: [ 17, 20, 10 ]
+
+Name: sentry_placement_feet_trace_dist_z
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 20
+
+Name: sentry_placement_trace_dist
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 42
+
+Name: sentry_placement_trace_min_normal
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.7
+
+Name: sentry_placement_trace_pitch
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 20
+
+Name: sentry_placement_trace_radius
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 30
+
+Name: sentry_placement_trace_radius_canon_safety
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 5
+
+Name: server1
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: server10
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: server11
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: server12
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: server13
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: server14
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: server15
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: server16
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: server2
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: server3
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: server4
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: server5
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: server6
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: server7
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: server8
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: server9
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: session_advertiseFailedSearchCount
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 6
+
+Name: session_immediateDeleteTinySessions
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: session_join_min_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 4000
+
+Name: session_nonblocking
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: shieldBlastDamageProtection_120
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0.55
+
+Name: shieldBlastDamageProtection_180
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0.15
+
+Name: shieldBlastDamageProtection_30
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0.95
+
+Name: shieldBlastDamageProtection_60
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0.8
+
+Name: shieldImpactBulletShakeDuration
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 500
+
+Name: shieldImpactBulletShakeScale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.35
+
+Name: shieldImpactExplosionHighShakeDuration
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 1250
+
+Name: shieldImpactExplosionHighShakeScale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: shieldImpactExplosionLowShakeDuration
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 800
+
+Name: shieldImpactExplosionLowShakeScale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.4
+
+Name: shieldImpactExplosionThreshold
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 85
+
+Name: shieldImpactMissileShakeDuration
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 1500
+
+Name: shieldImpactMissileShakeScale
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: shortversion
+Flags 0x2400
+Type: String
+Latched: False
+Value: "1.0"
+
+Name: signin0_vis
+Flags 0x0100
+Type: String
+Latched: True
+Value: "1"
+
+Name: signin1_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: signin2_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: signin3_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: sm_cameraOffset
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 0
+
+Name: sm_dynlightAllSModels
+Flags 0x0044
+Type: Bool
+Latched: False
+Value: False
+
+Name: sm_enable
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: sm_fastSunShadow
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: sm_lightScore_eyeProjectDist
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 64
+
+Name: sm_lightScore_spotProjectFrac
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 0.125
+
+Name: sm_maxLights
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 4
+
+Name: sm_minSpotLightScore
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: sm_polygonOffsetBias
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.125
+
+Name: sm_polygonOffsetScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2
+
+Name: sm_qualitySpotShadow
+Flags 0x0044
+Type: Bool
+Latched: False
+Value: True
+
+Name: sm_spotDistCull
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: sm_spotEnable
+Flags 0x0044
+Type: Bool
+Latched: False
+Value: True
+
+Name: sm_spotLightScoreModelScale
+Flags 0x004C
+Type: Float
+Latched: False
+Value: 0
+
+Name: sm_spotLimit
+Flags 0x0044
+Type: Int
+Latched: False
+Value: 4
+
+Name: sm_spotShadowFadeTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1
+
+Name: sm_strictCull
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: sm_sunEnable
+Flags 0x0044
+Type: Bool
+Latched: False
+Value: True
+
+Name: sm_sunSampleSizeNear
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 0.25
+
+Name: sm_sunShadowCenter
+Flags 0x0044
+Type: Vec3
+Latched: False
+Value: [ 0, 0, 0 ]
+
+Name: sm_sunShadowCenterMode
+Flags 0x0044
+Type: Bool
+Latched: False
+Value: False
+
+Name: sm_sunShadowScale
+Flags 0x004C
+Type: Float
+Latched: False
+Value: 1
+
+Name: snaps
+Flags 0x0200
+Type: Int
+Latched: False
+Value: 20
+
+Name: snd_cinematicVolumeScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.85
+
+Name: snd_draw3D
+Flags 0x0004
+Type: 
+Latched: False
+Value: ?
+
+Name: snd_drawInfo
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: snd_enable2D
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: snd_enable3D
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: snd_enableEq
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: snd_enableReverb
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: snd_enableStream
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: snd_errorOnMissing
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: snd_levelFadeTime
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 250
+
+Name: snd_loadFadeTime
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 500
+
+Name: snd_newWhizby
+Flags 0x0044
+Type: Bool
+Latched: False
+Value: True
+
+Name: snd_occlusionDelay
+Flags 0x0044
+Type: Int
+Latched: False
+Value: 150
+
+Name: snd_occlusionLerpTime
+Flags 0x0044
+Type: Int
+Latched: False
+Value: 500
+
+Name: snd_omnidirectionalPercentage
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.25
+
+Name: snd_slaveFadeTime
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 500
+
+Name: snd_volume
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.8
+
+Name: splitscreen
+Flags 0x0080
+Type: Bool
+Latched: True
+Value: True
+
+Name: splitscreen_control_desired
+Flags 0x0000
+Type: Bool
+Latched: True
+Value: True
+
+Name: splitscreen_disabled_ref_count
+Flags 0x0000
+Type: Int
+Latched: True
+Value: 0
+
+Name: splitscreen_ingame
+Flags 0x0080
+Type: Bool
+Latched: True
+Value: True
+
+Name: splitscreen_online_enabled
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1
+
+Name: startgame0_vis
+Flags 0x0100
+Type: String
+Latched: True
+Value: "1"
+
+Name: startgame1_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: startgame2_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: startgame3_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: stat_version
+Flags 0x0100
+Type: String
+Latched: False
+Value: "11"
+
+Name: stringtable_debug
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: sv_allowedClan1
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: sv_allowedClan2
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: sv_clientArchive
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: sv_connectTimeout
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 40
+
+Name: sv_floodProtect
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: sv_hostname
+Flags 0x0400
+Type: String
+Latched: True
+Value: "Guest 1"
+
+Name: sv_hugeSnapshotDelay
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 200
+
+Name: sv_hugeSnapshotSize
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 4000
+
+Name: sv_kickBanTime
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 300
+
+Name: sv_maxclients
+Flags 0x04C0
+Type: Int
+Latched: False
+Value: 1
+
+Name: sv_network_fps
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 50
+
+Name: sv_paused
+Flags 0x2000
+Type: Int
+Latched: False
+Value: 0
+
+Name: sv_privateClients
+Flags 0x0400
+Type: Int
+Latched: False
+Value: 0
+
+Name: sv_privateClientsForClients
+Flags 0x0400
+Type: Int
+Latched: False
+Value: 0
+
+Name: sv_reconnectlimit
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 3
+
+Name: sv_rejoinTimeout
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 5
+
+Name: sv_running
+Flags 0x2000
+Type: Bool
+Latched: True
+Value: True
+
+Name: sv_showAverageBPS
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: sv_timeout
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 10
+
+Name: sv_zombietime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 2
+
+Name: systemlink
+Flags 0x0080
+Type: Bool
+Latched: False
+Value: False
+
+Name: systemlink_host
+Flags 0x0080
+Type: Bool
+Latched: False
+Value: False
+
+Name: testClients_doAttack
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: testClients_doCrouch
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: testClients_doMove
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: testClients_doReload
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: testClients_watchKillcam
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: theater_active
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: thermal_playerModel
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: thermalBlurFactorNoScope
+Flags 0x0044
+Type: Int
+Latched: False
+Value: 250
+
+Name: thermalBlurFactorScope
+Flags 0x0044
+Type: Int
+Latched: False
+Value: 250
+
+Name: timescale
+Flags 0x000C
+Type: Float
+Latched: False
+Value: 1
+
+Name: tracer_explosiveColor1
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 1, 0.75, 0.75, 0 ]
+
+Name: tracer_explosiveColor2
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 1, 0.75, 0.75, 1 ]
+
+Name: tracer_explosiveColor3
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 1, 0.75, 0.75, 1 ]
+
+Name: tracer_explosiveColor4
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 1, 0.75, 0.75, 1 ]
+
+Name: tracer_explosiveColor5
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 1, 0.75, 0.75, 1 ]
+
+Name: tracer_explosiveOverride
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: tracer_explosiveWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 15
+
+Name: tracer_firstPersonMaxWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 4
+
+Name: tracer_stoppingPowerColor1
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 0, 0, 0, 0 ]
+
+Name: tracer_stoppingPowerColor2
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 1, 1, 1, 1 ]
+
+Name: tracer_stoppingPowerColor3
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 1, 0, 0, 1 ]
+
+Name: tracer_stoppingPowerColor4
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 1, 0, 0, 1 ]
+
+Name: tracer_stoppingPowerColor5
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 1, 1, 0, 1 ]
+
+Name: tracer_stoppingPowerOverride
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: tracer_stoppingPowerWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 6
+
+Name: tracer_thermalWidthMult
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 2
+
+Name: ui_ac130usetime
+Flags 0x0110
+Type: String
+Latched: False
+Value: "40"
+
+Name: ui_allow_classchange
+Flags 0x0014
+Type: Bool
+Latched: False
+Value: False
+
+Name: ui_allow_controlschange
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: ui_allow_teamchange
+Flags 0x0014
+Type: Bool
+Latched: True
+Value: True
+
+Name: ui_allowvote
+Flags 0x0110
+Type: String
+Latched: False
+Value: "1"
+
+Name: ui_bigFont
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.5832
+
+Name: ui_bomb_timer
+Flags 0x0110
+Type: String
+Latched: False
+Value: "0"
+
+Name: ui_borderLowLightScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.35
+
+Name: ui_buildLocation
+Flags 0x0000
+Type: Vec2
+Latched: False
+Value: [ -50, 45 ]
+
+Name: ui_buildSize
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.23
+
+Name: ui_cinematicsTimestamp
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: ui_connectScreenTextGlowColor
+Flags 0x0000
+Type: Vec4
+Latched: False
+Value: [ 0.3, 0.6, 0.3, 1 ]
+
+Name: ui_currentFeederMapIndex
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: ui_currentMap
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: ui_customClassName
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: ui_customModeEditName
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: ui_customModeName
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: ui_danger_team
+Flags 0x0110
+Type: String
+Latched: False
+Value: ""
+
+Name: ui_debugMode
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: ui_drawCrosshair
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: ui_extraBigFont
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1
+
+Name: ui_friendlyfire
+Flags 0x0110
+Type: String
+Latched: False
+Value: "0"
+
+Name: ui_gametype
+Flags 0x0000
+Type: String
+Latched: False
+Value: "war"
+
+Name: ui_halftime
+Flags 0x0110
+Type: String
+Latched: False
+Value: "0"
+
+Name: ui_hud_hardcore
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: ui_hud_obituaries
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: ui_hud_showobjicons
+Flags 0x0110
+Type: String
+Latched: False
+Value: "1"
+
+Name: ui_inactiveBaseColor
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: ui_inactivePartyColor
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: ui_inhostmigration
+Flags 0x0110
+Type: String
+Latched: False
+Value: "0"
+
+Name: ui_jip_button_name
+Flags 0x0100
+Type: String
+Latched: False
+Value: "@MPUI_JOININPROGRESS_ALLOWED"
+
+Name: ui_mapname
+Flags 0x0000
+Type: String
+Latched: True
+Value: "mp_mogadishu"
+
+Name: ui_mapvote_entrya_gametype
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: ui_mapvote_entrya_mapname
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: ui_mapvote_entryb_gametype
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: ui_mapvote_entryb_mapname
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: ui_mousePitch
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: ui_mptype
+Flags 0x0100
+Type: String
+Latched: False
+Value: "2"
+
+Name: ui_multiplayer
+Flags 0x2000
+Type: Bool
+Latched: False
+Value: True
+
+Name: ui_myPartyColor
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: ui_netSource
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: ui_nuke_end_milliseconds
+Flags 0x0110
+Type: String
+Latched: False
+Value: "0"
+
+Name: ui_onlineRequired
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: ui_opensummary
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: ui_override_halftime
+Flags 0x0110
+Type: String
+Latched: False
+Value: "0"
+
+Name: ui_overtime
+Flags 0x0110
+Type: String
+Latched: False
+Value: "0"
+
+Name: ui_partyFull
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: ui_playerPartyColor
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: ui_playlistActionButtonAlpha
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1
+
+Name: ui_playlistCategoryDisabledColor
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: ui_playlistCategoryEnabledColor
+Flags 0x0000
+Type: 
+Latched: False
+Value: ?
+
+Name: ui_playlistPopulationRefreshTime
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1200
+
+Name: ui_remoteTankUseTime
+Flags 0x0110
+Type: String
+Latched: False
+Value: "60"
+
+Name: ui_scorelimit
+Flags 0x0110
+Type: String
+Latched: True
+Value: "7500"
+
+Name: ui_selectedFeederMap
+Flags 0x0000
+Type: String
+Latched: True
+Value: "mp_mogadishu"
+
+Name: ui_serverStatusTimeOut
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 7000
+
+Name: ui_showDLCMaps
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: ui_showList
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: ui_showmap
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: ui_showMenuOnly
+Flags 0x0000
+Type: String
+Latched: False
+Value: ""
+
+Name: ui_sliderSteps
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 40
+
+Name: ui_smallFont
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.375
+
+Name: ui_textScrollFadeTime
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.2
+
+Name: ui_textScrollPauseEnd
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 3
+
+Name: ui_textScrollPauseStart
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1
+
+Name: ui_textScrollSpeed
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 30
+
+Name: ui_timelimit
+Flags 0x0110
+Type: String
+Latched: False
+Value: "10"
+
+Name: ui_useonlinestats_button_name
+Flags 0x0100
+Type: String
+Latched: False
+Value: "@PLATFORM_USEONLINESTATS_FALSE"
+
+Name: ui_version_show
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: uiscript_debug
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: use_filtered_query_pass
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: use_weighted_pass
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: useonlinestats
+Flags 0x0080
+Type: Bool
+Latched: False
+Value: False
+
+Name: useRelativeTeamColors
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: userGroup_active
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: userGroup_cool_off_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 60000
+
+Name: userGroup_max_retry_time
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 30000
+
+Name: userGroup_refresh_time_secs
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 1200
+
+Name: userGroup_retry_step
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1000
+
+Name: userGroup_RetryTime
+Flags 0x0004
+Type: Int
+Latched: False
+Value: 2000
+
+Name: useTagFlashSilenced
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: validate_apply_clamps
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: validate_apply_revert
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: validate_apply_revert_full
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: validate_clamp_assists
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 300
+
+Name: validate_clamp_experience
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 65536
+
+Name: validate_clamp_headshots
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 300
+
+Name: validate_clamp_hits
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 2500
+
+Name: validate_clamp_kills
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 300
+
+Name: validate_clamp_losses
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1
+
+Name: validate_clamp_misses
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 2500
+
+Name: validate_clamp_ties
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1
+
+Name: validate_clamp_totalshots
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 5000
+
+Name: validate_clamp_weaponXP
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 65536
+
+Name: validate_clamp_wins
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 1
+
+Name: validate_drop_on_fail
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: veh_aiOverSteerScale
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 1
+
+Name: veh_boneControllerLodDist
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 2000
+
+Name: vehAudio_inAirPitchDownLerp
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 1.2
+
+Name: vehAudio_inAirPitchUpLerp
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 0.75
+
+Name: vehAudio_spawnVolumeTime
+Flags 0x0044
+Type: Float
+Latched: False
+Value: 2
+
+Name: vehCam_freeLook
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: vehCam_mode
+Flags 0x0004
+Type: 
+Latched: False
+Value: ?
+
+Name: vehHelicopterBoundsRadius
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 50
+
+Name: vehHelicopterDecelerationFwd
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 0.5
+
+Name: vehHelicopterDecelerationSide
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 1
+
+Name: vehHelicopterDecelerationUp
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 1.5
+
+Name: vehHelicopterHeadSwayDontSwayTheTurret
+Flags 0x00C4
+Type: Bool
+Latched: False
+Value: True
+
+Name: vehHelicopterHoverSpeedThreshold
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 400
+
+Name: vehHelicopterInvertUpDown
+Flags 0x00C4
+Type: Bool
+Latched: False
+Value: False
+
+Name: vehHelicopterJitterJerkyness
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: vehHelicopterLookaheadTime
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 1
+
+Name: vehHelicopterMaxAccel
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 45
+
+Name: vehHelicopterMaxAccelVertical
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 30
+
+Name: vehHelicopterMaxPitch
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 35
+
+Name: vehHelicopterMaxRoll
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 35
+
+Name: vehHelicopterMaxSpeed
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 150
+
+Name: vehHelicopterMaxSpeedVertical
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 65
+
+Name: vehHelicopterMaxYawAccel
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 90
+
+Name: vehHelicopterMaxYawRate
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 120
+
+Name: vehHelicopterRightStickDeadzone
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: vehHelicopterScaleMovement
+Flags 0x0084
+Type: Bool
+Latched: False
+Value: True
+
+Name: vehHelicopterSoftCollisions
+Flags 0x0084
+Type: Bool
+Latched: False
+Value: False
+
+Name: vehHelicopterStrafeDeadzone
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: vehHelicopterTiltFromAcceleration
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 2
+
+Name: vehHelicopterTiltFromControllerAxes
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 0
+
+Name: vehHelicopterTiltFromDeceleration
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 2
+
+Name: vehHelicopterTiltFromFwdAndYaw
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 0
+
+Name: vehHelicopterTiltFromFwdAndYaw_VelAtMaxTilt
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 1
+
+Name: vehHelicopterTiltFromVelocity
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 1
+
+Name: vehHelicopterTiltMomentum
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 0.4
+
+Name: vehHelicopterTiltSpeed
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 1.2
+
+Name: vehHelicopterYawOnLeftStick
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 5
+
+Name: vehSubmarineAllowInSolid
+Flags 0x00C4
+Type: Bool
+Latched: False
+Value: False
+
+Name: vehSubmarineBodyRelRotation
+Flags 0x00C4
+Type: Int
+Latched: False
+Value: 1
+
+Name: vehSubmarineControls
+Flags 0x00C4
+Type: Int
+Latched: False
+Value: 0
+
+Name: vehSubmarineForwardDampening
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 0.95
+
+Name: vehSubmarineFwdCollMaxAccel
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 100
+
+Name: vehSubmarineFwdCollMaxAngAccel
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 200
+
+Name: vehSubmarineFwdProbeTime
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 1.25
+
+Name: vehSubmarineHorizControlGamma
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 1
+
+Name: vehSubmarineInvertUpDown
+Flags 0x00C4
+Type: Bool
+Latched: False
+Value: False
+
+Name: vehSubmarineLateralDampening
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 0.95
+
+Name: vehSubmarineMaxDownPitch
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 30
+
+Name: vehSubmarineMaxForwardAccel
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 200
+
+Name: vehSubmarineMaxForwardPitchAccel
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 10
+
+Name: vehSubmarineMaxForwardVel
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 200
+
+Name: vehSubmarineMaxForwardYawAccel
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 10
+
+Name: vehSubmarineMaxFwdVelRef
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 500
+
+Name: vehSubmarineMaxLateralVel
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 20
+
+Name: vehSubmarineMaxNegativeBuoyancy
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 40
+
+Name: vehSubmarineMaxPositiveBuoyancy
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 40
+
+Name: vehSubmarineMaxReverseAccel
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 20
+
+Name: vehSubmarineMaxReversePitchAccel
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 5
+
+Name: vehSubmarineMaxReverseVel
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 20
+
+Name: vehSubmarineMaxReverseYawAccel
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 5
+
+Name: vehSubmarineMaxRoll
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 10
+
+Name: vehSubmarineMaxRollAccel
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 3
+
+Name: vehSubmarineMaxStoppedPitchAccel
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 3
+
+Name: vehSubmarineMaxStoppedYawAccel
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 3
+
+Name: vehSubmarineMaxUpPitch
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 30
+
+Name: vehSubmarineMinForwardVel
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 0
+
+Name: vehSubmarineMinVelNoRestore
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 5
+
+Name: vehSubmarinePitchDampening
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 0.9
+
+Name: vehSubmarinePitchRestore
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 0.99
+
+Name: vehSubmarineRollDampening
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 0.9
+
+Name: vehSubmarineRollDrivenYaw
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 0
+
+Name: vehSubmarineRollRestore
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 0.95
+
+Name: vehSubmarineSideCollMaxAccel
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 1000
+
+Name: vehSubmarineSideCollMaxAngAccel
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 500
+
+Name: vehSubmarineSideProbeMaxDist
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 90
+
+Name: vehSubmarineSideProbeMinDist
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 24
+
+Name: vehSubmarineStoppedVel
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 0.4
+
+Name: vehSubmarineVertControlGamma
+Flags 0x0084
+Type: Float
+Latched: False
+Value: 1
+
+Name: vehSubmarineYawDampening
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 0.95
+
+Name: vehUGVPitchTrack
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 6
+
+Name: vehUGVRollTrack
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 6
+
+Name: vehUGVWheelInfluence
+Flags 0x00C4
+Type: Float
+Latched: False
+Value: 0.3
+
+Name: version
+Flags 0x2000
+Type: String
+Latched: True
+Value: "IW5 MP 1.0 build 419 latest Mon Sep 19 2011 04:15:30AM xenon"
+
+Name: viewangNow
+Flags 0x2001
+Type: Vec3
+Latched: False
+Value: [ 0, 0, 0 ]
+
+Name: viewModelDebugNotetracks
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: False
+
+Name: viewModelHacks
+Flags 0x0004
+Type: Bool
+Latched: False
+Value: True
+
+Name: viewposNow
+Flags 0x2001
+Type: Vec3
+Latched: False
+Value: [ 0, 0, 0 ]
+
+Name: waiting0_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: waiting1_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: waiting2_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: waiting3_vis
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: waypointDebugDraw
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: waypointDistScaleRangeMax
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 3000
+
+Name: waypointDistScaleRangeMin
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1000
+
+Name: waypointDistScaleSmallest
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0.8
+
+Name: waypointIconHeight
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 36
+
+Name: waypointIconWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 36
+
+Name: waypointOffscreenCornerRadius
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 105
+
+Name: waypointOffscreenDistanceThresholdAlpha
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 30
+
+Name: waypointOffscreenPadBottom
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 30
+
+Name: waypointOffscreenPadLeft
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 103
+
+Name: waypointOffscreenPadRight
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0
+
+Name: waypointOffscreenPadTop
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 0
+
+Name: waypointOffscreenPointerDistance
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 20
+
+Name: waypointOffscreenPointerHeight
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 12
+
+Name: waypointOffscreenPointerWidth
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 25
+
+Name: waypointOffscreenRoundedCorners
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: True
+
+Name: waypointOffscreenScaleLength
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 500
+
+Name: waypointOffscreenScaleSmallest
+Flags 0x0000
+Type: Float
+Latched: True
+Value: 0.65
+
+Name: waypointPlayerOffsetCrouch
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 56
+
+Name: waypointPlayerOffsetProne
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 30
+
+Name: waypointPlayerOffsetStand
+Flags 0x0004
+Type: Float
+Latched: False
+Value: 66
+
+Name: waypointSplitscreenScale
+Flags 0x0000
+Type: Float
+Latched: False
+Value: 1.8
+
+Name: waypointTweakY
+Flags 0x0000
+Type: Float
+Latched: False
+Value: -17
+
+Name: wideScreen
+Flags 0x2000
+Type: Bool
+Latched: True
+Value: False
+
+Name: xblive_hostingprivateparty
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: xblive_loggedin
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: xblive_mappacks
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 0
+
+Name: xblive_privatematch
+Flags 0x0000
+Type: Bool
+Latched: False
+Value: False
+
+Name: xenon_maxVoicePacketsPerSec
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 100
+
+Name: xenon_maxVoicePacketsPerSecForServer
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 20
+
+Name: xenon_presence_cooloff_timer
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 60000
+
+Name: xenon_presence_initial_timer
+Flags 0x0000
+Type: Int
+Latched: False
+Value: 30000
+
+Name: xenonGame
+Flags 0x2000
+Type: String
+Latched: False
+Value: "true"
+
+Name: cg_drawSpectatorMessages
+Flags 0x0100
+Type: String
+Latched: False
+Value: "1"
+
+Name: ui_altscene
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: ui_adrenaline
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: ui_promotion
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: player_summary_xp
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: player_summary_score
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: player_summary_challenge
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: player_summary_match
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: player_summary_misc
+Flags 0x0100
+Type: String
+Latched: False
+Value: "0"
+
+Name: ui_saved_focus_changeclass
+Flags 0x0100
+Type: String
+Latched: False
+Value: "PAUSE_LIST_0"
+
+Name: scr_objectiveText
+Flags 0x0100
+Type: String
+Latched: False
+Value: "OBJECTIVES_WAR_HINT"

@@ -1,0 +1,3725 @@
+accessToSubscriberContent | Offset: 8377CC60
+
+actionSlotsHide | Offset: 83774E78
+
+activeAction | Offset: 8376F824
+
+aim_autoaim_enabled | Offset: 8377CF08
+
+aim_target_sentient_radius | Offset: 8378057C
+
+ammoCounterHide | Offset: 83774E34
+
+band_12players | Offset: 837621C8
+
+band_18players | Offset: 8376220C
+
+band_2players | Offset: 837620FC
+
+band_4players | Offset: 83762140
+
+band_8players | Offset: 83762184
+
+bg_bulletExplDmgFactor | Offset: 83777694
+
+bg_bulletExplRadius | Offset: 837776D8
+
+bg_foliagesnd_fastinterval | Offset: 83777100
+
+bg_foliagesnd_maxspeed | Offset: 83777078
+
+bg_foliagesnd_minspeed | Offset: 83777034
+
+bg_foliagesnd_resetinterval | Offset: 83777144
+
+bg_foliagesnd_slowinterval | Offset: 837770BC
+
+bg_legYawTolerance | Offset: 837771CC
+
+bg_shieldHitEncodeHeightVM | Offset: 837782CC
+
+bg_shieldHitEncodeHeightWorld | Offset: 83778244
+
+bg_shieldHitEncodeWidthVM | Offset: 83778288
+
+bg_shieldHitEncodeWidthWorld | Offset: 83778200
+
+bg_shock_lookControl | Offset: 83777F9C
+
+bg_shock_lookControl_fadeTime | Offset: 837780AC
+
+bg_shock_lookControl_maxpitchspeed | Offset: 83777FE0
+
+bg_shock_lookControl_maxyawspeed | Offset: 83778024
+
+bg_shock_lookControl_mousesensitivityscale | Offset: 83778068
+
+bg_shock_movement | Offset: 837780F0
+
+bg_shock_screenBlurBlendFadeTime | Offset: 83777BA0
+
+bg_shock_screenBlurBlendTime | Offset: 83777B5C
+
+bg_shock_screenFlashShotFadeTime | Offset: 83777C28
+
+bg_shock_screenFlashWhiteFadeTime | Offset: 83777BE4
+
+bg_shock_screenType | Offset: 83777B18
+
+bg_shock_sound | Offset: 83777D38
+
+bg_shock_soundDryLevel | Offset: 83777ED0
+
+bg_shock_soundEnd | Offset: 83777A90
+
+bg_shock_soundEndAbort | Offset: 83777AD4
+
+bg_shock_soundFadeInTime | Offset: 83777D7C
+
+bg_shock_soundFadeOutTime | Offset: 83777DC0
+
+bg_shock_soundLoop | Offset: 83777A08
+
+bg_shock_soundLoopEndDelay | Offset: 83777E48
+
+bg_shock_soundLoopFadeTime | Offset: 83777E04
+
+bg_shock_soundLoopSilent | Offset: 83777A4C
+
+bg_shock_soundModEndDelay | Offset: 83777F58
+
+bg_shock_soundRoomType | Offset: 83777E8C
+
+bg_shock_soundWetLevel | Offset: 83777F14
+
+bg_shock_viewKickFadeTime | Offset: 83777CF4
+
+bg_shock_viewKickPeriod | Offset: 83777C6C
+
+bg_shock_viewKickRadius | Offset: 83777CB0
+
+bg_shock_volume_aircraft | Offset: 8377A90C
+
+bg_shock_volume_alarm | Offset: 83779FC0
+
+bg_shock_volume_ambdist1 | Offset: 83779F38
+
+bg_shock_volume_ambdist2 | Offset: 83779F7C
+
+bg_shock_volume_ambient | Offset: 8377ACC4
+
+bg_shock_volume_announcer | Offset: 8377AEE4
+
+bg_shock_volume_auto | Offset: 8377A004
+
+bg_shock_volume_auto2 | Offset: 8377A048
+
+bg_shock_volume_auto2d | Offset: 8377A08C
+
+bg_shock_volume_autodog | Offset: 8377A0D0
+
+bg_shock_volume_body | Offset: 8377A488
+
+bg_shock_volume_body2d | Offset: 8377A4CC
+
+bg_shock_volume_bulletflesh1 | Offset: 8377A2F0
+
+bg_shock_volume_bulletflesh2 | Offset: 8377A334
+
+bg_shock_volume_bulletimpact | Offset: 8377A2AC
+
+bg_shock_volume_bulletwhizby | Offset: 8377A378
+
+bg_shock_volume_critical | Offset: 8377AEA0
+
+bg_shock_volume_effects1 | Offset: 8377A730
+
+bg_shock_volume_effects2 | Offset: 8377A774
+
+bg_shock_volume_effects2d1 | Offset: 8377A7FC
+
+bg_shock_volume_effects2d2 | Offset: 8377A840
+
+bg_shock_volume_effects3 | Offset: 8377A7B8
+
+bg_shock_volume_element | Offset: 8377A1E0
+
+bg_shock_volume_element_ext | Offset: 8377A268
+
+bg_shock_volume_element_int | Offset: 8377A224
+
+bg_shock_volume_explosion1 | Offset: 8377A5DC
+
+bg_shock_volume_explosion2 | Offset: 8377A620
+
+bg_shock_volume_explosion3 | Offset: 8377A664
+
+bg_shock_volume_explosion4 | Offset: 8377A6A8
+
+bg_shock_volume_explosion5 | Offset: 8377A6EC
+
+bg_shock_volume_explosiondist1 | Offset: 8377A114
+
+bg_shock_volume_explosiondist2 | Offset: 8377A158
+
+bg_shock_volume_explosiveimpact | Offset: 8377A19C
+
+bg_shock_volume_grondo2d | Offset: 8377AB70
+
+bg_shock_volume_grondo3d | Offset: 8377AB2C
+
+bg_shock_volume_hurt | Offset: 8377AD08
+
+bg_shock_volume_item | Offset: 8377A598
+
+bg_shock_volume_local | Offset: 8377ABF8
+
+bg_shock_volume_local2 | Offset: 8377AC3C
+
+bg_shock_volume_local3 | Offset: 8377AC80
+
+bg_shock_volume_menu | Offset: 8377A444
+
+bg_shock_volume_mission | Offset: 8377AE5C
+
+bg_shock_volume_music | Offset: 8377ADD4
+
+bg_shock_volume_musicnopause | Offset: 8377AE18
+
+bg_shock_volume_nonshock | Offset: 8377AAA4
+
+bg_shock_volume_nonshock2 | Offset: 8377AAE8
+
+bg_shock_volume_norestrict | Offset: 8377A884
+
+bg_shock_volume_norestrict2d | Offset: 8377A8C8
+
+bg_shock_volume_physics | Offset: 83779EF4
+
+bg_shock_volume_player1 | Offset: 8377AD4C
+
+bg_shock_volume_player2 | Offset: 8377AD90
+
+bg_shock_volume_reload | Offset: 8377A510
+
+bg_shock_volume_reload2d | Offset: 8377A554
+
+bg_shock_volume_shellshock | Offset: 8377AF28
+
+bg_shock_volume_vehicle | Offset: 8377A3BC
+
+bg_shock_volume_vehicle2d | Offset: 8377A950
+
+bg_shock_volume_vehiclelimited | Offset: 8377A400
+
+bg_shock_volume_voice | Offset: 8377ABB4
+
+bg_shock_volume_weapon | Offset: 8377AA1C
+
+bg_shock_volume_weapon2d | Offset: 8377AA60
+
+bg_shock_volume_weapon_dist | Offset: 8377A994
+
+bg_shock_volume_weapon_mid | Offset: 8377A9D8
+
+bg_swingSpeed | Offset: 83777188
+
+bg_viewBobAmplitudeBase | Offset: 83777210
+
+bg_viewBobAmplitudeDucked | Offset: 83777320
+
+bg_viewBobAmplitudeDuckedAds | Offset: 83777364
+
+bg_viewBobAmplitudeProne | Offset: 837773A8
+
+bg_viewBobAmplitudeRoll | Offset: 837773EC
+
+bg_viewBobAmplitudeSprinting | Offset: 83777254
+
+bg_viewBobAmplitudeStanding | Offset: 83777298
+
+bg_viewBobAmplitudeStandingAds | Offset: 837772DC
+
+bg_viewBobLag | Offset: 83777430
+
+bg_viewKickMax | Offset: 83776C38
+
+bg_viewKickMin | Offset: 83776C7C
+
+bg_viewKickRandom | Offset: 83776CC0
+
+bg_viewKickScale | Offset: 83776BF4
+
+bg_weaponBobAmplitudeBase | Offset: 83777474
+
+bg_weaponBobAmplitudeDucked | Offset: 83777540
+
+bg_weaponBobAmplitudeProne | Offset: 83777584
+
+bg_weaponBobAmplitudeRoll | Offset: 837775C8
+
+bg_weaponBobAmplitudeSprinting | Offset: 837774B8
+
+bg_weaponBobAmplitudeStanding | Offset: 837774FC
+
+bg_weaponBobLag | Offset: 83777650
+
+bg_weaponBobMax | Offset: 8377760C
+
+bullet_penetrationMinFxDist | Offset: 83778134
+
+bullet_ricochetBaseChance | Offset: 83778178
+
+camera_thirdPerson | Offset: 83769C3C
+
+camera_thirdPersonCrosshairOffset | Offset: 83776DD0
+
+camera_thirdPersonOffset | Offset: 83776D04
+
+camera_thirdPersonOffsetAds | Offset: 83776D48
+
+camera_thirdPersonOffsetTurretAds | Offset: 83776D8C
+
+cameraShakeRemoteHelo_Angles | Offset: 83775F78
+
+cameraShakeRemoteHelo_Freqs | Offset: 83775FBC
+
+cameraShakeRemoteHelo_SpeedRange | Offset: 83776000
+
+cameraShakeRemoteMissile_Angles | Offset: 83775EAC
+
+cameraShakeRemoteMissile_Freqs | Offset: 83775EF0
+
+cameraShakeRemoteMissile_SpeedRange | Offset: 83775F34
+
+cg_airstrikeKillCamFarBlur | Offset: 83772F20
+
+cg_airstrikeKillCamFarBlurDist | Offset: 83772FA8
+
+cg_airstrikeKillCamFarBlurStart | Offset: 83772F64
+
+cg_airstrikeKillCamFov | Offset: 83772E98
+
+cg_airstrikeKillCamNearBlur | Offset: 83772EDC
+
+cg_airstrikeKillCamNearBlurEnd | Offset: 83773030
+
+cg_airstrikeKillCamNearBlurStart | Offset: 83772FEC
+
+cg_blood | Offset: 8376FF0C
+
+cg_brass | Offset: 8377188C
+
+cg_centertime | Offset: 837718D0
+
+cg_chatHeight | Offset: 83771FFC
+
+cg_chatTime | Offset: 83771FB8
+
+cg_ColorBlind_EnemyTeam | Offset: 837794DC
+
+cg_ColorBlind_MyParty | Offset: 83779564
+
+cg_ColorBlind_MyTeam | Offset: 83779520
+
+cg_connectionIconSize | Offset: 8377254C
+
+cg_constantSizeHeadIcons | Offset: 837725D4
+
+cg_crosshairAlpha | Offset: 8377177C
+
+cg_crosshairAlphaMin | Offset: 837717C0
+
+cg_crosshairDynamic | Offset: 83771804
+
+cg_crosshairEnemyColor | Offset: 83771848
+
+cg_crosshairVerticalOffset | Offset: 83773718
+
+cg_cullBulletAngle | Offset: 83776908
+
+cg_cullBullets | Offset: 83776880
+
+cg_cursorHints | Offset: 837705B0
+
+cg_deadChatWithDead | Offset: 837722E8
+
+cg_deadChatWithTeam | Offset: 8377221C
+
+cg_deadHearAllLiving | Offset: 837722A4
+
+cg_deadHearTeamLiving | Offset: 83772260
+
+cg_descriptiveText | Offset: 837723F8
+
+cg_draw2D | Offset: 83770704
+
+cg_drawBreathHint | Offset: 8377078C
+
+cg_drawCrosshair | Offset: 83766BA0
+
+cg_drawCrosshairNames | Offset: 83766BE4
+
+cg_drawCrosshairNamesPosX | Offset: 83770ABC
+
+cg_drawCrosshairNamesPosY | Offset: 83770B00
+
+cg_drawDamageDirection | Offset: 83770B88
+
+cg_drawDamageFlash | Offset: 83770B44
+
+cg_drawEffectNum | Offset: 837708E0
+
+cg_drawFPS | Offset: 83770858
+
+cg_drawFPSLabels | Offset: 83770924
+
+cg_drawFriendlyNames | Offset: 83772904
+
+cg_drawGun | Offset: 8377056C
+
+cg_drawHealth | Offset: 83770748
+
+cg_drawMantleHint | Offset: 837707D0
+
+cg_drawMaterial | Offset: 837709F0
+
+cg_drawpaused | Offset: 83772084
+
+cg_drawScriptUsage | Offset: 837709AC
+
+cg_drawSnapshot | Offset: 83770A34
+
+cg_drawStatsSource | Offset: 83770814
+
+cg_drawTalk | Offset: 83779278
+
+cg_drawTurretCrosshair | Offset: 83770A78
+
+cg_drawViewpos | Offset: 8377089C
+
+cg_errordecay | Offset: 83771914
+
+cg_everyoneHearsEveryone | Offset: 83766DC0
+
+cg_explosiveKillCamBackDist | Offset: 837730B8
+
+cg_explosiveKillCamGroundBackDist | Offset: 837731C8
+
+cg_explosiveKillCamGroundUpDist | Offset: 83773184
+
+cg_explosiveKillCamStopDecelDist | Offset: 83773360
+
+cg_explosiveKillCamStopDist | Offset: 8377331C
+
+cg_explosiveKillCamUpDist | Offset: 83773074
+
+cg_explosiveKillCamWallOutDist | Offset: 837730FC
+
+cg_explosiveKillCamWallSideDist | Offset: 83773140
+
+cg_flashbangNameFadeIn | Offset: 837729D0
+
+cg_flashbangNameFadeOut | Offset: 83772A14
+
+cg_footsteps | Offset: 8377199C
+
+cg_fov | Offset: 83770638
+
+cg_fovMin | Offset: 8377067C
+
+cg_fovScale | Offset: 83766B5C
+
+cg_friendlyNameFadeIn | Offset: 83772948
+
+cg_friendlyNameFadeOut | Offset: 8377298C
+
+cg_gameBoldMessageWidth | Offset: 837721D8
+
+cg_gameMessageWidth | Offset: 83772194
+
+cg_gun_x | Offset: 8377672C
+
+cg_gun_y | Offset: 83776770
+
+cg_gun_z | Offset: 837767B4
+
+cg_headIconMinScreenRadius | Offset: 8376682C
+
+cg_hearKillerTime | Offset: 8377232C
+
+cg_hearVictimEnabled | Offset: 83772370
+
+cg_hearVictimTime | Offset: 837723B4
+
+cg_heliKillCamFarBlur | Offset: 83772D44
+
+cg_heliKillCamFarBlurDist | Offset: 83772DCC
+
+cg_heliKillCamFarBlurStart | Offset: 83772D88
+
+cg_heliKillCamFov | Offset: 83772CBC
+
+cg_heliKillCamNearBlur | Offset: 83772D00
+
+cg_heliKillCamNearBlurEnd | Offset: 83772E54
+
+cg_heliKillCamNearBlurStart | Offset: 83772E10
+
+cg_hintFadeTime | Offset: 837705F4
+
+cg_hudChatIntermissionPosition | Offset: 83771270
+
+cg_hudChatPosition | Offset: 8377122C
+
+cg_hudDamageIconHeight | Offset: 83770DA8
+
+cg_hudDamageIconInScope | Offset: 83770E74
+
+cg_hudDamageIconOffset | Offset: 83770DEC
+
+cg_hudDamageIconTime | Offset: 83770E30
+
+cg_hudDamageIconWidth | Offset: 83770D64
+
+cg_hudGrenadeIconEnabledFlash | Offset: 83771050
+
+cg_hudGrenadeIconHeight | Offset: 83770FC8
+
+cg_hudGrenadeIconInScope | Offset: 83770F40
+
+cg_hudGrenadeIconMaxHeight | Offset: 83770EFC
+
+cg_hudGrenadeIconMaxRangeFlash | Offset: 83770EB8
+
+cg_hudGrenadeIconMaxRangeFrag | Offset: 83766A4C
+
+cg_hudGrenadeIconOffset | Offset: 83770F84
+
+cg_hudGrenadeIconWidth | Offset: 8377100C
+
+cg_hudGrenadePointerHeight | Offset: 83771094
+
+cg_hudGrenadePointerPivot | Offset: 8377111C
+
+cg_hudGrenadePointerPulseFreq | Offset: 83771160
+
+cg_hudGrenadePointerPulseMax | Offset: 837711A4
+
+cg_hudGrenadePointerPulseMin | Offset: 837711E8
+
+cg_hudGrenadePointerWidth | Offset: 837710D8
+
+cg_hudLegacySplitscreenScale | Offset: 83766760
+
+cg_hudMapBorderWidth | Offset: 837668F8
+
+cg_hudMapFriendlyHeight | Offset: 8376693C
+
+cg_hudMapFriendlyWidth | Offset: 83766980
+
+cg_hudMapPlayerHeight | Offset: 837669C4
+
+cg_hudMapPlayerWidth | Offset: 83766A08
+
+cg_hudMapRadarLineThickness | Offset: 83774B8C
+
+cg_hudObjectiveTextScale | Offset: 83766D38
+
+cg_hudProneY | Offset: 837715A0
+
+cg_hudSayPosition | Offset: 837712B4
+
+cg_hudSplitscreenBannerScoreboardScale | Offset: 837716B0
+
+cg_hudSplitscreenCompassElementScale | Offset: 83771628
+
+cg_hudSplitscreenCompassScale | Offset: 837667E8
+
+cg_hudSplitscreenOffsetsUseScale | Offset: 8376F318
+
+cg_hudSplitscreenScoreboardScale | Offset: 8377166C
+
+cg_hudSplitscreenStanceScale | Offset: 837667A4
+
+cg_hudStanceFlash | Offset: 83770D20
+
+cg_hudVotePosition | Offset: 837712F8
+
+cg_invalidCmdHintBlinkInterval | Offset: 83772AE0
+
+cg_invalidCmdHintDuration | Offset: 83772A9C
+
+cg_javelinKillCamCloseZDist | Offset: 8377353C
+
+cg_javelinKillCamDownDist | Offset: 83773690
+
+cg_javelinKillCamFov | Offset: 837735C4
+
+cg_javelinKillCamLookLerpDist | Offset: 837736D4
+
+cg_javelinKillCamPassDist | Offset: 83773608
+
+cg_javelinKillCamPassTime | Offset: 83773580
+
+cg_javelinKillCamUpDist | Offset: 8377364C
+
+cg_killCamDefaultLerpTime | Offset: 83772480
+
+cg_killCamTurretLerpTime | Offset: 837724C4
+
+cg_mapLocationSelectionCursorSpeed | Offset: 837715E4
+
+cg_marks_ents_player_only | Offset: 837719E0
+
+cg_minCullBulletDist | Offset: 837768C4
+
+cg_onlineSplitscreenScoreboardWidth | Offset: 8377562C
+
+cg_overheadIconSize | Offset: 83772728
+
+cg_overheadNamesFarDist | Offset: 837726E4
+
+cg_overheadNamesFarScale | Offset: 8377276C
+
+cg_overheadNamesFont | Offset: 8377287C
+
+cg_overheadNamesGlow | Offset: 83772838
+
+cg_overheadNamesMaxDist | Offset: 83772618
+
+cg_overheadNamesNearDist | Offset: 837726A0
+
+cg_overheadNamesSize | Offset: 8377265C
+
+cg_overheadRankSize | Offset: 837727B0
+
+cg_overheadTitlesFont | Offset: 837728C0
+
+cg_overheadTitleSize | Offset: 837727F4
+
+cg_remoteMissileKillCamBackDist | Offset: 837732D8
+
+cg_remoteMissileKillCamUpDist | Offset: 83773294
+
+cg_rocketKillCamBackDist | Offset: 83773250
+
+cg_rocketKillCamUpDist | Offset: 8377320C
+
+cg_scoreboard_externalmute_notice_duration | Offset: 8377584C
+
+cg_scoreboard_externalmute_notice_fadein | Offset: 837757C4
+
+cg_scoreboard_externalmute_notice_fadeout | Offset: 83775808
+
+cg_scoreboardBannerHeight | Offset: 837753C8
+
+cg_scoreboardFont | Offset: 837756B4
+
+cg_scoreboardHeaderFontScale | Offset: 837756F8
+
+cg_scoreboardHeight | Offset: 8377551C
+
+cg_scoreboardItemHeight | Offset: 8377540C
+
+cg_scoreboardMyColor | Offset: 83775560
+
+cg_scoreboardMyPartyColor | Offset: 837755A4
+
+cg_scoreboardPingGraph | Offset: 83775780
+
+cg_scoreboardPingHeight | Offset: 83775494
+
+cg_scoreboardPingText | Offset: 8377573C
+
+cg_scoreboardPingWidth | Offset: 83775450
+
+cg_scoreboardRankFontScale | Offset: 83775670
+
+cg_scoreboardScrollStep | Offset: 83775384
+
+cg_scoreboardTextOffset | Offset: 837755E8
+
+cg_scoreboardWidth | Offset: 837754D8
+
+cg_ScoresPing_BgColor | Offset: 83775340
+
+cg_ScoresPing_HighColor | Offset: 83775274
+
+cg_ScoresPing_Interval | Offset: 83775230
+
+cg_ScoresPing_LowColor | Offset: 837752FC
+
+cg_ScoresPing_MaxBars | Offset: 837751EC
+
+cg_ScoresPing_MedColor | Offset: 837752B8
+
+cg_scriptIconSize | Offset: 83772508
+
+cg_showmiss | Offset: 83771958
+
+cg_splitscreenSpectatorScaleIncrease | Offset: 837716F4
+
+cg_sprintMeterDisabledColor | Offset: 83779234
+
+cg_sprintMeterEmptyColor | Offset: 837791F0
+
+cg_sprintMeterFullColor | Offset: 837791AC
+
+cg_subtitleMinTime | Offset: 837720C8
+
+cg_subtitleWidthStandard | Offset: 8377210C
+
+cg_subtitleWidthWidescreen | Offset: 83772150
+
+cg_teamChatsOnly | Offset: 83772040
+
+cg_TeamColor_Allies | Offset: 83779300
+
+cg_TeamColor_Axis | Offset: 83779344
+
+cg_TeamColor_EnemyTeam | Offset: 83779410
+
+cg_TeamColor_Free | Offset: 83779498
+
+cg_TeamColor_MyParty | Offset: 837793CC
+
+cg_TeamColor_MyTeam | Offset: 83779388
+
+cg_TeamColor_Spectator | Offset: 83779454
+
+cg_thirdPerson | Offset: 83771EEC
+
+cg_thirdPersonAngle | Offset: 83771EA8
+
+cg_thirdPersonMode | Offset: 83771F30
+
+cg_thirdPersonRange | Offset: 83771E64
+
+cg_thirdPersonSpectator | Offset: 83771F74
+
+cg_turretKillCamBackDist | Offset: 837733E8
+
+cg_turretKillCamFov | Offset: 8377342C
+
+cg_turretKillCamUpDist | Offset: 837733A4
+
+cg_turretRemoteKillCamBackDist | Offset: 837734B4
+
+cg_turretRemoteKillCamFov | Offset: 837734F8
+
+cg_turretRemoteKillCamUpDist | Offset: 83773470
+
+cg_viewVehicleInfluence | Offset: 837706C0
+
+cg_viewZSmoothingMax | Offset: 83772B68
+
+cg_viewZSmoothingMin | Offset: 83772B24
+
+cg_viewZSmoothingTime | Offset: 83772BAC
+
+cg_voiceIconSize | Offset: 83772590
+
+cg_waterSheeting_distortionScaleFactor | Offset: 8377397C
+
+cg_waterSheeting_magnitude | Offset: 837739C0
+
+cg_waterSheeting_radius | Offset: 83773A04
+
+cg_weapHitCullAngle | Offset: 83772C34
+
+cg_weapHitCullEnable | Offset: 83772C78
+
+cg_weaponCycleDelay | Offset: 83771738
+
+cg_weaponHintsCoD1Style | Offset: 83766D7C
+
+cg_weaponVisInterval | Offset: 837792BC
+
+cg_youInKillCamSize | Offset: 8377243C
+
+cl_anglespeedkey | Offset: 8376F8F0
+
+cl_bypassMouseInput | Offset: 8376FB98
+
+cl_connectionAttempts | Offset: 8376F79C
+
+cl_connectTimeout | Offset: 8376F758
+
+cl_deathMessageWidth | Offset: 8376F3E4
+
+cl_demo_client | Offset: 837700A4
+
+cl_demo_enabled | Offset: 8376FFD8
+
+cl_demo_errormessage | Offset: 837701B4
+
+cl_demo_errortitle | Offset: 83770170
+
+cl_demo_keyframerate | Offset: 837700E8
+
+cl_demo_pause | Offset: 83770060
+
+cl_demo_playercard_display_start_time | Offset: 8377012C
+
+cl_demo_recordPrivateMatch | Offset: 8377001C
+
+cl_demo_render_fps | Offset: 83770308
+
+cl_demo_render_height | Offset: 837702C4
+
+cl_demo_render_width_wide | Offset: 83770280
+
+cl_demo_ui_segment_position | Offset: 8377023C
+
+cl_demo_ui_selected_segment | Offset: 837701F8
+
+cl_demo_uploadfb | Offset: 8377034C
+
+cl_dirSelConvergenceTime | Offset: 8376F934
+
+cl_freelook | Offset: 8376FA88
+
+cl_hudDrawsBehindUI | Offset: 8376F6D0
+
+cl_ingame | Offset: 8376FD74
+
+cl_maxpackets | Offset: 8376F978
+
+cl_maxPing | Offset: 8376FDB8
+
+cl_migrationTimeout | Offset: 8376F7E0
+
+cl_motdString | Offset: 8376FD30
+
+cl_mouseAccel | Offset: 8376FA44
+
+cl_noprint | Offset: 8376F428
+
+cl_packetdup | Offset: 8376F9BC
+
+cl_paused | Offset: 83761D00
+
+cl_pitchspeed | Offset: 8376F8AC
+
+cl_serverStatusResendTime | Offset: 8376FB54
+
+cl_showmouserate | Offset: 8376FACC
+
+cl_timeout | Offset: 8376F714
+
+cl_yawspeed | Offset: 8376F868
+
+clientSideEffects | Offset: 8376EFE8
+
+com_animCheck | Offset: 83761E10
+
+com_attractmode | Offset: 8376B358
+
+com_attractmodeduration | Offset: 8376B39C
+
+com_cinematicEndInWhite | Offset: 83761EDC
+
+com_completionResolveCommand | Offset: 83761F64
+
+com_errorMessage | Offset: 83780538
+
+com_errorResolveCommand | Offset: 83761F20
+
+com_filter_output | Offset: 83761D88
+
+com_maxfps | Offset: 83761AE0
+
+com_maxFrameTime | Offset: 83761C78
+
+com_timescale | Offset: 83761BAC
+
+compass | Offset: 83773FDC
+
+compassClampIcons | Offset: 83774174
+
+compassCoords | Offset: 837742C8
+
+compassECoordCutoff | Offset: 8377430C
+
+compassFriendlyHeight | Offset: 837741FC
+
+compassFriendlyWidth | Offset: 837741B8
+
+compassHellfireTargetSpot | Offset: 83774A7C
+
+compassHideSansObjectivePointer | Offset: 83774A38
+
+compassHideVehicles | Offset: 837749F4
+
+compassMaxRange | Offset: 83774064
+
+compassMinRadius | Offset: 837740EC
+
+compassMinRange | Offset: 837740A8
+
+compassObjectiveArrowHeight | Offset: 8377452C
+
+compassObjectiveArrowOffset | Offset: 83774570
+
+compassObjectiveArrowRotateDist | Offset: 837745B4
+
+compassObjectiveArrowWidth | Offset: 837744E8
+
+compassObjectiveDetailDist | Offset: 83774928
+
+compassObjectiveDrawLines | Offset: 837747D4
+
+compassObjectiveHeight | Offset: 837744A4
+
+compassObjectiveIconHeight | Offset: 8377485C
+
+compassObjectiveIconWidth | Offset: 83774818
+
+compassObjectiveMaxHeight | Offset: 837749B0
+
+compassObjectiveMaxRange | Offset: 837745F8
+
+compassObjectiveMinAlpha | Offset: 8377463C
+
+compassObjectiveMinDistRange | Offset: 837748E4
+
+compassObjectiveMinHeight | Offset: 8377496C
+
+compassObjectiveNearbyDist | Offset: 837748A0
+
+compassObjectiveNumRings | Offset: 83774680
+
+compassObjectiveRingSize | Offset: 83774708
+
+compassObjectiveRingTime | Offset: 837746C4
+
+compassObjectiveTextHeight | Offset: 83774790
+
+compassObjectiveTextScale | Offset: 8377474C
+
+compassObjectiveWidth | Offset: 83774460
+
+compassPlayerHeight | Offset: 83774284
+
+compassPlayerWidth | Offset: 83774240
+
+compassPortableRadarMinVelocity | Offset: 83774B48
+
+compassPortableRadarRadius | Offset: 83774AC0
+
+compassPortableRadarSweepTime | Offset: 83774B04
+
+compassRadarLineThickness | Offset: 8377441C
+
+compassRadarPingFadeTime | Offset: 837743D8
+
+compassRotation | Offset: 83774350
+
+compassSize | Offset: 83774020
+
+compassSoundPingFadeTime | Offset: 83774130
+
+compassTickertapeStretch | Offset: 83774394
+
+con_gameMsgWindow0FadeInTime | Offset: 83762360
+
+con_gameMsgWindow0FadeOutTime | Offset: 837623A4
+
+con_gameMsgWindow0Filter | Offset: 83766430
+
+con_gameMsgWindow0LineCount | Offset: 837622D8
+
+con_gameMsgWindow0MsgTime | Offset: 83762294
+
+con_gameMsgWindow0ScrollTime | Offset: 8376231C
+
+con_gameMsgWindow0SplitscreenScale | Offset: 837623E8
+
+con_gameMsgWindow1FadeInTime | Offset: 837624F8
+
+con_gameMsgWindow1FadeOutTime | Offset: 8376253C
+
+con_gameMsgWindow1Filter | Offset: 83766474
+
+con_gameMsgWindow1LineCount | Offset: 83762470
+
+con_gameMsgWindow1MsgTime | Offset: 8376242C
+
+con_gameMsgWindow1ScrollTime | Offset: 837624B4
+
+con_gameMsgWindow1SplitscreenScale | Offset: 83762580
+
+con_gameMsgWindow2FadeInTime | Offset: 83762690
+
+con_gameMsgWindow2FadeOutTime | Offset: 837626D4
+
+con_gameMsgWindow2Filter | Offset: 837664B8
+
+con_gameMsgWindow2LineCount | Offset: 83762608
+
+con_gameMsgWindow2MsgTime | Offset: 837625C4
+
+con_gameMsgWindow2ScrollTime | Offset: 8376264C
+
+con_gameMsgWindow2SplitscreenScale | Offset: 83762718
+
+con_gameMsgWindow3FadeInTime | Offset: 83762828
+
+con_gameMsgWindow3FadeOutTime | Offset: 8376286C
+
+con_gameMsgWindow3Filter | Offset: 837664FC
+
+con_gameMsgWindow3LineCount | Offset: 837627A0
+
+con_gameMsgWindow3MsgTime | Offset: 8376275C
+
+con_gameMsgWindow3ScrollTime | Offset: 837627E4
+
+con_gameMsgWindow3SplitscreenScale | Offset: 837628B0
+
+con_matchPrefixOnly | Offset: 8376F3A0
+
+con_typewriterColorBase | Offset: 837629C0
+
+con_typewriterColorGlowCheckpoint | Offset: 83762AD0
+
+con_typewriterColorGlowCompleted | Offset: 83762A48
+
+con_typewriterColorGlowFailed | Offset: 83762A8C
+
+con_typewriterColorGlowUpdated | Offset: 83762A04
+
+con_typewriterDecayDuration | Offset: 8376297C
+
+con_typewriterDecayStartTime | Offset: 83762938
+
+con_typewriterPrintSpeed | Offset: 837628F4
+
+consoleGame | Offset: 83761B24
+
+consoleLBFetchInterval | Offset: 837665C8
+
+counterDownloadInterval | Offset: 8376E658
+
+counterUploadInterval | Offset: 8376E614
+
+dcacheSimulateNoHDD | Offset: 8377CCE8
+
+dcacheThrottleEnabled | Offset: 83762074
+
+dcacheThrottleKBytesPerSec | Offset: 837620B8
+
+demonwareConsideredConnectedTime | Offset: 8376D15C
+
+developer | Offset: 8376583C
+
+didyouknow | Offset: 8377CF4C
+
+drawEntityCount | Offset: 83771380
+
+drawEntityCountPos | Offset: 837713C4
+
+drawEntityCountSize | Offset: 83771408
+
+drawKillcamData | Offset: 837714D4
+
+drawKillcamDataPos | Offset: 83771518
+
+drawKillcamDataSize | Offset: 8377155C
+
+drawLagometer | Offset: 8377133C
+
+drawServerBandwidth | Offset: 8377144C
+
+drawServerBandwidthPos | Offset: 83771490
+
+dw_leaderboard_write_active | Offset: 8376DE60
+
+dw_logging_frequency | Offset: 8376C788
+
+dw_logging_level | Offset: 8376C700
+
+dw_logging_level_chance | Offset: 8376C744
+
+dw_presence_active | Offset: 8376DB74
+
+dw_presence_coop_join_active | Offset: 8376DBB8
+
+dw_presence_get_delay | Offset: 8376DC84
+
+dw_presence_get_rate | Offset: 8376DCC8
+
+dw_presence_put_delay | Offset: 8376DBFC
+
+dw_presence_put_rate | Offset: 8376DC40
+
+dynEnt_bulletForce | Offset: 83773C24
+
+dynEnt_damageScale | Offset: 83773F10
+
+dynEnt_explodeForce | Offset: 83773C68
+
+dynEnt_explodeMaxEnts | Offset: 83773D78
+
+dynEnt_explodeMinForce | Offset: 83773D34
+
+dynEnt_explodeSpinScale | Offset: 83773CF0
+
+dynEnt_explodeUpbias | Offset: 83773CAC
+
+dynEnt_explodingBulletForce | Offset: 83773DBC
+
+dynEnt_explodingBulletMaxEnts | Offset: 83773ECC
+
+dynEnt_explodingBulletMinForce | Offset: 83773E88
+
+dynEnt_explodingBulletSpinScale | Offset: 83773E44
+
+dynEnt_explodingBulletUpbias | Offset: 83773E00
+
+elite_clan_active | Offset: 8376D888
+
+elite_clan_cool_off_time | Offset: 8376DAEC
+
+elite_clan_delay | Offset: 8376D844
+
+elite_clan_get_clan_max_retry_time | Offset: 8376D8CC
+
+elite_clan_get_clan_retry_step | Offset: 8376D910
+
+elite_clan_get_members_max_retry_time | Offset: 8376D954
+
+elite_clan_get_members_retry_step | Offset: 8376D998
+
+elite_clan_get_private_profile_max_retry_time | Offset: 8376D9DC
+
+elite_clan_get_private_profile_retry_step | Offset: 8376DA20
+
+elite_clan_get_public_profile_max_retry_time | Offset: 8376DA64
+
+elite_clan_get_public_profile_retry_step | Offset: 8376DAA8
+
+elite_clan_motd_throttle_time | Offset: 8376DB30
+
+elite_clan_using_title | Offset: 8376E548
+
+entitlements_active | Offset: 8376D514
+
+entitlements_config_file_max_retry_time | Offset: 8376D558
+
+entitlements_config_file_retry_step | Offset: 8376D59C
+
+entitlements_cool_off_time | Offset: 8376D668
+
+entitlements_delay | Offset: 8376D4D0
+
+entitlements_key_archive_max_retry_time | Offset: 8376D5E0
+
+entitlements_key_archive_retry_step | Offset: 8376D624
+
+entitlementSystemOk | Offset: 8376E504
+
+facebook_active | Offset: 8376D1E4
+
+facebook_delay | Offset: 8376D228
+
+facebook_friends_active | Offset: 8376D404
+
+facebook_friends_max_retry_time | Offset: 8376D2F4
+
+facebook_friends_refresh_time | Offset: 8376D37C
+
+facebook_friends_retry_step | Offset: 8376D338
+
+facebook_friends_showing_count | Offset: 8376E4C0
+
+facebook_friends_throttle_time | Offset: 8376D3C0
+
+facebook_max_retry_time | Offset: 8376D26C
+
+facebook_password | Offset: 8376E3F4
+
+facebook_password_asterisk | Offset: 8376E438
+
+facebook_popup_text | Offset: 8376E47C
+
+facebook_posting_popup_text | Offset: 8376E69C
+
+facebook_retry_step | Offset: 8376D2B0
+
+facebook_upload_photo_active | Offset: 8376D48C
+
+facebook_upload_video_active | Offset: 8376D448
+
+facebook_username | Offset: 8376E3B0
+
+fixedtime | Offset: 83761C34
+
+FoFIconMaxSize | Offset: 837769D4
+
+FoFIconMinSize | Offset: 83776990
+
+FoFIconScale | Offset: 8377694C
+
+FoFIconSpawnTimeDelay | Offset: 83776A18
+
+FoFIconSpawnTimeFade | Offset: 83776A5C
+
+fx_alphaThreshold | Offset: 83765F24
+
+fx_count | Offset: 83765C38
+
+fx_cull_elem_draw | Offset: 83765AA0
+
+fx_cull_elem_spawn | Offset: 83765A5C
+
+fx_debugBolt | Offset: 83765BF4
+
+fx_deferelem | Offset: 83765E58
+
+fx_draw | Offset: 83765990
+
+fx_draw_omniLight | Offset: 83765A18
+
+fx_draw_simd | Offset: 83765E9C
+
+fx_draw_spotLight | Offset: 837659D4
+
+fx_drawClouds | Offset: 83765E14
+
+fx_enable | Offset: 8376594C
+
+fx_freeze | Offset: 83765BB0
+
+fx_killEffectOnRewind | Offset: 83765EE0
+
+fx_mark_profile | Offset: 83765DD0
+
+fx_marks | Offset: 83765AE4
+
+fx_marks_ents | Offset: 83765B6C
+
+fx_marks_smodels | Offset: 83765B28
+
+fx_profile | Offset: 83765D8C
+
+fx_profileFilter | Offset: 83765D48
+
+fx_profileSkip | Offset: 83765D04
+
+fx_profileSort | Offset: 83765CC0
+
+fx_visMinTraceDist | Offset: 83765C7C
+
+g_allowvote | Offset: 8377BCB4
+
+g_banIPs | Offset: 8377CFD4
+
+g_clonePlayerMaxVelocity | Offset: 8377D27C
+
+g_compassShowEnemies | Offset: 83776BB0
+
+g_deadChat | Offset: 8377D304
+
+g_dropForwardSpeed | Offset: 8377D16C
+
+g_dropHorzSpeedRand | Offset: 8377D238
+
+g_dropUpSpeedBase | Offset: 8377D1B0
+
+g_dropUpSpeedRand | Offset: 8377D1F4
+
+g_earthquakeEnable | Offset: 8377DBC8
+
+g_fogColorReadOnly | Offset: 8377DEB4
+
+g_fogHalfDistReadOnly | Offset: 8377DF3C
+
+g_fogMaxOpacityReadOnly | Offset: 8377DF80
+
+g_fogStartDistReadOnly | Offset: 8377DEF8
+
+g_friendlyfireDist | Offset: 8377D8DC
+
+g_friendlyNameDist | Offset: 8377D920
+
+g_gametype | Offset: 8376EA54
+
+g_giveAll | Offset: 8377DDA4
+
+g_hardcore | Offset: 83767860
+
+g_inactivity | Offset: 8377D0A0
+
+g_knockback | Offset: 8377D018
+
+g_listEntity | Offset: 8377D2C0
+
+g_mantleBlockTimeBuffer | Offset: 8377DC0C
+
+g_maxDroppedWeapons | Offset: 8377D05C
+
+g_minGrenadeDamageSpeed | Offset: 8377DA74
+
+g_motd | Offset: 8377D0E4
+
+g_password | Offset: 8377CF90
+
+g_playerCollisionEjectSpeed | Offset: 8377D128
+
+g_radiusDamageMax | Offset: 8377DB84
+
+g_redCrosshairs | Offset: 8377DB40
+
+g_ScoresColor_Allies | Offset: 8377D700
+
+g_ScoresColor_Axis | Offset: 8377D744
+
+g_ScoresColor_EnemyTeam | Offset: 8377D634
+
+g_ScoresColor_Free | Offset: 8377D6BC
+
+g_ScoresColor_MyParty | Offset: 8377D5F0
+
+g_ScoresColor_MyTeam | Offset: 8377D5AC
+
+g_ScoresColor_Spectator | Offset: 8377D678
+
+g_sunFogBeginFadeAngleReadOnly | Offset: 8377E090
+
+g_sunFogColorReadOnly | Offset: 8377E008
+
+g_sunFogDirReadOnly | Offset: 8377E04C
+
+g_sunFogEnabledReadOnly | Offset: 8377DFC4
+
+g_sunFogEndFadeAngleReadOnly | Offset: 8377E0D4
+
+g_sunFogScaleReadOnly | Offset: 8377E118
+
+g_TeamIcon_Allies | Offset: 8377D38C
+
+g_TeamIcon_Axis | Offset: 8377D3D0
+
+g_TeamIcon_EnemyAllies | Offset: 8377D524
+
+g_TeamIcon_EnemyAxis | Offset: 8377D568
+
+g_TeamIcon_Free | Offset: 8377D414
+
+g_TeamIcon_MyAllies | Offset: 8377D49C
+
+g_TeamIcon_MyAxis | Offset: 8377D4E0
+
+g_TeamIcon_Spectator | Offset: 8377D458
+
+g_TeamName_Allies | Offset: 8377D788
+
+g_TeamName_Axis | Offset: 8377D7CC
+
+g_TeamTitleColor_EnemyTeam | Offset: 8377D854
+
+g_TeamTitleColor_MyTeam | Offset: 8377D810
+
+g_TeamTitleColor_Spectator | Offset: 8377D898
+
+g_useholdspawndelay | Offset: 8377DAFC
+
+g_useholdtime | Offset: 8377DAB8
+
+g_voiceChatTalkingDuration | Offset: 8377D348
+
+gameMode | Offset: 8376EA10
+
+glass_angular_vel | Offset: 83765FF0
+
+glass_break | Offset: 83765F68
+
+glass_damageToDestroy | Offset: 8378002C
+
+glass_damageToWeaken | Offset: 8377FFE8
+
+glass_edge_angle | Offset: 83766034
+
+glass_fall_delay | Offset: 837660BC
+
+glass_fall_gravity | Offset: 83766100
+
+glass_fall_ratio | Offset: 83766078
+
+glass_fringe_maxcoverage | Offset: 837662DC
+
+glass_fringe_maxsize | Offset: 83766298
+
+glass_fx_chance | Offset: 83766144
+
+glass_hinge_friction | Offset: 83766188
+
+glass_linear_vel | Offset: 83765FAC
+
+glass_max_pieces_per_frame | Offset: 837661CC
+
+glass_max_shatter_fx_per_frame | Offset: 83766210
+
+glass_meleeDamage | Offset: 83780070
+
+glass_physics_chance | Offset: 83766364
+
+glass_physics_maxdist | Offset: 837663A8
+
+glass_radiusDamageMultiplier | Offset: 837800B4
+
+glass_shard_maxsize | Offset: 83766254
+
+glass_shattered_scale | Offset: 837663EC
+
+glass_trace_interval | Offset: 83766320
+
+gpad_button_deadzone | Offset: 8376E7AC
+
+gpad_button_lstick_deflect_max | Offset: 83766650
+
+gpad_button_rstick_deflect_max | Offset: 8376660C
+
+gpad_dpadDebounceTime | Offset: 8376E988
+
+gpad_menu_scroll_delay_first | Offset: 8376E900
+
+gpad_menu_scroll_delay_rest | Offset: 8376E944
+
+gpad_stick_deadzone_max | Offset: 8376E834
+
+gpad_stick_deadzone_min | Offset: 8376E7F0
+
+gpad_stick_pressed | Offset: 8376E878
+
+gpad_stick_pressed_hysteresis | Offset: 8376E8BC
+
+grenadeBounceRestitutionMax | Offset: 8377FFA4
+
+grenadeBumpFreq | Offset: 8377FD84
+
+grenadeBumpMag | Offset: 8377FDC8
+
+grenadeBumpMax | Offset: 8377FE0C
+
+grenadeCurveMax | Offset: 8377FF60
+
+grenadeFrictionHigh | Offset: 8377FCFC
+
+grenadeFrictionLow | Offset: 8377FCB8
+
+grenadeFrictionMaxThresh | Offset: 8377FD40
+
+grenadeRestThreshold | Offset: 8377FC30
+
+grenadeRollingEnabled | Offset: 8377FC74
+
+grenadeWobbleFreq | Offset: 8377FE50
+
+grenadeWobbleFwdMag | Offset: 8377FE94
+
+grenadeWobbleSideDamp | Offset: 8377FF1C
+
+grenadeWobbleSideMag | Offset: 8377FED8
+
+groupDownloadInterval | Offset: 8376E5D0
+
+groupUploadInterval | Offset: 8376E58C
+
+heli_barrelMaxVelocity | Offset: 83776B28
+
+heli_barrelRotation | Offset: 83776AE4
+
+heli_barrelSlowdown | Offset: 83776B6C
+
+hiDef | Offset: 83761E54
+
+hud_bloodOverlayLerpRate | Offset: 83779168
+
+hud_deathQuoteFadeTime | Offset: 83779124
+
+hud_fade_ammodisplay | Offset: 83778EC0
+
+hud_fade_compass | Offset: 83778F48
+
+hud_fade_healthbar | Offset: 83778F04
+
+hud_fade_offhand | Offset: 83778F8C
+
+hud_fade_sprint | Offset: 83778FD0
+
+hud_flash_period_offhand | Offset: 83773F98
+
+hud_flash_time_offhand | Offset: 83773F54
+
+hud_health_pulserate_critical | Offset: 837790E0
+
+hud_health_pulserate_injured | Offset: 8377909C
+
+hud_health_startpulse_critical | Offset: 83779058
+
+hud_health_startpulse_injured | Offset: 83779014
+
+hudElemPausedBrightness | Offset: 83775D14
+
+intro | Offset: 83761DCC
+
+iwnet_sessionFullHeartbeat | Offset: 8376C524
+
+iwnet_sessionHeartbeat | Offset: 8376C4E0
+
+koth_autodestroytime | Offset: 837689A4
+
+koth_capturetime | Offset: 83768A70
+
+koth_delayPlayer | Offset: 83768AF8
+
+koth_destroytime | Offset: 83768AB4
+
+koth_extraDelay | Offset: 83768B80
+
+koth_kothmode | Offset: 83768A2C
+
+koth_proMode | Offset: 83768BC4
+
+koth_spawnDelay | Offset: 83768B3C
+
+koth_spawntime | Offset: 837689E8
+
+laserDebug | Offset: 83776374
+
+laserEndOffset | Offset: 837762EC
+
+laserFlarePct | Offset: 83776330
+
+laserFlarePct_alt | Offset: 83776484
+
+laserLight | Offset: 83776154
+
+laserLightBeginOffset | Offset: 83776264
+
+laserLightBodyTweak | Offset: 837761DC
+
+laserLightEndOffset | Offset: 837762A8
+
+laserLightRadius | Offset: 83776220
+
+laserLightRadius_alt | Offset: 83776440
+
+laserLightWithoutNightvision | Offset: 83776198
+
+laserRadius | Offset: 83776110
+
+laserRadius_alt | Offset: 837763FC
+
+laserRange | Offset: 83776088
+
+laserRange_alt | Offset: 837763B8
+
+laserRangePlayer | Offset: 837760CC
+
+lb_filter | Offset: 8376C810
+
+lb_maxrows | Offset: 8376C854
+
+lb_minrefresh | Offset: 8376C7CC
+
+lb_readDelay | Offset: 8376C898
+
+live_qosec_firstupdatems | Offset: 8376CDA4
+
+live_qosec_lastupdatems | Offset: 8376CDE8
+
+live_qosec_maxtime | Offset: 8376CE2C
+
+live_qosec_minpercent | Offset: 8376CD60
+
+live_qosec_minprobes | Offset: 8376CD1C
+
+liveanticheatunknowndvar | Offset: 83766540
+
+loading_sre_fatal | Offset: 8376E9CC
+
+lobby_animationSpeed | Offset: 8377C864
+
+lobby_animationTilesHigh | Offset: 8377C8EC
+
+lobby_animationTilesWide | Offset: 8377C8A8
+
+lobby_numAnimationFrames | Offset: 8377C820
+
+lobby_searchingPartyColor | Offset: 8377C798
+
+loc_forceEnglish | Offset: 8376B2D0
+
+loc_language | Offset: 8376B28C
+
+loc_translate | Offset: 8376B314
+
+lowAmmoWarningColor1 | Offset: 83774EBC
+
+lowAmmoWarningColor2 | Offset: 83774F00
+
+lowAmmoWarningNoAmmoColor1 | Offset: 83775098
+
+lowAmmoWarningNoAmmoColor2 | Offset: 837750DC
+
+lowAmmoWarningNoReloadColor1 | Offset: 83775010
+
+lowAmmoWarningNoReloadColor2 | Offset: 83775054
+
+lowAmmoWarningPulseFreq | Offset: 83774F44
+
+lowAmmoWarningPulseMax | Offset: 83774F88
+
+lowAmmoWarningPulseMin | Offset: 83774FCC
+
+lsp_debug | Offset: 8376C6BC
+
+m_filter | Offset: 8376FCEC
+
+m_forward | Offset: 8376FC64
+
+m_pitch | Offset: 8376FBDC
+
+m_side | Offset: 8376FCA8
+
+m_yaw | Offset: 8376FC20
+
+mantle_check_radius | Offset: 837783DC
+
+mantle_max_vertical_end_velocity | Offset: 83778464
+
+mantle_view_yawcap | Offset: 83778420
+
+mapname | Offset: 8376EADC
+
+matchdata_active | Offset: 8376DF70
+
+matchmaking_debug | Offset: 8376C49C
+
+melee_debug | Offset: 8377DDE8
+
+migration_dvarErrors | Offset: 8376E768
+
+missileExplosionLiftDistance | Offset: 8377FBA8
+
+missileGlassShatterVel | Offset: 8377F5D0
+
+missileHellfireMaxSlope | Offset: 8377F614
+
+missileHellfireUpAccel | Offset: 8377F658
+
+missileJavAccelClimb | Offset: 8377FA10
+
+missileJavAccelDescend | Offset: 8377F878
+
+missileJavClimbAngleDirect | Offset: 8377F6E0
+
+missileJavClimbAngleTop | Offset: 8377F724
+
+missileJavClimbCeilingDirect | Offset: 8377F768
+
+missileJavClimbCeilingTop | Offset: 8377F7AC
+
+missileJavClimbHeightDirect | Offset: 8377F69C
+
+missileJavClimbHeightTop | Offset: 8377F9CC
+
+missileJavClimbToOwner | Offset: 8377F944
+
+missileJavDuds | Offset: 8377F988
+
+missileJavSpeedLimitClimb | Offset: 8377FA54
+
+missileJavSpeedLimitDescend | Offset: 8377F8BC
+
+missileJavTurnDecel | Offset: 8377F900
+
+missileJavTurnRateDirect | Offset: 8377F7F0
+
+missileJavTurnRateTop | Offset: 8377F834
+
+missileMacross | Offset: 8377FBEC
+
+missileRemoteFOV | Offset: 83776044
+
+missileRemoteSpeedDown | Offset: 8377FB64
+
+missileRemoteSpeedTargetRange | Offset: 8377FADC
+
+missileRemoteSpeedUp | Offset: 8377FB20
+
+missileRemoteSteerPitchRange | Offset: 83778310
+
+missileRemoteSteerPitchRate | Offset: 83778354
+
+missileRemoteSteerYawRate | Offset: 83778398
+
+missileWaterMaxDepth | Offset: 8377FA98
+
+monkeytoy | Offset: 8376F35C
+
+motd | Offset: 8376FF50
+
+motionTrackerBlurDuration | Offset: 83774C58
+
+motionTrackerCenterX | Offset: 83774CE0
+
+motionTrackerCenterY | Offset: 83774D24
+
+motionTrackerPingFadeTime | Offset: 83774BD0
+
+motionTrackerPingPitchAddPerEnemy | Offset: 83774DF0
+
+motionTrackerPingPitchBase | Offset: 83774D68
+
+motionTrackerPingPitchNearby | Offset: 83774DAC
+
+motionTrackerPingSize | Offset: 83774C9C
+
+motionTrackerSweepSpeed | Offset: 83774C14
+
+name | Offset: 8376FDFC
+
+net_ip | Offset: 8376F180
+
+net_port | Offset: 8376F1C4
+
+newsFeed_updateInterval | Offset: 8376C8DC
+
+nextmap | Offset: 8376EE94
+
+nightVisionDisableEffects | Offset: 837751A8
+
+nightVisionFadeInOutTime | Offset: 83775120
+
+nightVisionPowerOnTime | Offset: 83775164
+
+objectiveFontSize | Offset: 83775E24
+
+objectiveTextOffsetY | Offset: 83775E68
+
+onlinegame | Offset: 8376F4B0
+
+onlinegame 0 | Offset: 8377CE80
+
+onlinevault_active | Offset: 8376DD0C
+
+onlinevault_maxslots_sub0 | Offset: 8376DD50
+
+onlinevault_maxslots_sub1 | Offset: 8376DD94
+
+onlinevault_maxslots_sub2 | Offset: 8376DDD8
+
+overrideNVGModelWithKnife | Offset: 83772BF0
+
+painReverbDryLevel | Offset: 83770C98
+
+painReverbRoomType | Offset: 83770C54
+
+painReverbWetLevel | Offset: 83770CDC
+
+painVisionLerpOutRate | Offset: 83770C10
+
+painVisionTriggerHealth | Offset: 83770BCC
+
+party_alternateMapVoteStatus | Offset: 8376BCE8
+
+party_firstSubpartyIndex | Offset: 8376C16C
+
+party_followPartyHostOutOfGames | Offset: 8376C27C
+
+party_gamesize | Offset: 8376BD70
+
+party_gametype | Offset: 8376BD2C
+
+party_IsLocalClientSelected | Offset: 8376C0A0
+
+party_kickplayerquestion | Offset: 8376BE80
+
+party_lobbyPlayerCount | Offset: 8376BEC4
+
+party_mapname | Offset: 8376BDB4
+
+party_mapvote_entrya_mapname | Offset: 8376BDF8
+
+party_mapvote_entryb_mapname | Offset: 8376BE3C
+
+party_matchedPlayerCount | Offset: 8376BF90
+
+party_maxplayers | Offset: 8376BBD8
+
+party_maxPrivatePartyPlayers | Offset: 8376C1B0
+
+party_maxTeamDiff | Offset: 8376BFD4
+
+party_membersMissingMapPack | Offset: 8376C1F4
+
+party_minLobbyTime | Offset: 8376C018
+
+party_minplayers | Offset: 8376BB94
+
+party_nextMapVoteStatus | Offset: 8376BCA4
+
+party_partyPlayerCount | Offset: 8376BF08
+
+party_playervisible | Offset: 8376C05C
+
+party_selectedIndex | Offset: 8376C0E4
+
+party_selectedIndexChangedTime | Offset: 8376C128
+
+party_statusString | Offset: 8376C238
+
+party_teambased | Offset: 8376BF4C
+
+party_teamsVisible | Offset: 8376BC1C
+
+party_timer | Offset: 8376BC60
+
+partyChatDisallowed | Offset: 8376CF80
+
+partyChatDisconnectTimer | Offset: 8376CFC4
+
+partymigrate_broadcast_interval | Offset: 8376C304
+
+partymigrate_makeHostTimeout | Offset: 8376C3D0
+
+partymigrate_selectiontime | Offset: 8376C2C0
+
+partymigrate_timeout | Offset: 8376C348
+
+partymigrate_timeoutmax | Offset: 8376C38C
+
+password | Offset: 8376FEC8
+
+past_title_data_active | Offset: 8376DEA4
+
+past_title_data_read_failure_interval_hours | Offset: 8376DEE8
+
+past_title_data_read_success_interval_hours | Offset: 8376DF2C
+
+perk_armorPiercingDamage | Offset: 83767200
+
+perk_blastShield | Offset: 837671BC
+
+perk_bulletPenetrationMultiplier | Offset: 837785FC
+
+perk_diveDistanceCheck | Offset: 837787D8
+
+perk_diveGravityScale | Offset: 837788E8
+
+perk_diveVelocity | Offset: 83778794
+
+perk_diveViewRollResetSpeed | Offset: 837788A4
+
+perk_diveViewRollSpeed | Offset: 83778860
+
+perk_diveViewRollTarget | Offset: 8377881C
+
+perk_extendedMagsMGAmmo | Offset: 83778970
+
+perk_extendedMagsPistolAmmo | Offset: 83778A3C
+
+perk_extendedMagsRifleAmmo | Offset: 8377892C
+
+perk_extendedMagsSMGAmmo | Offset: 837789B4
+
+perk_extendedMagsSpreadAmmo | Offset: 837789F8
+
+perk_extraBreath | Offset: 83778574
+
+perk_fastSnipeScale | Offset: 83778B08
+
+perk_footstepVolumeAlly | Offset: 83778C18
+
+perk_footstepVolumeEnemy | Offset: 83778C5C
+
+perk_footstepVolumePlayer | Offset: 83778BD4
+
+perk_grenadeDeath | Offset: 83778640
+
+perk_improvedExtraBreath | Offset: 837785B8
+
+perk_lightWeightViewBobScale | Offset: 83778A80
+
+perk_parabolicAngle | Offset: 837786C8
+
+perk_parabolicIcon | Offset: 8377870C
+
+perk_parabolicRadius | Offset: 83778684
+
+perk_quickDrawSpeedScale | Offset: 83778AC4
+
+perk_scavengerMode | Offset: 83767178
+
+perk_sprintMultiplier | Offset: 83778750
+
+perk_sprintRecoveryMultiplierActual | Offset: 83778B4C
+
+perk_sprintRecoveryMultiplierVisual | Offset: 83778B90
+
+perk_weapRateMultiplier | Offset: 83778530
+
+perk_weapReloadMultiplier | Offset: 837784EC
+
+perk_weapSpreadMultiplier | Offset: 837784A8
+
+phys_autoDisableAngular | Offset: 8377B3AC
+
+phys_autoDisableFastAngular | Offset: 8377B478
+
+phys_autoDisableFastLinear | Offset: 8377B434
+
+phys_autoDisableFastTime | Offset: 8377B4BC
+
+phys_autoDisableLinear | Offset: 8377B368
+
+phys_autoDisableTime | Offset: 8377B3F0
+
+phys_bulletSpinScale | Offset: 8377B214
+
+phys_bulletUpBias | Offset: 8377B1D0
+
+phys_cfm | Offset: 8377AFB0
+
+phys_collUseEntities | Offset: 8377B324
+
+phys_contact_cfm | Offset: 8377B500
+
+phys_contact_cfm_ragdoll | Offset: 8377B588
+
+phys_contact_cfm_vehicle | Offset: 8377B610
+
+phys_contact_cfm_vehicleSoft | Offset: 8377B698
+
+phys_contact_erp | Offset: 8377B544
+
+phys_contact_erp_ragdoll | Offset: 8377B5CC
+
+phys_contact_erp_vehicle | Offset: 8377B654
+
+phys_contact_erp_vehicleSoft | Offset: 8377B6DC
+
+phys_csl | Offset: 8377B104
+
+phys_dragAngular | Offset: 8377B874
+
+phys_dragLinear | Offset: 8377B830
+
+phys_erp | Offset: 8377AFF4
+
+phys_frictionScale | Offset: 8377B7EC
+
+phys_gravity | Offset: 8377B148
+
+phys_gravity_ragdoll | Offset: 8377B18C
+
+phys_gravityChangeWakeupRadius | Offset: 8377B8FC
+
+phys_jitterMaxMass | Offset: 8377B8B8
+
+phys_joint_cfm | Offset: 8377B720
+
+phys_joint_stop_cfm | Offset: 8377B764
+
+phys_joint_stop_erp | Offset: 8377B7A8
+
+phys_jointPullThreshold | Offset: 8377B940
+
+phys_mcv | Offset: 8377B038
+
+phys_mcv_ragdoll | Offset: 8377B07C
+
+phys_mcv_vehicle | Offset: 8377B0C0
+
+phys_noIslands | Offset: 8377B2E0
+
+phys_qsi | Offset: 8377B258
+
+phys_reorderConst | Offset: 8377B29C
+
+phys_worker_cmds | Offset: 8377AF6C
+
+physVeh_collideWithClipOnly | Offset: 8377BB60
+
+physVeh_explodeForce | Offset: 8377BA50
+
+physVeh_explodeSpinScale | Offset: 8377BA94
+
+physVeh_jump | Offset: 8377BBA4
+
+physVeh_minImpactMomentum | Offset: 8377B9C8
+
+physVeh_pathConstraintCfm | Offset: 8377BAD8
+
+physVeh_pathConstraintErp | Offset: 8377BB1C
+
+physVeh_slideReductionForHighSpeed | Offset: 8377BA0C
+
+physVeh_StepsPerFrame | Offset: 8377B984
+
+pickupPrints | Offset: 8377DE70
+
+ping_default_min | Offset: 83761A58
+
+ping_increment | Offset: 83761A14
+
+ping_searches_per | Offset: 837619D0
+
+player_breath_snd_delay | Offset: 83777760
+
+player_breath_snd_lerp | Offset: 8377771C
+
+player_dmgtimer_flinchTime | Offset: 837779C4
+
+player_dmgtimer_maxTime | Offset: 8377793C
+
+player_dmgtimer_stumbleTime | Offset: 83777980
+
+player_dmgtimer_timePerPoint | Offset: 837778F8
+
+player_lean_rotate_crouch_left | Offset: 83776FAC
+
+player_lean_rotate_crouch_right | Offset: 83776FF0
+
+player_lean_rotate_left | Offset: 83776F24
+
+player_lean_rotate_right | Offset: 83776F68
+
+player_lean_shift_crouch_left | Offset: 83776E9C
+
+player_lean_shift_crouch_right | Offset: 83776EE0
+
+player_lean_shift_left | Offset: 83776E14
+
+player_lean_shift_right | Offset: 83776E58
+
+player_MGUseRadius | Offset: 8377DA30
+
+player_moveThreshhold | Offset: 837777E8
+
+player_runThreshhold | Offset: 837777A4
+
+player_spectateSpeedScale | Offset: 83777870
+
+player_strafeAnimCosAngle | Offset: 8377782C
+
+player_stunWhiteFlash | Offset: 8377DD60
+
+player_throwbackInnerRadius | Offset: 8377D964
+
+player_throwbackOuterRadius | Offset: 8377D9A8
+
+player_turnAnims | Offset: 837778B4
+
+player_useRadius | Offset: 8377D9EC
+
+playercard_cache_download_max_retry_time | Offset: 8376E080
+
+playercard_cache_download_retry_step | Offset: 8376E0C4
+
+playercard_cache_upload_max_retry_time | Offset: 8376DFF8
+
+playercard_cache_upload_retry_step | Offset: 8376E03C
+
+playercard_cache_validity_life | Offset: 8376DFB4
+
+playerLBFetchInterval | Offset: 83766584
+
+playlist | Offset: 8376F46C
+
+playlistAggrFilename | Offset: 83761FEC
+
+playlistFilename | Offset: 83761FA8
+
+playListUpdateCheckMinutes | Offset: 83762030
+
+pm_gamesetup_mode_altmodes | Offset: 8376E108
+
+pm_gamesetup_mode_altmodes_dropzone | Offset: 8376E14C
+
+pm_gamesetup_mode_altmodes_gungame | Offset: 8376E218
+
+pm_gamesetup_mode_altmodes_infected | Offset: 8376E25C
+
+pm_gamesetup_mode_altmodes_jug | Offset: 8376E1D4
+
+pm_gamesetup_mode_altmodes_oneinthechamber | Offset: 8376E2A0
+
+pm_gamesetup_mode_altmodes_teamjug | Offset: 8376E190
+
+pm_gamesetup_options_createdefaultclass | Offset: 8376E2E4
+
+pm_gamesetup_options_customclassrestrictions | Offset: 8376E328
+
+prestige_shop_active | Offset: 8376E36C
+
+profileMenuOption_blacklevel | Offset: 837703D4
+
+profileMenuOption_gamma | Offset: 83770390
+
+profileMenuOption_offensiveContentMode | Offset: 83770528
+
+profileMenuOption_safeAreaHorz | Offset: 8377045C
+
+profileMenuOption_safeAreaVert | Offset: 837704A0
+
+profileMenuOption_sensitivity | Offset: 837704E4
+
+profileMenuOption_volume | Offset: 83770418
+
+protocol | Offset: 8376EA98
+
+pt_AdjustableQoSbitsPerSec | Offset: 8376B8EC
+
+pt_allMembersDoQoS | Offset: 8376B424
+
+pt_allMembersDoQoSTimeout | Offset: 8376B468
+
+pt_connectAttempts | Offset: 8376B798
+
+pt_connectTimeout | Offset: 8376B7DC
+
+pt_currentSearchTier | Offset: 8376BAC8
+
+pt_defaultSearchTier | Offset: 8376BA84
+
+pt_GameQoSbitsMinOpenSlots | Offset: 8376B974
+
+pt_GameQoSbitsPerSecMax | Offset: 8376B9FC
+
+pt_GameQoSbitsPerSecMin | Offset: 8376B9B8
+
+pt_gameStartTimerLength | Offset: 8376B5BC
+
+pt_LobbyQoSbitsPerSec | Offset: 8376B930
+
+pt_maxSearchTier | Offset: 8376BB0C
+
+pt_memberTimeout | Offset: 8376B820
+
+pt_migrateBeforeAdvertise | Offset: 8376BA40
+
+pt_msPerTier | Offset: 8376BB50
+
+pt_percentUnacceptableQoS | Offset: 8376B8A8
+
+pt_pregameStartTimerLength | Offset: 8376B600
+
+pt_rejoin | Offset: 8376B3E0
+
+pt_reservedAnonymousSlotTime | Offset: 8376B4AC
+
+pt_reservedCommittedSlotTime | Offset: 8376B534
+
+pt_reservedJoiningSlotTime | Offset: 8376B4F0
+
+pt_searchConnectAttempts | Offset: 8376B754
+
+pt_searchPauseTime | Offset: 8376B6CC
+
+pt_searchRandomDelay | Offset: 8376B710
+
+pt_searchResultsLifetime | Offset: 8376B644
+
+pt_searchResultsMin | Offset: 8376B688
+
+pt_startAllowingUnacceptableQos | Offset: 8376B864
+
+pt_stillConnectingWaitTime | Offset: 8376B578
+
+r_atlasAnimFPS | Offset: 837657F8
+
+r_blacklevel | Offset: 837631B8
+
+r_blur | Offset: 83764D58
+
+r_brightness | Offset: 83765198
+
+r_cacheModelLighting | Offset: 83763B48
+
+r_cacheSModelLighting | Offset: 83763B04
+
+r_charLightAmbient | Offset: 83763818
+
+r_clear | Offset: 83764120
+
+r_clearColor | Offset: 83764164
+
+r_clearColor2 | Offset: 837641A8
+
+r_cmdbuf_worker | Offset: 83764098
+
+r_colorMap | Offset: 837635B4
+
+r_contrast | Offset: 83765154
+
+r_debugLineWidth | Offset: 837639B0
+
+r_depthPrepassFar | Offset: 837645A4
+
+r_desaturation | Offset: 837651DC
+
+r_detailMap | Offset: 837635F8
+
+r_diffuseColorScale | Offset: 83763708
+
+r_distortion | Offset: 83764D9C
+
+r_dlightLimit | Offset: 837641EC
+
+r_dof_bias | Offset: 837656E8
+
+r_dof_enable | Offset: 83765440
+
+r_dof_farBlur | Offset: 8376550C
+
+r_dof_farEnd | Offset: 837656A4
+
+r_dof_farStart | Offset: 83765660
+
+r_dof_nearBlur | Offset: 837654C8
+
+r_dof_nearEnd | Offset: 8376561C
+
+r_dof_nearStart | Offset: 837655D8
+
+r_dof_tweak | Offset: 83765484
+
+r_dof_viewModelEnd | Offset: 83765594
+
+r_dof_viewModelStart | Offset: 83765550
+
+r_drawWater | Offset: 837642B8
+
+r_envMapExponent | Offset: 83763E78
+
+r_envMapMaxIntensity | Offset: 83763E34
+
+r_envMapMinIntensity | Offset: 83763DF0
+
+r_envMapOverride | Offset: 83763DAC
+
+r_envMapSunIntensity | Offset: 83763EBC
+
+r_filmAltShader | Offset: 83765088
+
+r_filmTweakBrightness | Offset: 83765220
+
+r_filmTweakContrast | Offset: 83765110
+
+r_filmTweakDarkTint | Offset: 83765374
+
+r_filmTweakDesaturation | Offset: 83765264
+
+r_filmTweakDesaturationDark | Offset: 837652A8
+
+r_filmTweakEnable | Offset: 837650CC
+
+r_filmTweakHeroSaturation | Offset: 837652EC
+
+r_filmTweakInvert | Offset: 83765330
+
+r_filmTweakLightTint | Offset: 837653FC
+
+r_filmTweakMediumTint | Offset: 837653B8
+
+r_filmUseTweaks | Offset: 83765044
+
+r_fog | Offset: 8376341C
+
+r_fog_depthhack_scale | Offset: 83763460
+
+r_forceLod | Offset: 837646F8
+
+r_fullbright | Offset: 83763350
+
+r_fullscreen | Offset: 837630EC
+
+r_gamma | Offset: 83763130
+
+r_glow | Offset: 83764E68
+
+r_glow_allowed | Offset: 83764DE0
+
+r_glow_allowed_script_forced | Offset: 83764E24
+
+r_glowTweakBloomCutoff | Offset: 83764FBC
+
+r_glowTweakBloomDesaturation | Offset: 83765000
+
+r_glowTweakBloomIntensity0 | Offset: 83764F78
+
+r_glowTweakEnable | Offset: 83764EF0
+
+r_glowTweakRadius0 | Offset: 83764F34
+
+r_glowUseTweaks | Offset: 83764EAC
+
+r_heroLighting | Offset: 83763C9C
+
+r_highLodDist | Offset: 837645E8
+
+r_ignore | Offset: 837630A8
+
+r_ignorehwgamma | Offset: 83763174
+
+r_inGameVideo | Offset: 8376FB10
+
+r_lightCacheLessFrequentMaxDistance | Offset: 83763D24
+
+r_lightCacheLessFrequentPeriod | Offset: 83763CE0
+
+r_lightGridContrast | Offset: 83763C58
+
+r_lightGridEnableTweaks | Offset: 83763B8C
+
+r_lightGridIntensity | Offset: 83763C14
+
+r_lightGridUseTweakedValues | Offset: 83763BD0
+
+r_lightMap | Offset: 83763570
+
+r_lockPvs | Offset: 837642FC
+
+r_lowestLodDist | Offset: 837646B4
+
+r_lowLodDist | Offset: 83764670
+
+r_mediumLodDist | Offset: 8376462C
+
+r_normalMap | Offset: 8376363C
+
+r_outdoorFeather | Offset: 83765770
+
+r_pixelShaderGPRReallocation | Offset: 8376572C
+
+r_polygonOffsetBias | Offset: 837634E8
+
+r_polygonOffsetBiasMult | Offset: 8376352C
+
+r_polygonOffsetScale | Offset: 837634A4
+
+r_portalBevels | Offset: 83764384
+
+r_portalBevelsOnly | Offset: 837643C8
+
+r_portalMinClipArea | Offset: 83764494
+
+r_portalMinRecurseDepth | Offset: 837644D8
+
+r_portalWalkLimit | Offset: 83764450
+
+r_primaryLightTweakDiffuseStrength | Offset: 83763790
+
+r_primaryLightTweakSpecularStrength | Offset: 837637D4
+
+r_primaryLightUseTweaks | Offset: 8376374C
+
+r_resampleScene | Offset: 8376396C
+
+r_scaleViewport | Offset: 83763F00
+
+r_screenFilterQuads | Offset: 83764D14
+
+r_showFbColorDebug | Offset: 8376451C
+
+r_showFloatZDebug | Offset: 83764560
+
+r_showLightGrid | Offset: 83763A7C
+
+r_showMissingLightGrid | Offset: 83763AC0
+
+r_showModelLightingLowWaterMark | Offset: 83763D68
+
+r_singleCell | Offset: 8376440C
+
+r_skipPvs | Offset: 83764340
+
+r_smp_backend | Offset: 83763F44
+
+r_smp_worker | Offset: 83763F88
+
+r_smp_worker_thread0 | Offset: 83763FCC
+
+r_smp_worker_thread1 | Offset: 83764010
+
+r_smp_worker_thread2 | Offset: 83764054
+
+r_specularColorScale | Offset: 837636C4
+
+r_specularMap | Offset: 83763680
+
+r_spotLightEntityShadows | Offset: 83764274
+
+r_spotLightShadows | Offset: 83764230
+
+r_subwindow | Offset: 83763394
+
+r_sun_from_dvars | Offset: 837657B4
+
+r_sun_fx_position | Offset: 83763064
+
+r_sunblind_fadein | Offset: 83762E88
+
+r_sunblind_fadeout | Offset: 83762ECC
+
+r_sunblind_max_angle | Offset: 83762E00
+
+r_sunblind_max_darken | Offset: 83762E44
+
+r_sunblind_min_angle | Offset: 83762DBC
+
+r_sunflare_fadein | Offset: 83762D34
+
+r_sunflare_fadeout | Offset: 83762D78
+
+r_sunflare_max_alpha | Offset: 83762CF0
+
+r_sunflare_max_angle | Offset: 83762CAC
+
+r_sunflare_max_size | Offset: 83762C68
+
+r_sunflare_min_angle | Offset: 83762C24
+
+r_sunflare_min_size | Offset: 83762BE0
+
+r_sunflare_shader | Offset: 83762B9C
+
+r_sunglare_fadein | Offset: 83762FDC
+
+r_sunglare_fadeout | Offset: 83763020
+
+r_sunglare_max_angle | Offset: 83762F54
+
+r_sunglare_max_lighten | Offset: 83762F98
+
+r_sunglare_min_angle | Offset: 83762F10
+
+r_sunsprite_shader | Offset: 83762B14
+
+r_sunsprite_size | Offset: 83762B58
+
+r_texFilterAnisoMax | Offset: 837631FC
+
+r_texFilterAnisoMin | Offset: 83763284
+
+r_texFilterDisable | Offset: 83763240
+
+r_texFilterMipBias | Offset: 8376330C
+
+r_texFilterMipMode | Offset: 837632C8
+
+r_thermalColorOffset | Offset: 837658C4
+
+r_thermalColorScale | Offset: 83765880
+
+r_thermalDetailScale | Offset: 83765908
+
+r_vc_makelog | Offset: 837639F4
+
+r_vc_showlog | Offset: 83763A38
+
+r_viewModelLightAmbient | Offset: 83763928
+
+r_viewModelPrimaryLightTweakDiffuseStrength | Offset: 837638A0
+
+r_viewModelPrimaryLightTweakSpecularStrength | Offset: 837638E4
+
+r_viewModelPrimaryLightUseTweaks | Offset: 8376385C
+
+r_vsync | Offset: 837640DC
+
+r_zfar | Offset: 837633D8
+
+radarjamDistMax | Offset: 8377386C
+
+radarjamDistMin | Offset: 83773828
+
+radarjamSinCurve | Offset: 837738B0
+
+radius_damage_debug | Offset: 8377DE2C
+
+ragdoll_baselerp_time | Offset: 83779894
+
+ragdoll_bullet_force | Offset: 8377980C
+
+ragdoll_bullet_upbias | Offset: 83779850
+
+ragdoll_debug | Offset: 837795EC
+
+ragdoll_dump_anims | Offset: 837799E8
+
+ragdoll_enable | Offset: 837795A8
+
+ragdoll_explode_force | Offset: 837796FC
+
+ragdoll_explode_upbias | Offset: 83779740
+
+ragdoll_exploding_bullet_force | Offset: 83779784
+
+ragdoll_exploding_bullet_upbias | Offset: 837797C8
+
+ragdoll_fps | Offset: 83779630
+
+ragdoll_idle_min_velsq | Offset: 83779AB4
+
+ragdoll_jitter_scale | Offset: 83779960
+
+ragdoll_jointlerp_time | Offset: 837798D8
+
+ragdoll_max_life | Offset: 83779674
+
+ragdoll_max_simulating | Offset: 837796B8
+
+ragdoll_max_stretch_pct | Offset: 83779A2C
+
+ragdoll_rotvel_scale | Offset: 8377991C
+
+ragdoll_self_collision_scale | Offset: 837799A4
+
+ragdoll_stretch_iters | Offset: 83779A70
+
+rate | Offset: 8376FE40
+
+RemoteCameraSounds_DryLevel | Offset: 837737A0
+
+RemoteCameraSounds_RoomType | Offset: 8377375C
+
+RemoteCameraSounds_WetLevel | Offset: 837737E4
+
+safeArea_adjusted_horizontal | Offset: 8376F290
+
+safeArea_adjusted_vertical | Offset: 8376F2D4
+
+safeArea_horizontal | Offset: 8376F208
+
+safeArea_vertical | Offset: 8376F24C
+
+scr_arena_numlives | Offset: 8376908C
+
+scr_arena_promode | Offset: 83769114
+
+scr_arena_roundlimit | Offset: 83769004
+
+scr_arena_roundswitch | Offset: 837690D0
+
+scr_arena_scorelimit | Offset: 83768F7C
+
+scr_arena_timelimit | Offset: 83768FC0
+
+scr_arena_winlimit | Offset: 83769048
+
+scr_bgm_halftime | Offset: 8376A038
+
+scr_bgm_numlives | Offset: 83769FF4
+
+scr_bgm_playerrespawndelay | Offset: 8376A104
+
+scr_bgm_promode | Offset: 8376A148
+
+scr_bgm_roundlimit | Offset: 83769F6C
+
+scr_bgm_roundswitch | Offset: 8376A07C
+
+scr_bgm_scorelimit | Offset: 83769EE4
+
+scr_bgm_timelimit | Offset: 83769F28
+
+scr_bgm_waverespawndelay | Offset: 8376A0C0
+
+scr_bgm_winlimit | Offset: 83769FB0
+
+scr_conf_numlives | Offset: 8376A6DC
+
+scr_conf_playerrespawndelay | Offset: 8376A720
+
+scr_conf_promode | Offset: 8376A7A8
+
+scr_conf_roundlimit | Offset: 8376A654
+
+scr_conf_scorelimit | Offset: 8376A5CC
+
+scr_conf_timelimit | Offset: 8376A610
+
+scr_conf_waverespawndelay | Offset: 8376A764
+
+scr_conf_winlimit | Offset: 8376A698
+
+scr_ctf_halftime | Offset: 837697B8
+
+scr_ctf_numlives | Offset: 83769840
+
+scr_ctf_playerrespawndelay | Offset: 83769884
+
+scr_ctf_promode | Offset: 8376990C
+
+scr_ctf_returntime | Offset: 837698C8
+
+scr_ctf_roundlimit | Offset: 83769730
+
+scr_ctf_scorelimit | Offset: 837696A8
+
+scr_ctf_timelimit | Offset: 837696EC
+
+scr_ctf_waverespawndelay | Offset: 837697FC
+
+scr_ctf_winlimit | Offset: 83769774
+
+scr_ctfpro_halftime | Offset: 83769AA4
+
+scr_ctfpro_numlives | Offset: 83769A60
+
+scr_ctfpro_playerrespawndelay | Offset: 83769B70
+
+scr_ctfpro_promode | Offset: 83769BF8
+
+scr_ctfpro_returntime | Offset: 83769BB4
+
+scr_ctfpro_roundlimit | Offset: 837699D8
+
+scr_ctfpro_roundswitch | Offset: 83769AE8
+
+scr_ctfpro_scorelimit | Offset: 83769950
+
+scr_ctfpro_timelimit | Offset: 83769994
+
+scr_ctfpro_waverespawndelay | Offset: 83769B2C
+
+scr_ctfpro_winlimit | Offset: 83769A1C
+
+scr_dd_addtime | Offset: 83769444
+
+scr_dd_bombtimer | Offset: 83769378
+
+scr_dd_defusetime | Offset: 83769400
+
+scr_dd_numlives | Offset: 83769268
+
+scr_dd_planttime | Offset: 837693BC
+
+scr_dd_playerrespawndelay | Offset: 837692F0
+
+scr_dd_promode | Offset: 83769488
+
+scr_dd_roundlimit | Offset: 837691E0
+
+scr_dd_roundswitch | Offset: 837692AC
+
+scr_dd_scorelimit | Offset: 83769158
+
+scr_dd_timelimit | Offset: 8376919C
+
+scr_dd_waverespawndelay | Offset: 83769334
+
+scr_dd_winlimit | Offset: 83769224
+
+scr_diehard | Offset: 837678E8
+
+scr_dm_numlives | Offset: 83767B4C
+
+scr_dm_playerrespawndelay | Offset: 83767B90
+
+scr_dm_promode | Offset: 83767C18
+
+scr_dm_roundlimit | Offset: 83767AC4
+
+scr_dm_scorelimit | Offset: 83767A3C
+
+scr_dm_timelimit | Offset: 83767A80
+
+scr_dm_waverespawndelay | Offset: 83767BD4
+
+scr_dm_winlimit | Offset: 83767B08
+
+scr_dom_numlives | Offset: 83767D6C
+
+scr_dom_playerrespawndelay | Offset: 83767DB0
+
+scr_dom_promode | Offset: 83767E38
+
+scr_dom_roundlimit | Offset: 83767CE4
+
+scr_dom_scorelimit | Offset: 83767C5C
+
+scr_dom_timelimit | Offset: 83767CA0
+
+scr_dom_waverespawndelay | Offset: 83767DF4
+
+scr_dom_winlimit | Offset: 83767D28
+
+scr_explBulletMod | Offset: 83767640
+
+scr_game_allowkillcam | Offset: 83766E8C
+
+scr_game_deathpointloss | Offset: 83766F14
+
+scr_game_forceuav | Offset: 83767068
+
+scr_game_graceperiod | Offset: 83766E48
+
+scr_game_hardpoints | Offset: 837670AC
+
+scr_game_killstreakdelay | Offset: 83767244
+
+scr_game_onlyheadshots | Offset: 83766ED0
+
+scr_game_perks | Offset: 83767024
+
+scr_game_spectatetype | Offset: 83766FE0
+
+scr_game_suicidepointloss | Offset: 83766F58
+
+scr_gameended | Offset: 8378035C
+
+scr_grnd_numlives | Offset: 8376A29C
+
+scr_grnd_playerrespawndelay | Offset: 8376A2E0
+
+scr_grnd_promode | Offset: 8376A368
+
+scr_grnd_roundlimit | Offset: 8376A214
+
+scr_grnd_scorelimit | Offset: 8376A18C
+
+scr_grnd_timelimit | Offset: 8376A1D0
+
+scr_grnd_waverespawndelay | Offset: 8376A324
+
+scr_grnd_winlimit | Offset: 8376A258
+
+scr_gtnw_numlives | Offset: 83769DD4
+
+scr_gtnw_playerrespawndelay | Offset: 83769E18
+
+scr_gtnw_promode | Offset: 83769EA0
+
+scr_gtnw_roundlimit | Offset: 83769D08
+
+scr_gtnw_roundswitch | Offset: 83769D90
+
+scr_gtnw_scorelimit | Offset: 83769C80
+
+scr_gtnw_timelimit | Offset: 83769CC4
+
+scr_gtnw_waverespawndelay | Offset: 83769E5C
+
+scr_gtnw_winlimit | Offset: 83769D4C
+
+scr_gun_numlives | Offset: 8376AD3C
+
+scr_gun_playerrespawndelay | Offset: 8376AD80
+
+scr_gun_promode | Offset: 8376AE08
+
+scr_gun_roundlimit | Offset: 8376ACB4
+
+scr_gun_scorelimit | Offset: 8376AC2C
+
+scr_gun_timelimit | Offset: 8376AC70
+
+scr_gun_waverespawndelay | Offset: 8376ADC4
+
+scr_gun_winlimit | Offset: 8376ACF8
+
+scr_hardcore | Offset: 837678A4
+
+scr_hardpoint_allowartillery | Offset: 83767288
+
+scr_hardpoint_allowhelicopter | Offset: 83767310
+
+scr_hardpoint_allowuav | Offset: 837672CC
+
+scr_infect_numlives | Offset: 8376AF18
+
+scr_infect_playerrespawndelay | Offset: 8376AF5C
+
+scr_infect_promode | Offset: 8376AFE4
+
+scr_infect_roundlimit | Offset: 8376AE90
+
+scr_infect_timelimit | Offset: 8376AE4C
+
+scr_infect_waverespawndelay | Offset: 8376AFA0
+
+scr_infect_winlimit | Offset: 8376AED4
+
+scr_jugg_numlives | Offset: 8376AB1C
+
+scr_jugg_playerrespawndelay | Offset: 8376AB60
+
+scr_jugg_promode | Offset: 8376ABE8
+
+scr_jugg_roundlimit | Offset: 8376AA94
+
+scr_jugg_scorelimit | Offset: 8376AA0C
+
+scr_jugg_timelimit | Offset: 8376AA50
+
+scr_jugg_waverespawndelay | Offset: 8376ABA4
+
+scr_jugg_winlimit | Offset: 8376AAD8
+
+scr_koth_numlives | Offset: 837688D8
+
+scr_koth_playerrespawndelay | Offset: 8376891C
+
+scr_koth_promode | Offset: 83768C08
+
+scr_koth_roundlimit | Offset: 8376880C
+
+scr_koth_roundswitch | Offset: 83768894
+
+scr_koth_scorelimit | Offset: 83768784
+
+scr_koth_timelimit | Offset: 837687C8
+
+scr_koth_waverespawndelay | Offset: 83768960
+
+scr_koth_winlimit | Offset: 83768850
+
+scr_maxPerPlayerExplosives | Offset: 83767684
+
+scr_nukeCancelMode | Offset: 83767134
+
+scr_nukeTimer | Offset: 837670F0
+
+scr_oic_numlives | Offset: 8376B138
+
+scr_oic_playerrespawndelay | Offset: 8376B17C
+
+scr_oic_promode | Offset: 8376B204
+
+scr_oic_roundlimit | Offset: 8376B0B0
+
+scr_oic_scorelimit | Offset: 8376B028
+
+scr_oic_timelimit | Offset: 8376B06C
+
+scr_oic_waverespawndelay | Offset: 8376B1C0
+
+scr_oic_winlimit | Offset: 8376B0F4
+
+scr_oldschool | Offset: 8376792C
+
+scr_oneflag_numlives | Offset: 83768DA0
+
+scr_oneflag_playerrespawndelay | Offset: 83768DE4
+
+scr_oneflag_promode | Offset: 83768E6C
+
+scr_oneflag_roundlimit | Offset: 83768CD4
+
+scr_oneflag_roundswitch | Offset: 83768D5C
+
+scr_oneflag_scorelimit | Offset: 83768C4C
+
+scr_oneflag_timelimit | Offset: 83768C90
+
+scr_oneflag_waverespawndelay | Offset: 83768E28
+
+scr_oneflag_winlimit | Offset: 83768D18
+
+scr_patientZero | Offset: 83766C6C
+
+scr_player_forcerespawn | Offset: 837675B8
+
+scr_player_healthregentime | Offset: 83767574
+
+scr_player_maxhealth | Offset: 837674EC
+
+scr_player_numlives | Offset: 83767464
+
+scr_player_respawndelay | Offset: 837674A8
+
+scr_player_sprinttime | Offset: 837675FC
+
+scr_player_suicidespawndelay | Offset: 83767530
+
+scr_RequiredMapAspectratio | Offset: 83766C28
+
+scr_restxp_cap | Offset: 83767794
+
+scr_restxp_enable | Offset: 837676C8
+
+scr_restxp_levelsPerDay | Offset: 83767750
+
+scr_restxp_minRestTime | Offset: 8376770C
+
+scr_restxp_restedAwardScale | Offset: 837677D8
+
+scr_restxp_timescale | Offset: 8376781C
+
+scr_riotShieldXPBullets | Offset: 83766CF4
+
+scr_sab_bombtimer | Offset: 83768234
+
+scr_sab_defusetime | Offset: 837682BC
+
+scr_sab_hotpotato | Offset: 83768300
+
+scr_sab_numlives | Offset: 837681F0
+
+scr_sab_planttime | Offset: 83768278
+
+scr_sab_playerrespawndelay | Offset: 83768344
+
+scr_sab_promode | Offset: 837683CC
+
+scr_sab_roundlimit | Offset: 83768124
+
+scr_sab_roundswitch | Offset: 837681AC
+
+scr_sab_scorelimit | Offset: 8376809C
+
+scr_sab_timelimit | Offset: 837680E0
+
+scr_sab_waverespawndelay | Offset: 83768388
+
+scr_sab_winlimit | Offset: 83768168
+
+scr_sd_bombtimer | Offset: 837685A8
+
+scr_sd_defusetime | Offset: 83768630
+
+scr_sd_multibomb | Offset: 83768674
+
+scr_sd_numlives | Offset: 83768564
+
+scr_sd_planttime | Offset: 837685EC
+
+scr_sd_playerrespawndelay | Offset: 837686B8
+
+scr_sd_promode | Offset: 83768740
+
+scr_sd_roundlimit | Offset: 83768498
+
+scr_sd_roundswitch | Offset: 83768520
+
+scr_sd_scorelimit | Offset: 83768410
+
+scr_sd_timelimit | Offset: 83768454
+
+scr_sd_waverespawndelay | Offset: 837686FC
+
+scr_sd_winlimit | Offset: 837684DC
+
+scr_tdef_numlives | Offset: 8376A4BC
+
+scr_tdef_playerrespawndelay | Offset: 8376A500
+
+scr_tdef_promode | Offset: 8376A588
+
+scr_tdef_roundlimit | Offset: 8376A434
+
+scr_tdef_scorelimit | Offset: 8376A3AC
+
+scr_tdef_timelimit | Offset: 8376A3F0
+
+scr_tdef_waverespawndelay | Offset: 8376A544
+
+scr_tdef_winlimit | Offset: 8376A478
+
+scr_team_fftype | Offset: 83767354
+
+scr_team_kickteamkillers | Offset: 83767420
+
+scr_team_respawntime | Offset: 83767398
+
+scr_team_teamkillpointloss | Offset: 83766F9C
+
+scr_team_teamkillspawndelay | Offset: 837673DC
+
+scr_thirdPerson | Offset: 83766E04
+
+scr_tispawndelay | Offset: 83766CB0
+
+scr_tjugg_numlives | Offset: 8376A8FC
+
+scr_tjugg_playerrespawndelay | Offset: 8376A940
+
+scr_tjugg_promode | Offset: 8376A9C8
+
+scr_tjugg_roundlimit | Offset: 8376A874
+
+scr_tjugg_scorelimit | Offset: 8376A7EC
+
+scr_tjugg_timelimit | Offset: 8376A830
+
+scr_tjugg_waverespawndelay | Offset: 8376A984
+
+scr_tjugg_winlimit | Offset: 8376A8B8
+
+scr_vip_numlives | Offset: 837695DC
+
+scr_vip_promode | Offset: 83769664
+
+scr_vip_roundlimit | Offset: 83769554
+
+scr_vip_roundswitch | Offset: 83769620
+
+scr_vip_scorelimit | Offset: 837694CC
+
+scr_vip_timelimit | Offset: 83769510
+
+scr_vip_winlimit | Offset: 83769598
+
+scr_war_halftime | Offset: 837802D4
+
+scr_war_numlives | Offset: 83767F8C
+
+scr_war_playerrespawndelay | Offset: 83767FD0
+
+scr_war_promode | Offset: 83768058
+
+scr_war_roundlimit | Offset: 83767F04
+
+scr_war_roundswitch | Offset: 83780290
+
+scr_war_scorelimit | Offset: 83767E7C
+
+scr_war_timelimit | Offset: 83767EC0
+
+scr_war_waverespawndelay | Offset: 83768014
+
+scr_war_winlimit | Offset: 83767F48
+
+scr_xpscale | Offset: 83768EF4
+
+search_weight_country_code | Offset: 8376C5AC
+
+search_weight_country_code_and_region | Offset: 8376C5F0
+
+search_weight_hilbert_enum | Offset: 8376C634
+
+search_weight_mappack_count | Offset: 8376C678
+
+sensitivity | Offset: 8376FA00
+
+sentry_placement_debug | Offset: 83778CA0
+
+sentry_placement_feet_offset | Offset: 83778CE4
+
+sentry_placement_feet_trace_dist_z | Offset: 83778D28
+
+sentry_placement_trace_dist | Offset: 83778DF4
+
+sentry_placement_trace_min_normal | Offset: 83778E7C
+
+sentry_placement_trace_pitch | Offset: 83778E38
+
+sentry_placement_trace_radius | Offset: 83778D6C
+
+sentry_placement_trace_radius_canon_safety | Offset: 83778DB0
+
+server1 | Offset: 8377BCF8
+
+server10 | Offset: 8377BF5C
+
+server11 | Offset: 8377BFA0
+
+server12 | Offset: 8377BFE4
+
+server13 | Offset: 8377C028
+
+server14 | Offset: 8377C06C
+
+server15 | Offset: 8377C0B0
+
+server16 | Offset: 8377C0F4
+
+server2 | Offset: 8377BD3C
+
+server3 | Offset: 8377BD80
+
+server4 | Offset: 8377BDC4
+
+server5 | Offset: 8377BE08
+
+server6 | Offset: 8377BE4C
+
+server7 | Offset: 8377BE90
+
+server8 | Offset: 8377BED4
+
+server9 | Offset: 8377BF18
+
+session_advertiseFailedSearchCount | Offset: 83761A9C
+
+session_immediateDeleteTinySessions | Offset: 8376C568
+
+session_join_min_time | Offset: 8376FF94
+
+session_nonblocking | Offset: 8376CF3C
+
+shieldBlastDamageProtection_120 | Offset: 8377DCD8
+
+shieldBlastDamageProtection_180 | Offset: 8377DD1C
+
+shieldBlastDamageProtection_30 | Offset: 8377DC50
+
+shieldBlastDamageProtection_60 | Offset: 8377DC94
+
+shieldImpactBulletShakeDuration | Offset: 8377650C
+
+shieldImpactBulletShakeScale | Offset: 837764C8
+
+shieldImpactExplosionHighShakeDuration | Offset: 837766A4
+
+shieldImpactExplosionHighShakeScale | Offset: 83776660
+
+shieldImpactExplosionLowShakeDuration | Offset: 8377661C
+
+shieldImpactExplosionLowShakeScale | Offset: 837765D8
+
+shieldImpactExplosionThreshold | Offset: 837766E8
+
+shieldImpactMissileShakeDuration | Offset: 83776594
+
+shieldImpactMissileShakeScale | Offset: 83776550
+
+shortversion | Offset: 8376E724
+
+sm_cameraOffset | Offset: 83764A28
+
+sm_dynlightAllSModels | Offset: 8376495C
+
+sm_enable | Offset: 8376473C
+
+sm_fastSunShadow | Offset: 83764C8C
+
+sm_lightScore_eyeProjectDist | Offset: 837649A0
+
+sm_lightScore_spotProjectFrac | Offset: 837649E4
+
+sm_maxLights | Offset: 8376484C
+
+sm_minSpotLightScore | Offset: 83764890
+
+sm_polygonOffsetBias | Offset: 83764AB0
+
+sm_polygonOffsetScale | Offset: 83764A6C
+
+sm_qualitySpotShadow | Offset: 83764CD0
+
+sm_spotDistCull | Offset: 83764C48
+
+sm_spotEnable | Offset: 837647C4
+
+sm_spotLightScoreModelScale | Offset: 837648D4
+
+sm_spotLimit | Offset: 83764808
+
+sm_spotShadowFadeTime | Offset: 83764918
+
+sm_strictCull | Offset: 83764C04
+
+sm_sunEnable | Offset: 83764780
+
+sm_sunSampleSizeNear | Offset: 83764AF4
+
+sm_sunShadowCenter | Offset: 83764B38
+
+sm_sunShadowCenterMode | Offset: 83764B7C
+
+sm_sunShadowScale | Offset: 83764BC0
+
+snaps | Offset: 8376FE84
+
+snd_cinematicVolumeScale | Offset: 83779DE4
+
+snd_draw3D | Offset: 83779D5C
+
+snd_drawInfo | Offset: 83770968
+
+snd_enable2D | Offset: 83779C08
+
+snd_enable3D | Offset: 83779C4C
+
+snd_enableEq | Offset: 83779D18
+
+snd_enableReverb | Offset: 83779CD4
+
+snd_enableStream | Offset: 83779C90
+
+snd_errorOnMissing | Offset: 83779AF8
+
+snd_levelFadeTime | Offset: 83779DA0
+
+snd_loadFadeTime | Offset: 83779B80
+
+snd_newWhizby | Offset: 83776AA0
+
+snd_occlusionDelay | Offset: 83779E28
+
+snd_occlusionLerpTime | Offset: 83779E6C
+
+snd_omnidirectionalPercentage | Offset: 83779EB0
+
+snd_slaveFadeTime | Offset: 83779BC4
+
+snd_volume | Offset: 83779B3C
+
+splitscreen | Offset: 8376F57C
+
+splitscreen_control_desired | Offset: 8376F648
+
+splitscreen_disabled_ref_count | Offset: 8376F604
+
+splitscreen_ingame | Offset: 8376F5C0
+
+splitscreen_online_enabled | Offset: 8376DE1C
+
+stat_version | Offset: 8376B248
+
+stringtable_debug | Offset: 83762250
+
+sv_allowedClan1 | Offset: 8376ED84
+
+sv_allowedClan2 | Offset: 8376EDC8
+
+sv_clientArchive | Offset: 8376EF1C
+
+sv_connectTimeout | Offset: 8376EC74
+
+sv_floodProtect | Offset: 8376EBEC
+
+sv_hostname | Offset: 8376EBA8
+
+sv_hugeSnapshotDelay | Offset: 8376EFA4
+
+sv_hugeSnapshotSize | Offset: 8376EF60
+
+sv_kickBanTime | Offset: 8376EE50
+
+sv_maxclients | Offset: 83768EB0
+
+sv_network_fps | Offset: 8376EED8
+
+sv_paused | Offset: 83761CBC
+
+sv_privateClients | Offset: 8376EB64
+
+sv_privateClientsForClients | Offset: 8376EB20
+
+sv_reconnectlimit | Offset: 8376ED40
+
+sv_rejoinTimeout | Offset: 8376ECB8
+
+sv_running | Offset: 83761D44
+
+sv_showAverageBPS | Offset: 8376EE0C
+
+sv_timeout | Offset: 8376EC30
+
+sv_zombietime | Offset: 8376ECFC
+
+systemlink | Offset: 8376F4F4
+
+systemlink_host | Offset: 8376F538
+
+testClients_doAttack | Offset: 8376F02C
+
+testClients_doCrouch | Offset: 8376F0F8
+
+testClients_doMove | Offset: 8376F070
+
+testClients_doReload | Offset: 8376F0B4
+
+testClients_watchKillcam | Offset: 8376F13C
+
+theater_active | Offset: 8376D1A0
+
+thermal_playerModel | Offset: 83772A58
+
+thermalBlurFactorNoScope | Offset: 83773938
+
+thermalBlurFactorScope | Offset: 837738F4
+
+timescale | Offset: 83761BF0
+
+tracer_explosiveColor1 | Offset: 83771AF0
+
+tracer_explosiveColor2 | Offset: 83771B34
+
+tracer_explosiveColor3 | Offset: 83771B78
+
+tracer_explosiveColor4 | Offset: 83771BBC
+
+tracer_explosiveColor5 | Offset: 83771C00
+
+tracer_explosiveOverride | Offset: 83771AAC
+
+tracer_explosiveWidth | Offset: 83771C44
+
+tracer_firstPersonMaxWidth | Offset: 83771A68
+
+tracer_stoppingPowerColor1 | Offset: 83771CCC
+
+tracer_stoppingPowerColor2 | Offset: 83771D10
+
+tracer_stoppingPowerColor3 | Offset: 83771D54
+
+tracer_stoppingPowerColor4 | Offset: 83771D98
+
+tracer_stoppingPowerColor5 | Offset: 83771DDC
+
+tracer_stoppingPowerOverride | Offset: 83771C88
+
+tracer_stoppingPowerWidth | Offset: 83771E20
+
+tracer_thermalWidthMult | Offset: 83771A24
+
+ui_ac130usetime | Offset: 8378046C
+
+ui_allow_classchange | Offset: 8377CA40
+
+ui_allow_controlschange | Offset: 83766870
+
+ui_allow_teamchange | Offset: 8377CA84
+
+ui_allowvote | Offset: 837803E4
+
+ui_bigFont | Offset: 8377C1C0
+
+ui_bomb_timer | Offset: 837800F8
+
+ui_borderLowLightScale | Offset: 83766694
+
+ui_buildLocation | Offset: 8377C4AC
+
+ui_buildSize | Offset: 8377C4F0
+
+ui_cinematicsTimestamp | Offset: 8377C930
+
+ui_connectScreenTextGlowColor | Offset: 8377C974
+
+ui_currentFeederMapIndex | Offset: 8377C3E0
+
+ui_currentMap | Offset: 8377C248
+
+ui_customClassName | Offset: 8377BC70
+
+ui_customModeEditName | Offset: 8377BC2C
+
+ui_customModeName | Offset: 8377BBE8
+
+ui_danger_team | Offset: 83780180
+
+ui_debugMode | Offset: 8377C9FC
+
+ui_drawCrosshair | Offset: 8377C9B8
+
+ui_extraBigFont | Offset: 8377C204
+
+ui_friendlyfire | Offset: 83780428
+
+ui_gametype | Offset: 8376671C
+
+ui_halftime | Offset: 83780318
+
+ui_hud_hardcore | Offset: 83767970
+
+ui_hud_obituaries | Offset: 837679B4
+
+ui_hud_showobjicons | Offset: 837679F8
+
+ui_inactiveBaseColor | Offset: 8377C6CC
+
+ui_inactivePartyColor | Offset: 8377C710
+
+ui_inhostmigration | Offset: 837801C4
+
+ui_mapname | Offset: 837666D8
+
+ui_mapvote_entrya_gametype | Offset: 8377C314
+
+ui_mapvote_entrya_mapname | Offset: 8377C28C
+
+ui_mapvote_entryb_gametype | Offset: 8377C358
+
+ui_mapvote_entryb_mapname | Offset: 8377C2D0
+
+ui_mousePitch | Offset: 8377CD2C
+
+ui_mptype | Offset: 8377CEC4
+
+ui_multiplayer | Offset: 8377CD70
+
+ui_myPartyColor | Offset: 8377C754
+
+ui_netSource | Offset: 8377C138
+
+ui_nuke_end_milliseconds | Offset: 8378013C
+
+ui_onlineRequired | Offset: 8377C39C
+
+ui_opensummary | Offset: 8377CE3C
+
+ui_override_halftime | Offset: 83780208
+
+ui_overtime | Offset: 837803A0
+
+ui_partyFull | Offset: 8377C7DC
+
+ui_playerPartyColor | Offset: 8377C688
+
+ui_playlistActionButtonAlpha | Offset: 8377C644
+
+ui_playlistCategoryDisabledColor | Offset: 8377C5BC
+
+ui_playlistCategoryEnabledColor | Offset: 8377C600
+
+ui_playlistPopulationRefreshTime | Offset: 8377CCA4
+
+ui_remoteTankUseTime | Offset: 837804B0
+
+ui_scorelimit | Offset: 837804F4
+
+ui_selectedFeederMap | Offset: 8377C424
+
+ui_serverStatusTimeOut | Offset: 8377C468
+
+ui_showDLCMaps | Offset: 8377CC1C
+
+ui_showList | Offset: 8377C534
+
+ui_showmap | Offset: 837668B4
+
+ui_showMenuOnly | Offset: 8377C578
+
+ui_sliderSteps | Offset: 8377CBD8
+
+ui_smallFont | Offset: 8377C17C
+
+ui_textScrollFadeTime | Offset: 8377CB94
+
+ui_textScrollPauseEnd | Offset: 8377CB50
+
+ui_textScrollPauseStart | Offset: 8377CB0C
+
+ui_textScrollSpeed | Offset: 8377CAC8
+
+ui_timelimit | Offset: 8378024C
+
+ui_version_show | Offset: 8377CDF8
+
+uiscript_debug | Offset: 8377CDB4
+
+use_filtered_query_pass | Offset: 8376C458
+
+use_weighted_pass | Offset: 8376C414
+
+useonlinestats | Offset: 8376F68C
+
+useRelativeTeamColors | Offset: 83768F38
+
+userGroup_active | Offset: 8376D6AC
+
+userGroup_cool_off_time | Offset: 8376D800
+
+userGroup_max_retry_time | Offset: 8376D6F0
+
+userGroup_refresh_time_secs | Offset: 8376D7BC
+
+userGroup_retry_step | Offset: 8376D734
+
+userGroup_RetryTime | Offset: 8376D778
+
+useTagFlashSilenced | Offset: 837781BC
+
+validate_apply_clamps | Offset: 8376C920
+
+validate_apply_revert | Offset: 8376C964
+
+validate_apply_revert_full | Offset: 8376C9A8
+
+validate_clamp_assists | Offset: 8376CAFC
+
+validate_clamp_experience | Offset: 8376CA30
+
+validate_clamp_headshots | Offset: 8376CB40
+
+validate_clamp_hits | Offset: 8376CC50
+
+validate_clamp_kills | Offset: 8376CAB8
+
+validate_clamp_losses | Offset: 8376CBC8
+
+validate_clamp_misses | Offset: 8376CC94
+
+validate_clamp_ties | Offset: 8376CC0C
+
+validate_clamp_totalshots | Offset: 8376CCD8
+
+validate_clamp_weaponXP | Offset: 8376CA74
+
+validate_clamp_wins | Offset: 8376CB84
+
+validate_drop_on_fail | Offset: 8376C9EC
+
+veh_aiOverSteerScale | Offset: 8377E1A0
+
+veh_boneControllerLodDist | Offset: 83773AD0
+
+vehAudio_inAirPitchDownLerp | Offset: 83773B9C
+
+vehAudio_inAirPitchUpLerp | Offset: 83773B58
+
+vehAudio_spawnVolumeTime | Offset: 83773BE0
+
+vehCam_freeLook | Offset: 83773B14
+
+vehCam_mode | Offset: 8377E15C
+
+vehHelicopterBoundsRadius | Offset: 8377E998
+
+vehHelicopterDecelerationFwd | Offset: 8377E59C
+
+vehHelicopterDecelerationSide | Offset: 8377E5E0
+
+vehHelicopterDecelerationUp | Offset: 8377E624
+
+vehHelicopterHeadSwayDontSwayTheTurret | Offset: 8377E910
+
+vehHelicopterHoverSpeedThreshold | Offset: 8377E448
+
+vehHelicopterInvertUpDown | Offset: 8377E668
+
+vehHelicopterJitterJerkyness | Offset: 8377E8CC
+
+vehHelicopterLookaheadTime | Offset: 8377E404
+
+vehHelicopterMaxAccel | Offset: 8377E26C
+
+vehHelicopterMaxAccelVertical | Offset: 8377E2B0
+
+vehHelicopterMaxPitch | Offset: 8377E37C
+
+vehHelicopterMaxRoll | Offset: 8377E3C0
+
+vehHelicopterMaxSpeed | Offset: 8377E1E4
+
+vehHelicopterMaxSpeedVertical | Offset: 8377E228
+
+vehHelicopterMaxYawAccel | Offset: 8377E338
+
+vehHelicopterMaxYawRate | Offset: 8377E2F4
+
+vehHelicopterRightStickDeadzone | Offset: 8377E48C
+
+vehHelicopterScaleMovement | Offset: 8377E514
+
+vehHelicopterSoftCollisions | Offset: 8377E558
+
+vehHelicopterStrafeDeadzone | Offset: 8377E4D0
+
+vehHelicopterTiltFromAcceleration | Offset: 8377E734
+
+vehHelicopterTiltFromControllerAxes | Offset: 8377E800
+
+vehHelicopterTiltFromDeceleration | Offset: 8377E778
+
+vehHelicopterTiltFromFwdAndYaw | Offset: 8377E844
+
+vehHelicopterTiltFromFwdAndYaw_VelAtMaxTilt | Offset: 8377E888
+
+vehHelicopterTiltFromVelocity | Offset: 8377E7BC
+
+vehHelicopterTiltMomentum | Offset: 8377E954
+
+vehHelicopterTiltSpeed | Offset: 8377E6F0
+
+vehHelicopterYawOnLeftStick | Offset: 8377E6AC
+
+vehSubmarineAllowInSolid | Offset: 8377F190
+
+vehSubmarineBodyRelRotation | Offset: 8377F47C
+
+vehSubmarineControls | Offset: 8377F108
+
+vehSubmarineForwardDampening | Offset: 8377EB74
+
+vehSubmarineFwdCollMaxAccel | Offset: 8377F36C
+
+vehSubmarineFwdCollMaxAngAccel | Offset: 8377F328
+
+vehSubmarineFwdProbeTime | Offset: 8377F25C
+
+vehSubmarineHorizControlGamma | Offset: 8377F3F4
+
+vehSubmarineInvertUpDown | Offset: 8377F14C
+
+vehSubmarineLateralDampening | Offset: 8377EBB8
+
+vehSubmarineMaxDownPitch | Offset: 8377EC40
+
+vehSubmarineMaxForwardAccel | Offset: 8377ECC8
+
+vehSubmarineMaxForwardPitchAccel | Offset: 8377EF2C
+
+vehSubmarineMaxForwardVel | Offset: 8377ED94
+
+vehSubmarineMaxForwardYawAccel | Offset: 8377EF70
+
+vehSubmarineMaxFwdVelRef | Offset: 8377F3B0
+
+vehSubmarineMaxLateralVel | Offset: 8377EE1C
+
+vehSubmarineMaxNegativeBuoyancy | Offset: 8377EEA4
+
+vehSubmarineMaxPositiveBuoyancy | Offset: 8377EE60
+
+vehSubmarineMaxReverseAccel | Offset: 8377ED0C
+
+vehSubmarineMaxReversePitchAccel | Offset: 8377EFB4
+
+vehSubmarineMaxReverseVel | Offset: 8377EDD8
+
+vehSubmarineMaxReverseYawAccel | Offset: 8377EFF8
+
+vehSubmarineMaxRoll | Offset: 8377EC84
+
+vehSubmarineMaxRollAccel | Offset: 8377F0C4
+
+vehSubmarineMaxStoppedPitchAccel | Offset: 8377F03C
+
+vehSubmarineMaxStoppedYawAccel | Offset: 8377F080
+
+vehSubmarineMaxUpPitch | Offset: 8377EBFC
+
+vehSubmarineMinForwardVel | Offset: 8377ED50
+
+vehSubmarineMinVelNoRestore | Offset: 8377EB30
+
+vehSubmarinePitchDampening | Offset: 8377EA20
+
+vehSubmarinePitchRestore | Offset: 8377EAA8
+
+vehSubmarineRollDampening | Offset: 8377EA64
+
+vehSubmarineRollDrivenYaw | Offset: 8377F4C0
+
+vehSubmarineRollRestore | Offset: 8377EAEC
+
+vehSubmarineSideCollMaxAccel | Offset: 8377F2E4
+
+vehSubmarineSideCollMaxAngAccel | Offset: 8377F2A0
+
+vehSubmarineSideProbeMaxDist | Offset: 8377F218
+
+vehSubmarineSideProbeMinDist | Offset: 8377F1D4
+
+vehSubmarineStoppedVel | Offset: 8377EEE8
+
+vehSubmarineVertControlGamma | Offset: 8377F438
+
+vehSubmarineYawDampening | Offset: 8377E9DC
+
+vehUGVPitchTrack | Offset: 8377F548
+
+vehUGVRollTrack | Offset: 8377F58C
+
+vehUGVWheelInfluence | Offset: 8377F504
+
+version | Offset: 8376E6E0
+
+viewangNow | Offset: 83773A8C
+
+viewModelDebugNotetracks | Offset: 8377683C
+
+viewModelHacks | Offset: 837767F8
+
+viewposNow | Offset: 83773A48
+
+waypointDebugDraw | Offset: 83775890
+
+waypointDistScaleRangeMax | Offset: 83775C04
+
+waypointDistScaleRangeMin | Offset: 83775BC0
+
+waypointDistScaleSmallest | Offset: 83775C48
+
+waypointIconHeight | Offset: 83766A90
+
+waypointIconWidth | Offset: 83766AD4
+
+waypointOffscreenCornerRadius | Offset: 83775AF4
+
+waypointOffscreenDistanceThresholdAlpha | Offset: 8377595C
+
+waypointOffscreenPadBottom | Offset: 83775A6C
+
+waypointOffscreenPadLeft | Offset: 837759A0
+
+waypointOffscreenPadRight | Offset: 837759E4
+
+waypointOffscreenPadTop | Offset: 83775A28
+
+waypointOffscreenPointerDistance | Offset: 83766B18
+
+waypointOffscreenPointerHeight | Offset: 83775918
+
+waypointOffscreenPointerWidth | Offset: 837758D4
+
+waypointOffscreenRoundedCorners | Offset: 83775AB0
+
+waypointOffscreenScaleLength | Offset: 83775B38
+
+waypointOffscreenScaleSmallest | Offset: 83775B7C
+
+waypointPlayerOffsetCrouch | Offset: 83775D9C
+
+waypointPlayerOffsetProne | Offset: 83775D58
+
+waypointPlayerOffsetStand | Offset: 83775DE0
+
+waypointSplitscreenScale | Offset: 83775C8C
+
+waypointTweakY | Offset: 83775CD0
+
+wideScreen | Offset: 83761E98
+
+xblive_hostingprivateparty | Offset: 8376D008
+
+xblive_loggedin | Offset: 8376CE70
+
+xblive_mappacks | Offset: 8376D090
+
+xblive_privatematch | Offset: 8376D04C
+
+xenon_maxVoicePacketsPerSec | Offset: 8376CEB4
+
+xenon_maxVoicePacketsPerSecForServer | Offset: 8376CEF8
+
+xenon_presence_cooloff_timer | Offset: 8376D0D4
+
+xenon_presence_initial_timer | Offset: 8376D118
+
+xenonGame | Offset: 83761B68
+
+cg_drawSpectatorMessages | Offset: 837805C0
+
+ui_altscene | Offset: 83780604
+
+ui_adrenaline | Offset: 83780648
+
+ui_promotion | Offset: 8378068C
+
+player_summary_xp | Offset: 837806D0
+
+player_summary_score | Offset: 83780714
+
+player_summary_challenge | Offset: 83780758
+
+player_summary_match | Offset: 8378079C
+
+player_summary_misc | Offset: 837807E0
+
+ui_saved_focus_changeclass | Offset: 83780824
+
+scr_objectiveText | Offset: 83780868

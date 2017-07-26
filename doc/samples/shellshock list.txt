@@ -1,0 +1,58 @@
+* ac130
+ac130_enhanced
+berlin_building
+berlin_intro
+* concussion_grenade_mp
+* damage_mp
+dcburning
+* default
+dog_bite
+dubai_ending_crash_site
+dubai_ending_no_control
+dubai_ending_pulling_knife_later
+dubai_ending_wakeup
+dubai_ending_wounded
+dubai_injured_passout
+flashbang
+* flashbang_mp
+* frag_grenade_mp
+hamburg_blackout
+hamburg_garage_crash
+hijack_airplane
+hijack_door_explosion
+hijack_end_scene
+hijack_engine_explosion
+hijack_minor
+hijack_slowview
+hijack_tail_explosion
+* hold_breath
+intro_injured
+intro_opening
+laststand_getup
+london_explosion
+london_gas
+london_gas_nosway
+london_gas_post
+nightvision
+pain
+paris_ac130_enhanced
+paris_ac130_enhanced_angel_flares
+paris_ac130_thermal
+paris_scripted_flashbang
+prague_escape
+prague_escape_airport
+prague_escape_flashback
+prague_explosion
+prague_swim
+radiation_high
+radiation_low
+radiation_med
+rescue_2_ele_crash
+rescue_chopper_drag
+rescue_chopper_drag_2
+slowview
+so_finished
+tankblast
+teargas
+* victoryscreen
+westminster_truck_crash

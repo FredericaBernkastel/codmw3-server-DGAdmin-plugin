@@ -1,0 +1,125 @@
+/// MAIN MENU ///
+main.menu
+-    menu_xboxlive.menu --------------------------------------------------- PLAY
+-        poup_findgame.menu ----------------------------------------------- FIND GAME
+-            menu_xboxlive_lobby.menu ------------------------------------- IN LOBBY
+-        menu_xboxlive_privatelobby.menu --------------------------------- PRIVATE LOBBY
+-            popup_recipes_setup.menu
+-                settings_map_rotation.menu
+-                popup_recipesetup_modes.menu
+-                    settings_recipe_choosetype_standard.menu
+-                    settings_recipe_choosetype_alternate.menu
+-                    settings_my_history.menu
+-                    settings_my_modes.menu
+-                    vault_loadfromslot.menu
+-                settings_recipe_rules_base.menu
+-                    popup_gs_opt_5.menu
+-                    popup_gs_opt_6.menu
+-                    popup_gs_opt_3.menu
+-                    popup_gs_opt_4.menu
+-                    menu_custom_class_restrictions.menu
+-                       ...
+-                popup_serverpassword.menu
+-        cac_popup.menu --------------------------------------------------- CREATE A CLASS
+-            menu_cac_assault.menu
+-                cac_weapon_primary.menu
+-                    cac_assault_primary.menu
+-                        cac_weapon_proficiency_primary_assault.menu
+-                            cac_weapon_attachments.primary.menu
+-                                cac_weapon_camo_primary.menu
+-                    cac_smg_primary.menu
+-                        cac_weapon_proficiency_primary_smg.menu
+-                    cac_lmg_primary.menu
+-                        cac_weapon_proficiency_primary_lmg.menu
+-                    cac_sniper_primary.menu
+-                        cac_weapon_proficiency_primary_sniper.menu
+-                    cac_shotgun_primary.menu
+-                        cac_weapon_proficiency_primary_shotgun.menu
+-                    cac_weapon_proficiency_primary_riot.menu
+-                cac_weapon_secondary.menu
+-                    cac_machinepistol_secondary.menu
+-                        cac_weapon_attachments.secondary.menu
+-                    cac_handgun_secondary.menu
+-                    cac_rocket_secondary.menu
+-                cac_equipment.menu
+-                cac_special.menu
+-                cac_perk1.menu
+-                cac_perk2.menu
+-                cac_perk3.menu
+-                popup_cac_streaktype.menu
+-                    cac_strike_package_assault.menu
+-                    cac_strike_package_support.menu
+-                    cac_strike_package_specialist.menu
+-                popup_cac_deathstreak.menu
+-                popup_cac_copy_class.menu
+-                pc_rename.menu
+-                popup_cac_template.menu
+-        popup_callsign.menu ---------------------------------------------- TITLE / EMBLEM
+-            menu_playercard_title_popup.menu
+-        menu_online_barracks.menu
+-           ...
+___________________________________________________________________________________
+-    popup_vault.menu ----------------------------------------------------- THEATER
+-        vault_browser.menu
+-        popup_friends.menu
+-        page_friends.menu
+-        popup_demo_enum.menu
+-            popup_recentgames_action.menu
+___________________________________________________________________________________
+-    serverbrowser.menu --------------------------------------------------- SERVER LIST
+___________________________________________________________________________________
+-    pc_options_video.menu ------------------------------------------------ OPTIONS
+-        pc_options_advanced_video.menu
+-        pc_options_audio.menu
+-        pc_options_controls.menu
+-            pc_options_movement.menu
+-            pc_options_actions.menu
+-            pc_options_look.menu
+-            controls_multi.menu
+-            options_controls_defaults.menu
+-        pc_options_voice.menu
+-        pc_options_dedicateserver.menu
+-        options_graphics_defaults.menu
+___________________________________________________________________________________
+-    single_popmenu.menu -------------------------------------------------- MAIN MENU
+___________________________________________________________________________________
+-    quit_poupmenu.menu --------------------------------------------------- QUIT
+___________________________________________________________________________________
+
+/// INGAME MENU ///
+
+class.menu ----------------------------------------- MAIN INGAME MENU
+    changeclass.menu ------------------------------- CHOOSE CLASS
+    team_marinesopfor.menu ------------------------- CHANGE TEAM
+    pc_options_video_ingame.menu ------------------- OPTIONS
+        pc_options_advanced_video_ingame.menu
+        pc_options_audio_ingame.menu
+        pc_options_controls_ingame.menu
+            ...
+        pc_options_voice_ingame.menu
+muteplayer.menu ------------------------------------ MUTE PLAYERS
+popup_leavegame_ranked.menu ------------------------ LEAVE GAME
+
+team_marinesopfor // main menu when join server
+connect.menu // LOAD SCREEN
+ds_connecting.menu // CONNECTING ...
+
+/// HUD /// *this is for fullscreen and 1080p*
+
+playercard_splash.menu // text middle right (player.name + action)
+playercard_killedby_hd.menu
+playercard_youkilled_hd.menu
+playercard_spectator_hd.menu
+killcam_fullscreen.menu
+perks_info_hd.menu
+scoreboard.menu
+hud_fullscreen.menu
+change_zoom_hint.menu
+hold_breath_hint.menu //
+killstreaks_hd.menu // killstreak squares and counter
+scorebar_hd.menu // bottom left mini scoreboard
+weaponbar_hd.menu // ammo counter
+dpad_hd.menu
+minimap_fullscreen.menu // minimap
+safearea_hd.menu //
+blood_effect_center.menu // blood hits

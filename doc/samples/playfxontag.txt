@@ -1,0 +1,22 @@
+!fire
+
+HARDHAT(mp_hardhat)
+
+!playfxontag fire/car_fire_mp_far
+!playfxontag fire/car_fire_mp_far tag_origin
+!playfxontag fire/car_fire_mp_far tag_shield_back
+
+LOCKDOWN(mp_alpha)
+
+!playfxontag fire/firelp_med_pm
+!playfxontag fire/firelp_med_pm tag_origin
+!playfxontag fire/firelp_med_pm tag_shield_back
+
+SEATOWN(mp_seatown)
+
+!playfxontag fire/car_fire_mp
+
+DOME (mp_dome)
+
+!playfxontag fire/firelp_med_pm_nodistort
+!playfxontag fire/firelp_med_pm_nodistort tag_shield_back

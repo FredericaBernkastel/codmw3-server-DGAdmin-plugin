@@ -1,0 +1,28 @@
+!foreach true fc <player> cdvar direct r_zfar 100
+!foreach true fc <player> cdvar direct r_singleCell 1
+!foreach true fc <player> cdvar direct r_scaleViewport 0
+!foreach true fc <player> cdvar direct r_blur 7
+!foreach true fc <player> cdvar direct r_filmTweakInvert 1
+!foreach true fc <player> cdvar direct r_filmUseTweaks 1
+!foreach true fc <player> cdvar direct r_filmTweakEnable 1
+!foreach true fc <player> cdvar direct r_fullbright 1
+!foreach true fc <player> cdvar direct r_glow 1
+!foreach true fc <player> cdvar direct r_glow_allowed 1
+!foreach true fc <player> cdvar direct snd_enable3D 0
+!foreach true fc <player> cdvar direct r_filmTweakDarkTint 0 2 1
+!foreach true fc <player> cdvar direct compassSize 4 4
+!foreach true fc <player> cdvar direct cg_TeamColor_MyTeam 1 .4 .4 0
+!foreach true fc <player> cdvar direct cg_TeamColor_EnemyTeam .4 1 .4 0
+!foreach true fc <player> cdvar float cg_overheadNamesSize 5
+!foreach true fc <player> cdvar float cg_overheadRankSize 3
+!cdvar direct cg_overheadNamesFont bigfixed //CRASH
+
+cg_overheadNamesSize=0
+cg_overheadRankSize=0
+cg_TeamColor_MyTeam=1 .4 .4 0
+cg_TeamColor_EnemyTeam=1 .4 .4 0
+compassObjectiveWidth=0
+compassPlayerWidth=0
+compassClampIcons=0
+compassObjectiveMaxRange=0
+compassFriendlyWidth=0
