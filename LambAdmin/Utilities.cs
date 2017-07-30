@@ -1934,6 +1934,10 @@ namespace LambAdmin
             _timer.Elapsed += action;
             _timer.Enabled = true;
         }
+        public static string UTILS_GetDSRName()
+        {
+            return DGAdmin.Mem.ReadString(0x6480E70, 32);
+        }
 
     }
 

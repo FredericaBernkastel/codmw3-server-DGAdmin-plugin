@@ -68,6 +68,13 @@ namespace LambAdmin
                     return bool.Parse(Sett_GetString("settings_enable_alive_counter"));
                 }
             }
+            public static bool settings_dynamic_properties
+            {
+                get
+                {
+                    return bool.Parse(Sett_GetString("settings_dynamic_properties"));
+                }
+            }
             public static string settings_daytime
             {
                 get
@@ -2941,16 +2948,28 @@ namespace LambAdmin
                 }
             }));
 
+            CommandList.Add(new Command("debug", 1, Command.Behaviour.Normal,
+            (sender, arguments, optarg) =>
+            {
+                switch (arguments[0])
+                {
+                    case "dsrname":
+                        {
+                            WriteChatToPlayer(sender, UTILS_GetDSRName());
+                            break;
+                        }
+                }
+            }));
 #endif
 
 
 
-            /* -------------- Broadcast commands -------------- */
+                /* -------------- Broadcast commands -------------- */
 
 
 
-            // ADMINS
-            CommandList.Add(new Command("@admins", 0, Command.Behaviour.Normal,
+                // ADMINS
+                CommandList.Add(new Command("@admins", 0, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
                     WriteChatToAll(Command.GetString("admins", "firstline"));

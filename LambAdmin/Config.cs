@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.IO;
 
 namespace LambAdmin
@@ -73,8 +74,9 @@ namespace LambAdmin
             { "settings_enable_dlcmaps", "true" },
             { "settings_enable_chat_alias", "true" },
             { "settings_enable_spree_messages", "true"},
+            { "settings_dynamic_properties", "false" },
             { "commands_vote_time", "30"},
-            { "commands_vote_threshold", "2"}
+            { "commands_vote_threshold", "2"},
         };
 
         public static Dictionary<string, string> DefaultCmdLang = new Dictionary<string, string>()
@@ -485,6 +487,51 @@ namespace LambAdmin
             CFG_ReadDictionary(ConfigValues.ConfigPath + @"settings.txt", ref Settings);
             CFG_ReadDictionary(ConfigValues.ConfigPath + @"lang.txt", ref Lang);
             CFG_ReadDictionary(ConfigValues.ConfigPath + @"cmdlang.txt", ref CmdLang);
+
+
+            /* ############## DYNAMIC_PROPERTIES ##############  */
+            /* ############# basic implementation ############## */
+
+            if (ConfigValues.settings_dynamic_properties)
+            {
+                if (System.IO.Directory.Exists(@"admin\"))
+                {
+                    WriteLog.Error("Failed loading dynamic_properties feature");
+                    WriteLog.Error("\"admin/\" folder exsists! Delete it, and use \"players2/\" instead!");
+                    return;
+                } else
+                {
+                    string DSR = @"players2/" + DGAdmin.UTILS_GetDSRName() + ".dsr";
+                    List<string> DSRData = new List<string>();
+                    if (System.IO.File.Exists(DSR))
+                        DSRData = System.IO.File.ReadAllLines(DSR).ToList();
+                    else
+                    {
+                        WriteLog.Error("Error loading dynamic_properties feature: DSR not exists! \"" + DSR + "\"");
+                        return;
+                    }
+
+                    // start of parsing
+
+                    int count = 0;
+                    DSRData.ForEach((s) =>
+                    {
+                        // //#DGAdmin <setting> = <value>
+                        Regex rgx = new Regex(@"^[\s]{0,31}\/\/#DGAdmin[\s]{0,31}([a-z_]{0,63})[\s]{0,31}=[\s]{0,31}(.*)?$", RegexOptions.IgnoreCase);
+                        Match match = rgx.Match(s);
+                        
+                        if (match.Success)
+                        {
+                            count++;
+                            Settings[match.Groups[1].Value] = match.Groups[2].Value;
+                        }
+                    });
+
+                    WriteLog.Info(string.Format("dynamic_properties:: Done reading {0} settings from \"{1}\"", count, DSR));
+
+                }
+    
+            }
 
             WriteLog.Info("Done reading config...");
         }
