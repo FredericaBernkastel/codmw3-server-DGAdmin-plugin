@@ -52,7 +52,6 @@ namespace LambAdmin
             { "settings_isnipe_antiboltcancel", "false"},
             { "settings_isnipe_antiknife", "true" },
             { "settings_isnipe_antifalldamage", "true" },
-            { "settings_isnipe_antiweaponhack", "true" },
             { "settings_enable_xlrstats","true"},
             { "settings_teamnames_allies", "^0[^1DG^0] ^7Clan" },
             { "settings_teamnames_axis", "^7Noobs" },
@@ -75,6 +74,7 @@ namespace LambAdmin
             { "settings_enable_chat_alias", "true" },
             { "settings_enable_spree_messages", "true"},
             { "settings_dynamic_properties", "false" },
+            { "settings_antiweaponhack", "false" },
             { "commands_vote_time", "30"},
             { "commands_vote_threshold", "2"},
         };
@@ -489,7 +489,7 @@ namespace LambAdmin
             CFG_ReadDictionary(ConfigValues.ConfigPath + @"cmdlang.txt", ref CmdLang);
 
 
-            /* ############## DYNAMIC_PROPERTIES ##############  */
+            /* ############## DYNAMIC_PROPERTIES ############### */
             /* ############# basic implementation ############## */
 
             if (ConfigValues.settings_dynamic_properties)
@@ -517,20 +517,45 @@ namespace LambAdmin
                     DSRData.ForEach((s) =>
                     {
                         // //#DGAdmin <setting> = <value>
-                        Regex rgx = new Regex(@"^[\s]{0,31}\/\/#DGAdmin[\s]{0,31}([a-z_]{0,63})[\s]{0,31}=[\s]{0,31}(.*)?$", RegexOptions.IgnoreCase);
-                        Match match = rgx.Match(s);
+                        Regex rgx_prop = new Regex(@"^[\s]{0,31}\/\/#DGAdmin[\s]{1,31}([a-z_]{0,63})[\s]{0,31}=[\s]{0,31}(.*)?$", RegexOptions.IgnoreCase);
+                        Match match_prop = rgx_prop.Match(s);
                         
-                        if (match.Success)
+                        if (match_prop.Success)
                         {
-                            count++;
-                            Settings[match.Groups[1].Value] = match.Groups[2].Value;
+                            string prop = match_prop.Groups[1].Value.ToLower();
+                            if (Settings.Keys.Contains(prop)){
+                                count++;
+                                Settings[prop] = match_prop.Groups[2].Value;
+                            }
+                            else
+                            {
+                                WriteLog.Warning("Unknown setting: " + prop);
+                            }
+                        } else
+                        {
+                            /* ############## ANTIWEAPONHACK ############### */
+                            // get the list of restricted weapons
+                            Regex rgx_weap = new Regex(
+                                @"^[\s]{0,31}gameOpt[\s]{1,31}commonOption\.weaponRestricted\.([a-z0-9_]{1,31})[\s]{1,31}'1'.*?$".Replace('\'','"'),
+                                RegexOptions.IgnoreCase);
+                            Match match_weap = rgx_weap.Match(s);
+                            if (match_weap.Success)
+                                DGAdmin.RestrictedWeapons.Add(match_weap.Groups[1].Value);
+
                         }
+
                     });
 
-                    WriteLog.Info(string.Format("dynamic_properties:: Done reading {0} settings from \"{1}\"", count, DSR));
+                    if(count > 0)
+                        WriteLog.Info(string.Format("dynamic_properties:: Done reading {0} settings from \"{1}\"", count, DSR));
 
                 }
     
+            }
+
+            if(!ConfigValues.settings_dynamic_properties && ConfigValues.ANTIWEAPONHACK)
+            {
+                WriteLog.Info("You have to enable \"settings_dynamic_properties\" if you wish to use antiweaponhack");
             }
 
             WriteLog.Info("Done reading config...");

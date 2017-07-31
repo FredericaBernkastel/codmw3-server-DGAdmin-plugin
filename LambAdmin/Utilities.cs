@@ -937,6 +937,43 @@ namespace LambAdmin
                 ConfigValues.AvailableMaps = Data.AllMapNames;
         }
 
+        public void ANTIWEAPONHACK (Entity player, Entity inflictor, Entity attacker, int damage, int dFlags, string mod, string weapon, Vector3 point, Vector3 dir, string hitLoc)
+        {
+            // antiweaponhack
+            if (ConfigValues.settings_dynamic_properties &&
+                ConfigValues.ANTIWEAPONHACK &&
+                !UTILS_WeaponAllowed(weapon) &&
+                !CMDS_IsRekt(attacker))
+            {
+                try
+                {
+                    WriteLog.Info("----STARTREPORT----");
+                    WriteLog.Info("Bad weapon detected: " + weapon + " at player " + attacker.Name);
+                    HaxLog.WriteInfo("----STARTREPORT----");
+                    HaxLog.WriteInfo("BAD WEAPON: " + weapon);
+                    HaxLog.WriteInfo("Player Info:");
+                    HaxLog.WriteInfo(attacker.Name);
+                    HaxLog.WriteInfo(attacker.GUID.ToString());
+                    HaxLog.WriteInfo(attacker.IP.ToString());
+                    HaxLog.WriteInfo(attacker.GetEntityNumber().ToString());
+                }
+                finally
+                {
+                    WriteLog.Info("----ENDREPORT----");
+                    HaxLog.WriteInfo("----ENDREPORT----");
+                    player.Health += damage;
+                    CMDS_Rek(attacker);
+                    WriteChatToAll(Command.GetString("rek", "message").Format(new Dictionary<string, string>()
+                    {
+                        {"<target>", attacker.Name},
+                        {"<targetf>", attacker.GetFormattedName(database)},
+                        {"<issuer>", ConfigValues.ChatPrefix},
+                        {"<issuerf>", ConfigValues.ChatPrefix},
+                    }));
+                }
+            }
+        }
+
         public void CMD_Votekick_CreateHUD()
         {
             if (VoteStatsHUD == null)
@@ -1937,6 +1974,14 @@ namespace LambAdmin
         public static string UTILS_GetDSRName()
         {
             return DGAdmin.Mem.ReadString(0x6480E70, 32);
+        }
+
+        public bool UTILS_WeaponAllowed(string s)
+        {
+            foreach (string weapon in RestrictedWeapons)
+                if (s.StartsWith(weapon))
+                    return false;
+            return true;
         }
 
     }

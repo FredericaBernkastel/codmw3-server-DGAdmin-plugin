@@ -75,6 +75,13 @@ namespace LambAdmin
                     return bool.Parse(Sett_GetString("settings_dynamic_properties"));
                 }
             }
+            public static bool ANTIWEAPONHACK
+            {
+                get
+                {
+                    return bool.Parse(Sett_GetString("settings_antiweaponhack"));
+                }
+            }
             public static string settings_daytime
             {
                 get
@@ -143,6 +150,8 @@ namespace LambAdmin
         public volatile SerializableDictionary<long, List<Dvar>> PersonalPlayerDvars = new SerializableDictionary<long, List<Dvar>>();
 
         public volatile Voting voting = new Voting();
+
+        public static List<string> RestrictedWeapons = new List<string>();
 
         public class Command
         {
@@ -2827,38 +2836,34 @@ namespace LambAdmin
                                 {"<player>", sender.Name},
                             }));
             }));
-#if DEBUG   
-            
-            
-/* -------------- Commands that not included in release build -------------- */
+#if DEBUG
+
+
+            /* -------------- Commands that not included in release build -------------- */
 
 
 
-
-            // giveweapon <player> <weapon> <camo ID> <akimbo>
-            //CommandList.Add(new Command("giveweapon", 4, Command.Behaviour.Normal,
-            //(sender, arguments, optarg) =>
-            //{
-            //    Entity target = FindSinglePlayer(arguments[0]);
-            //    if (target == null)
-            //    {
-            //        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-            //        return;
-            //    }
-            //    int camo = 0;
-            //    if(int.TryParse(arguments[2], out camo))
-            //    {
-
-            //    }
-            //    target.TakeAllWeapons();
-            //    target.AfterDelay(50, (ent) => {
-            //        target.GiveWeapon(arguments[1]);
-            //        target.AfterDelay(50, (_ent) => {
-            //            target.SwitchToWeaponImmediate(arguments[1]);
-            //            WriteChatSpyToPlayer(sender, "giveweapon::callback");
-            //        });
-            //    });
-            //}));
+            // weapon <player> <raw weapon string>
+            CommandList.Add(new Command("weapon", 2, Command.Behaviour.Normal,
+            (sender, arguments, optarg) =>
+            {
+                Entity target = FindSinglePlayer(arguments[0]);
+                if (target == null)
+                {
+                    WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                    return;
+                }
+                target.TakeAllWeapons();
+                target.AfterDelay(50, (ent) =>
+                {
+                    target.GiveWeapon(arguments[1]);
+                    target.AfterDelay(50, (_ent) =>
+                    {
+                        target.SwitchToWeaponImmediate(arguments[1]);
+                        WriteChatSpyToPlayer(sender, "giveweapon::callback");
+                    });
+                });
+            }));
 
             // shellshock <name> <time>
             CommandList.Add(new Command("shellshock", 2, Command.Behaviour.Normal,
@@ -2955,9 +2960,26 @@ namespace LambAdmin
                 {
                     case "dsrname":
                         {
+                            WriteChatSpyToPlayer(sender, "debug.dsrname::callback");
                             WriteChatToPlayer(sender, UTILS_GetDSRName());
                             break;
+                        };
+                    case "name":
+                        {
+                            OnInterval(1, () => {
+                                sender.Name = "test";
+                                return true;
+                            });
+                            
+                            WriteChatSpyToPlayer(sender, "debug.name::callback");
+                            break;
                         }
+                    case "restrictedweapons":
+                        {
+                            WriteChatSpyToPlayer(sender, "debug.restrictedweapons::console out");
+                            WriteLog.Info("Restriced weapons: " + String.Join(", ", RestrictedWeapons.ToArray()));
+                            break;
+                        };
                 }
             }));
 #endif
@@ -3968,6 +3990,10 @@ namespace LambAdmin
                         {"<killstreak>", victim_killstreak.ToString()}
                     }));
             }
+
+            string line = "[DEATH] " + string.Format("{0} : {1}, {2}, {3}", player.Name.ToString(), attacker.Name.ToString(), mod, weapon);
+            line.LogTo(PlayersLog, MainLog);
+
         }
 
         public string CMDS_CommonIdentifiers(PlayerInfo A, PlayerInfo B)

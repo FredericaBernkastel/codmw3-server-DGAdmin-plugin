@@ -151,6 +151,7 @@ namespace LambAdmin
             PlayerConnected += MAIN_OnPlayerConnect;
             PlayerDisconnected += MAIN_OnPlayerDisconnect;
             PlayerConnecting += MAIN_OnPlayerConnecting;
+            OnPlayerDamageEvent += ANTIWEAPONHACK;
 
             // CUSTOM EVENTS
 

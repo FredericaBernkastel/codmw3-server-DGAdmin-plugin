@@ -69,30 +69,6 @@ namespace LambAdmin
                         return bool.Parse(Sett_GetString("settings_isnipe_antifalldamage"));
                     }
                 }
-                public static bool ANTIWEAPONHACK
-                {
-                    get
-                    {
-                        return bool.Parse(Sett_GetString("settings_isnipe_antiweaponhack"));
-                    }
-                }
-                public static List<string> AllowedWeapons = new List<string>()
-                {
-                    "l96a1",
-                    "msr",
-                    "moab",
-                    "briefcase_bomb_mp",
-                    "none",
-                    "throwingknife",
-                    "destructible_car",
-                    "barrel_mp",
-                    "destructible_toy",
-                    "knife",
-                    "trophy_mp",
-                    "ac130_105mm_mp",
-                    "ac130_40mm_mp",
-                    "ac130_25mm_mp"
-                };
             }
         }
 
@@ -192,8 +168,8 @@ namespace LambAdmin
 
             if (weapon == "iw5_usp45_mp_tactical" && Call<string>("getdvar", "g_gametype") == "infect" && attacker.GetTeam() != "allies")
                 return;
-            if (ConfigValues.ISNIPE_SETTINGS.ANTINOSCOPE && (UTILS_GetFieldSafe<int>(attacker, "weapon_fired_noscope") == 1))
-                player.Health += damage;
+            //if (ConfigValues.ISNIPE_SETTINGS.ANTINOSCOPE && (UTILS_GetFieldSafe<int>(attacker, "weapon_fired_noscope") == 1))
+            //    player.Health += damage;
             if (ConfigValues.ISNIPE_SETTINGS.ANTICRTK && (weapon == "throwingknife_mp") && (attacker.Origin.DistanceTo2D(player.Origin) < 200f))
             {
                 player.Health += damage;
@@ -202,45 +178,6 @@ namespace LambAdmin
             if (ConfigValues.ISNIPE_SETTINGS.ANTIBOLTCANCEL && (UTILS_GetFieldSafe<int>(attacker, "weapon_fired_boltcancel") == 1))
                 player.Health += damage;
 
-            if (ConfigValues.ISNIPE_SETTINGS.ANTIWEAPONHACK && !SNIPE_IsWeaponAllowed(weapon) && !CMDS_IsRekt(attacker))
-            {
-                try
-                {
-                    WriteLog.Info("----STARTREPORT----");
-                    WriteLog.Info("Bad weapon detected: " + weapon + " at player " + attacker.Name);
-                    HaxLog.WriteInfo("----STARTREPORT----");
-                    HaxLog.WriteInfo("BAD WEAPON: " + weapon);
-                    HaxLog.WriteInfo("Player Info:");
-                    HaxLog.WriteInfo(attacker.Name);
-                    HaxLog.WriteInfo(attacker.GUID.ToString());
-                    HaxLog.WriteInfo(attacker.IP.ToString());
-                    HaxLog.WriteInfo(attacker.GetEntityNumber().ToString());
-                }
-                finally
-                {
-                    WriteLog.Info("----ENDREPORT----");
-                    HaxLog.WriteInfo("----ENDREPORT----");
-                    player.Health += damage;
-                    CMDS_Rek(attacker);
-                    WriteChatToAll(Command.GetString("rek", "message").Format(new Dictionary<string, string>()
-                    {
-                        {"<target>", attacker.Name},
-                        {"<targetf>", attacker.GetFormattedName(database)},
-                        {"<issuer>", ConfigValues.ChatPrefix},
-                        {"<issuerf>", ConfigValues.ChatPrefix},
-                    }));
-                }
-            }
-        }
-
-        public bool SNIPE_IsWeaponAllowed(string weapon)
-        {
-            foreach (string weap in ConfigValues.ISNIPE_SETTINGS.AllowedWeapons)
-            {
-                if (weapon.Contains(weap))
-                    return true;
-            }
-            return false;
         }
 
         public void SNIPE_OnPlayerDisconnect(Entity player)
@@ -251,7 +188,8 @@ namespace LambAdmin
         public void SNIPE_OnPlayerConnect(Entity player)
         {
             if (ConfigValues.ISNIPE_SETTINGS.ANTINOSCOPE)
-                EventDispatcher_AntiNoScope(player);
+                //EventDispatcher_AntiNoScope(player);
+                WriteLog.Info("settings_isnipe_antinoscope is DEPRECATED");
 
             if (ConfigValues.ISNIPE_SETTINGS.ANTIBOLTCANCEL)
                 EventDispatcher_AntiBoltCancel(player);
@@ -371,30 +309,30 @@ namespace LambAdmin
         #endregion
 
         #endregion
-        private void EventDispatcher_AntiNoScope(Entity player)
-        {
-            player.SetField("weapon_fired_noscope", new Parameter((int)0));
+        //private void EventDispatcher_AntiNoScope(Entity player)
+        //{
+        //    player.SetField("weapon_fired_noscope", new Parameter((int)0));
 
-            player.OnNotify("weapon_fired", new Action<Entity, Parameter>((_player, args) =>
-            {
-                if (_player.Call<float>("playerads", new Parameter[0]) == 0f ||
-                    _player.Call<int>("adsbuttonpressed", new Parameter[0]) == 0)
-                {
-                    string currentWeapon = _player.CurrentWeapon;
-                    if (currentWeapon.Contains("iw5_l96a1") || currentWeapon.Contains("iw5_msr"))
-                    {
-                        player.SetField("weapon_fired_noscope", (int)1);
-                        _player.Call("iprintlnbold", new Parameter[] { Lang_GetString("Message_CRNS_NotAllowed") });
-                        _player.Call("stunplayer", new Parameter[] { 1 });
-                        _player.AfterDelay(2000, new Action<Entity>((__player) =>
-                        {
-                            __player.SetField("weapon_fired_noscope", (int)0);
-                            __player.Call("stunplayer", new Parameter[] { 0 });
-                        }));
-                    }
-                }
-            }));
-        }
+        //    player.OnNotify("weapon_fired", new Action<Entity, Parameter>((_player, args) =>
+        //    {
+        //        if (_player.Call<float>("playerads", new Parameter[0]) == 0f ||
+        //            _player.Call<int>("adsbuttonpressed", new Parameter[0]) == 0)
+        //        {
+        //            string currentWeapon = _player.CurrentWeapon;
+        //            if (currentWeapon.Contains("iw5_l96a1") || currentWeapon.Contains("iw5_msr"))
+        //            {
+        //                player.SetField("weapon_fired_noscope", (int)1);
+        //                _player.Call("iprintlnbold", new Parameter[] { Lang_GetString("Message_CRNS_NotAllowed") });
+        //                _player.Call("stunplayer", new Parameter[] { 1 });
+        //                _player.AfterDelay(2000, new Action<Entity>((__player) =>
+        //                {
+        //                    __player.SetField("weapon_fired_noscope", (int)0);
+        //                    __player.Call("stunplayer", new Parameter[] { 0 });
+        //                }));
+        //            }
+        //        }
+        //    }));
+        //}
 
         private void EventDispatcher_AntiBoltCancel(Entity player)
         {
