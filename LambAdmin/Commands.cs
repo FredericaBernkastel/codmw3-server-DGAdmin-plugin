@@ -2854,14 +2854,64 @@ namespace LambAdmin
                     WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
                     return;
                 }
-                target.TakeAllWeapons();
-                target.AfterDelay(50, (ent) =>
+                if (!target.IsAlive)
                 {
-                    target.GiveWeapon(arguments[1]);
-                    target.AfterDelay(50, (_ent) =>
+                    WriteChatToPlayer(sender, Command.GetString("weapon", "error1").Format(
+                    new Dictionary<string, string>()
                     {
-                        target.SwitchToWeaponImmediate(arguments[1]);
-                        WriteChatSpyToPlayer(sender, "giveweapon::callback");
+                        {"<player>", target.Name}
+                    }));
+                    return;
+                }
+                bool _antiweaponhack = ConfigValues.ANTIWEAPONHACK;
+                if (_antiweaponhack)
+                    Settings["settings_antiweaponhack"] = "false"; //temporary disable                   //                    .                                                      
+                string orig_weapon = target.CurrentWeapon;                                               //                  _,|\    WE FIGHT FOR LOVE AND JUSTICE !!!!               
+                target.TakeAllWeapons();                                                                 //                  \__/                                                     
+                target.AfterDelay(50, (ent) =>                                                           //                   ||     AND ALSO NICE SHOES AND PRETTY PURSES AND JEWELRY
+                {                                                                                        //___               {_].                                                     
+                    target.GiveWeapon(arguments[1]);                                                     // \ \               L; `                                                     
+                    target.AfterDelay(50, (_ent) =>                                                      //  ) )               | :  ,(),_,_,(),                                       
+                    {                                                                                    //_/_/                | | / /(,,^,,)\ \                                      
+                        target.SwitchToWeaponImmediate(arguments[1]);                                    //                    | || | ;`-o-'; | |                                     
+                        target.AfterDelay(1000, (__ent) =>                                               //                    |/:) | | '.' | | (                                     
+                        {                                                                                //                     \ \(   \_-_/   ) |                                    
+                            if (target.CurrentWeapon == "none")                                          //                      \ `._--)=(---.: |                                    
+                            {                                                                            //                      |\ '-_|\O/|_-'/\                                     
+                                target.TakeAllWeapons();                                                 //                     | | `\ |/ \| //\ \                                    
+                                target.AfterDelay(50, (___ent) =>                                        //                     / /   \     /   \ \                                   
+                                {                                                                        //                    ; |    :\   /:    \/\                                  
+                                    target.GiveWeapon(orig_weapon);                                      //                    | (   / \\,// \   )\ \                                 
+                                    target.AfterDelay(50, (____ent) =>                                   //                    | |  /  /|'|\  \  | \ \
+                                    {                                                                    //                    | | /  / | | \  \ | |\ \___ 
+                                        target.SwitchToWeaponImmediate(orig_weapon);                     //                    ) :'-_/--|_|--\_-`: ( `-\   
+                                    });                                                                  //                   / /  /    / \    \  \ \
+                                });                                                                      //                  / /  /    /   \    \  \ \
+                                                                                                         //              /\_/ /  /    /     \    \  \ \_/\
+                                if(_antiweaponhack)                                                      //              \___'   /   /       \   \   `___/
+                                    Settings["settings_antiweaponhack"] = "true";                        //                     /   /         \   \
+                                                                                                         //                    /   /           \   \
+                                WriteChatToPlayer(sender, Command.GetString("weapon", "error").Format(   //                   /   /             \   \
+                                new Dictionary<string, string>()                                         //                   /^/                 \^\
+                                {                                                                        //                  /  /                 \  \
+                                    {"<weapon>", arguments[1]}                                           //                 /  /                   \  \
+                                }));                                                                     //                /  /                     \  \
+                            }                                                                            //               ' ,/                       \, `
+                            else                                                                         //              ; /                           \ :
+                            {                                                                            //             /  /J                         L\  \
+                                if (_antiweaponhack)                                                     //            :__/'                           '\__;
+                                {                                                                        
+                                    UTILS_Antiweaponhack_allowweapon(target.CurrentWeapon);              
+                                    Settings["settings_antiweaponhack"] = "true";                        
+                                }                                                                        
+                                WriteChatToPlayer(sender, Command.GetString("weapon", "message").Format( 
+                                new Dictionary<string, string>()
+                                {
+                                    {"<weapon>", target.CurrentWeapon},
+                                    {"<player>", target.Name}
+                                }));
+                            }
+                        });
                     });
                 });
             }));

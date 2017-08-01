@@ -1997,6 +1997,22 @@ namespace LambAdmin
             return true;
         }
 
+        public bool UTILS_Antiweaponhack_allowweapon(string weapon)
+        {
+            if (UTILS_WeaponAllowed(weapon))
+                return true;
+            else
+            {
+                foreach (string _weapon in RestrictedWeapons)
+                    if (weapon.StartsWith(_weapon))
+                    {
+                        RestrictedWeapons.RemoveAt(RestrictedWeapons.IndexOf(_weapon));
+                        return true;
+                    }
+                return false;
+            }
+        }
+
     }
 
     public static partial class Extensions
