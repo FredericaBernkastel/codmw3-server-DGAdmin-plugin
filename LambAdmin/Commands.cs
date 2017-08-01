@@ -18,6 +18,7 @@ namespace LambAdmin
             private static Single[] SunLight = new Single[3] { 1F, 1F, 1F };
             public static bool HellMode = false;
             public static bool LockServer = false;
+            public static bool SettingsMutex = false;
 
             public static int settings_warn_maxwarns
             {
@@ -1177,7 +1178,7 @@ namespace LambAdmin
                     }));
                     if (ConfigValues.settings_enable_xlrstats)
                     {
-                        xlr_database.Save();
+                        xlr_database.Save(this);
                         WriteChatToAll(Command.GetString("savegroups", "message_xlr").Format(new Dictionary<string, string>()
                         {
                             {"<issuer>", sender.Name },
@@ -1687,7 +1688,7 @@ namespace LambAdmin
                     string message = Command.GetString("rage", "message");
                     foreach (string name in Command.GetString("rage", "custommessagenames").Split(','))
                     {
-                        if (sender.Name.ToLowerInvariant().Contains(name))
+                        if (sender.Name.ToLowerInvariant().Contains(name.ToLowerInvariant()))
                             message = Command.GetString("rage", "message_" + name);
                     }
 

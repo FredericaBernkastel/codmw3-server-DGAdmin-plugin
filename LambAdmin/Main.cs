@@ -96,13 +96,21 @@ namespace LambAdmin
             WriteLog.Info("Saving groups...");
             database.SaveGroups();
 
-            // Save xlr stats
-            if (ConfigValues.settings_enable_xlrstats)
-                xlr_database.Save();
+            if (!ConfigValues.SettingsMutex)
+            {
+                // Save xlr stats
+                if (ConfigValues.settings_enable_xlrstats)
+                {
+                    WriteLog.Info("Saving xlrstats...");
+                    xlr_database.Save(this);
+                }
 
-            // Save FilmTweak settings
-            UTILS_PersonalPlayerDvars_save(PersonalPlayerDvars);
+                WriteLog.Info("Saving PersonalPlayerDvars...");
+                // Save FilmTweak settings
+                UTILS_PersonalPlayerDvars_save(PersonalPlayerDvars);
 
+                ConfigValues.SettingsMutex = false;
+            }
             MAIN_ResetSpawnAction();
             base.OnExitLevel();
         }

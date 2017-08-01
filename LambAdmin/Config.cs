@@ -251,6 +251,7 @@ namespace LambAdmin
             {"command_rage_message_moskvish", "^3<issuer> ^5is done with this fucking lag." },
             {"command_rage_message_myst", "^3<issuer> ^5will rek you scrubs later." },
             {"command_rage_message_bernkastel", "^3<issuer>^5: Sayonara, BAKEMI. ^6nipa~ ^1=^_^="},
+            {"command_rage_message_ayoub", "^1Da^2dd^1y ^3is ^5OuT"},
 
             {"command_loadgroups_usage", "^1Usage: !loadgroups" },
             {"command_loadgroups_message", "^2Groups configuration loaded." },

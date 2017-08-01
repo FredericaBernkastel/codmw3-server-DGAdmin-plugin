@@ -37,7 +37,7 @@ namespace LambAdmin
                 weapon_fired = 16
             }
 
-            public string FilePath = @"Utils\internal\XLRStats.xml";
+            public static string FilePath = @"Utils\internal\XLRStats.xml";
             // <GUID, XLREntry>
             public volatile SerializableDictionary<long, XLREntry> xlr_players = new SerializableDictionary<long, XLREntry>();
             
@@ -77,12 +77,22 @@ namespace LambAdmin
                 xlr_players[GUID] = entry;
             }
 
-            public void Save()
+            public void Save(DGAdmin script)
             {
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(SerializableDictionary<long, XLREntry>));
-                using (FileStream fs = new FileStream(ConfigValues.ConfigPath + FilePath, FileMode.Create))
+                try
                 {
-                    xmlSerializer.Serialize(fs, xlr_players);
+                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(SerializableDictionary<long, XLREntry>));
+                    using (FileStream fs = new FileStream(ConfigValues.ConfigPath + FilePath, FileMode.Create))
+                    {
+                        xmlSerializer.Serialize(fs, xlr_players);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    script.MainLog.WriteError(ex.Message);
+                    script.MainLog.WriteError(ex.StackTrace);
+                    WriteLog.Error(ex.Message);
+                    WriteLog.Error(ex.StackTrace);
                 }
             }
 

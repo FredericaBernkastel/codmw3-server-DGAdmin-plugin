@@ -98,7 +98,11 @@ namespace LambAdmin
                     return Sett_GetString("settings_teamicons_axis");
                 }
             }
+#if DEBUG
+            public static bool DEBUG = true;
+#else
             public static bool DEBUG = false;
+#endif
             public static Dictionary<string, string> AvailableMaps = Data.StandardMapNames;
             public static class DEBUGOPT
             {
@@ -1046,10 +1050,16 @@ namespace LambAdmin
 
                 // Save xlr stats
                 if (ConfigValues.settings_enable_xlrstats)
-                    xlr_database.Save();
+                {
+                    WriteLog.Info("Saving xlrstats...");
+                    xlr_database.Save(this);
+                }
 
+                WriteLog.Info("Saving PersonalPlayerDvars...");
                 // Save FilmTweak settings
                 UTILS_PersonalPlayerDvars_save(PersonalPlayerDvars);
+
+                ConfigValues.SettingsMutex = true;
             });
 
         }
@@ -1978,6 +1988,9 @@ namespace LambAdmin
 
         public bool UTILS_WeaponAllowed(string s)
         {
+            if (s == "none")
+                return true;
+
             foreach (string weapon in RestrictedWeapons)
                 if (s.StartsWith(weapon))
                     return false;
