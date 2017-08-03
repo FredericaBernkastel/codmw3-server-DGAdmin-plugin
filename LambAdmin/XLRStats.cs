@@ -134,7 +134,6 @@ namespace LambAdmin
 
         public void XLR_OnServerStart()
         {
-            WriteLog.Info("Initializing XLRstats...");
             xlr_database = new XLR_database();
             xlr_database.Init();
             PlayerConnected += XLR_OnPlayerConnected;

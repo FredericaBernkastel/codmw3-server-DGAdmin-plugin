@@ -411,6 +411,7 @@ namespace LambAdmin
 
             {"command_3rdperson_usage", "^1Usage: !3rdperson"},
             {"command_3rdperson_message", "^33RD person mode enabled by ^2<issuerf>"},
+            {"command_3rdperson_disabled", "^33RD person mode ^1disabled ^3by ^2<issuerf>"},
 
             {"command_fly_usage", "^1Usage: !fly <on|off> [spawn key = activate]"},
             {"command_fly_enabled", "^3Fly mode ^2enabled. ^3Key: <key>"},

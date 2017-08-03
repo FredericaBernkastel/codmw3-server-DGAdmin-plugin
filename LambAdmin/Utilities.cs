@@ -2013,6 +2013,26 @@ namespace LambAdmin
             }
         }
 
+        //this is A wrong way to convert encodings :)
+        public static string Win1251xUTF8(string s)
+        {
+            string utf8_String = s;
+            byte[] bytes = Encoding.Default.GetBytes(utf8_String);
+            for (int i = 0; i < bytes.Length - 1; i++)
+            {
+                if ((bytes[i] == 0xC3) && (bytes[i + 1] >= 0x80) && (bytes[i + 1] <= 0xAF)) //А-Яа-п
+                { bytes[i] = 0xD0; bytes[i + 1] += 0x10; } else
+                if ((bytes[i] == 0xC3) && (bytes[i + 1] >= 0xB0) && (bytes[i + 1] <= 0xBF)) //р-я
+                { bytes[i] = 0xD1; bytes[i + 1] -= 0x30; } else
+                if ((bytes[i] == 0xC2) && (bytes[i + 1] == 0xA8)) //Ё
+                { bytes[i] = 0xD0; bytes[i + 1] = 0x81; }  else
+                if ((bytes[i] == 0xC2) && (bytes[i + 1] == 0xB8)) //ё
+                { bytes[i] = 0xD1; bytes[i + 1] = 0x91; }
+            }
+                utf8_String = Encoding.UTF8.GetString(bytes);
+            return utf8_String;
+        }
+
     }
 
     public static partial class Extensions

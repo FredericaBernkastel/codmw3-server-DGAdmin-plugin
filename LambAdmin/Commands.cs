@@ -19,6 +19,7 @@ namespace LambAdmin
             public static bool HellMode = false;
             public static bool LockServer = false;
             public static bool SettingsMutex = false;
+            public static bool _3rdPerson = false;
 
             public static int settings_warn_maxwarns
             {
@@ -2533,24 +2534,53 @@ namespace LambAdmin
             CommandList.Add(new Command("3rdperson", 0, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
-                    OnInterval(33, () =>
+                if (!ConfigValues._3rdPerson)
+                {
+                    foreach (Entity player in Players)
                     {
-                        foreach (Entity player in Players)
+                        foreach (KeyValuePair<string, string> dvar in (new Dictionary<string, string>{
+                            { "cg_thirdPerson", "1" },
+                            { "cg_thirdPersonMode", "1" },
+                            { "cg_thirdPersonSpectator", "1" },
+                            { "scr_thirdPerson", "1" },
+                            { "camera_thirdPerson", "1" },
+                            { "camera_thirdPersonOffsetAds", "10 8 0" },
+                            { "camera_thirdPersonOffset", "-70 -30 14" }
+                        }))
                         {
-                            player.SetClientDvar("cg_thirdPerson", " 1");
-                            player.SetClientDvar("cg_thirdPersonMode", " 1");
-                            player.SetClientDvar("cg_thirdPersonSpectator", " 1");
-                            player.SetClientDvar("scr_thirdPerson", " 1");
-                            player.SetClientDvar("camera_thirdPerson", " 1");
-                        }
-                        return true;
-                    });
+                            player.SetClientDvar(dvar.Key, dvar.Value);
+                        };
+                    }
                     WriteChatToAll(Command.GetString("3rdperson", "message").Format(new Dictionary<string, string>()
                         {
                             {"<issuer>", sender.Name },
                             {"<issuerf>", sender.GetFormattedName(database) }
-                        }));
-                }));
+                    }));
+                }
+                else
+                {
+                    foreach (Entity player in Players)
+                    {
+                        foreach (KeyValuePair<string, string> dvar in (new Dictionary<string, string>{
+                            { "cg_thirdPerson", "0" },
+                            { "cg_thirdPersonMode", "0" },
+                            { "cg_thirdPersonSpectator", "0" },
+                            { "scr_thirdPerson", "0" },
+                            { "camera_thirdPerson", "0" }
+                        }))
+                        {
+                            player.SetClientDvar(dvar.Key, dvar.Value);
+                        };
+                    };
+                    WriteChatToAll(Command.GetString("3rdperson", "disabled").Format(new Dictionary<string, string>()
+                    {
+                        {"<issuer>", sender.Name },
+                        {"<issuerf>", sender.GetFormattedName(database) }
+                    }));
+                };
+
+                ConfigValues._3rdPerson = !ConfigValues._3rdPerson;
+            }));
 
             // TELEPORT
             CommandList.Add(new Command("teleport",2,Command.Behaviour.Normal,
