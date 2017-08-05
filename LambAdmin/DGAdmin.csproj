@@ -61,6 +61,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializableDictionary.cs" />
+    <Compile Include="ServerTitle.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="XLRStats.cs" />
   </ItemGroup>

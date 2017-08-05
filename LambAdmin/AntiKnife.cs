@@ -200,7 +200,7 @@ namespace LambAdmin
             }
             catch (Exception ex)
             {
-                WriteLog.Error("Error in Knife:" + ex.Message);
+                WriteLog.Error("Error in DGAdmin::FindMem:" + ex.Message);
             }
             return 0;
         }

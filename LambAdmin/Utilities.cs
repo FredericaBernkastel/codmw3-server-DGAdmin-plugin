@@ -1117,9 +1117,9 @@ namespace LambAdmin
 
         public void UTILS_SetCliDefDvars(Entity player)
         {
-            foreach (Dvar dvar in DefaultCDvars)
+            foreach (KeyValuePair<string, string> dvar in DefaultCDvars)
             {
-                player.SetClientDvar(dvar.key, dvar.value);
+                player.SetClientDvar(dvar.Key, dvar.Value);
             }
             player.SetClientDvar("fx_draw", "1");
             if(ConfigValues.settings_daytime == "night")

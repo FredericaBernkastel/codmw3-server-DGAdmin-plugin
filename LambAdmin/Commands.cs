@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using InfinityScript;
 using System.IO;
+using System.Diagnostics;
 
 namespace LambAdmin
 {
@@ -20,6 +21,7 @@ namespace LambAdmin
             public static bool LockServer = false;
             public static bool SettingsMutex = false;
             public static bool _3rdPerson = false;
+            public static List<string> cmd_rules = new List<string>();
 
             public static int settings_warn_maxwarns
             {
@@ -288,7 +290,7 @@ namespace LambAdmin
             public bool isActive(){
                 return Active;
             }
-            public void Start(Entity issuer, Entity target, string reason)
+            public void Start(Entity issuer, Entity target, string reason, DGAdmin script)
             {
                 if(Active)
                     return;
@@ -326,7 +328,7 @@ namespace LambAdmin
                             if ((target == null) || (issuer == null))
                                 return;
                             if (time <= 0)
-                                End();
+                                End(script);
                         }
                         catch
                         {
@@ -335,24 +337,32 @@ namespace LambAdmin
                     };
                 _timer.Enabled = true;
             }
-            private void End()
+            private void End(DGAdmin script)
             {
                 if (!Active)
                     return;
                 Active = false;                
                 if (PosVotes - NegVotes >= Threshold)
                 {
-                    WriteChatToAll(Command.GetString("kick", "message").Format(new Dictionary<string, string>()
+                    if (target.isImmune(script.database))
                     {
-                        {"<target>", target.Name },
-                        {"<issuer>", issuer.Name },
-                        {"<reason>", reason },
-                    }));
-                    Delay(100, (o, e) =>
+                        WriteChatToAll(Command.GetMessage("TargetIsImmune"));
+                        return;
+                    }
+                    else
                     {
-                        ExecuteCommand("dropclient " + target.GetEntityNumber() + " \"" + reason + "\"");
-                        WriteLog.Info("Voting passed successfully.");
-                    });
+                        WriteChatToAll(Command.GetString("kick", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<target>", target.Name },
+                            {"<issuer>", issuer.Name },
+                            {"<reason>", reason },
+                        }));
+                        Delay(100, (o, e) =>
+                        {
+                            ExecuteCommand("dropclient " + target.GetEntityNumber() + " \"" + reason + "\"");
+                            WriteLog.Info("Voting passed successfully.");
+                        });
+                    };
                 }
                 else {
                     WriteChatToAll(Command.GetString("votekick", "error2"));
@@ -674,7 +684,6 @@ namespace LambAdmin
             InitCommands();
             InitCommandAliases();
             InitCDVars();
-
             BanList = System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\bannedplayers.txt").ToList();
             XBanList = System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\xbans.txt").ToList();
         }
@@ -957,11 +966,15 @@ namespace LambAdmin
 
             if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\rules.txt"))
             {
+                // DSR setts got higher priority
+                if (!(ConfigValues.settings_dynamic_properties && ConfigValues.cmd_rules.Count > 0))
+                    ConfigValues.cmd_rules = File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\rules.txt").ToList();
+
                 // RULES
                 CommandList.Add(new Command("rules", 0, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
-                    WriteChatToPlayerMultiline(sender, System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\rules.txt"));
+                    WriteChatToPlayerMultiline(sender, ConfigValues.cmd_rules.ToArray());
                 }));
             }
 
@@ -2849,7 +2862,7 @@ namespace LambAdmin
                 if (!String.IsNullOrEmpty(message2))
                     WriteChatToAll(message2);
 
-                voting.Start(sender, target, reason);
+                voting.Start(sender, target, reason, this);
                 CMD_Votekick_CreateHUD();
             }));
 
@@ -2893,6 +2906,7 @@ namespace LambAdmin
                     }));
                     return;
                 }
+
                 bool _antiweaponhack = ConfigValues.ANTIWEAPONHACK;
                 if (_antiweaponhack)
                     Settings["settings_antiweaponhack"] = "false"; //temporary disable                   //                    .                                                      
@@ -3061,6 +3075,17 @@ namespace LambAdmin
                             WriteLog.Info("Restriced weapons: " + String.Join(", ", RestrictedWeapons.ToArray()));
                             break;
                         };
+                    case "weapon":
+                        {
+                            WriteChatToPlayer(sender, sender.CurrentWeapon);
+                            break;
+                        };
+                    case "mem":
+                        {
+                            WriteChatSpyToPlayer(sender, "debug.mem::callback");
+                            UTILS_ServerTitle("^1test", "^3test");
+                            break;
+                        }
                 }
             }));
 #endif
@@ -3276,7 +3301,11 @@ namespace LambAdmin
                 foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Utils\cdvars.txt"))
                 {
                     string[] parts = line.Split('=');
-                    DefaultCDvars.Add(new Dvar { key = parts[0], value = parts[1] });
+                    parts[0] = parts[0].ToLowerInvariant();
+
+                    // DSR setts got higher priority
+                    if (!(ConfigValues.settings_dynamic_properties && DefaultCDvars.Keys.Contains(parts[0])))
+                        DefaultCDvars.Add(parts[0], parts[1]);
                 }
             }
             if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))

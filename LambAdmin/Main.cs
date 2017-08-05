@@ -94,7 +94,6 @@ namespace LambAdmin
         public override void OnStartGameType()
         {
             MAIN_ResetSpawnAction();
-
             base.OnStartGameType();
         }
 
@@ -252,6 +251,10 @@ namespace LambAdmin
         {
             foreach (Entity player in Players)
                 player.SetField("spawnevent", 0);
+
+            AfterDelay(1000, () => { 
+                UTILS_ServerTitle("", "");
+            }); 
         }
 
         private void hud_alive_players(Entity player)

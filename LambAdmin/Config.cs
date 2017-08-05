@@ -36,7 +36,7 @@ namespace LambAdmin
             { "Spree_KnifeKill", "^2<attacker> ^3humiliated ^5<victim>"}
         };
 
-        public static List<Dvar> DefaultCDvars = new List<Dvar>();
+        public static Dictionary<string, string> DefaultCDvars = new Dictionary<string, string>();
 
         public static Dictionary<long,string> ChatAlias = new Dictionary<long,string>();
 
@@ -495,75 +495,11 @@ namespace LambAdmin
             CFG_ReadDictionary(ConfigValues.ConfigPath + @"lang.txt", ref Lang);
             CFG_ReadDictionary(ConfigValues.ConfigPath + @"cmdlang.txt", ref CmdLang);
 
-
-            /* ############## DYNAMIC_PROPERTIES ############### */
-            /* ############# basic implementation ############## */
-
             if (ConfigValues.settings_dynamic_properties)
-            {
-                if (System.IO.Directory.Exists(@"admin\"))
-                {
-                    WriteLog.Error("Failed loading dynamic_properties feature");
-                    WriteLog.Error("\"admin/\" folder exsists! Delete it, and use \"players2/\" instead!");
-                    return;
-                } else
-                {
-                    string DSR = @"players2/" + DGAdmin.UTILS_GetDSRName() + ".dsr";
-                    List<string> DSRData = new List<string>();
-                    if (System.IO.File.Exists(DSR))
-                        DSRData = System.IO.File.ReadAllLines(DSR).ToList();
-                    else
-                    {
-                        WriteLog.Error("Error loading dynamic_properties feature: DSR not exists! \"" + DSR + "\"");
-                        return;
-                    }
+                CFG_Dynprop_Init();
 
-                    // start of parsing
-
-                    int count = 0;
-                    DSRData.ForEach((s) =>
-                    {
-                        // //#DGAdmin <setting> = <value>
-                        Regex rgx_prop = new Regex(@"^[\s]{0,31}\/\/#DGAdmin[\s]{1,31}([a-z_]{0,63})[\s]{0,31}=[\s]{0,31}(.*)?$", RegexOptions.IgnoreCase);
-                        Match match_prop = rgx_prop.Match(s);
-                        
-                        if (match_prop.Success)
-                        {
-                            string prop = match_prop.Groups[1].Value.ToLower();
-                            if (Settings.Keys.Contains(prop)){
-                                count++;
-                                Settings[prop] = match_prop.Groups[2].Value;
-                            }
-                            else
-                            {
-                                WriteLog.Warning("Unknown setting: " + prop);
-                            }
-                        } else
-                        {
-                            /* ############## ANTIWEAPONHACK ############### */
-                            // get the list of restricted weapons
-                            Regex rgx_weap = new Regex(
-                                @"^[\s]{0,31}gameOpt[\s]{1,31}commonOption\.weaponRestricted\.([a-z0-9_]{1,31})[\s]{1,31}'1'.*?$".Replace('\'','"'),
-                                RegexOptions.IgnoreCase);
-                            Match match_weap = rgx_weap.Match(s);
-                            if (match_weap.Success)
-                                DGAdmin.RestrictedWeapons.Add(match_weap.Groups[1].Value);
-
-                        }
-
-                    });
-
-                    if(count > 0)
-                        WriteLog.Info(string.Format("dynamic_properties:: Done reading {0} settings from \"{1}\"", count, DSR));
-
-                }
-    
-            }
-
-            if(!ConfigValues.settings_dynamic_properties && ConfigValues.ANTIWEAPONHACK)
-            {
+            else if(ConfigValues.ANTIWEAPONHACK)
                 WriteLog.Info("You have to enable \"settings_dynamic_properties\" if you wish to use antiweaponhack");
-            }
 
             WriteLog.Info("Done reading config...");
         }
@@ -577,6 +513,118 @@ namespace LambAdmin
             CFG_WriteDictionary(DefaultLang, ConfigValues.ConfigPath + @"lang.txt");
 
             CFG_WriteDictionary(DefaultCmdLang, ConfigValues.ConfigPath + @"cmdlang.txt");
+        }
+
+        /* ############## DYNAMIC_PROPERTIES ############### */
+        /* ############# basic implementation ############## */
+        public static void CFG_Dynprop_Init()
+        {
+            if (System.IO.Directory.Exists(@"admin\"))
+            {
+                WriteLog.Error("Failed loading dynamic_properties feature");
+                WriteLog.Error("\"admin/\" folder exsists! Delete it, and use \"players2/\" instead!");
+                return;
+            }
+            else
+            {
+                string DSR = @"players2/" + DGAdmin.UTILS_GetDSRName() + ".dsr";
+                List<string> DSRData = new List<string>();
+                if (System.IO.File.Exists(DSR))
+                    DSRData = System.IO.File.ReadAllLines(DSR).ToList();
+                else
+                {
+                    WriteLog.Error("Error loading dynamic_properties feature: DSR not exists! \"" + DSR + "\"");
+                    return;
+                }
+
+                // start of parsing
+
+                int count = 0;
+
+                Action _h_settings = () =>
+                {
+                    DSRData.ForEach((s) =>
+                    {
+
+                        /* 
+                         *  //#DGAdmin settings <setting> = <value> 
+                         */
+                        Match match = (new Regex(@"^[\s]{0,31}\/\/#DGAdmin[\s]{1,31}settings[\s]{1,31}([a-z_]{0,63})[\s]{0,31}=[\s]{0,31}(.*)?$", RegexOptions.IgnoreCase))
+                                      .Match(s);
+
+                        if (match.Success)
+                        {
+                            string prop = match.Groups[1].Value.ToLower();
+                            if (Settings.Keys.Contains(prop))
+                            {
+                                count++;
+                                Settings[prop] = match.Groups[2].Value;
+                            }
+                            else
+                            {
+                                WriteLog.Warning("Unknown setting: " + prop);
+                            }
+                        }
+
+                        /* 
+                         *  //#DGAdmin cdvar <dvar name> = <value>
+                         */
+                        match = (new Regex(@"^[\s]{0,31}\/\/#DGAdmin[\s]{1,31}cdvar[\s]{1,31}([a-z_]{0,63})[\s]{0,31}=[\s]{0,31}(.*)?$", RegexOptions.IgnoreCase))
+                                .Match(s);
+
+                        if (match.Success)
+                        {
+                            count++;
+                            string prop = match.Groups[1].Value.ToLower();
+                            string value = match.Groups[2].Value;
+                            DefaultCDvars.Add(prop, value);
+                        }
+
+                        /* 
+                         *  //#DGAdmin rules "Rule1\nRule2\nRule3"
+                         */
+                        match = (new Regex(@"^[\s]{0,31}\/\/#DGAdmin[\s]{1,31}rules[\s]{1,31}'([^ ']*?)'[\s]{ 0, 31 }$".Replace('\'', '"'), RegexOptions.IgnoreCase))
+                                .Match(s);
+                        if (match.Success)
+                        {
+                            count++;
+                            ConfigValues.cmd_rules = match.Groups[1].Value.Split(new char[] { '\\' , 'n'}).ToList();
+                        }
+                    });
+                };
+
+                /* 
+                 *  ############## ANTIWEAPONHACK ############### 
+                 *      get the list of restricted weapons
+                 */
+                Action _h_RestrictedWeapons = () =>
+                {
+
+                    DSRData.ForEach((s) => {
+
+                        Regex rgx = new Regex(
+                            @"^[\s]{0,31}gameOpt[\s]{1,31}commonOption\.weaponRestricted\.([a-z0-9_]{1,31})[\s]{1,31}'1'.*?$".Replace('\'', '"'),
+                            RegexOptions.IgnoreCase);
+
+                        Match match_weap = rgx.Match(s);
+                        if (match_weap.Success)
+                            DGAdmin.RestrictedWeapons.Add(match_weap.Groups[1].Value);
+
+                    });
+
+                };
+
+
+
+                _h_settings();
+
+                if (ConfigValues.ANTIWEAPONHACK)
+                    _h_RestrictedWeapons();
+
+                if (count > 0)
+                    WriteLog.Info(string.Format("dynamic_properties:: Done reading {0} settings from \"{1}\"", count, DSR));
+
+            }
         }
 
         public static string Lang_GetString(string key)
