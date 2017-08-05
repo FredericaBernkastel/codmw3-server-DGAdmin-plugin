@@ -3048,7 +3048,7 @@ namespace LambAdmin
                 }
             }));
 
-            CommandList.Add(new Command("debug", 1, Command.Behaviour.Normal,
+            CommandList.Add(new Command("debug", 1, Command.Behaviour.HasOptionalArguments,
             (sender, arguments, optarg) =>
             {
                 switch (arguments[0])
@@ -3080,10 +3080,11 @@ namespace LambAdmin
                             WriteChatToPlayer(sender, sender.CurrentWeapon);
                             break;
                         };
-                    case "mem":
+                    case "svtitle":
                         {
                             WriteChatSpyToPlayer(sender, "debug.mem::callback");
-                            UTILS_ServerTitle("^1test", "^3test");
+                            //string[] args = optarg.Split(' ');
+                            UTILS_ServerTitle("123456789012345678901234567890", "123456789012345678901234567890");
                             break;
                         }
                 }

@@ -1,9 +1,19 @@
-﻿using System;
+﻿/*
+******************************~**********************************
+******************+**+**++***+++***++**+**+**+*******************
+***************+**+**++**+++ made by +++***++**+*****************
+************~*++**+++ Frederica Bernkastel *+++**++*~************
+*****************************************************************
+************************* nipa~( =^_^= ) ************************
+*****************************************************************
+*****~*~*~~~ https://github.com/FredericaBernkastel ~~~*~*~******
+*****************************************************************
+*****************************************************************
+*/
+using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Xml.Linq;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
@@ -21,15 +31,28 @@ namespace LambAdmin
             [DllImport("kernel32.dll")]
             protected static extern int VirtualQueryEx(IntPtr hProcess, IntPtr lpAddress, out MEMORY_BASIC_INFORMATION lpBuffer, int dwLength);
             [DllImport("kernel32.dll", SetLastError = true)]
-            static extern bool WriteProcessMemory(int hProcess, int lpBaseAddress,
-              byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesWritten);
+            static extern bool WriteProcessMemory(int hProcess, int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesWritten);
             [DllImport("kernel32.dll", SetLastError = true)]
-            static extern bool VirtualProtect(IntPtr lpAddress, uint dwSize,
-                       uint flNewProtect, out uint lpflOldProtect);
+            static extern bool VirtualProtect(IntPtr lpAddress, uint dwSize, uint flNewProtect, out uint lpflOldProtect);
+            [DllImport("kernel32.dll")]
+            protected static extern int OpenProcess(uint dwDesiredAccess, bool bInheritHandle, int dwProcessId);
+            [DllImport("kernel32.dll")]
+            public static extern bool CloseHandle(int hObject);
 
-            const int PROCESS_VM_WRITE = 0x0020;
-            const int PROCESS_VM_OPERATION = 0x0008;
-            const int PAGE_READWRITE = 0x04;
+            private const int PROCESS_VM_WRITE = 0x0020;
+            private const int PROCESS_VM_OPERATION = 0x0008;
+
+            private const uint PAGE_EXECUTE = 16;
+            private const uint PAGE_EXECUTE_READ = 32;
+            private const uint PAGE_EXECUTE_READWRITE = 64;
+            private const uint PAGE_EXECUTE_WRITECOPY = 128;
+            private const uint PAGE_GUARD = 256;
+            private const uint PAGE_NOACCESS = 1;
+            private const uint PAGE_NOCACHE = 512;
+            private const uint PAGE_READONLY = 2;
+            private const uint PAGE_READWRITE = 4;
+            private const uint PAGE_WRITECOPY = 8;
+            private const uint PROCESS_ALL_ACCESS = 2035711;
 
             [StructLayout(LayoutKind.Sequential)]
             protected struct MEMORY_BASIC_INFORMATION
@@ -110,10 +133,20 @@ namespace LambAdmin
                 return result;
             }
 
+            public void WriteMem(int pOffset, byte[] pBytes)
+            {
+                int processHandle = OpenProcess(PROCESS_ALL_ACCESS, false, Process.GetCurrentProcess().Id);
+                int BytesWritten = 0;
+                WriteProcessMemory(processHandle, pOffset, pBytes, pBytes.Length, ref BytesWritten);
+                CloseHandle(processHandle);
+                
+            }
         }
 
         public bool UTILS_ServerTitle(string MapName, string ModeName)
         {
+            Regex rgx = new Regex(@"^gn\\IW5\\gt\\([^\\].*?\\){27}$");
+
             Action<Action<List<IntPtr>>> FindAddr = (callback) => {
 
                 WriteLog.Debug("ServerTitle:: start scanning...");
@@ -140,7 +173,6 @@ namespace LambAdmin
                     if ((int)addr <= 0xC000000)
                     {
                         string structure = Mem.ReadString((int)addr, 128);
-                        Regex rgx = new Regex(@"^gn\\IW5\\gt\\([^\\].*?\\){27}$");
                         Match match = rgx.Match(structure);
                         if (match.Success)
                             pass1.Add(addr);
@@ -149,33 +181,55 @@ namespace LambAdmin
 
                 List<IntPtr> pass2 = new List<IntPtr>();
 
-                //step 2. - Test for lathness
-                unsafe
+                //step 2.  (black magic)
+                if (pass1.Count == 3)
                 {
-                    // write test bytes
-                    pass1.ForEach(addr => {
-
-
-                        // >>>> HERE <<<<<
-                        *(byte*)(addr + 10) = 0x61;
-                        // >>>> HERE <<<<<
-
-
-                        WriteLog.Debug(String.Format("0x{0}: {1}", (addr + 10).ToString("X"), (*(byte*)(addr + 10)).ToString("X")));
-                    });
-
-                    WriteLog.Debug("Delay(1000)");
-
-                    AfterDelay(1000, () =>
-                    {
-                        // read test bytes
-                        pass1.ForEach(addr =>
-                        {
-                            WriteLog.Debug(String.Format("0x{0}: {1}", (addr + 10).ToString("X"), (*(byte*)(addr + 10)).ToString("X")));
-                        });
-                    });
+                    if ((int)pass1.ElementAt(1) - (int)pass1.ElementAt(0) == 0x7DD)
+                        pass2.Add(pass1.ElementAt(1));
+                    else
+                    if ((int)pass1.ElementAt(2) - (int)pass1.ElementAt(1) == 0x7DD)
+                        pass2.Add(pass1.ElementAt(2));
+                } else 
+                if(pass1.Count == 2)
+                {
+                    if ((int)pass1.ElementAt(1) - (int)pass1.ElementAt(0) == 0x7DD)
+                        pass2.Add(pass1.ElementAt(1));
                 }
-                return pass1;
+                return pass2;
+            };
+
+            Action<IntPtr> Write = (addr) =>
+            {
+                if (String.IsNullOrEmpty(MapName) && String.IsNullOrEmpty(ModeName))
+                    return;
+                if ((int)addr <= 0)
+                    return;
+                if(MapName.Length > 20)
+                {
+                    WriteLog.Warning("ServerTitle:: MapName overflow. Max length is 20 chars!");
+                    MapName = MapName.Substring(0, 20);
+                }
+                if (ModeName.Length > 15)
+                {
+                    WriteLog.Warning("ServerTitle:: ModeName overflow. Max length is 15 chars!");
+                    ModeName = ModeName.Substring(0, 15);
+                }
+                string structure = Mem.ReadString((int)addr, 128);
+                if (!rgx.Match(structure).Success)
+                    return;
+
+                // no, Carl, this is not a brainfuck
+                Regex _rgx = new Regex(@"^(gn\\IW5\\gt\\)([^\\].*?)\\(([^\\].*?\\){5})([^\\].*?)\\(([^\\].*?\\){20})$");
+                string part1 = _rgx.Replace(structure, @"$1");
+                string part2 = _rgx.Replace(structure, @"$3");
+                string part3 = _rgx.Replace(structure, @"$6");
+
+                structure = part1 + ModeName + "\\" + part2 + MapName + "\\" + part3;
+
+                List<byte> data = Encoding.ASCII.GetBytes(structure).ToList();
+                data.Add(0);
+                if (data.Count <= 128)
+                    (new AobScan()).WriteMem((int)addr, data.ToArray());
             };
 
             /* Once found, the address wont change in future
@@ -190,13 +244,15 @@ namespace LambAdmin
                     {
                         addrs = Filter(addrs);
 
-                        WriteLog.Debug("ServerTitle:: addrs: " + String.Join(", ", addrs.ConvertAll<string>((s) => { return "0x" + (s.ToInt32().ToString("X")); }).ToArray()));
+                        WriteLog.Debug("ServerTitle:: addr: " + String.Join(", ", addrs.ConvertAll<string>((s) => { return "0x" + (s.ToInt32().ToString("X")); }).ToArray()));
 
                         //assume its 2nd
                         IntPtr addr = (addrs.Count > 1) ? addrs.ElementAt(1) : addrs.ElementAt(0);
 
                         //save found address
                         Call("setdvar", "sv_serverinfo_addr", new Parameter((int)addr.ToInt32()));
+
+                        Write(addrs.First());
                     }
                     else
                     {
@@ -204,6 +260,7 @@ namespace LambAdmin
                         Call("setdvar", "sv_serverinfo_addr", new Parameter((int)0)); //just skip dis shit in future
                     }
                     WriteLog.Debug("ServerTitle:: done scanning.");
+                    
                 }));
             }
             else
@@ -213,6 +270,7 @@ namespace LambAdmin
                 if (addr > 0)
                 {
                     WriteLog.Debug("ServerTitle:: addr: 0x" + addr.ToString("X"));
+                    Write(new IntPtr(addr));
                 }
             }
 
