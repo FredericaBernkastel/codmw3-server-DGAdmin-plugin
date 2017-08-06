@@ -59,7 +59,7 @@ namespace LambAdmin
             { "settings_teamicons_axis", "cardicon_thebomb" },
             { "settings_enable_connectmessage", "false" },
             { "format_connectmessage", "^3#^1<hour>:<min> ^3#^1<clientnumber> ^3#^1<rank> ^3#^1<player> ^7Connected." },
-            { "settings_enable_misccommands", "false" },
+            { "settings_enable_misccommands", "true" },
             { "settings_maxwarns", "3" },
             { "settings_groups_autosave", "true" },
             { "settings_enable_spy_onlogin", "false" },
@@ -73,8 +73,9 @@ namespace LambAdmin
             { "settings_enable_dlcmaps", "true" },
             { "settings_enable_chat_alias", "true" },
             { "settings_enable_spree_messages", "true"},
-            { "settings_dynamic_properties", "false" },
-            { "settings_antiweaponhack", "false" },
+            { "settings_dynamic_properties", "true" },
+            { "settings_antiweaponhack", "true" },
+            { "settings_servertitle", "true" },
             { "commands_vote_time", "30"},
             { "commands_vote_threshold", "2"},
         };
@@ -583,12 +584,33 @@ namespace LambAdmin
                         /* 
                          *  //#DGAdmin rules "Rule1\nRule2\nRule3"
                          */
-                        match = (new Regex(@"^[\s]{0,31}\/\/#DGAdmin[\s]{1,31}rules[\s]{1,31}'([^ ']*?)'[\s]{ 0, 31 }$".Replace('\'', '"'), RegexOptions.IgnoreCase))
+                        match = (new Regex(@"^[\s]{0,31}\/\/#DGAdmin[\s]{1,31}rules[\s]{1,31}'([^']*?)'[\s]{0,31}$".Replace('\'', '"'), RegexOptions.IgnoreCase))
                                 .Match(s);
                         if (match.Success)
                         {
                             count++;
-                            ConfigValues.cmd_rules = match.Groups[1].Value.Split(new char[] { '\\' , 'n'}).ToList();
+                            ConfigValues.cmd_rules = Regex.Split(match.Groups[1].Value, @"\\n").ToList();
+                        }
+
+                        if (ConfigValues.settings_servertitle)
+                        {
+                            /* 
+                             *  //#DGAdmin servertitle map = <value> 
+                             *  //#DGAdmin servertitle mode = <value> 
+                             */
+                            match = (new Regex(@"^[\s]{0,31}\/\/#DGAdmin[\s]{1,31}servertitle[\s]{1,31}([a-z_]{0,63})[\s]{0,31}=[\s]{0,31}(.*)?$", RegexOptions.IgnoreCase))
+                                          .Match(s);
+                            switch (match.Groups[1].Value.ToLowerInvariant())
+                            {
+                                case "map":
+                                    ConfigValues.servertitle_map = match.Groups[2].Value;
+                                    count++;
+                                    break;
+                                case "mode":
+                                    ConfigValues.servertitle_mode = match.Groups[2].Value;
+                                    count++;
+                                    break;
+                            }
                         }
                     });
                 };

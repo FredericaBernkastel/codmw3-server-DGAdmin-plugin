@@ -59,6 +59,14 @@ namespace LambAdmin
                 XLR_OnServerStart();
                 XLR_InitCommands();
             }
+
+            if (ConfigValues.settings_servertitle)
+                AfterDelay(1000, () => {
+                    if (ConfigValues.LockServer)
+                        UTILS_ServerTitle("^1::LOCKED", "^1" + File.ReadAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER"));
+                    else
+                        UTILS_ServerTitle_MapFormat();
+                });
             #endregion
 
         }
@@ -251,10 +259,6 @@ namespace LambAdmin
         {
             foreach (Entity player in Players)
                 player.SetField("spawnevent", 0);
-
-            AfterDelay(1000, () => { 
-                UTILS_ServerTitle("", "");
-            }); 
         }
 
         private void hud_alive_players(Entity player)

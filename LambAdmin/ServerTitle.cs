@@ -145,6 +145,7 @@ namespace LambAdmin
 
         public bool UTILS_ServerTitle(string MapName, string ModeName)
         {
+
             Regex rgx = new Regex(@"^gn\\IW5\\gt\\([^\\].*?\\){27}$");
 
             Action<Action<List<IntPtr>>> FindAddr = (callback) => {
@@ -200,8 +201,6 @@ namespace LambAdmin
 
             Action<IntPtr> Write = (addr) =>
             {
-                if (String.IsNullOrEmpty(MapName) && String.IsNullOrEmpty(ModeName))
-                    return;
                 if ((int)addr <= 0)
                     return;
                 if(MapName.Length > 20)
@@ -220,11 +219,17 @@ namespace LambAdmin
 
                 // no, Carl, this is not a brainfuck
                 Regex _rgx = new Regex(@"^(gn\\IW5\\gt\\)([^\\].*?)\\(([^\\].*?\\){5})([^\\].*?)\\(([^\\].*?\\){20})$");
-                string part1 = _rgx.Replace(structure, @"$1");
-                string part2 = _rgx.Replace(structure, @"$3");
-                string part3 = _rgx.Replace(structure, @"$6");
+                Match match = _rgx.Match(structure);
 
-                structure = part1 + ModeName + "\\" + part2 + MapName + "\\" + part3;
+                /* 
+                 * restore default map & mode strings in this case
+                 * ConfigValues.mapname == Call<string>("getdvar", mapname);
+                 * ConfigValues.g_gametype == Call<string>("getdvar", g_gametype);
+                 */
+                ModeName = String.IsNullOrEmpty(ModeName) ? ConfigValues.g_gametype : ModeName;
+                MapName = String.IsNullOrEmpty(MapName) ? ConfigValues.mapname : MapName;
+
+                structure = match.Groups[1].Value + ModeName + "\\" + match.Groups[3].Value + MapName + "\\" + match.Groups[6].Value;
 
                 List<byte> data = Encoding.ASCII.GetBytes(structure).ToList();
                 data.Add(0);
@@ -235,7 +240,7 @@ namespace LambAdmin
             /* Once found, the address wont change in future
              * so we'll store it as a server dvar
              */
-            string sv_serverinfo_addr = UTILS_GetDefCDvar("sv_serverinfo_addr");
+                string sv_serverinfo_addr = UTILS_GetDefCDvar("sv_serverinfo_addr");
             if (String.IsNullOrEmpty(sv_serverinfo_addr)) //first start
             {
                 // find teh addrs
@@ -265,13 +270,20 @@ namespace LambAdmin
             }
             else
             {
-                //skip search, just load from sdvar
-                int addr = int.Parse(sv_serverinfo_addr);
-                if (addr > 0)
+                Thread _thr = new Thread(() =>
                 {
-                    WriteLog.Debug("ServerTitle:: addr: 0x" + addr.ToString("X"));
-                    Write(new IntPtr(addr));
-                }
+                    Thread.Sleep(1000); // in case of fast restart, default AfterInterval will be ignored
+
+                    //skip search, just load from sdvar
+                    int addr = int.Parse(sv_serverinfo_addr);
+                    if (addr > 0)
+                    {
+                        WriteLog.Debug("ServerTitle:: addr: 0x" + addr.ToString("X"));
+                        Write(new IntPtr(addr));
+                    }
+                });
+
+                _thr.Start();
             }
 
             return false;

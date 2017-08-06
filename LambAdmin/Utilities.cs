@@ -708,6 +708,17 @@ namespace LambAdmin
             return maps[0];
         }
 
+        public string DevMapName2Mapname(string devMapname)
+        {
+            List<string> maps =
+                (from map in ConfigValues.AvailableMaps
+                    where map.Value.Contains(devMapname)
+                    select map.Key).ToList();
+            if (maps.Count != 1)
+                return null;
+            return maps[0];
+        }
+
         public static bool ParseCommand(string CommandToBeParsed, int ArgumentAmount, out string[] arguments, out string optionalarguments)
         {
             CommandToBeParsed = CommandToBeParsed.TrimEnd(' ');
@@ -939,6 +950,9 @@ namespace LambAdmin
             //DLCMAPS
             if (bool.Parse(Sett_GetString("settings_enable_dlcmaps")))
                 ConfigValues.AvailableMaps = Data.AllMapNames;
+
+            ConfigValues.mapname = UTILS_GetDvar("mapname");
+            ConfigValues.g_gametype = UTILS_GetDvar("g_gametype");
         }
 
         public void ANTIWEAPONHACK (Entity player, Entity inflictor, Entity attacker, int damage, int dFlags, string mod, string weapon, Vector3 point, Vector3 dir, string hitLoc)
@@ -2011,6 +2025,25 @@ namespace LambAdmin
                     }
                 return false;
             }
+        }
+
+        public void UTILS_ServerTitle_MapFormat()
+        {
+            string mapname = DevMapName2Mapname(UTILS_GetDvar("mapname"));
+
+            // ToTitleCase
+            if (!String.IsNullOrEmpty(mapname))
+            {
+                Char[] ca = mapname.ToCharArray();
+                ca[0] = Char.ToUpperInvariant(ca[0]);
+                mapname = new string(ca);
+            }
+
+            UTILS_ServerTitle(ConfigValues.servertitle_map.Format(new Dictionary<string, string>()
+                {
+                    {"<map>", mapname }
+                })
+                , ConfigValues.servertitle_mode);
         }
 
         //this is A wrong way to convert encodings :)

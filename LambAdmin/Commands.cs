@@ -86,6 +86,13 @@ namespace LambAdmin
                     return bool.Parse(Sett_GetString("settings_antiweaponhack"));
                 }
             }
+            public static bool settings_servertitle
+            {
+                get
+                {
+                    return bool.Parse(Sett_GetString("settings_servertitle"));
+                }
+            }
             public static string settings_daytime
             {
                 get
@@ -139,6 +146,11 @@ namespace LambAdmin
                     return float.Parse(Sett_GetString("commands_vote_threshold"));
                 }
             }
+
+            public static string servertitle_map = "";
+            public static string servertitle_mode = "";
+            public static string mapname = "";
+            public static string g_gametype = "";
         }
 
         public volatile List<Command> CommandList = new List<Command>();
@@ -3226,46 +3238,52 @@ namespace LambAdmin
                 CommandList.Add(new Command("lockserver", 0, Command.Behaviour.HasOptionalArguments | Command.Behaviour.MustBeConfirmed,
                 (sender, arguments, optarg) =>
                 {
-                optarg = String.IsNullOrEmpty(optarg) ? "" : optarg;
-                if (ConfigValues.LockServer)
-                {
-                    ConfigValues.LockServer = false;
-                    LockServer_Whitelist.Clear();
-                    if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER"))
-                        System.IO.File.Delete(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER");
-                    if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt"))
-                        System.IO.File.Delete(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt");
-                    WriteChatToAll(@"^2Server unlocked.");
-                }
-                else
-                {
-                    WriteChatToAll((@" ^3<issuer> ^1executed ^3!lockserver " + optarg).Format(new Dictionary<string, string>()
+                    optarg = String.IsNullOrEmpty(optarg) ? "" : optarg;
+                    if (ConfigValues.LockServer)
                     {
-                        {"<issuer>", sender.Name },
-                    }));
+                        ConfigValues.LockServer = false;
+                        LockServer_Whitelist.Clear();
+                        if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER"))
+                            System.IO.File.Delete(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER");
+                        if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt"))
+                            System.IO.File.Delete(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt");
+                        WriteChatToAll(@"^2Server unlocked.");
 
-                    AfterDelay(2000, () =>
+                        if (ConfigValues.settings_servertitle)
+                            UTILS_ServerTitle_MapFormat();
+                    }
+                    else
                     {
-                        WriteChatToAllMultiline(new string[] {
-                            "^1Server will be locked in:",
-                            "^35",
-                            "^34",
-                            "^33",
-                            "^32",
-                            "^31",
-                            "^1DONE."
-                        }, 1000);
-                    });
-                    AfterDelay(8000, () =>
-                    {
-                        ConfigValues.LockServer = true;
-                        LockServer_Whitelist = Players.ConvertAll<long>(s => s.GUID);
-                        System.IO.File.WriteAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER", optarg);
-                        System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt",
-                            LockServer_Whitelist.ConvertAll(s => s.ToString())
-                        );
-                    });
-                }
+                        WriteChatToAll((@" ^3<issuer> ^1executed ^3!lockserver " + optarg).Format(new Dictionary<string, string>()
+                        {
+                            {"<issuer>", sender.Name },
+                        }));
+
+                        AfterDelay(2000, () =>
+                        {
+                            WriteChatToAllMultiline(new string[] {
+                                "^1Server will be locked in:",
+                                "^35",
+                                "^34",
+                                "^33",
+                                "^32",
+                                "^31",
+                                "^1DONE."
+                            }, 1000);
+                        });
+                        AfterDelay(8000, () =>
+                        {
+                            ConfigValues.LockServer = true;
+                            LockServer_Whitelist = Players.ConvertAll<long>(s => s.GUID);
+                            System.IO.File.WriteAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER", optarg);
+                            System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt",
+                                LockServer_Whitelist.ConvertAll(s => s.ToString())
+                            );
+
+                            if (ConfigValues.settings_servertitle)
+                                UTILS_ServerTitle("^1::LOCKED", "^1" + optarg);
+                        });
+                    }
                 }));
             }
 
