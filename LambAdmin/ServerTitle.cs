@@ -182,20 +182,25 @@ namespace LambAdmin
 
                 List<IntPtr> pass2 = new List<IntPtr>();
 
+                WriteLog.Debug("ServerTitle:: addrs: " + String.Join(", ", pass1.ConvertAll<string>((s) => { return "0x" + (s.ToInt32().ToString("X")); }).ToArray()));
+
                 //step 2.  (black magic)
-                if (pass1.Count == 3)
+                int gap_min = 0x7DD, gap_max = 0x7EB;
+                if (pass1.Count < 2)
+                    return pass2;
+                else
                 {
-                    if ((int)pass1.ElementAt(1) - (int)pass1.ElementAt(0) == 0x7DD)
-                        pass2.Add(pass1.ElementAt(1));
-                    else
-                    if ((int)pass1.ElementAt(2) - (int)pass1.ElementAt(1) == 0x7DD)
-                        pass2.Add(pass1.ElementAt(2));
-                } else 
-                if(pass1.Count == 2)
-                {
-                    if ((int)pass1.ElementAt(1) - (int)pass1.ElementAt(0) == 0x7DD)
-                        pass2.Add(pass1.ElementAt(1));
+                    int[] _addrs = pass1.ConvertAll(s => { return (int)s; }).ToArray();
+                    for(int i = 1; i < _addrs.Length; i++)
+                    {
+                        if(((_addrs[i] - _addrs[i - 1]) >= gap_min) && ((_addrs[i] - _addrs[i - 1]) <= gap_max))
+                        {
+                            pass2.Add(addrs[i]);
+                            return pass2;
+                        }
+                    }
                 }
+
                 return pass2;
             };
 
@@ -240,16 +245,17 @@ namespace LambAdmin
             /* Once found, the address wont change in future
              * so we'll store it as a server dvar
              */
-                string sv_serverinfo_addr = UTILS_GetDefCDvar("sv_serverinfo_addr");
+            string sv_serverinfo_addr = UTILS_GetDefCDvar("sv_serverinfo_addr");
             if (String.IsNullOrEmpty(sv_serverinfo_addr)) //first start
             {
                 // find teh addrs
                 FindAddr(new Action<List<IntPtr>>((addrs) => {
+
+                    addrs = Filter(addrs);
+                    WriteLog.Debug("ServerTitle:: addrs(filter): " + String.Join(", ", addrs.ConvertAll<string>((s) => { return "0x" + (s.ToInt32().ToString("X")); }).ToArray()));
+
                     if (addrs.Count != 0)
                     {
-                        addrs = Filter(addrs);
-
-                        WriteLog.Debug("ServerTitle:: addr: " + String.Join(", ", addrs.ConvertAll<string>((s) => { return "0x" + (s.ToInt32().ToString("X")); }).ToArray()));
 
                         //assume its 2nd
                         IntPtr addr = (addrs.Count > 1) ? addrs.ElementAt(1) : addrs.ElementAt(0);
