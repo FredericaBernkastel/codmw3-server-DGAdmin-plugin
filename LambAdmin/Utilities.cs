@@ -2046,6 +2046,20 @@ namespace LambAdmin
                 , ConfigValues.servertitle_mode);
         }
 
+        public List<Dvar> UTILS_DvarListUnion(List<Dvar> set1, List<Dvar> set2)
+        {
+            Dictionary<string, string> _dvars = set1.ToDictionary(x => x.key, x => x.value);
+            foreach (Dvar dvar in set2)
+                if (_dvars.ContainsKey(dvar.key))
+                    _dvars[dvar.key] = dvar.value;
+                else
+                    _dvars.Add(dvar.key, dvar.value);
+            set1.Clear();
+            foreach (KeyValuePair<string, string> dvar in _dvars)
+                set1.Add(new Dvar { key = dvar.Key, value = dvar.Value });
+            return set1;
+        }
+
         //this is A wrong way to convert encodings :)
         public static string Win1251xUTF8(string s)
         {

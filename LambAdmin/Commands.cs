@@ -2007,6 +2007,36 @@ namespace LambAdmin
                     }));
                 }));
 
+
+            // fx <on/off>
+            CommandList.Add(new Command("fx", 1, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    List<Dvar> dvars;
+
+                    if (UTILS_ParseBool(arguments[0]))
+                        dvars = new List<Dvar>(){
+                           new Dvar { key = "fx_draw",   value = "0" },
+                           new Dvar { key = "r_fog",     value = "0" }
+                        };
+                    else
+                        dvars = new List<Dvar>(){
+                           new Dvar { key = "fx_draw",   value = "1" },
+                           new Dvar { key = "r_fog",     value = "1" }
+                        };
+
+                    if (PersonalPlayerDvars.ContainsKey(sender.GUID))
+                        PersonalPlayerDvars[sender.GUID] = UTILS_DvarListUnion(PersonalPlayerDvars[sender.GUID], dvars);
+                    else
+                        PersonalPlayerDvars.Add(sender.GUID, dvars);
+
+                    UTILS_SetClientDvars(sender, dvars);
+
+                    WriteChatToPlayer(sender, Command.GetString("fx", UTILS_ParseBool(arguments[0])? "message_on":"message_off"));
+                }));
+
+
+
             // NIGHT MODE
             CommandList.Add(new Command("night", 1, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
@@ -3815,22 +3845,10 @@ namespace LambAdmin
             try
             {
                 if (PersonalPlayerDvars.ContainsKey(sender.GUID))
-                {
                     if (ft == "0")
                         PersonalPlayerDvars[sender.GUID] = dvars;
                     else
-                    {
-                        Dictionary<string, string> _dvars = PersonalPlayerDvars[sender.GUID].ToDictionary(x => x.key, x => x.value);
-                        foreach (Dvar dvar in dvars)
-                            if (_dvars.ContainsKey(dvar.key))
-                                _dvars[dvar.key] = dvar.value;
-                            else
-                                _dvars.Add(dvar.key, dvar.value);
-                        PersonalPlayerDvars[sender.GUID].Clear();
-                        foreach (KeyValuePair<string, string> dvar in _dvars)
-                            PersonalPlayerDvars[sender.GUID].Add(new Dvar { key = dvar.Key, value = dvar.Value });
-                    }
-                }
+                        PersonalPlayerDvars[sender.GUID] = UTILS_DvarListUnion(PersonalPlayerDvars[sender.GUID], dvars);
                 else
                     PersonalPlayerDvars.Add(sender.GUID, dvars);
                 UTILS_SetClientDvars(sender, dvars);

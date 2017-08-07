@@ -470,6 +470,10 @@ namespace LambAdmin
             {"command_weapon_error", "^1Error: ^7weapon ^2<weapon> ^7not exist! Switching back"},
             {"command_weapon_error1", "^1Error: ^3<player> ^7is dead"},
 
+            {"command_fx_usage", "^1Usage: !fx <on/off>"},
+            {"command_fx_message_on", "^3Fx ^2applied."},
+            {"command_fx_message_off", "^3Fx ^1disabled."},
+
             {"command_@admins_usage", "^1Usage: !@admins" },
 
             {"command_@rules_usage", "^1Usage: !@rules"},
