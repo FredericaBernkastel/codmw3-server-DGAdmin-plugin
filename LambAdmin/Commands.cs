@@ -986,7 +986,7 @@ namespace LambAdmin
                 CommandList.Add(new Command("rules", 0, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
-                    WriteChatToPlayerMultiline(sender, ConfigValues.cmd_rules.ToArray());
+                    WriteChatToPlayerMultiline(sender, ConfigValues.cmd_rules.ToArray(), 1000);
                 }));
             }
 

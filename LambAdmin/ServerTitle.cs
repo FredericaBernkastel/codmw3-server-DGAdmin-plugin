@@ -83,10 +83,10 @@ namespace LambAdmin
 
             private bool MaskCheck(int nOffset, ref byte[] data, ref byte[] btPattern)
             {
-                // Loop the pattern and compare to the mask and dump.
+                // Loop the pattern and compare to the dump
                 for (int x = 0; x < btPattern.Length; x++)
                 {
-                    // If the mask char is not a wildcard, ensure a match is made in the pattern.
+                    
                     if (btPattern[x] != data[nOffset + x])
                         return false;
                 }
@@ -116,10 +116,12 @@ namespace LambAdmin
                 MemReg = new List<MEMORY_BASIC_INFORMATION>();
                 MemInfo(P.Handle);
 
+                long regionSize = 0;
                 List<IntPtr> result = new List<IntPtr>();
                 for (int i = 0; i < MemReg.Count; i++)
                 {
                     byte[] buff = new byte[MemReg[i].RegionSize];
+                    regionSize = Math.Max(regionSize, MemReg[i].RegionSize);
                     ReadProcessMemory(P.Handle, MemReg[i].BaseAddress, buff, MemReg[i].RegionSize, 0);
                     List<IntPtr> Result = _Scan(ref buff, ref Pattern);
                     if (Result.Count > 0)
@@ -185,7 +187,7 @@ namespace LambAdmin
                 WriteLog.Debug("ServerTitle:: addrs: " + String.Join(", ", pass1.ConvertAll<string>((s) => { return "0x" + (s.ToInt32().ToString("X")); }).ToArray()));
 
                 //step 2.  (black magic)
-                int gap_min = 0x7DD, gap_max = 0x7EB;
+                int gap_min = 0x700, gap_max = 0x7FF;
                 if (pass1.Count < 2)
                     return pass2;
                 else
@@ -206,12 +208,32 @@ namespace LambAdmin
 
             Action<IntPtr> Write = (addr) =>
             {
+                Func<string,string> construct = (_structure) =>
+                {
+
+                    // no, Carl, this is not a brainfuck
+                    Regex _rgx = new Regex(@"^(gn\\IW5\\gt\\)([^\\].*?)\\(([^\\].*?\\){5})([^\\].*?)\\(([^\\].*?\\){20})$");
+                    Match match = _rgx.Match(_structure);
+
+                    /* 
+                     * restore default map & mode strings in this case
+                     * ConfigValues.mapname == Call<string>("getdvar", mapname);
+                     * ConfigValues.g_gametype == Call<string>("getdvar", g_gametype);
+                     */
+                    ModeName = String.IsNullOrEmpty(ModeName) ? ConfigValues.g_gametype : ModeName;
+                    MapName = String.IsNullOrEmpty(MapName) ? ConfigValues.mapname : MapName;
+
+                    _structure = match.Groups[1].Value + ModeName + "\\" + match.Groups[3].Value + MapName + "\\" + match.Groups[6].Value;
+                    return _structure;
+
+                };
+
                 if ((int)addr <= 0)
                     return;
-                if(MapName.Length > 20)
+                if(MapName.Length > 28)
                 {
-                    WriteLog.Warning("ServerTitle:: MapName overflow. Max length is 20 chars!");
-                    MapName = MapName.Substring(0, 20);
+                    WriteLog.Warning("ServerTitle:: MapName overflow. Max length is 28 chars!");
+                    MapName = MapName.Substring(0, 28);
                 }
                 if (ModeName.Length > 15)
                 {
@@ -222,24 +244,20 @@ namespace LambAdmin
                 if (!rgx.Match(structure).Success)
                     return;
 
-                // no, Carl, this is not a brainfuck
-                Regex _rgx = new Regex(@"^(gn\\IW5\\gt\\)([^\\].*?)\\(([^\\].*?\\){5})([^\\].*?)\\(([^\\].*?\\){20})$");
-                Match match = _rgx.Match(structure);
-
-                /* 
-                 * restore default map & mode strings in this case
-                 * ConfigValues.mapname == Call<string>("getdvar", mapname);
-                 * ConfigValues.g_gametype == Call<string>("getdvar", g_gametype);
-                 */
-                ModeName = String.IsNullOrEmpty(ModeName) ? ConfigValues.g_gametype : ModeName;
-                MapName = String.IsNullOrEmpty(MapName) ? ConfigValues.mapname : MapName;
-
-                structure = match.Groups[1].Value + ModeName + "\\" + match.Groups[3].Value + MapName + "\\" + match.Groups[6].Value;
+                structure = construct(structure);
+                if ((structure.Length >= 128) && (MapName.Length > 20))
+                {
+                    //maybe it will help...
+                    MapName = MapName.Substring(0, 20);
+                    structure = construct(structure);
+                }
 
                 List<byte> data = Encoding.ASCII.GetBytes(structure).ToList();
                 data.Add(0);
                 if (data.Count <= 128)
                     (new AobScan()).WriteMem((int)addr, data.ToArray());
+                else
+                    WriteLog.Warning(String.Format("ServerTitle:: structure overflow 128, but got {0} bytes.", data.Count.ToString()));
             };
 
             /* Once found, the address wont change in future
@@ -254,21 +272,20 @@ namespace LambAdmin
                     addrs = Filter(addrs);
                     WriteLog.Debug("ServerTitle:: addrs(filter): " + String.Join(", ", addrs.ConvertAll<string>((s) => { return "0x" + (s.ToInt32().ToString("X")); }).ToArray()));
 
-                    if (addrs.Count != 0)
+                    if (addrs.Count == 1)
                     {
 
-                        //assume its 2nd
-                        IntPtr addr = (addrs.Count > 1) ? addrs.ElementAt(1) : addrs.ElementAt(0);
+                        IntPtr addr = addrs.First();
 
                         //save found address
                         Call("setdvar", "sv_serverinfo_addr", new Parameter((int)addr.ToInt32()));
 
-                        Write(addrs.First());
+                        Write(addr);
                     }
                     else
                     {
                         WriteLog.Warning("ServerTitle:: structure not found");
-                        Call("setdvar", "sv_serverinfo_addr", new Parameter((int)0)); //just skip dis shit in future
+                        Call("setdvar", "sv_serverinfo_addr", new Parameter((int)0)); //addr no found, skip search in future
                     }
                     WriteLog.Debug("ServerTitle:: done scanning.");
                     
