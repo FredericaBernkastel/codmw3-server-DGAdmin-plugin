@@ -27,7 +27,7 @@ namespace LambAdmin
         public class AobScan
         {
             [DllImport("kernel32.dll")]
-            private static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] buffer, uint size, int lpNumberOfBytesRead);
+            private static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, IntPtr buffer, uint size, int lpNumberOfBytesRead);
             [DllImport("kernel32.dll")]
             protected static extern int VirtualQueryEx(IntPtr hProcess, IntPtr lpAddress, out MEMORY_BASIC_INFORMATION lpBuffer, int dwLength);
             [DllImport("kernel32.dll", SetLastError = true)]
@@ -81,27 +81,28 @@ namespace LambAdmin
                 }
             }
 
-            private bool MaskCheck(int nOffset, ref byte[] data, ref byte[] btPattern)
+            private bool MaskCheck(int nOffset, IntPtr data, ref byte[] btPattern)
             {
                 // Loop the pattern and compare to the dump
                 for (int x = 0; x < btPattern.Length; x++)
                 {
-                    
-                    if (btPattern[x] != data[nOffset + x])
-                        return false;
+                    unsafe {
+                        if (btPattern[x] != (*(byte*)(data + nOffset + x)))
+                            return false;
+                    }
                 }
 
                 // The loop was successful so we found the pattern.
                 return true;
             }
 
-            private List<IntPtr> _Scan(ref byte[] sIn, ref byte[] sFor)
+            private List<IntPtr> _Scan(IntPtr sIn, ref byte[] sFor, int length)
             {
                 List<IntPtr> result = new List<IntPtr>();
 
-                for (int x = 0; x < sIn.Length - sFor.Length; x++)
+                for (int x = 0; x < length - sFor.Length; x++)
                 {
-                    if (MaskCheck(x, ref sIn, ref sFor))
+                    if (MaskCheck(x, sIn, ref sFor))
                     {
                         // The pattern was found, return it.
                         result.Add(new IntPtr(x));
@@ -115,21 +116,28 @@ namespace LambAdmin
                 Process P = Process.GetCurrentProcess();
                 MemReg = new List<MEMORY_BASIC_INFORMATION>();
                 MemInfo(P.Handle);
-
-                long regionSize = 0;
                 List<IntPtr> result = new List<IntPtr>();
                 for (int i = 0; i < MemReg.Count; i++)
                 {
-                    byte[] buff = new byte[MemReg[i].RegionSize];
-                    regionSize = Math.Max(regionSize, MemReg[i].RegionSize);
-                    ReadProcessMemory(P.Handle, MemReg[i].BaseAddress, buff, MemReg[i].RegionSize, 0);
-                    List<IntPtr> Result = _Scan(ref buff, ref Pattern);
-                    if (Result.Count > 0)
+                    if (MemReg[i].RegionSize == 0)
+                        continue;
+
+                    unsafe
                     {
-                        Result.ForEach(s =>
+                        IntPtr buff = Marshal.AllocHGlobal((int)MemReg[i].RegionSize);
+
+                        ReadProcessMemory(P.Handle, MemReg[i].BaseAddress, buff, MemReg[i].RegionSize, 0);
+                        List<IntPtr> Result = _Scan(buff, ref Pattern, (int)MemReg[i].RegionSize);
+
+                        Marshal.FreeHGlobal(buff);
+
+                        if (Result.Count > 0)
                         {
-                            result.Add(new IntPtr(MemReg[i].BaseAddress.ToInt32() + s.ToInt32()));
-                        });
+                            Result.ForEach(s =>
+                            {
+                                result.Add(new IntPtr(MemReg[i].BaseAddress.ToInt32() + s.ToInt32()));
+                            });
+                        }
                     }
                 }
                 return result;
