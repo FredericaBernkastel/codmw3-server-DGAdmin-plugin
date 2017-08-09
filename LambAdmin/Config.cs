@@ -334,7 +334,7 @@ namespace LambAdmin
 
             {"command_clankick_usage", "^1Usage: !clankick <player>" },
             {"command_clankick_kickmessage", "You have been kicked from the clan. You can remove clantag and reconnect." },
-            {"command_clankick_message", "^2<target> ^7was ^5CLANKICKED ^7by ^3<sender>^7." },
+            {"command_clankick_message", "^2<target> ^7was ^5CLANKICKED ^7by ^3<issuerf>^7." },
 
             {"command_nootnoot_usage", "^1Usage: !nootnoot <player>" },
             {"command_nootnoot_message_on", "^3<target> ^5was nootnooted." },

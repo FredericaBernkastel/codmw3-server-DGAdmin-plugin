@@ -3330,7 +3330,10 @@ namespace LambAdmin
                     "a=amsg",
                     "k=kick",
                     "w=warn",
-                    "fr=foreach"
+                    "fr=foreach",
+                    "s=suicide",
+                    "tp=teleport",
+                    "pft=playfxontag"
                 });
 
             foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\commandaliases.txt"))
