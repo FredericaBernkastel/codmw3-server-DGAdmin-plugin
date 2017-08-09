@@ -1180,12 +1180,12 @@ namespace LambAdmin
                 (sender, arguments, optarg) =>
                 {
                     Entity target = FindSinglePlayer(arguments[0]);
-                    if(target == null)
+                    if (target == null)
                     {
                         WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
                         return;
                     }
-                    if(target.FixPlayerIdentifiers(database))
+                    if (target.FixPlayerIdentifiers(database))
                         WriteChatToPlayer(sender, Command.GetString("fixplayergroup", "message"));
                     else
                         WriteChatToPlayer(sender, Command.GetString("fixplayergroup", "notfound"));
@@ -1578,12 +1578,12 @@ namespace LambAdmin
                     List<BanEntry> entries = CMD_SearchBanEntries(arguments[0]);
                     if (entries.Count == 0)
                     {
-                        WriteChatToPlayer(sender,Command.GetMessage("NoEntriesFound"));
+                        WriteChatToPlayer(sender, Command.GetMessage("NoEntriesFound"));
                         return;
                     }
                     if (entries.Count > 1)
                     {
-                        WriteChatToPlayer(sender,Command.GetString("unban", "multiple_entries_found"));
+                        WriteChatToPlayer(sender, Command.GetString("unban", "multiple_entries_found"));
                         return;
                     }
                     if (CMD_unban(entries[0].banid) != null)
@@ -1598,7 +1598,7 @@ namespace LambAdmin
                             }));
                     }
                     else
-                        WriteChatToPlayer(sender, "Unknown error at DGAdmin::cmd_unban"); 
+                        WriteChatToPlayer(sender, "Unknown error at DGAdmin::cmd_unban");
                 }
             ));
 
@@ -1746,7 +1746,28 @@ namespace LambAdmin
                                                         select mapname).ToArray());
                 }));
 
-            // TIME
+            // dsrnames
+            CommandList.Add(new Command("dsrnames", 0, Command.Behaviour.Normal,
+                (sender, arguments, optarg) =>
+                {
+                    if (System.IO.Directory.Exists(@"admin\"))
+                    {
+                        WriteChatToPlayer(sender, "^1Error: ^7\"admin/\" folder exsists! Delete it, and use \"players2/\" instead!");
+                        return;
+                    }
+                    if (System.IO.Directory.Exists(@"players2\"))
+                    {
+                        WriteChatToPlayer(sender, Command.GetString("dsrnames", "firstline"));
+                        WriteChatToPlayerCondensed(sender, 
+                            Array.ConvertAll(Directory.GetFiles(@"players2\", "*.DSR"), (s) => {
+                                return Regex.Replace(s, @"^players2\\(.*?)\.dsr", "$1", RegexOptions.IgnoreCase);
+                            }),
+                            2000
+                        );
+                    }
+                }));
+
+                    // TIME
             CommandList.Add(new Command("time", 0, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {

@@ -82,7 +82,7 @@ namespace LambAdmin
                     WriteLog.Warning("Groups file not found, creating new one...");
                     File.WriteAllLines(ConfigValues.ConfigPath + @"Groups\groups.txt", new string[]
                     {
-                        "default::pm,admins,guid,version,rules,afk,credits,hidebombicon,help,rage,maps,time,amsg,ft,hwid,apply,night,fillammo,report,suicide,yes,no,register,xlrstats,xlrtop,votekick,drunk,fx",
+                        "default::pm,admins,guid,version,rules,afk,credits,hidebombicon,help,rage,maps,dsrnames,time,amsg,ft,hwid,apply,night,ga,report,suicide,yes,no,register,xlrstats,xlrtop,votekick,drunk,fx",
                         "moderator::login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,changeteam,lastreports,@admins,@rules,@apply,@time,@xlrstats,@xlrtop:^0[^5Moderator^0]^7",
                         "family::kickhacker,kill,mute,unmute,end,tmpbantime,cdvar,getplayerinfo,say,sayto,resetwarns,setgroup,scream,whois,changeteam,yell,gametype,mode,login,map,status,kick,tmpban,ban,warn,unwarn,getwarns,res,setafk,setteam,balance,clanvsall,clanvsallspectate,sunlight,alias,lastreports,fire,@admins,@rules,@apply,@time,@xlrstats,@xlrtop:^0[^3F^0]^7",
                         "elder:password:-*unsafe*,*all*:^0[^4Elder^0]^7",

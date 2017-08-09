@@ -260,6 +260,9 @@ namespace LambAdmin
             {"command_maps_usage", "^1Usage: !maps" },
             {"command_maps_firstline", "^2Available maps:" },
 
+            {"command_dsrnames_usage", "^1Usage: !dsrnames" },
+            {"command_dsrnames_firstline", "^2Available DSRs:" },
+
             {"command_time_usage", "^1Usage: !time" },
             {"command_time_message", "^2Time: {0:HH:mm:ss}" },
 
