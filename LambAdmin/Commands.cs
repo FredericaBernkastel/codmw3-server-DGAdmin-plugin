@@ -1519,31 +1519,6 @@ namespace LambAdmin
                     }));
                 }));
 
-            // PBAN
-            CommandList.Add(new Command("pban", 1, Command.Behaviour.Normal,
-                (sender, arguments, optarg) =>
-                {
-                    Entity target = FindSinglePlayer(arguments[0]);
-                    if (target == null)
-                    {
-                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                        return;
-                    }
-                    if (target.isImmune(database))
-                    {
-                        WriteChatToPlayer(sender, Command.GetMessage("TargetIsImmune"));
-                        return;
-                    }
-                    CMD_pban(target);
-                    WriteChatToAll(Command.GetString("pban", "message").Format(new Dictionary<string, string>()
-                    {
-                        {"<target>", target.Name },
-                        {"<targetf>", target.GetFormattedName(database) },
-                        {"<issuer>", sender.Name },
-                        {"<issuerf>", sender.GetFormattedName(database) },
-                    }));
-                }));
-
             // UNBAN BY ID
             CommandList.Add(new Command("unban-id", 1, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
@@ -3352,7 +3327,10 @@ namespace LambAdmin
                     "hbi=hidebombicon",
                     "cvsa=clanvsall",
                     "tbt=tmpbantime",
-                    "a=amsg"
+                    "a=amsg",
+                    "k=kick",
+                    "w=warn",
+                    "fr=foreach"
                 });
 
             foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\commandaliases.txt"))

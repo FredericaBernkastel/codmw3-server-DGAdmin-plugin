@@ -216,9 +216,6 @@ namespace LambAdmin
             {"command_tmpbantime_usage", "^1Usage: !tmpbantime <minutes> <player> [reason]" },
             {"command_tmpbantime_message", "^3<target> ^7was tmpbanned by ^1<issuer> ^7for ^5<timespan>^7. Reason: ^6<reason>" },
 
-            {"command_pban_usage", "^1Usage: !pban <player>" },
-            {"command_pban_message", "^3<target> ^7 was ^1permanently banned ^7by ^1<issuer>" },
-
             {"command_unban_usage", "^1Usage: !unban <name>"},
             {"command_unban_message", "^3Ban entry removed. ^1<banid>: <name>, <guid>, <hwid>, <time>"},
             {"command_unban_multiple_entries_found", "^1Error: Multiple entries found. Use ^3!searchbans > !unban-id"},
