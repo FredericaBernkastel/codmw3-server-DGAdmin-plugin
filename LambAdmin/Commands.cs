@@ -3803,7 +3803,6 @@ namespace LambAdmin
                     dvars.Add(new Dvar { key = "r_filmtweakenable",         value = "1"});
                     break;
                 case "7":
-                    dvars.Add(new Dvar { key = "r_specularMap",             value = "2"});
                     dvars.Add(new Dvar { key = "r_normalMap",               value = "0"});
                     break;
                 case "8":
