@@ -22,6 +22,7 @@ namespace LambAdmin
             public static bool SettingsMutex = false;
             public static bool _3rdPerson = false;
             public static List<string> cmd_rules = new List<string>();
+            public static bool cmd_foreachContext = false;
 
             public static int settings_warn_maxwarns
             {
@@ -3191,6 +3192,15 @@ namespace LambAdmin
                     (sender, arguments, optarg) =>
                     {
                         optarg = "!" + optarg;
+
+                        //we'll use global flag to gather all possible hacks with !foreach and !fc
+                        if (ConfigValues.cmd_foreachContext)
+                        {
+                            WriteChatToPlayer(sender, "I like the way you're thinking, but nope.");
+                            return;
+                        }
+                        ConfigValues.cmd_foreachContext = true;
+
                         bool includeself = UTILS_ParseBool(arguments[0]);
                         foreach (Entity player in Players)
                         {
@@ -3199,6 +3209,8 @@ namespace LambAdmin
                                 continue;
                             ProcessCommand(sender, sender.Name, optarg.Replace("<player>", "#" + player.GetEntityNumber().ToString()));
                         }
+
+                        ConfigValues.cmd_foreachContext = false;
                     }));                
 
                 // SVPASSWORD
