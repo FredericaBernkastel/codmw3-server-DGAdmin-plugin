@@ -1372,44 +1372,138 @@ namespace LambAdmin
                 }));
 
             // CDVAR
-            CommandList.Add(new Command("cdvar", 2, Command.Behaviour.HasOptionalArguments,
+            /*
+             * cdvar -i <key> <int>
+             * cdvar -f <key> <float>
+             * cdvar -d <key> <value>
+             * cdvar -s <key> <value>
+             * cdvar -r
+             * cdvar -r <key>
+             * cdvar -r <key> <value>
+             */
+            CommandList.Add(new Command("cdvar", 1, Command.Behaviour.HasOptionalArguments,
                 (sender, arguments, optarg) =>
                 {
+                    string[] optargs = new string[] { };
                     if (!String.IsNullOrEmpty(optarg))
-                    {
-                        switch (arguments[0].ToLowerInvariant())
+                        optargs = optarg.Split(new char[] { ' ' }, 2);
+
+                    if (optargs.Length == 2)
+                        if (!String.IsNullOrEmpty(optargs[0]) && !String.IsNullOrEmpty(optargs[1]))
                         {
-                            case "int":
-                                sender.Call("setclientdvar", arguments[1], int.Parse(optarg));
-                                break;
-                            case "float":
-                                sender.Call("setclientdvar", arguments[1], float.Parse(optarg));
-                                break;
-                            case "string":
-                                sender.Call("setclientdvar", arguments[1], optarg);
-                                break;
-                            case "direct":
-                                sender.SetClientDvar(arguments[1], optarg);
-                                break;
+                            optargs[0] = optargs[0].ToLowerInvariant();
+                            bool success = false;
+                            switch (arguments[0].ToLowerInvariant())
+                            {
+                                case "-i":
+                                case "--int":
+                                    sender.Call("setclientdvar", optargs[0], int.Parse(optargs[1]));
+                                    success = true;
+                                    break;
+
+                                case "-f":
+                                case "--float":
+                                    sender.Call("setclientdvar", optargs[0], float.Parse(optargs[1]));
+                                    success = true;
+                                    break;
+
+                                case "-d":
+                                case "--direct":
+                                    sender.SetClientDvar(optargs[0], optargs[1]);
+                                    success = true;
+                                    break;
+
+                                case "-s":
+                                case "--save":
+                                    {
+                                        sender.SetClientDvar(optargs[0], optargs[1]);
+                                        List<Dvar> dvar = new List<Dvar>() { new Dvar { key = optargs[0], value = optargs[1] } };
+                                        if (PersonalPlayerDvars.ContainsKey(sender.GUID))
+                                            PersonalPlayerDvars[sender.GUID] = UTILS_DvarListUnion(PersonalPlayerDvars[sender.GUID], dvar);
+                                        else
+                                            PersonalPlayerDvars.Add(sender.GUID, dvar);
+                                        success = true;
+                                        break;
+                                    }
+                            }
+                            if (success)
+                            {
+                                switch (arguments[0].ToLowerInvariant())
+                                {
+                                    case "-i":
+                                    case "--int":
+                                    case "-f":
+                                    case "--float":
+                                    case "-d":
+                                    case "--direct":
+                                        WriteChatToPlayer(sender, Command.GetString("cdvar", "message").Format(new Dictionary<string, string>()
+                                        {
+                                            {"<key>", optargs[0] },
+                                            {"<value>", optargs[1] }
+                                        }));
+                                        break;
+                                    case "-s":
+                                    case "--save":
+                                        WriteChatToPlayer(sender, Command.GetString("cdvar", "message1").Format(new Dictionary<string, string>()
+                                        {
+                                            {"<key>", optargs[0] },
+                                            {"<value>", optargs[1] }
+                                        }));
+                                        break;
+
+                                }
+                                return;
+                            }
                         }
-                        WriteChatToPlayer(sender, Command.GetString("cdvar", "message").Format(new Dictionary<string, string>()
-                        {
-                            {"<type>", arguments[0] },
-                            {"<key>", arguments[1] },
-                            {"<value>", optarg },
-                        }));
-                    }
-                    else
+
+                    switch (arguments[0].ToLowerInvariant())
                     {
-                        string dvar = UTILS_GetDefCDvar(arguments[1]);
-                        WriteChatToPlayer(sender, Command.GetString("cdvar", "message").Format(new Dictionary<string, string>()
-                        {
-                            {"<type>", "string" },
-                            {"<key>", arguments[1] },
-                            {"<value>",String.IsNullOrEmpty(dvar)?"NULL":dvar }
-                        }));
+                        case "-r":
+                        case "--reset":
+                            {
+                                if (!PersonalPlayerDvars.ContainsKey(sender.GUID))
+                                {
+                                    WriteChatToPlayer(sender, Command.GetString("cdvar", "error1"));
+                                    return;
+                                }
+
+                                if (optargs.Length > 0)
+                                {
+                                    if (!String.IsNullOrEmpty(optargs[0]))
+                                    {
+                                        optargs[0] = optargs[0].ToLowerInvariant();
+                                        if(UTILS_DvarListRelativeComplement(new List<Dvar>() { new Dvar { key = optargs[0], value = "0" } }, PersonalPlayerDvars[sender.GUID].ConvertAll((s) => { return s.key; })).Count != 0)
+                                        {
+                                            WriteChatToPlayer(sender, Command.GetString("cdvar", "error2").Format(new Dictionary<string, string>()
+                                            {
+                                                {"<key>", optargs[0] }
+                                            }));
+                                            return;
+                                        }
+                                        PersonalPlayerDvars[sender.GUID] = UTILS_DvarListRelativeComplement(PersonalPlayerDvars[sender.GUID], new List<string>() { optargs[0] });
+
+                                        if (optargs.Length == 2)
+                                            if (!String.IsNullOrEmpty(optargs[1]))
+                                                sender.SetClientDvar(optargs[0], optargs[1]);
+
+                                        WriteChatToPlayer(sender, Command.GetString("cdvar", "message2").Format(new Dictionary<string, string>()
+                                        {
+                                            {"<key>", optargs[0] }
+                                        }));
+                                        return;
+                                    }
+                                }
+                                else
+                                {
+                                    PersonalPlayerDvars.Remove(sender.GUID);
+                                    WriteChatToPlayer(sender, Command.GetString("cdvar", "message3"));
+                                    return;
+                                }
+                                break;
+                            }
                     }
-                    return;
+
+                    WriteChatToPlayer(sender, Command.GetString("cdvar", "usage"));
                 }));
 
             // SDVAR

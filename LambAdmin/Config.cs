@@ -198,8 +198,13 @@ namespace LambAdmin
             {"command_clanvsallspectate_usage" , "^1Usage: !clanvsallspectate <matches...>" },
             {"command_clanvsall_message", "^1<issuer>^5 used ^2clanvsall ^5with terms ^3<identifiers>" },
 
-            {"command_cdvar_usage", "^1Usage: !cdvar <type> <key> [value]" },
-            {"command_cdvar_message", "^5Dvar (^1<type>^5)^3<key> ^5= ^3<value>" },
+            {"command_cdvar_usage", "^1Usage: !cdvar <<-ifds> <dvar> <value> | <-r> [dvar] [value]>" },
+            {"command_cdvar_message", "^5Dvar ^3<key> ^5= ^3<value>" },
+            {"command_cdvar_message1", "^5Dvar ^2saved permanently: ^3<key> ^5= ^3<value>" },
+            {"command_cdvar_message2", "^5Dvar ^3<key> ^2was reset." },
+            {"command_cdvar_message3", "^2All Dvars was reset." },
+            {"command_cdvar_error1", "^1Error: ^7dvars already empty" },
+            {"command_cdvar_error2", "^1Error: ^5dvar ^3<key> ^7not set!" },
 
             {"command_sdvar_usage", "^1Usage: !sdvar <key> [value]" },
             {"command_sdvar_message", "^5Server Dvar ^3<key> ^5= ^3<value>" },

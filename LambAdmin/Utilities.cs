@@ -2064,6 +2064,18 @@ namespace LambAdmin
             return set1;
         }
 
+        public List<Dvar> UTILS_DvarListRelativeComplement(List<Dvar> set1, List<string> set2)
+        {
+            Dictionary<string, string> _dvars = set1.ToDictionary(x => x.key, x => x.value);
+            foreach (string dvar in set2)
+                if (_dvars.ContainsKey(dvar))
+                    _dvars.Remove(dvar);
+            set1.Clear();
+            foreach (KeyValuePair<string, string> dvar in _dvars)
+                set1.Add(new Dvar { key = dvar.Key, value = dvar.Value });
+            return set1;
+        }
+
         //this is A wrong way to convert encodings :)
         public static string Win1251xUTF8(string s)
         {
