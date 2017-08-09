@@ -1156,10 +1156,14 @@ namespace LambAdmin
 
         public void UTILS_SetTeamNames(Entity player)
         {
-            player.SetClientDvar("g_TeamName_Allies", ConfigValues.settings_teamnames_allies);
-            player.SetClientDvar("g_TeamName_Axis", ConfigValues.settings_teamnames_axis);
-            player.SetClientDvar("g_TeamIcon_Allies", ConfigValues.settings_teamicons_allies);
-            player.SetClientDvar("g_TeamIcon_Axis", ConfigValues.settings_teamicons_axis);
+            if(!String.IsNullOrWhiteSpace(ConfigValues.settings_teamnames_allies))
+                player.SetClientDvar("g_TeamName_Allies", ConfigValues.settings_teamnames_allies);
+            if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamnames_axis))
+                player.SetClientDvar("g_TeamName_Axis", ConfigValues.settings_teamnames_axis);
+            if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamicons_allies))
+                player.SetClientDvar("g_TeamIcon_Allies", ConfigValues.settings_teamicons_allies);
+            if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamicons_axis))
+                player.SetClientDvar("g_TeamIcon_Axis", ConfigValues.settings_teamicons_axis);
         }
 
         public void UTILS_SetClientNightVision(Entity player)
