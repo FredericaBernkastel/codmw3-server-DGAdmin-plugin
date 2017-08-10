@@ -65,6 +65,8 @@ namespace LambAdmin
                         return false;
                     if (permissions.Contains("-*unsafe*")  && _unsafe.Contains(permission))
                         return false;
+                    if (ConfigValues.settings_disabled_commands.Contains(permission))
+                        return false;
                     if (permissions.Contains(permission) || permissions.Contains("*all*"))
                         return true;
                     return false;
@@ -266,6 +268,10 @@ namespace LambAdmin
 
                 Group group = player.GetGroup(this);
                 WriteLog.Debug("playergroup acquired");
+
+                if (ConfigValues.settings_disabled_commands.Contains(permission_string))
+                    return false;
+
                 if (GetGroup("default").permissions.Contains(permission_string))
                 {
                     WriteLog.Debug("Default contained...");

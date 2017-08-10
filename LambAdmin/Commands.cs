@@ -38,11 +38,11 @@ namespace LambAdmin
                     return bool.Parse(Sett_GetString("settings_groups_autosave"));
                 }
             }
-            public static bool settings_enable_misccommands
+            public static List<string> settings_disabled_commands
             {
                 get
                 {
-                    return bool.Parse(Sett_GetString("settings_enable_misccommands"));
+                    return Sett_GetString("settings_disabled_commands").Split(',').ToList().ConvertAll((s) => { return s.ToLowerInvariant(); });
                 }
             }
             public static bool settings_enable_chat_alias
@@ -527,7 +527,10 @@ namespace LambAdmin
                     else
                     {
                         WriteLog.Debug("No permission");
-                        WriteChatToPlayer(sender, Command.GetMessage("NoPermission"));
+                        if (ConfigValues.settings_disabled_commands.Contains(commandname))
+                            WriteChatToPlayer(sender, Command.GetMessage("CmdDisabled"));
+                        else
+                            WriteChatToPlayer(sender, Command.GetMessage("NoPermission"));
                     }
                     return;
                 }
@@ -3013,12 +3016,6 @@ namespace LambAdmin
                                 {"<player>", sender.Name},
                             }));
             }));
-#if DEBUG
-
-
-            /* -------------- Commands that not included in release build -------------- */
-
-
 
             // weapon <player> <raw weapon string>
             CommandList.Add(new Command("weapon", 2, Command.Behaviour.Normal,
@@ -3065,7 +3062,7 @@ namespace LambAdmin
                                     });                                                                  //                   / /  /    / \    \  \ \
                                 });                                                                      //                  / /  /    /   \    \  \ \
                                                                                                          //              /\_/ /  /    /     \    \  \ \_/\
-                                if(_antiweaponhack)                                                      //              \___'   /   /       \   \   `___/
+                                if (_antiweaponhack)                                                      //              \___'   /   /       \   \   `___/
                                     Settings["settings_antiweaponhack"] = "true";                        //                     /   /         \   \
                                                                                                          //                    /   /           \   \
                                 WriteChatToPlayer(sender, Command.GetString("weapon", "error").Format(   //                   /   /             \   \
@@ -3077,11 +3074,11 @@ namespace LambAdmin
                             else                                                                         //              ; /                           \ :
                             {                                                                            //             /  /J                         L\  \
                                 if (_antiweaponhack)                                                     //            :__/'                           '\__;
-                                {                                                                        
-                                    UTILS_Antiweaponhack_allowweapon(target.CurrentWeapon);              
-                                    Settings["settings_antiweaponhack"] = "true";                        
-                                }                                                                        
-                                WriteChatToPlayer(sender, Command.GetString("weapon", "message").Format( 
+                                {
+                                    UTILS_Antiweaponhack_allowweapon(target.CurrentWeapon);
+                                    Settings["settings_antiweaponhack"] = "true";
+                                }
+                                WriteChatToPlayer(sender, Command.GetString("weapon", "message").Format(
                                 new Dictionary<string, string>()
                                 {
                                     {"<weapon>", target.CurrentWeapon},
@@ -3092,6 +3089,12 @@ namespace LambAdmin
                     });
                 });
             }));
+
+#if DEBUG
+
+
+            /* -------------- Commands that not included in release build -------------- */
+
 
             // shellshock <name> <time>
             CommandList.Add(new Command("shellshock", 2, Command.Behaviour.Normal,
@@ -3230,8 +3233,8 @@ namespace LambAdmin
 
 
 
-                // ADMINS
-                CommandList.Add(new Command("@admins", 0, Command.Behaviour.Normal,
+            // ADMINS
+            CommandList.Add(new Command("@admins", 0, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
                     WriteChatToAll(Command.GetString("admins", "firstline"));
@@ -3244,7 +3247,7 @@ namespace LambAdmin
                 CommandList.Add(new Command("@rules", 0, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
-                    WriteChatToAllMultiline(System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\rules.txt"));
+                    WriteChatToAllMultiline(ConfigValues.cmd_rules.ToArray(), 2000);
                 }));
             }
 
@@ -3265,159 +3268,156 @@ namespace LambAdmin
                     WriteChatToAll(string.Format(Command.GetString("time", "message"), DateTime.Now));
                 }));
 
-            if (ConfigValues.settings_enable_misccommands)
-            {
-                // FORCECOMMAND // fc
-                CommandList.Add(new Command("fc", 1, Command.Behaviour.HasOptionalArguments | Command.Behaviour.OptionalIsRequired,
-                    (sender, arguments, optarg) =>
-                    {
-                        Entity target = FindSinglePlayer(arguments[0]);
-                        if (target == null)
-                        {
-                            WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                            return;
-                        }
-                        WriteChatSpyToPlayer(target, sender.Name + ": ^6!fc " + arguments[0] +" "+ optarg); //abuse proof ;)
-                        ProcessForceCommand(sender, target, target.Name, "!" + optarg);
-                    }));
-
-                // FOREACH
-                CommandList.Add(new Command("foreach", 1, Command.Behaviour.HasOptionalArguments | Command.Behaviour.OptionalIsRequired,
-                    (sender, arguments, optarg) =>
-                    {
-                        optarg = "!" + optarg;
-
-                        //we'll use global flag to gather all possible hacks with !foreach and !fc
-                        if (ConfigValues.cmd_foreachContext)
-                        {
-                            WriteChatToPlayer(sender, "I like the way you're thinking, but nope.");
-                            return;
-                        }
-                        ConfigValues.cmd_foreachContext = true;
-
-                        bool includeself = UTILS_ParseBool(arguments[0]);
-                        foreach (Entity player in Players)
-                        {
-                            int number = player.GetEntityNumber();
-                            if (includeself == false && number == sender.GetEntityNumber())
-                                continue;
-                            ProcessCommand(sender, sender.Name, optarg.Replace("<player>", "#" + player.GetEntityNumber().ToString()));
-                        }
-
-                        ConfigValues.cmd_foreachContext = false;
-                    }));                
-
-                // SVPASSWORD
-                CommandList.Add(new Command("svpassword", 0, Command.Behaviour.HasOptionalArguments | Command.Behaviour.MustBeConfirmed,
-                    (sender, arguments, optarg) =>
-                    {
-                        string path = @"players2\server.cfg";
-                        optarg = String.IsNullOrEmpty(optarg) ? "" : optarg;
-                        if (optarg.IndexOf('"') != -1)
-                        {
-                            WriteChatToPlayer(sender, "^1Error: Password has forbidden characters. Try another.");
-                            return;
-                        }
-                        if (!System.IO.File.Exists(path))
-                        {
-                            WriteChatToPlayer(sender, "^1Error: ^3" + path + "^1 not found.");
-                            return;
-                        }
-
-                        WriteChatToAll(@"^3<issuer> ^1executed ^3!svpassword".Format(new Dictionary<string, string>()
-                        {
-                            {"<issuer>", sender.Name },
-                        }));
-
-                        AfterDelay(2000, () =>
-                        {
-                            WriteChatToAllMultiline(new string[] { 
-                                "^1Server will be killed in:", 
-                                "^35", 
-                                "^34", 
-                                "^33", 
-                                "^32", 
-                                "^31", 
-                                "^30" 
-                            }, 1000);
-                        });
-                        AfterDelay(8000, () =>
-                        {
-                            string password = "seta g_password \"" + optarg + "\"";
-                            List<string> lines = File.ReadAllLines(path).ToList();
-                            Regex regex = new Regex(@"seta g_password ""[^""]*""");
-
-                            bool found = false;
-                            for (int i = 0; i < lines.Count; i++)
-                            {
-                                if (regex.Matches(lines[i]).Count == 1)
-                                {
-                                    found = true;
-                                    lines[i] = password;
-                                    break;
-                                }
-                            }
-                            if (!found)
-                                lines.Add(password);
-                            File.WriteAllLines(path, lines.ToArray());
-                            foreach (Entity player in Players)
-                                CMD_kick(player, "^3Server killed");
-                            AfterDelay(1000, () => Environment.Exit(-1));
-                        });
-                    }));
-
-                // lockserver [reason]
-                CommandList.Add(new Command("lockserver", 0, Command.Behaviour.HasOptionalArguments | Command.Behaviour.MustBeConfirmed,
+            // FORCECOMMAND // fc
+            CommandList.Add(new Command("fc", 1, Command.Behaviour.HasOptionalArguments | Command.Behaviour.OptionalIsRequired,
                 (sender, arguments, optarg) =>
                 {
-                    optarg = String.IsNullOrEmpty(optarg) ? "" : optarg;
-                    if (ConfigValues.LockServer)
+                    Entity target = FindSinglePlayer(arguments[0]);
+                    if (target == null)
                     {
-                        ConfigValues.LockServer = false;
-                        LockServer_Whitelist.Clear();
-                        if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER"))
-                            System.IO.File.Delete(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER");
-                        if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt"))
-                            System.IO.File.Delete(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt");
-                        WriteChatToAll(@"^2Server unlocked.");
+                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                        return;
+                    }
+                    WriteChatSpyToPlayer(target, sender.Name + ": ^6!fc " + arguments[0] +" "+ optarg); //abuse proof ;)
+                    ProcessForceCommand(sender, target, target.Name, "!" + optarg);
+                }));
+
+            // FOREACH
+            CommandList.Add(new Command("foreach", 1, Command.Behaviour.HasOptionalArguments | Command.Behaviour.OptionalIsRequired,
+                (sender, arguments, optarg) =>
+                {
+                    optarg = "!" + optarg;
+
+                    //we'll use global flag to gather all possible hacks with !foreach and !fc
+                    if (ConfigValues.cmd_foreachContext)
+                    {
+                        WriteChatToPlayer(sender, "I like the way you're thinking, but nope.");
+                        return;
+                    }
+                    ConfigValues.cmd_foreachContext = true;
+
+                    bool includeself = UTILS_ParseBool(arguments[0]);
+                    foreach (Entity player in Players)
+                    {
+                        int number = player.GetEntityNumber();
+                        if (includeself == false && number == sender.GetEntityNumber())
+                            continue;
+                        ProcessCommand(sender, sender.Name, optarg.Replace("<player>", "#" + player.GetEntityNumber().ToString()));
+                    }
+
+                    ConfigValues.cmd_foreachContext = false;
+                }));                
+
+            // SVPASSWORD
+            CommandList.Add(new Command("svpassword", 0, Command.Behaviour.HasOptionalArguments | Command.Behaviour.MustBeConfirmed,
+                (sender, arguments, optarg) =>
+                {
+                    string path = @"players2\server.cfg";
+                    optarg = String.IsNullOrEmpty(optarg) ? "" : optarg;
+                    if (optarg.IndexOf('"') != -1)
+                    {
+                        WriteChatToPlayer(sender, "^1Error: Password has forbidden characters. Try another.");
+                        return;
+                    }
+                    if (!System.IO.File.Exists(path))
+                    {
+                        WriteChatToPlayer(sender, "^1Error: ^3" + path + "^1 not found.");
+                        return;
+                    }
+
+                    WriteChatToAll(@"^3<issuer> ^1executed ^3!svpassword".Format(new Dictionary<string, string>()
+                    {
+                        {"<issuer>", sender.Name },
+                    }));
+
+                    AfterDelay(2000, () =>
+                    {
+                        WriteChatToAllMultiline(new string[] { 
+                            "^1Server will be killed in:", 
+                            "^35", 
+                            "^34", 
+                            "^33", 
+                            "^32", 
+                            "^31", 
+                            "^30" 
+                        }, 1000);
+                    });
+                    AfterDelay(8000, () =>
+                    {
+                        string password = "seta g_password \"" + optarg + "\"";
+                        List<string> lines = File.ReadAllLines(path).ToList();
+                        Regex regex = new Regex(@"seta g_password ""[^""]*""");
+
+                        bool found = false;
+                        for (int i = 0; i < lines.Count; i++)
+                        {
+                            if (regex.Matches(lines[i]).Count == 1)
+                            {
+                                found = true;
+                                lines[i] = password;
+                                break;
+                            }
+                        }
+                        if (!found)
+                            lines.Add(password);
+                        File.WriteAllLines(path, lines.ToArray());
+                        foreach (Entity player in Players)
+                            CMD_kick(player, "^3Server killed");
+                        AfterDelay(1000, () => Environment.Exit(-1));
+                    });
+                }));
+
+            // lockserver [reason]
+            CommandList.Add(new Command("lockserver", 0, Command.Behaviour.HasOptionalArguments | Command.Behaviour.MustBeConfirmed,
+            (sender, arguments, optarg) =>
+            {
+                optarg = String.IsNullOrEmpty(optarg) ? "" : optarg;
+                if (ConfigValues.LockServer)
+                {
+                    ConfigValues.LockServer = false;
+                    LockServer_Whitelist.Clear();
+                    if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER"))
+                        System.IO.File.Delete(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER");
+                    if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt"))
+                        System.IO.File.Delete(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt");
+                    WriteChatToAll(@"^2Server unlocked.");
+
+                    if (ConfigValues.settings_servertitle)
+                        UTILS_ServerTitle_MapFormat();
+                }
+                else
+                {
+                    WriteChatToAll((@" ^3<issuer> ^1executed ^3!lockserver " + optarg).Format(new Dictionary<string, string>()
+                    {
+                        {"<issuer>", sender.Name },
+                    }));
+
+                    AfterDelay(2000, () =>
+                    {
+                        WriteChatToAllMultiline(new string[] {
+                            "^1Server will be locked in:",
+                            "^35",
+                            "^34",
+                            "^33",
+                            "^32",
+                            "^31",
+                            "^1DONE."
+                        }, 1000);
+                    });
+                    AfterDelay(8000, () =>
+                    {
+                        ConfigValues.LockServer = true;
+                        LockServer_Whitelist = Players.ConvertAll<long>(s => s.GUID);
+                        System.IO.File.WriteAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER", optarg);
+                        System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt",
+                            LockServer_Whitelist.ConvertAll(s => s.ToString())
+                        );
 
                         if (ConfigValues.settings_servertitle)
-                            UTILS_ServerTitle_MapFormat();
-                    }
-                    else
-                    {
-                        WriteChatToAll((@" ^3<issuer> ^1executed ^3!lockserver " + optarg).Format(new Dictionary<string, string>()
-                        {
-                            {"<issuer>", sender.Name },
-                        }));
-
-                        AfterDelay(2000, () =>
-                        {
-                            WriteChatToAllMultiline(new string[] {
-                                "^1Server will be locked in:",
-                                "^35",
-                                "^34",
-                                "^33",
-                                "^32",
-                                "^31",
-                                "^1DONE."
-                            }, 1000);
-                        });
-                        AfterDelay(8000, () =>
-                        {
-                            ConfigValues.LockServer = true;
-                            LockServer_Whitelist = Players.ConvertAll<long>(s => s.GUID);
-                            System.IO.File.WriteAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER", optarg);
-                            System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt",
-                                LockServer_Whitelist.ConvertAll(s => s.ToString())
-                            );
-
-                            if (ConfigValues.settings_servertitle)
-                                UTILS_ServerTitle("^1::LOCKED", "^1" + optarg);
-                        });
+                            UTILS_ServerTitle("^1::LOCKED", "^1" + optarg);
+                    });
                     }
                 }));
-            }
 
             #endregion
 
