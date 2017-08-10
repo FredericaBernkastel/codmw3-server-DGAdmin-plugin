@@ -98,6 +98,30 @@ namespace LambAdmin
                     return Sett_GetString("settings_teamicons_axis");
                 }
             }
+            public static bool settings_timed_messages
+            {
+                get
+                {
+                    return bool.Parse(Sett_GetString("settings_timed_messages"));
+                }
+            }
+            public static int settings_timed_messages_interval
+            {
+                get
+                {
+                    int interval = 45;
+                    if (String.IsNullOrWhiteSpace(Sett_GetString("settings_timed_messages_interval")))
+                        return interval;
+                    if (int.TryParse(Sett_GetString("settings_timed_messages_interval"), out interval))
+                    {
+                        if (interval < 1)
+                            return 1000;
+                        else
+                            return interval * 1000;
+                    } else
+                        return 4500;
+                }
+            }
 #if DEBUG
             public static bool DEBUG = true;
 #else
@@ -322,11 +346,18 @@ namespace LambAdmin
                 if (System.IO.File.Exists(path))
                     try
                     {
-                        return int.Parse(System.IO.File.ReadAllText(path));
+                        int step = int.Parse(System.IO.File.ReadAllText(path));
+                        if (step > message_list.Count - 1)
+                        {
+                            File.Delete(path);
+                            return 0;
+                        }
+                        else
+                            return step;
                     }
                     catch
                     {
-                        System.IO.File.Delete(path);
+                        File.Delete(path);
                     }
                 return 0;
             }
@@ -884,9 +915,21 @@ namespace LambAdmin
                         "hkClan",
                     });
 
-            if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\announcer.txt"))
+            if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\announcer.txt"))
+                System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Utils\announcer.txt", new string[] 
+                {
+                    "^3Two to the one from the one to the three",
+                    "^1I LIKE GOOD PUSSY AND I LIKE GOOD TREES",
+                    "^;Smoke so much weed you wouldn't believe",
+                    "^2And I get more ass than a toilet seat"
+                });
+            if (ConfigValues.settings_timed_messages)
             {
-                Announcer announcer = new Announcer("default", System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Utils\announcer.txt").ToList());
+                Announcer announcer = new Announcer(
+                    "default", 
+                    File.ReadAllLines(ConfigValues.ConfigPath + @"Utils\announcer.txt").ToList(),
+                    ConfigValues.settings_timed_messages_interval
+                );
                 OnInterval(announcer.message_interval, () =>
                 {
                     WriteChatToAll(announcer.SpitMessage());

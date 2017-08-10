@@ -78,6 +78,8 @@ namespace LambAdmin
             { "settings_servertitle", "true" },
             { "commands_vote_time", "30"},
             { "commands_vote_threshold", "2"},
+            { "settings_timed_messages", "true" },
+            { "settings_timed_messages_interval", "45" }
         };
 
         public static Dictionary<string, string> DefaultCmdLang = new Dictionary<string, string>()
