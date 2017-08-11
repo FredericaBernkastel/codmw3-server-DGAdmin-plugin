@@ -109,6 +109,7 @@ namespace LambAdmin
             {"Message_FX_not_found", "^1Error: given FX not found."},
             {"Message_Filters_error1", "^1Error: ^3Wrong filter syntax"},
             {"Message_Filters_error2", "^1Error: ^3Unknown filter selector: ^2<selector>"},
+            {"Message_Filters_message", "^3Applied to ^2<count> ^3players"},
 
             #endregion
 
@@ -273,7 +274,7 @@ namespace LambAdmin
             {"command_time_usage", "^1Usage: !time" },
             {"command_time_message", "^2Time: {0:HH:mm:ss}" },
 
-            {"command_yell_usage", "^1Usage: !yell <player|all> <message>" },
+            {"command_yell_usage", "^1Usage: !yell <player | *filter*> <message>" },
 
             {"command_changeteam_usage", "^1Usage: !changeteam <player>" },
 
@@ -284,7 +285,9 @@ namespace LambAdmin
             {"command_end_usage", "^1Usage: !end" },
             {"command_end_message", "^2Game ended by ^3<issuer>" },
 
-            {"command_foreach_usage", "^1Usage: !foreach <include self> <command>" },
+            {"command_foreach_usage", "^1Usage: !foreach <*filter*> <command>" },
+
+            {"command_frfc_usage", "^1Usage: !frfc <*filter*> <command>" },
 
             {"command_spy_usage", "^1Usage: !spy <on|off>" },
             {"command_spy_message_on", "^0Spy mode ^2enabled"},
@@ -308,19 +311,19 @@ namespace LambAdmin
             {"command_letmehardscope_message_on", "^5Hardscoping enabled for you. NEWB." },
             {"command_letmehardscope_message_off", "^5Hardscoping disabled for you." },
 
-            {"command_freeze_usage", "^1Usage: !freeze <player>" },
+            {"command_freeze_usage", "^1Usage: !freeze <player | *filter*>" },
             {"command_freeze_message", "^3<target> ^7was frozen by ^1<issuer>" },
 
-            {"command_unfreeze_usage", "^1Usage: !unfreeze <player>" },
+            {"command_unfreeze_usage", "^1Usage: !unfreeze <player | *filter*>" },
             {"command_unfreeze_message", "^3<target> ^7was ^0unfrozen ^7by ^1<issuer>" },
 
-            {"command_mute_usage", "^1Usage: !mute <player>" },
+            {"command_mute_usage", "^1Usage: !mute <player | *filter*" },
             {"command_mute_message", "^3<target>^7 was ^:muted^7 by ^1<issuer>^7." },
 
-            {"command_unmute_usage", "^1Usage: !unmute <player>" },
+            {"command_unmute_usage", "^1Usage: !unmute <player | *filter*" },
             {"command_unmute_message", "^3<target>^7 was ^;unmuted^7 by ^1<issuer>^7." },
 
-            {"command_kill_usage", "^1Usage: !kill <player>" },
+            {"command_kill_usage", "^1Usage: !kill <player | *filter*>" },
 
             {"command_ft_usage", "^1Usage: !ft <0-10>" },
             {"command_ft_message", "^3FilmTweak ^2<ft> ^3applied." },
@@ -362,7 +365,7 @@ namespace LambAdmin
             {"command_dbsearch_message_found", "^3<playerinfo>" },
             {"command_dbsearch_message_notfound", "^1Player info not found in the database." },
 
-            {"command_ac130_usage", "^1Usage: !ac130 <all | <player>> [-p]" },
+            {"command_ac130_usage", "^1Usage: !ac130 <player | *filter*> [-p]" },
             {"command_ac130_message", "^1AC130 ^7Given to ^1<target>^7." },
             {"command_ac130_all", "^1AC130 ^7Given to ALL by ^1<issuerf>"},
 
@@ -437,7 +440,7 @@ namespace LambAdmin
             {"command_gravity_usage", "^1Usage: !gravity <<g> | default>"},
             {"command_gravity_message", "^3Gravity has been set to: ^2<g> m / s ^ 2"},
 
-            {"command_teleport_usage", "^1Usage: !teleport <player1> <player2>"},
+            {"command_teleport_usage", "^1Usage: !teleport <player1 | *filter*> <player2>"},
             {"command_teleport_message", "^3<player1> ^2teleported to ^3<player2>"},
 
             {"command_register_usage", "^1Usage: !register"},
@@ -455,7 +458,7 @@ namespace LambAdmin
             {"command_playfxontag_usage", "^1Usage: !playfxontag <fx> [tag = j_head]"},
             {"command_playfxontag_message", "^3FX ''^2<fx>^3'' spawned on ^2<tag>"},
 
-            {"command_rotatescreen_usage", "^1Usage: !rotatescreen <player> <degree>"},
+            {"command_rotatescreen_usage", "^1Usage: !rotatescreen <player | *filter*> <degree>"},
             {"command_rotatescreen_message", "^2<player>'s ^3roll has been set to ^2<roll>°"},
 
             {"command_votekick_usage", "^1Usage: !votekick <player> [reason]"},
@@ -475,7 +478,7 @@ namespace LambAdmin
             {"command_drunk_usage", "^1Usage: !drunk"},
             {"command_drunk_message", "^3<player> ^2is ^1drunk"},
 
-            {"command_weapon_usage", "^1Usage: !weapon <player> <raw weapon string> [-t]"},
+            {"command_weapon_usage", "^1Usage: !weapon <player | *filter*> <raw weapon string> [-t]"},
             {"command_weapon_message", "^3<player> ^7weapon set to ^2<weapon>"},
             {"command_weapon_error", "^1Error: ^7weapon ^2<weapon> ^7not exist! Switching back"},
             {"command_weapon_error1", "^1Error: ^3<player> ^7is dead"},

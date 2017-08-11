@@ -754,6 +754,22 @@ namespace LambAdmin
             }
         }
 
+        public List<Entity> FindPlayersFilter(string identifier, Entity sender)
+        {
+            if (identifier.StartsWith("*") && identifier.EndsWith("*") && (identifier.Length > 1)){
+                identifier = identifier.Substring(1, identifier.Length - 2);
+                List<Entity> players = (new PlayersFilter(this, sender)).Filter(identifier);
+                if (players.Count == 0)
+                    WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                return players;
+            }
+            else
+            {
+                WriteChatToPlayer(sender, Command.GetMessage("Filters_error1"));
+                return new List<Entity>();
+            }
+        }
+
         public List<string> FindMaps(string identifier)
         {
             return (from map in ConfigValues.AvailableMaps

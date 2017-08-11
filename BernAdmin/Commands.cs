@@ -1868,20 +1868,16 @@ namespace LambAdmin
             CommandList.Add(new Command("yell", 1, Command.Behaviour.HasOptionalArguments | Command.Behaviour.OptionalIsRequired,
                 (sender, arguments, optarg) =>
                 {
-                    if (arguments[0].ToLowerInvariant() == "all")
-                    {
-                        foreach (Entity player in Players)
-                            player.IPrintLnBold(optarg);
-                        return;
-                    }
+                    List<Entity> targets = FindSinglePlayerXFilter(arguments[0], sender);
+                    
+                    foreach(Entity target in targets)
+                        target.IPrintLnBold(optarg);
 
-                    Entity target = FindSinglePlayer(arguments[0]);
-                    if (target == null)
-                    {
-                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                        return;
-                    }
-                    target.IPrintLnBold(optarg);
+                    if (targets.Count > 1)
+                        WriteChatToPlayer(sender, Command.GetMessage("Filters_message").Format(new Dictionary<string, string>()
+                        {
+                            {"<count>", targets.Count.ToString() }
+                        }));
                 }));
 
             // CHANGETEAM
@@ -1986,102 +1982,97 @@ namespace LambAdmin
             CommandList.Add(new Command("freeze", 1, Command.Behaviour.Normal,
                 (sender, arguments, optard) =>
                 {
-                    Entity target = FindSinglePlayer(arguments[0]);
-                    if (target == null)
+                    List<Entity> targets = FindSinglePlayerXFilter(arguments[0], sender);
+                    foreach (Entity target in targets)
                     {
-                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                        return;
+                        if (target.isImmune(database))
+                        {
+                            WriteChatToPlayer(sender, Command.GetMessage("TargetIsImmune"));
+                            continue;
+                        }
+                        target.Call("freezecontrols", true);
+                        target.SetField("frozenbycommand", 1);
+                        WriteChatToAll(Command.GetString("freeze", "message").Format(new Dictionary<string, string>() {
+                            {"<issuer>", sender.Name },
+                            {"<issuerf>", sender.GetFormattedName(database) },
+                            {"<target>", target.Name },
+                            {"<targetf>", target.GetFormattedName(database) },
+                        }));
                     }
-                    if (target.isImmune(database))
-                    {
-                        WriteChatToPlayer(sender, Command.GetMessage("TargetIsImmune"));
-                        return;
-                    }
-                    target.Call("freezecontrols", true);
-                    target.SetField("frozenbycommand", 1);
-                    WriteChatToAll(Command.GetString("freeze", "message").Format(new Dictionary<string, string>() {
-                        {"<issuer>", sender.Name },
-                        {"<issuerf>", sender.GetFormattedName(database) },
-                        {"<target>", target.Name },
-                        {"<targetf>", target.GetFormattedName(database) },
-                    }));
                 }));
 
             // UNFREEZE
             CommandList.Add(new Command("unfreeze", 1, Command.Behaviour.Normal,
                 (sender, arguments, optard) =>
                 {
-                    Entity target = FindSinglePlayer(arguments[0]);
-                    if (target == null)
-                    {
-                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                        return;
-                    }
-                    if (target.isImmune(database))
-                    {
-                        WriteChatToPlayer(sender, Command.GetMessage("TargetIsImmune"));
-                        return;
-                    }
+                    List<Entity> targets = FindSinglePlayerXFilter(arguments[0], sender);
 
-                    if (target.HasField("frozenbycommand") && target.GetField<int>("frozenbycommand") == 1)
+                    foreach (Entity target in targets)
                     {
-                        target.SetField("frozenbycommand", 0);
-                        target.Call("freezecontrols", false);
+                        if (target.isImmune(database))
+                        {
+                            WriteChatToPlayer(sender, Command.GetMessage("TargetIsImmune"));
+                            return;
+                        }
+
+                        if (target.HasField("frozenbycommand") && target.GetField<int>("frozenbycommand") == 1)
+                        {
+                            target.SetField("frozenbycommand", 0);
+                            target.Call("freezecontrols", false);
+                        }
+                        WriteChatToAll(Command.GetString("unfreeze", "message").Format(new Dictionary<string, string>() {
+                            {"<issuer>", sender.Name },
+                            {"<issuerf>", sender.GetFormattedName(database) },
+                            {"<target>", target.Name },
+                            {"<targetf>", target.GetFormattedName(database) },
+                        }));
                     }
-                    WriteChatToAll(Command.GetString("unfreeze", "message").Format(new Dictionary<string, string>() {
-                        {"<issuer>", sender.Name },
-                        {"<issuerf>", sender.GetFormattedName(database) },
-                        {"<target>", target.Name },
-                        {"<targetf>", target.GetFormattedName(database) },
-                    }));
                 }));
 
             // MUTE
             CommandList.Add(new Command("mute", 1, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
-                    Entity target = FindSinglePlayer(arguments[0]);
-                    if (target == null)
+                    List<Entity> targets = FindSinglePlayerXFilter(arguments[0], sender);
+
+                    foreach (Entity target in targets)
                     {
-                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                        return;
+                        if (target.isImmune(database))
+                        {
+                            WriteChatToPlayer(sender, Command.GetMessage("TargetIsImmune"));
+                            return;
+                        }
+                        target.setMuted(true);
+                        WriteChatToAll(Command.GetString("mute", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<issuer>", sender.Name },
+                            {"<issuerf>", sender.GetFormattedName(database) },
+                            {"<target>", target.Name },
+                            {"<targetf>", target.GetFormattedName(database) },
+                        }));
                     }
-                    if (target.isImmune(database))
-                    {
-                        WriteChatToPlayer(sender, Command.GetMessage("TargetIsImmune"));
-                        return;
-                    }
-                    target.setMuted(true);
-                    WriteChatToAll(Command.GetString("mute", "message").Format(new Dictionary<string, string>()
-                    {
-                        {"<issuer>", sender.Name },
-                        {"<issuerf>", sender.GetFormattedName(database) },
-                        {"<target>", target.Name },
-                        {"<targetf>", target.GetFormattedName(database) },
-                    }));
                 }));
 
             // UNMUTE
             CommandList.Add(new Command("unmute", 1, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
-                    Entity target = FindSinglePlayer(arguments[0]);
-                    if (target == null)
+                    List<Entity> targets = FindSinglePlayerXFilter(arguments[0], sender);
+
+                    foreach (Entity target in targets)
                     {
-                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                        return;
+                        target.setMuted(false);
+                        WriteChatToAll(Command.GetString("unmute", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<issuer>", sender.Name },
+                            {"<issuerf>", sender.GetFormattedName(database) },
+                            {"<target>", target.Name },
+                            {"<targetf>", target.GetFormattedName(database) },
+                        }));
                     }
-                    target.setMuted(false);
-                    WriteChatToAll(Command.GetString("unmute", "message").Format(new Dictionary<string, string>()
-                    {
-                        {"<issuer>", sender.Name },
-                        {"<issuerf>", sender.GetFormattedName(database) },
-                        {"<target>", target.Name },
-                        {"<targetf>", target.GetFormattedName(database) },
-                    }));
                 }));
 
-            // KILL
+            // KILL <player | *filter*>
             CommandList.Add(new Command("kill", 1, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
@@ -2098,6 +2089,12 @@ namespace LambAdmin
                             target.Suicide();
                         });
                     }
+
+                    if (targets.Count > 1)
+                        WriteChatToPlayer(sender, Command.GetMessage("Filters_message").Format(new Dictionary<string, string>()
+                        {
+                            {"<count>", targets.Count.ToString() }
+                        }));
                 }));
 
             // FT // FILMTWEAK
@@ -2750,19 +2747,23 @@ namespace LambAdmin
             CommandList.Add(new Command("teleport",2,Command.Behaviour.Normal,
                 (sender,arguments, optarg)=>
                 {
-                    Entity player1 = FindSinglePlayer(arguments[0]);
                     Entity player2 = FindSinglePlayer(arguments[1]);
-                    if ((player1 != null) && (player2 != null))
+                    if(player2 == null)
                     {
-                        player1.Call("setOrigin", player2.Origin);
+                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                        return;
+                    }
+                    List<Entity> players = FindSinglePlayerXFilter(arguments[0], sender);
+
+                    foreach (Entity player in players)
+                    {
+                        player.Call("setOrigin", player2.Origin);
                         WriteChatToPlayer(sender, Command.GetString("teleport", "message").Format(new Dictionary<string, string>()
                         {
-                            {"<player1>", player1.Name },
+                            {"<player1>", player.Name },
                             {"<player2>", player2.Name }
-                        }));
+                        }));      
                     }
-                    else
-                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
                 }));
 
             // FLY <on | off> [bound key]
@@ -2904,11 +2905,11 @@ namespace LambAdmin
                         }));
                 }));
 
-            // AC130 <all | <player>> [-p]
+            // ac130 <player | *filter*> [-p]
             CommandList.Add(new Command("ac130", 1, Command.Behaviour.HasOptionalArguments,
                 (sender, arguments, optarg) =>
                 {
-                    if (arguments[0] == "all")
+                    if (arguments[0] == "*all*")
                     {
                         foreach (Entity player in Players)
                             CMD_AC130(player, optarg == "-p");
@@ -2920,22 +2921,20 @@ namespace LambAdmin
                         return;
                     }
 
-                    Entity target = FindSinglePlayer(arguments[0]);
-                    if (target == null)
+                    List<Entity> targets = FindSinglePlayerXFilter(arguments[0], sender);
+
+                    foreach (Entity target in targets)
                     {
-                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                        return;
-                    }
+                        CMD_AC130(target, optarg == "-p");
 
-                    CMD_AC130(target, optarg == "-p");
-
-                    WriteChatToAll(Command.GetString("ac130", "message").Format(new Dictionary<string, string>()
+                        WriteChatToAll(Command.GetString("ac130", "message").Format(new Dictionary<string, string>()
                         {
                             {"<issuer>", sender.Name },
                             {"<issuerf>", sender.GetFormattedName(database) },
                             {"<target>", target.Name },
                             {"<targetf>", target.GetFormattedName(database) },
                         }));
+                    }
                 }));
 
             // PLAYFXONTAG <fx> [tag = j_head]
@@ -2956,30 +2955,38 @@ namespace LambAdmin
                 }));
             }));
 
-            // ROTATESCREEN <player> <degree>
+            // !rotatescreen <player | *filter*> <degree>
             CommandList.Add(new Command("rotatescreen", 2, Command.Behaviour.Normal,
             (sender, arguments, optarg) =>
             {
-                Entity target = FindSinglePlayer(arguments[0]);
-                if (target == null)
-                {
-                    WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                    return;
-                }
-                Vector3 angles = target.Call<Vector3>("getplayerangles");
-                if(!float.TryParse(arguments[1], out angles.Z))
+                Vector3 angles = new Vector3(0, 0, 0);
+                if (!float.TryParse(arguments[1], out angles.Z))
                 {
                     WriteChatToPlayer(sender, Command.GetString("rotatescreen", "usage"));
                     return;
                 }
-                
-                target.Call("setplayerangles", new Parameter[] { angles });
 
-                WriteChatToPlayer(sender, Command.GetString("rotatescreen", "message").Format(new Dictionary<string, string>()
+                List<Entity> targets = FindSinglePlayerXFilter(arguments[0], sender);
+
+                foreach (Entity target in targets)
                 {
-                    {"<player>", target.Name},
-                    {"<roll>", angles.Z.ToString()}
-                }));
+                    angles = target.Call<Vector3>("getplayerangles");
+                    angles.Z = float.Parse(arguments[1]);
+
+                    target.Call("setplayerangles", new Parameter[] { angles });
+
+                    if(targets.Count == 1)
+                        WriteChatToPlayer(sender, Command.GetString("rotatescreen", "message").Format(new Dictionary<string, string>()
+                        {
+                            {"<player>", target.Name},
+                            {"<roll>", angles.Z.ToString()}
+                        }));
+                }
+                if(targets.Count > 1)
+                    WriteChatToPlayer(sender, Command.GetMessage("Filters_message").Format(new Dictionary<string, string>()
+                        {
+                            {"<count>", targets.Count.ToString() }
+                        }));
             }));
 
             // VOTEKICK <player> [reason]
@@ -3033,16 +3040,12 @@ namespace LambAdmin
                             }));
             }));
 
-            // weapon <player> <raw weapon string> [-t]
+            // weapon <player | *filter*> <raw weapon string> [-t]
             CommandList.Add(new Command("weapon", 2, Command.Behaviour.HasOptionalArguments,
             (sender, arguments, optarg) =>
             {
-                Entity target = FindSinglePlayer(arguments[0]);
-                if (target == null)
-                {
-                    WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                    return;
-                }
+                List<Entity> targets = FindSinglePlayerXFilter(arguments[0], sender);
+
                 bool takeWeapons = false;
                 if (!String.IsNullOrEmpty(optarg))
                     if (optarg == "-t")
@@ -3052,70 +3055,86 @@ namespace LambAdmin
                         Command.GetString("weapon", "usage");
                         return;
                     }
-                        
-                if (!target.IsAlive)
-                {
-                    WriteChatToPlayer(sender, Command.GetString("weapon", "error1").Format(
-                    new Dictionary<string, string>()
-                    {
-                        {"<player>", target.Name}
-                    }));
+
+                if (targets.Count == 0)
                     return;
-                }
 
                 bool _antiweaponhack = ConfigValues.ANTIWEAPONHACK;
                 if (_antiweaponhack)
-                    Settings["settings_antiweaponhack"] = "false"; //temporary disable                                                 
-                string orig_weapon = target.CurrentWeapon;                                               
-                if(takeWeapons)                                                                          
-                    target.TakeAllWeapons();                                                             
-                target.AfterDelay(50, (ent) =>                                                           
-                {                                                                                        
-                    target.GiveWeapon(arguments[1]);                                                         //                    .
-                    target.AfterDelay(50, (_ent) =>                                                          //                  _,|\    WE FIGHT FOR LOVE AND JUSTICE !!!!               
-                    {                                                                                        //                  \__/                                                     
-                        target.SwitchToWeaponImmediate(arguments[1]);                                        //                   ||     AND ALSO NICE SHOES AND PRETTY PURSES AND JEWELRY
-                        target.AfterDelay(1000, (__ent) =>                                                   //___               {_].                                                     
-                        {                                                                                    // \ \               L; `                                                    
-                            if (((target.CurrentWeapon == "none")       &&  takeWeapons) ||                  //  ) )               | :  ,(),_,_,(),                                       
-                                ((target.CurrentWeapon == orig_weapon)  && !takeWeapons))                    //_/_/                | | / /(,,^,,)\ \                                      
-                            {                                                                                //                    | || | ;`-o-'; | |                                     
-                                if (takeWeapons)                                                             //                    |/:) | | '.' | | (                                     
-                                {                                                                            //                     \ \(   \_-_/   ) |                                    
-                                    target.GiveWeapon(orig_weapon);                                          //                      \ `._--)=(---.: |                                    
-                                    target.AfterDelay(50, (____ent) =>                                       //                      |\ '-_|\O/|_-'/\                                     
-                                    {                                                                        //                     | | `\ |/ \| //\ \                                    
-                                        target.SwitchToWeaponImmediate(orig_weapon);                         //                     / /   \     /   \ \                                   
-                                    });                                                                      //                    ; |    :\   /:    \/\                                  
-                                }                                                                            //                    | (   / \\,// \   )\ \                                 
-                                                                                                             //                    | |  /  /|'|\  \  | \ \
-                                if (_antiweaponhack)                                                         //                    | | /  / | | \  \ | |\ \___ 
-                                    Settings["settings_antiweaponhack"] = "true";                            //                    ) :'-_/--|_|--\_-`: ( `-\   
-                                                                                                             //                   / /  /    / \    \  \ \
-                                WriteChatToPlayer(sender, Command.GetString("weapon", "error").Format(       //                  / /  /    /   \    \  \ \
-                                new Dictionary<string, string>()                                             //              /\_/ /  /    /     \    \  \ \_/\
-                                {                                                                            //              \___'   /   /       \   \   `___/
-                                    {"<weapon>", arguments[1]}                                               //                     /   /         \   \
-                                }));                                                                         //                    /   /           \   \
-                            }                                                                                //                   /   /             \   \
-                            else                                                                             //                   /^/                 \^\
-                            {                                                                                //                  /  /                 \  \
-                                CMD_GiveMaxAmmo(sender);                                                     //                 /  /                   \  \
-                                if (_antiweaponhack)                                                         //                /  /                     \  \
-                                {                                                                            //               ' ,/                       \, `
-                                    UTILS_Antiweaponhack_allowweapon(target.CurrentWeapon);                  //              ; /                           \ :
-                                    Settings["settings_antiweaponhack"] = "true";                            //             /  /J                         L\  \
-                                }                                                                            //            :__/'                           '\__;
-                                WriteChatToPlayer(sender, Command.GetString("weapon", "message").Format( 
-                                new Dictionary<string, string>()
-                                {
-                                    {"<weapon>", target.CurrentWeapon},
-                                    {"<player>", target.Name}
-                                }));
-                            }
-                        });
+                {
+                    Settings["settings_antiweaponhack"] = "false"; //temporary disable  
+                    AfterDelay(2000, () =>
+                    {
+                        Settings["settings_antiweaponhack"] = "true";
                     });
-                });
+                }
+
+                foreach (Entity target in targets)
+                {
+                    if (!target.IsAlive)
+                    {
+                        WriteChatToPlayer(sender, Command.GetString("weapon", "error1").Format(
+                            new Dictionary<string, string>()
+                            {
+                                {"<player>", target.Name}
+                            }));
+                        return;
+                    }
+
+                    string orig_weapon = target.CurrentWeapon;
+                    if (takeWeapons)
+                        target.TakeAllWeapons();
+
+                    target.AfterDelay(50, (ent) =>
+                    {
+                        target.GiveWeapon(arguments[1]);
+                        target.AfterDelay(50, (_ent) =>
+                        {
+                            target.SwitchToWeaponImmediate(arguments[1]);
+                            target.AfterDelay(1000, (__ent) =>
+                            {
+                                if (((target.CurrentWeapon == "none") && takeWeapons) ||                            //                    .
+                                    ((target.CurrentWeapon == orig_weapon) && !takeWeapons))                        //                  _,|\    WE FIGHT FOR LOVE AND JUSTICE !!!!               
+                                {                                                                                   //                  \__/                                                     
+                                    if (takeWeapons)                                                                //                   ||     AND ALSO NICE SHOES AND PRETTY PURSES AND JEWELRY
+                                    {                                                                               //___               {_].                                                     
+                                        target.GiveWeapon(orig_weapon);                                             // \ \               L; `                                                    
+                                        target.AfterDelay(50, (____ent) =>                                          //  ) )               | :  ,(),_,_,(),                                       
+                                        {                                                                           //_/_/                | | / /(,,^,,)\ \                                      
+                                            target.SwitchToWeaponImmediate(orig_weapon);                            //                    | || | ;`-o-'; | |                                     
+                                        });                                                                         //                    |/:) | | '.' | | (                                     
+                                    }                                                                               //                     \ \(   \_-_/   ) |                                    
+                                                                                                                    //                      \ `._--)=(---.: |                                    
+                                    if(targets.Count == 1)                                                          //                      |\ '-_|\O/|_-'/\                                     
+                                        WriteChatToPlayer(sender, Command.GetString("weapon", "error").Format(      //                     | | `\ |/ \| //\ \                                    
+                                            new Dictionary<string, string>()                                        //                     / /   \     /   \ \                                   
+                                            {                                                                       //                    ; |    :\   /:    \/\                                  
+                                                {"<weapon>", arguments[1]}                                          //                    | (   / \\,// \   )\ \                                 
+                                            }));                                                                    //                    | |  /  /|'|\  \  | \ \
+                                }                                                                                   //                    | | /  / | | \  \ | |\ \___ 
+                                else                                                                                //                    ) :'-_/--|_|--\_-`: ( `-\   
+                                {                                                                                   //                   / /  /    / \    \  \ \
+                                    CMD_GiveMaxAmmo(sender);                                                        //                  / /  /    /   \    \  \ \
+                                    if (_antiweaponhack)                                                            //              /\_/ /  /    /     \    \  \ \_/\
+                                        UTILS_Antiweaponhack_allowweapon(target.CurrentWeapon);                     //              \___'   /   /       \   \   `___/
+                                                                                                                    //                     /   /         \   \
+                                    if (targets.Count == 1)                                                         //                    /   /           \   \
+                                        WriteChatToPlayer(sender, Command.GetString("weapon", "message").Format(    //                   /   /             \   \
+                                            new Dictionary<string, string>()                                        //                   /^/                 \^\
+                                            {                                                                       //                  /  /                 \  \
+                                                {"<weapon>", target.CurrentWeapon},                                 //                 /  /                   \  \
+                                                {"<player>", target.Name}                                           //                /  /                     \  \
+                                            }));                                                                    //               ' ,/                       \, `
+                                }                                                                                   //              ; /                           \ :
+                            });                                                                                     //             /  /J                         L\  \
+                        });                                                                                         //            :__/'                           '\__;
+                    });
+                };
+                if(targets.Count > 1)
+                    WriteChatToPlayer(sender, Command.GetMessage("Filters_message").Format(new Dictionary<string, string>()
+                        {
+                            {"<count>", targets.Count.ToString() }
+                        }));
             }));
 
 #if DEBUG
@@ -3338,17 +3357,52 @@ namespace LambAdmin
                     }
                     ConfigValues.cmd_foreachContext = true;
 
-                    bool includeself = UTILS_ParseBool(arguments[0]);
-                    foreach (Entity player in Players)
+                    List<Entity> players = FindPlayersFilter(arguments[0], sender);
+
+                    foreach (Entity player in players)
+                        ProcessCommand(sender, sender.Name, optarg
+                            .Replace("<player>", "#" + player.GetEntityNumber().ToString())
+                            .Replace("<p>", "#" + player.GetEntityNumber().ToString()));
+
+                    ConfigValues.cmd_foreachContext = false;
+
+                    if (players.Count > 0)
+                        WriteChatToPlayer(sender, Command.GetMessage("Filters_message").Format(new Dictionary<string, string>()
+                        {
+                            {"<count>", players.Count.ToString() }
+                        }));
+                }));
+
+            // frfc <*filter*> <command>  
+            CommandList.Add(new Command("frfc", 1, Command.Behaviour.HasOptionalArguments | Command.Behaviour.OptionalIsRequired,
+                (sender, arguments, optarg) =>
+                {
+
+                    //we'll use global flag to gather all possible hacks with !foreach and !fc
+                    if (ConfigValues.cmd_foreachContext)
                     {
-                        int number = player.GetEntityNumber();
-                        if (includeself == false && number == sender.GetEntityNumber())
-                            continue;
-                        ProcessCommand(sender, sender.Name, optarg.Replace("<player>", "#" + player.GetEntityNumber().ToString()));
+                        WriteChatToPlayer(sender, "I like the way you're thinking, but nope.");
+                        return;
+                    }
+                    ConfigValues.cmd_foreachContext = true;
+
+                    List<Entity> players = FindPlayersFilter(arguments[0], sender);
+
+                    foreach (Entity player in players)
+                    {
+                        WriteChatSpyToPlayer(player, sender.Name + ": ^6!frfc " + arguments[0] + " " + optarg); //abuse proof ;)
+                        ProcessForceCommand(sender, player, player.Name, "!" + optarg);
                     }
 
                     ConfigValues.cmd_foreachContext = false;
-                }));                
+
+                    if(players.Count > 0)
+                        WriteChatToPlayer(sender, Command.GetMessage("Filters_message").Format(new Dictionary<string, string>()
+                        {
+                            {"<count>", players.Count.ToString() }
+                        }));
+
+                }));
 
             // SVPASSWORD
             CommandList.Add(new Command("svpassword", 0, Command.Behaviour.HasOptionalArguments | Command.Behaviour.MustBeConfirmed,
