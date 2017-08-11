@@ -790,7 +790,7 @@ namespace LambAdmin
                     }
                     else
                     {
-                        statusstrings = (from player in FindPlayers(optarg)
+                        statusstrings = (from player in FindPlayers(optarg, sender)
                                          select Command.GetString("status", "formatting").Format(new Dictionary<string, string>()
                                         {
                                             { "<namef>", player.GetFormattedName(database) },
@@ -2085,21 +2085,24 @@ namespace LambAdmin
             CommandList.Add(new Command("kill", 1, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
-                    Entity target = FindSinglePlayer(arguments[0]);
-                    if (target == null)
+                    List<Entity> targets = FindPlayers(arguments[0], sender);
+                    if (targets.Count == 0)
                     {
                         WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
                         return;
                     }
-                    if (target.isImmune(database))
+                    foreach (Entity target in targets)
                     {
-                        WriteChatToPlayer(sender, Command.GetMessage("TargetIsImmune"));
-                        return;
+                        if (target.isImmune(database))
+                        {
+                            WriteChatToPlayer(sender, Command.GetMessage("TargetIsImmune"));
+                            return;
+                        }
+                        AfterDelay(100, () =>
+                        {
+                            target.Suicide();
+                        });
                     }
-                    AfterDelay(100, () =>
-                    {
-                        target.Suicide();
-                    });
                 }));
 
             // FT // FILMTWEAK

@@ -59,6 +59,7 @@
     <Compile Include="Groups.cs" />
     <Compile Include="ISnipe.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="PlayersFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializableDictionary.cs" />
     <Compile Include="ServerTitle.cs" />

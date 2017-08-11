@@ -689,7 +689,7 @@ namespace LambAdmin
             ExecuteCommand("map " + devmapname);
         }
 
-        public List<Entity> FindPlayers(string identifier)
+        public List<Entity> FindPlayers(string identifier, Entity sender = null)
         {
             if (identifier.StartsWith("#"))
             {
@@ -710,6 +710,11 @@ namespace LambAdmin
                 catch (Exception)
                 {
                 }
+            }
+            if(identifier.StartsWith("*") && identifier.EndsWith("*") && (identifier.Length > 1) && (sender != null))
+            {
+                identifier = identifier.Substring(1, identifier.Length - 2);
+                return (new PlayersFilter(this, sender)).Filter(identifier);
             }
             identifier = identifier.ToLowerInvariant();
             return (from player in Players

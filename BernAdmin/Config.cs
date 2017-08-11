@@ -107,6 +107,8 @@ namespace LambAdmin
             {"Message_NoEntriesFound", "^1No entries found." },
             {"Message_blockedByNightMode", "^1You cant use this command when night mode is active" },
             {"Message_FX_not_found", "^1Error: given FX not found."},
+            {"Message_Filters_error1", "^1Error: ^3Wrong filter syntax"},
+            {"Message_Filters_error2", "^1Error: ^3Unknown filter selector: ^2<selector>"},
 
             #endregion
 
