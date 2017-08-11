@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using InfinityScript;
+using System.Text.RegularExpressions;
 
 namespace LambAdmin
 {
@@ -102,7 +103,8 @@ namespace LambAdmin
                 //begin the processing
                 foreach (Selector selector in selectors)
                 {
-                    if (!Filters.Contains(selector.selector.ToLowerInvariant()))
+                    if (!Filters.Contains(selector.selector.ToLowerInvariant()) && 
+                        !selector.selector.ToLowerInvariant().StartsWith("name:"))
                     {
                         script.WriteChatToPlayer(sender, Command.GetMessage("Filters_error2").Format(new Dictionary<string, string>(){
                             { "<selector>", selector.selector }
@@ -140,6 +142,12 @@ namespace LambAdmin
                                 break;
 
                         }
+
+                        if (selector.selector.ToLowerInvariant().StartsWith("name:")) {
+                            string name = Regex.Replace(selector.selector, "^name:", "");
+                            set = _sel_name(selector.isComplement, name);
+                        }
+
                         switch (selector.operation_type)
                         {
                             case DISJUNCTION:
@@ -288,6 +296,18 @@ namespace LambAdmin
             private List<Entity> _sel_me(bool isComplement)
             {
                 List<Entity> result = new List<Entity>() { sender };
+
+                if (isComplement)
+                    result = COMPLEMENT(script.Players, result);
+                return result;
+            }
+            private List<Entity> _sel_name(bool isComplement, string identifier)
+            {
+                string tolowidentifier = identifier.ToLowerInvariant();
+                List<Entity> result = (
+                    from player in script.Players
+                    where player.Name.ToLowerInvariant().Contains(tolowidentifier) || player.GetClantag().ToLowerInvariant().Contains(tolowidentifier)
+                    select player).ToList();
 
                 if (isComplement)
                     result = COMPLEMENT(script.Players, result);

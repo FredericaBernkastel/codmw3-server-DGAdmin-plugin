@@ -730,6 +730,30 @@ namespace LambAdmin
             return players[0];
         }
 
+        // Find single player,
+        // or multiple players (if Filter given)
+        public List<Entity> FindSinglePlayerXFilter(string identifier, Entity sender = null)
+        {
+            if (identifier.StartsWith("*") && identifier.EndsWith("*") && (identifier.Length > 1) && (sender != null))
+            {
+                identifier = identifier.Substring(1, identifier.Length - 2);
+                List<Entity> players = (new PlayersFilter(this, sender)).Filter(identifier);
+                if(players.Count == 0)
+                    WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                return players;
+            }
+            else
+            {
+                List<Entity> players = FindPlayers(identifier);
+                if (players.Count != 1)
+                {
+                    WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                    return new List<Entity>();
+                }
+                return players;
+            }
+        }
+
         public List<string> FindMaps(string identifier)
         {
             return (from map in ConfigValues.AvailableMaps

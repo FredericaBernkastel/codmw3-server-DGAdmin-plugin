@@ -2085,12 +2085,7 @@ namespace LambAdmin
             CommandList.Add(new Command("kill", 1, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
-                    List<Entity> targets = FindPlayers(arguments[0], sender);
-                    if (targets.Count == 0)
-                    {
-                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                        return;
-                    }
+                    List<Entity> targets = FindSinglePlayerXFilter(arguments[0], sender);
                     foreach (Entity target in targets)
                     {
                         if (target.isImmune(database))
