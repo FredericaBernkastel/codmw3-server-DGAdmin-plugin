@@ -2141,7 +2141,7 @@ namespace LambAdmin
                     else
                         PersonalPlayerDvars.Add(sender.GUID, dvars);
 
-                    UTILS_SetClientDvars(sender, dvars);
+                    UTILS_SetClientDvarsPacked(sender, dvars);
 
                     WriteChatToPlayer(sender, Command.GetString("fx", UTILS_ParseBool(arguments[0])? "message_on":"message_off"));
                 }));
@@ -2159,15 +2159,15 @@ namespace LambAdmin
                     }
                     switch (arguments[0])
                     {
-                        case "on": { 
-                            UTILS_SetClientNightVision(sender);
-                            WriteChatToPlayer(sender, "^4NigthMod ^2Activated");
-                            break;
+                        case "on": {
+                                UTILS_SetClientDvarsPacked(sender, UTILS_SetClientNightVision());
+                                WriteChatToPlayer(sender, "^4NigthMod ^2Activated");
+                                break;
                         }
                         case "off": { 
-                            UTILS_SetCliDefDvars(sender);
-                            WriteChatToPlayer(sender, "^4NightMod ^1Deactivated"); 
-                            break; 
+                                UTILS_SetCliDefDvars(sender);
+                                WriteChatToPlayer(sender, "^4NightMod ^1Deactivated");
+                                break;
                         }
                     }
                 }));
@@ -2799,7 +2799,8 @@ namespace LambAdmin
                                 _player.Call("allowspectateteam", "freelook", true);
                                 _player.SetField("sessionstate", "spectator");
                                 _player.Call("setcontents", 0);
-                                UTILS_SetClientInShadowFX(_player);
+                                _player.Call("ThermalVisionOn");
+                                UTILS_SetClientDvarsPacked(_player, UTILS_SetClientInShadowFX());
                                 int iter = 0;
                                 _player.OnInterval(100, __player =>
                                 {
@@ -3975,7 +3976,7 @@ namespace LambAdmin
                         PersonalPlayerDvars[sender.GUID] = UTILS_DvarListUnion(PersonalPlayerDvars[sender.GUID], dvars);
                 else
                     PersonalPlayerDvars.Add(sender.GUID, dvars);
-                UTILS_SetClientDvars(sender, dvars);
+                UTILS_SetClientDvarsPacked(sender, dvars);
                 if ((ft == "0") && PersonalPlayerDvars.ContainsKey(sender.GUID))
                     PersonalPlayerDvars.Remove(sender.GUID);
             }

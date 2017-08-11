@@ -8,6 +8,7 @@ using System.Net;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
+using System.Threading;
 
 namespace LambAdmin
 {
@@ -884,7 +885,6 @@ namespace LambAdmin
 
             //check issue #11
 
-            UTILS_SetTeamNames(player);
             if (!player.HasField("killstreak"))
             {
                 int v = 0;
@@ -942,12 +942,6 @@ namespace LambAdmin
 
             if (!System.IO.Directory.Exists(ConfigValues.ConfigPath + @"Utils\internal\announcers"))
                 System.IO.Directory.CreateDirectory(ConfigValues.ConfigPath + @"Utils\internal\announcers");
-
-            // TEAM NAMES
-            foreach (Entity player in Players)
-            {
-                UTILS_SetTeamNames(player);
-            }
 
             // RGADMIN HUDELEM
             if (bool.Parse(Sett_GetString("settings_showversion")))
@@ -1172,17 +1166,36 @@ namespace LambAdmin
 
         public void UTILS_SetCliDefDvars(Entity player)
         {
+            List<Dvar> dvars = new List<Dvar>();
+
+            //DefaultCDvars
             foreach (KeyValuePair<string, string> dvar in DefaultCDvars)
-            {
-                player.SetClientDvar(dvar.Key, dvar.Value);
-            }
-            player.SetClientDvar("fx_draw", "1");
-            if(ConfigValues.settings_daytime == "night")
-                UTILS_SetClientNightVision(player);
+                dvars.Add(new Dvar { key = dvar.Key, value = dvar.Value });
+
+            dvars = UTILS_DvarListUnion(dvars, new List<Dvar>() { new Dvar { key = "fx_draw", value = "1" } });
+
+            //night mode
+            if (ConfigValues.settings_daytime == "night")
+                dvars = UTILS_DvarListUnion(dvars, UTILS_SetClientNightVision());
             else
+            //personal dvars
             if (PersonalPlayerDvars.ContainsKey(player.GUID))
-                foreach (Dvar dvar in PersonalPlayerDvars[player.GUID])
-                    player.SetClientDvar(dvar.key, dvar.value);
+                dvars = UTILS_DvarListUnion(dvars, PersonalPlayerDvars[player.GUID]);
+
+            //team names
+            List<Dvar> teamNames = new List<Dvar>();
+            if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamnames_allies))
+                teamNames.Add(new Dvar { key = "g_TeamName_Allies", value = ConfigValues.settings_teamnames_allies });
+            if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamnames_axis))
+                teamNames.Add(new Dvar { key = "g_TeamName_Axis", value = ConfigValues.settings_teamnames_axis });
+            if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamicons_allies))
+                teamNames.Add(new Dvar { key = "g_TeamIcon_Allies", value = ConfigValues.settings_teamicons_allies });
+            if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamicons_axis))
+                teamNames.Add(new Dvar { key = "g_TeamIcon_Axis", value = ConfigValues.settings_teamicons_axis });
+
+            dvars = UTILS_DvarListUnion(dvars, teamNames);
+
+            UTILS_SetClientDvarsPacked(player, dvars);
         }
 
         public void UTILS_SetClientDvars(Entity player, List<Dvar> dvars){
@@ -1190,56 +1203,50 @@ namespace LambAdmin
                 player.SetClientDvar(dvar.key, dvar.value);
         }
 
+        public void UTILS_SetClientDvarsPacked(Entity player, List<Dvar> dvars)
+        {
+            player.Call("setclientdvars", dvars.ConvertAll((v) => { return new Parameter[] { v.key, v.value }; }).SelectMany(v => v).ToArray());
+        }
+
         public static void ExecuteCommand(string command)
         {
             Utilities.ExecuteCommand(command);
         }
 
-        public void UTILS_SetTeamNames(Entity player)
+        public List<Dvar> UTILS_SetClientNightVision()
         {
-            if(!String.IsNullOrWhiteSpace(ConfigValues.settings_teamnames_allies))
-                player.SetClientDvar("g_TeamName_Allies", ConfigValues.settings_teamnames_allies);
-            if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamnames_axis))
-                player.SetClientDvar("g_TeamName_Axis", ConfigValues.settings_teamnames_axis);
-            if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamicons_allies))
-                player.SetClientDvar("g_TeamIcon_Allies", ConfigValues.settings_teamicons_allies);
-            if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamicons_axis))
-                player.SetClientDvar("g_TeamIcon_Axis", ConfigValues.settings_teamicons_axis);
+            return
+                new List<Dvar>(){
+                    new Dvar {key = "r_filmUseTweaks",              value =  "1" },
+                    new Dvar {key = "r_filmTweakEnable",            value =  "1" },
+                    new Dvar {key = "r_filmTweakLightTint",         value =  "0 0.2 1" },
+                    new Dvar {key = "r_filmTweakDarkTint",          value =  "0 0.125 1" },
+                    new Dvar {key = "r_filmtweakbrightness",        value =  "0" },
+                    new Dvar {key = "r_glowTweakEnable",            value =  "1"},
+                    new Dvar {key = "r_glowUseTweaks",              value =  "1"},
+                    new Dvar {key = "r_glowTweakRadius0",           value =  "5"},
+                    new Dvar {key = "r_glowTweakBloomIntensity0",   value =  "0.5"},
+                    new Dvar {key = "r_fog",                        value =  "0"}
+                };
         }
 
-        public void UTILS_SetClientNightVision(Entity player)
+        public List<Dvar> UTILS_SetClientInShadowFX()
         {
-            string[,] dvars = new string[10,2] { 
-                { "r_filmUseTweaks", "1" }, 
-                { "r_filmTweakEnable", "1" }, 
-                { "r_filmTweakLightTint", "0 0.2 1" }, 
-                { "r_filmTweakDarkTint", "0 0.125 1" },
-                { "r_filmtweakbrightness","0" },
-                {"r_glowTweakEnable", "1"},
-                {"r_glowUseTweaks","1"},
-                {"r_glowTweakRadius0","5"},
-                {"r_glowTweakBloomIntensity0","0.5"},
-                {"r_fog", "0"}
-            };
-            for (int i = 0; i < 10; i++ )
-                player.SetClientDvar(dvars[i,0], dvars[i,1]);
-        }
-
-        public void UTILS_SetClientInShadowFX(Entity player)
-        {
-            player.SetClientDvar("r_filmUseTweaks", "1");
-            player.SetClientDvar("r_filmTweakEnable", "1");
-            player.SetClientDvar("r_filmTweakDesaturation", "1");
-            player.SetClientDvar("r_filmTweakDesaturationDark", "1");
-            player.SetClientDvar("r_filmTweakInvert", "1");
-            player.SetClientDvar("r_glowTweakEnable", "1");
-            player.SetClientDvar("r_glowUseTweaks", "1");
-            player.SetClientDvar("r_glowTweakRadius0", "10");
-            player.SetClientDvar("r_filmTweakContrast", "3");
-            player.SetClientDvar("r_filmTweakBrightness", "1");
-            player.SetClientDvar("r_filmTweakLightTint", "1 0.125 0");
-            player.SetClientDvar("r_filmTweakDarkTint", "0 0 0");
-            player.Call("ThermalVisionOn");
+            return
+                new List<Dvar>(){
+                    new Dvar {key = "r_filmUseTweaks",              value =  "1" },
+                    new Dvar {key = "r_filmTweakEnable",            value =  "1" },
+                    new Dvar {key = "r_filmTweakDesaturation",      value =  "1" },
+                    new Dvar {key = "r_filmTweakDesaturationDark",  value =  "1" },
+                    new Dvar {key = "r_filmTweakInvert",            value =  "1" },
+                    new Dvar {key = "r_glowTweakEnable",            value =  "1"},
+                    new Dvar {key = "r_glowUseTweaks",              value =  "1"},
+                    new Dvar {key = "r_glowTweakRadius0",           value =  "10"},
+                    new Dvar {key = "r_filmTweakContrast",          value =  "3"},
+                    new Dvar {key = "r_filmTweakBrightness",        value =  "1"},
+                    new Dvar {key = "r_filmTweakLightTint",         value =  "1 0.125 0"},
+                    new Dvar {key = "r_filmTweakDarkTint",          value =  "0 0 0"}
+                };
         }
 
         public void UTILS_SetHellMod() {
@@ -2093,12 +2100,15 @@ namespace LambAdmin
 
         public List<Dvar> UTILS_DvarListUnion(List<Dvar> set1, List<Dvar> set2)
         {
-            Dictionary<string, string> _dvars = set1.ToDictionary(x => x.key, x => x.value);
+            Dictionary<string, string> _dvars = set1.ToDictionary(x => x.key.ToLowerInvariant(), x => x.value);
             foreach (Dvar dvar in set2)
-                if (_dvars.ContainsKey(dvar.key))
-                    _dvars[dvar.key] = dvar.value;
+            {
+                string key = dvar.key.ToLowerInvariant();
+                if (_dvars.ContainsKey(key))
+                    _dvars[key] = dvar.value;
                 else
-                    _dvars.Add(dvar.key, dvar.value);
+                    _dvars.Add(key, dvar.value);
+            }
             set1.Clear();
             foreach (KeyValuePair<string, string> dvar in _dvars)
                 set1.Add(new Dvar { key = dvar.Key, value = dvar.Value });
@@ -2107,10 +2117,10 @@ namespace LambAdmin
 
         public List<Dvar> UTILS_DvarListRelativeComplement(List<Dvar> set1, List<string> set2)
         {
-            Dictionary<string, string> _dvars = set1.ToDictionary(x => x.key, x => x.value);
+            Dictionary<string, string> _dvars = set1.ToDictionary(x => x.key.ToLowerInvariant(), x => x.value);
             foreach (string dvar in set2)
-                if (_dvars.ContainsKey(dvar))
-                    _dvars.Remove(dvar);
+                if (_dvars.ContainsKey(dvar.ToLowerInvariant()))
+                    _dvars.Remove(dvar.ToLowerInvariant());
             set1.Clear();
             foreach (KeyValuePair<string, string> dvar in _dvars)
                 set1.Add(new Dvar { key = dvar.Key, value = dvar.Value });
