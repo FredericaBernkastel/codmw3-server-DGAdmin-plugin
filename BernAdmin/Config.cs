@@ -76,7 +76,7 @@ namespace LambAdmin
             { "settings_dynamic_properties", "true" },
             { "settings_antiweaponhack", "true" },
             { "settings_servertitle", "true" },
-            { "commands_vote_time", "30"},
+            { "commands_vote_time", "20"},
             { "commands_vote_threshold", "2"},
             { "settings_timed_messages", "true" },
             { "settings_timed_messages_interval", "45" }

@@ -517,6 +517,17 @@ namespace LambAdmin
                 }
 
                 WriteLog.Debug("Checking permission");
+
+                //right groups for right ppl
+                if ((playergroup.group_name == "sucker") || (playergroup.group_name == "banned"))
+                {
+                    if (sender.HasPermission(commandname, database))
+                        CommandToBeRun.Run(sender, message, this);
+                    else
+                        WriteChatToPlayer(sender, Command.GetMessage("NoPermission"));
+                    return;
+                }
+
                 if (!sender.HasPermission(commandname, database))
                 {
                     if (playergroup.CanDo(commandname))
@@ -662,10 +673,7 @@ namespace LambAdmin
                     "r_filmTweakContrast=1.4",
                     "r_filmTweakBrightness=0",
                     "r_filmTweakLightTint=1.1 1.05 0.85",
-                    "r_filmTweakDarkTint=0.7 0.85 1",
-                    "lowAmmoWarningColor1=1 1 0 1",
-                    "lowAmmoWarningColor2=1 0 0 1",
-                    "lowAmmoWarningPulseFreq=5"
+                    "r_filmTweakDarkTint=0.7 0.85 1"
                 });
 
             if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\PersonalPlayerDvars.xml"))
@@ -725,16 +733,16 @@ namespace LambAdmin
                     {
                         string.Format("^1DG Admin ^3{0}", ConfigValues.Version),
                         "^1Credits:",
+                        "^3Developed by ^2F. Bernkastel",
                         "^3Based on RG Admin v1.05",
-                        "^3Modified by ^2F. Bernkastel",
-                        "^3HKClan for trying to give me their help over on their forum",
+                        "^3Thanks to:",
+                        "^3HKClan for trying to give their help over on their forum",
                         "^3Creators of SAT for AntiKnife copypasta and HWID offsets",
                         "^5x86jmpstreet, ^3they know themselves. // L33T",
-                        "^3All ^1RG ^3members for supporting me on this project",
-                        "^3Special ^1RG ^3members: Moustache, Pepper",
-                        "^3And lastly, ^1Lambder ^3for putting all this together",
-                        "^1Guide creators:",
-                        "^3Lambder, Arnie and ^2F. Bernkastel",
+                        "^3Lambder, for putting all this together, and coding the base script",
+                        "^3but he is ^1FAGGOT",
+                        "",
+                        "^6nipa~^1(=^_^=)"
                     }, 1500);
                 }));
 
@@ -1761,10 +1769,19 @@ namespace LambAdmin
                     }
                     GroupsDatabase.Group playergroup = sender.GetGroup(database);
                     GroupsDatabase.Group defaultgroup = database.GetGroup("default");
-                    List<string> availablecommands = (from cmd in CommandList
-                                                      where playergroup.CanDo(cmd.name) || defaultgroup.CanDo(cmd.name)
-                                                      orderby cmd.name
-                                                      select cmd.name).ToList();
+                    List<string> availablecommands;
+
+                    //right groups for right ppl
+                    if ((playergroup.group_name == "sucker") || (playergroup.group_name == "banned"))
+                        availablecommands = (from cmd in CommandList
+                                                where playergroup.CanDo(cmd.name)
+                                                orderby cmd.name
+                                                select cmd.name).ToList();
+                    else
+                        availablecommands = (from cmd in CommandList
+                                                where playergroup.CanDo(cmd.name) || defaultgroup.CanDo(cmd.name)
+                                                orderby cmd.name
+                                                select cmd.name).ToList();
                     WriteChatToPlayer(sender, Command.GetString("help", "firstline"));
                     WriteChatToPlayerMultiline(sender, availablecommands.ToArray().Condense(), 2000);
                 }));

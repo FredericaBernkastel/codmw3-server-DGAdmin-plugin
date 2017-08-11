@@ -22,7 +22,7 @@ namespace LambAdmin
 
         HudElem RGAdminMessage;
         HudElem OnlineAdmins;
-        HudElem VoteStatsHUD = null;
+        HudElem VoteStatsHUD;
 
         //typedef
         public struct Dvar
@@ -1037,14 +1037,12 @@ namespace LambAdmin
 
         public void CMD_Votekick_CreateHUD()
         {
-            if (VoteStatsHUD == null)
-            {
-                VoteStatsHUD = HudElem.CreateServerFontString("hudsmall", 0.7f);
-                VoteStatsHUD.SetPoint("TOPLEFT", "TOPLEFT", 10, 290);
-                VoteStatsHUD.Foreground = true;
-                VoteStatsHUD.HideWhenInMenu = true;
-                VoteStatsHUD.Archived = false;
-            }
+            VoteStatsHUD = HudElem.CreateServerFontString("hudsmall", 0.7f);
+            VoteStatsHUD.SetPoint("TOPLEFT", "TOPLEFT", 10, 290);
+            VoteStatsHUD.Foreground = true;
+            VoteStatsHUD.HideWhenInMenu = true;
+            VoteStatsHUD.Archived = false;
+
             OnInterval(1000, () =>
             {
                 if (voting.isActive())
@@ -1054,7 +1052,7 @@ namespace LambAdmin
                 }
                 else
                 {
-                    VoteStatsHUD.SetText("");
+                    VoteStatsHUD.Call("destroy");
                     return false;
                 }
             });

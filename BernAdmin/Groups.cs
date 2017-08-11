@@ -88,7 +88,7 @@ namespace LambAdmin
                         "moderator::login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,changeteam,lastreports,@admins,@rules,@apply,@time,@xlrstats,@xlrtop:^0[^5Moderator^0]^7",
                         "family::kickhacker,kill,mute,unmute,end,tmpbantime,cdvar,getplayerinfo,say,sayto,resetwarns,setgroup,scream,whois,changeteam,yell,gametype,mode,login,map,status,kick,tmpban,ban,warn,unwarn,getwarns,res,setafk,setteam,balance,clanvsall,clanvsallspectate,sunlight,alias,lastreports,fire,@admins,@rules,@apply,@time,@xlrstats,@xlrtop:^0[^3F^0]^7",
                         "elder:password:-*unsafe*,*all*:^0[^4Elder^0]^7",
-                        "developer:password:*all*:^0[^;Dev^0]^1",
+                        "developer:password:*all*:^0[^6neko neko ^1=^_^=^0]^5",
                         "owner:password:*all*:^0[^1O^2w^3n^4e^5r^0]^3",
                         "admin::scream,whois,changeteam,yell,gametype,mode,login,map,status,unban,unban-id,kick,tmpban,ban,warn,unwarn,getwarns,res,setafk,setteam,balance,clanvsall,clanvsallspectate,login,lastreports,@admins,@rules,@apply,@time,@xlrstats,@xlrtop:^0[^1Admin^0]^7",
                         "leader:password:*all*:^0[^1L^2e^3a^4d^5e^7r^0]^2",
@@ -98,7 +98,8 @@ namespace LambAdmin
                         "vip::ban,kick,tmpban,warn,unwarn,map,balance,mode,whois,status,login,setafk,changeteam,scream,fakesay,myalias,fire,@admins,@rules,@apply,@time,@xlrstats,@xlrtop:^0[^3V.I.P.^0]^7",
                         "founder:password:*all*:^0[^1F^2o^3u^4n^5d^6e^8r^0]^6",
                         "donator::kick,warn,tmpban,unwarn,mute,unmute,login,balance,setafk,changeteam,myalias,lastreports,fire,@admins,@rules,@apply,@time,@xlrstats,@xlrtop:^0[^2Donator^0]^7",
-                        "coleader:password:-*abusive*,-*unsafe*,*all*:^0[^3CoLeader^0]^7"
+                        "coleader:password:-*abusive*,-*unsafe*,*all*:^0[^3CoLeader^0]^7",
+                        "banned::drunk,help:^0[^1BANNED^0]^5"
                     });
                 }
 
@@ -272,11 +273,13 @@ namespace LambAdmin
                 if (ConfigValues.settings_disabled_commands.Contains(permission_string))
                     return false;
 
-                if (GetGroup("default").permissions.Contains(permission_string))
-                {
-                    WriteLog.Debug("Default contained...");
-                    return true;
-                }
+                //right groups for right ppl
+                if (!((group.group_name == "sucker") || (group.group_name == "banned")))
+                    if (GetGroup("default").permissions.Contains(permission_string))
+                    {
+                        WriteLog.Debug("Default contained...");
+                        return true;
+                    }
 
                 if (!player.isLogged() && !string.IsNullOrWhiteSpace(group.login_password))
                 {
@@ -298,7 +301,7 @@ namespace LambAdmin
             {
                 return (from player in Players
                         let grp = player.GetGroup(this)
-                        where !string.IsNullOrWhiteSpace(grp.short_name)
+                        where !string.IsNullOrWhiteSpace(grp.short_name) && !(grp.group_name == "sucker") && !(grp.group_name == "banned")
                         select Command.GetString("admins", "formatting").Format(new Dictionary<string, string>()
                         {
                             {"<name>", player.Name },

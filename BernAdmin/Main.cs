@@ -24,8 +24,8 @@ namespace LambAdmin
         public DGAdmin()
             : base()
         {
-            WriteLog.Info("RGAdmin is starting...");
-            MainLog.WriteInfo("RGAdmin starting...");
+            WriteLog.Info("DGAdmin is starting...");
+            MainLog.WriteInfo("DGAdmin starting...");
 
             if (!Directory.Exists(ConfigValues.ConfigPath))
             {
@@ -145,7 +145,6 @@ namespace LambAdmin
         {
             WriteLog.Info("Setting up internal stuff...");
 
-            //Array.ForEach(new string[] { }, UTILS_GetDefCDvar);
             PlayerConnected += e =>
             {
                 e.SetField("spawnevent", 0);
