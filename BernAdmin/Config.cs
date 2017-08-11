@@ -473,7 +473,7 @@ namespace LambAdmin
             {"command_drunk_usage", "^1Usage: !drunk"},
             {"command_drunk_message", "^3<player> ^2is ^1drunk"},
 
-            {"command_weapon_usage", "^1Usage: !weapon <player> <raw weapon string>"},
+            {"command_weapon_usage", "^1Usage: !weapon <player> <raw weapon string> [-t]"},
             {"command_weapon_message", "^3<player> ^7weapon set to ^2<weapon>"},
             {"command_weapon_error", "^1Error: ^7weapon ^2<weapon> ^7not exist! Switching back"},
             {"command_weapon_error1", "^1Error: ^3<player> ^7is dead"},
