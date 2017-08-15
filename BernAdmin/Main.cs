@@ -45,59 +45,19 @@ namespace LambAdmin
 
             WriteLog.Debug("Initializing PersonalPlayerDvars...");
             PersonalPlayerDvars = UTILS_PersonalPlayerDvars_load();
-            if (ConfigValues.settings_enable_chat_alias)
-            {
-                WriteLog.Debug("Initializing Chat aliases...");
-                InitChatAlias();
-            }
-            if (ConfigValues.settings_enable_alive_counter)
-                PlayerConnected += hud_alive_players;
 
             if (ConfigValues.settings_dynamic_properties)
                 Delay(400, () =>
                 {
-                    WriteLog.Debug("Sleep(400)");
-                    ConfigValues.sv_current_dsr = UTILS_GetDSRName();
-                    WriteLog.Debug("dsr: " + ConfigValues.sv_current_dsr);
-                    CFG_Dynprop_Init();
-
-                    if (ConfigValues.ISNIPE_MODE)
-                    {
-                        WriteLog.Debug("Initializing iSnipe mode...");
-                        SNIPE_OnServerStart();
-
-                        /* {~~~~~~~} */
-                        foreach (Entity player in Players)
-                        {
-                            SNIPE_OnPlayerConnect(player);
-                            if (player.IsAlive)
-                                SNIPE_OnPlayerSpawn(player);
-                        }
-                        /* {~~~~~~~} */
-                    }
-
-                    if (ConfigValues.settings_enable_xlrstats)
-                    {
-                        WriteLog.Debug("Initializing XLRStats...");
-                        XLR_OnServerStart();
-                        XLR_InitCommands();
-
-                        /* {~~~~~~~} */
-                        foreach (Entity player in Players)
-                            XLR_OnPlayerConnected(player);
-                        /* {~~~~~~~} */
-                    }
-
-                    if (ConfigValues.settings_servertitle)
-                        if (ConfigValues.LockServer)
-                            UTILS_ServerTitle("^1::LOCKED", "^1" + File.ReadAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER"));
-                        else
-                            UTILS_ServerTitle_MapFormat();
+                    CFG_Dynprop_Apply();
                 });
             else
             {
                 if (ConfigValues.ANTIWEAPONHACK)
                     WriteLog.Info("You have to enable \"settings_dynamic_properties\" if you wish to use antiweaponhack");
+
+                if (ConfigValues.settings_servertitle)
+                    WriteLog.Info("You have to enable \"settings_dynamic_properties\" if you wish to use \"Server Title\"");
 
                 if (ConfigValues.ISNIPE_MODE)
                 {
@@ -111,6 +71,17 @@ namespace LambAdmin
                     XLR_OnServerStart();
                     XLR_InitCommands();
                 }
+
+                if (ConfigValues.settings_enable_alive_counter)
+                    PlayerConnected += hud_alive_players;
+
+                if (ConfigValues.settings_enable_chat_alias)
+                {
+                    WriteLog.Debug("Initializing Chat aliases...");
+                    InitChatAlias();
+                }
+
+                timed_messages_init();
             }
             #endregion
 
@@ -306,38 +277,6 @@ namespace LambAdmin
                 player.SetField("spawnevent", 0);
         }
 
-        private void hud_alive_players(Entity player)
-        {
-            HudElem fontString1 = HudElem.CreateFontString(player, "hudbig", 0.6f);
-            fontString1.SetPoint("DOWNRIGHT", "DOWNRIGHT", -19, 60);
-            fontString1.SetText("^3Allies^7:");
-            fontString1.HideWhenInMenu = true;
-            HudElem fontString2 = HudElem.CreateFontString(player, "hudbig", 0.6f);
-            fontString2.SetPoint("DOWNRIGHT", "DOWNRIGHT", -19, 80);
-            fontString2.SetText("^1Enemy^7:");
-            fontString2.HideWhenInMenu = true;
-            HudElem hudElem2 = HudElem.CreateFontString(player, "hudbig", 0.6f);
-            hudElem2.SetPoint("DOWNRIGHT", "DOWNRIGHT", -8, 60);
-            hudElem2.HideWhenInMenu = true;
-            HudElem hudElem3 = HudElem.CreateFontString(player, "hudbig", 0.6f);
-            hudElem3.SetPoint("DOWNRIGHT", "DOWNRIGHT", -8, 80);
-            hudElem3.HideWhenInMenu = true;
-            this.OnInterval(50, (Func<bool>)(() =>
-            {
-                string str1 = (string)player.GetField<string>("sessionteam");
-                string str2 = ((int)this.Call<int>("getteamplayersalive", new Parameter[1]
-                    {
-            "axis"
-                    })).ToString();
-                string str3 = ((int)this.Call<int>("getteamplayersalive", new Parameter[1]
-                    {
-             "allies"
-                    })).ToString();
-                hudElem2.SetText(str1.Equals("allies") ? str3 : str2);
-                hudElem3.SetText(str1.Equals("allies") ? str2 : str3);
-                return true;
-            }));
-        }
     }
 
     public static partial class Extensions

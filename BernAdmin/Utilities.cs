@@ -105,6 +105,13 @@ namespace LambAdmin
                     return bool.Parse(Sett_GetString("settings_timed_messages"));
                 }
             }
+            public static bool settings_betterbalance_enable
+            {
+                get
+                {
+                    return bool.Parse(Sett_GetString("settings_betterbalance_enable"));
+                }
+            }
             public static int settings_timed_messages_interval
             {
                 get
@@ -967,19 +974,6 @@ namespace LambAdmin
                     "^;Smoke so much weed you wouldn't believe",
                     "^2And I get more ass than a toilet seat"
                 });
-            if (ConfigValues.settings_timed_messages)
-            {
-                Announcer announcer = new Announcer(
-                    "default", 
-                    File.ReadAllLines(ConfigValues.ConfigPath + @"Utils\announcer.txt").ToList(),
-                    ConfigValues.settings_timed_messages_interval
-                );
-                OnInterval(announcer.message_interval, () =>
-                {
-                    WriteChatToAll(announcer.SpitMessage());
-                    return true;
-                });
-            }
 
             if (!System.IO.Directory.Exists(ConfigValues.ConfigPath + @"Utils\playerlogs"))
                 System.IO.Directory.CreateDirectory(ConfigValues.ConfigPath + @"Utils\playerlogs");
@@ -1017,23 +1011,61 @@ namespace LambAdmin
 
             OnGameEnded += UTILS_OnGameEnded;
 
-            // BETTER BALANCE
-            Call("setdvarifuninitialized", "betterbalance", bool.Parse(Sett_GetString("settings_betterbalance_enable")) ? "1" : "0");
-
-            // AUTOFPSUNLOCK
-            if (bool.Parse(Sett_GetString("settings_enable_autofpsunlock")))
-                PlayerConnected += (player) =>
-                {
-                    player.SetClientDvar("com_maxfps", "0");
-                    player.SetClientDvar("con_maxfps", "0");
-                };
-
             //DLCMAPS
             if (bool.Parse(Sett_GetString("settings_enable_dlcmaps")))
                 ConfigValues.AvailableMaps = Data.AllMapNames;
 
             ConfigValues.mapname = UTILS_GetDvar("mapname");
             ConfigValues.g_gametype = UTILS_GetDvar("g_gametype");
+        }
+
+        private void hud_alive_players(Entity player)
+        {
+            HudElem fontString1 = HudElem.CreateFontString(player, "hudbig", 0.6f);
+            fontString1.SetPoint("DOWNRIGHT", "DOWNRIGHT", -19, 60);
+            fontString1.SetText("^3Allies^7:");
+            fontString1.HideWhenInMenu = true;
+            HudElem fontString2 = HudElem.CreateFontString(player, "hudbig", 0.6f);
+            fontString2.SetPoint("DOWNRIGHT", "DOWNRIGHT", -19, 80);
+            fontString2.SetText("^1Enemy^7:");
+            fontString2.HideWhenInMenu = true;
+            HudElem hudElem2 = HudElem.CreateFontString(player, "hudbig", 0.6f);
+            hudElem2.SetPoint("DOWNRIGHT", "DOWNRIGHT", -8, 60);
+            hudElem2.HideWhenInMenu = true;
+            HudElem hudElem3 = HudElem.CreateFontString(player, "hudbig", 0.6f);
+            hudElem3.SetPoint("DOWNRIGHT", "DOWNRIGHT", -8, 80);
+            hudElem3.HideWhenInMenu = true;
+            this.OnInterval(50, (Func<bool>)(() =>
+            {
+                string str1 = (string)player.GetField<string>("sessionteam");
+                string str2 = ((int)this.Call<int>("getteamplayersalive", new Parameter[1]
+                    {
+                        "axis"
+                    })).ToString();
+                string str3 = ((int)this.Call<int>("getteamplayersalive", new Parameter[1]
+                    {
+                        "allies"
+                    })).ToString();
+                hudElem2.SetText(str1.Equals("allies") ? str3 : str2);
+                hudElem3.SetText(str1.Equals("allies") ? str2 : str3);
+                return true;
+            }));
+        }
+        private void timed_messages_init()
+        {
+            if (ConfigValues.settings_timed_messages)
+            {
+                Announcer announcer = new Announcer(
+                    "default",
+                    File.ReadAllLines(ConfigValues.ConfigPath + @"Utils\announcer.txt").ToList(),
+                    ConfigValues.settings_timed_messages_interval
+                );
+                OnInterval(announcer.message_interval, () =>
+                {
+                    WriteChatToAll(announcer.SpitMessage());
+                    return true;
+                });
+            }
         }
 
         public void ANTIWEAPONHACK (Entity player, Entity inflictor, Entity attacker, int damage, int dFlags, string mod, string weapon, Vector3 point, Vector3 dir, string hitLoc)
@@ -1076,7 +1108,7 @@ namespace LambAdmin
 
         public void UTILS_BetterBalance(Entity player, Entity inflictor, Entity attacker, int damage, string mod, string weapon, Vector3 dir, string hitLoc)
         {
-            if (Call<string>("getdvar", "betterbalance") == "0" || Call<string>("getdvar", "g_gametype") == "infect")
+            if (!ConfigValues.settings_betterbalance_enable || Call<string>("getdvar", "g_gametype") == "infect")
                 return;
             int axis = 0, allies = 0;
             UTILS_GetTeamPlayers(out axis, out allies);

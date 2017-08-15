@@ -70,7 +70,6 @@ namespace LambAdmin
             { "settings_unfreezeongameend", "true" },
             { "settings_betterbalance_enable", "true" },
             { "settings_betterbalance_message", "^3<player> ^2got teamchanged for balance." },
-            { "settings_enable_autofpsunlock", "true" },
             { "settings_enable_dlcmaps", "true" },
             { "settings_enable_chat_alias", "true" },
             { "settings_enable_spree_messages", "true"},
@@ -576,24 +575,39 @@ namespace LambAdmin
                             if (Settings.Keys.Contains(prop))
                             {
                                 count++;
-                                Settings[prop] = match.Groups[2].Value;
-
-                                //team names
                                 switch (prop)
                                 {
-                                    case "settings_teamnames_allies":
-                                    case "settings_teamnames_axis":
-                                    case "settings_teamicons_allies":
-                                    case "settings_teamicons_axis":
-                                        if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamnames_allies))
-                                            teamNames.Add(new Dvar { key = "g_TeamName_Allies", value = ConfigValues.settings_teamnames_allies });
-                                        if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamnames_axis))
-                                            teamNames.Add(new Dvar { key = "g_TeamName_Axis", value = ConfigValues.settings_teamnames_axis });
-                                        if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamicons_allies))
-                                            teamNames.Add(new Dvar { key = "g_TeamIcon_Allies", value = ConfigValues.settings_teamicons_allies });
-                                        if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamicons_axis))
-                                            teamNames.Add(new Dvar { key = "g_TeamIcon_Axis", value = ConfigValues.settings_teamicons_axis });
+                                    case "settings_showversion":
+                                    case "settings_adminshudelem":
+                                    case "settings_enable_dlcmaps":
+                                        WriteLog.Debug("dynamic_properties:: unable to override \"" + prop +"\"");
                                         break;
+                                    case "settings_dynamic_properties":
+                                        WriteLog.Debug("dynamic_properties:: I like the way you're thinking, but nope.");
+                                        break;
+                                    default:
+                                        {
+                                            Settings[prop] = match.Groups[2].Value;
+
+                                            //team names
+                                            switch (prop)
+                                            {
+                                                case "settings_teamnames_allies":
+                                                case "settings_teamnames_axis":
+                                                case "settings_teamicons_allies":
+                                                case "settings_teamicons_axis":
+                                                    if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamnames_allies))
+                                                        teamNames.Add(new Dvar { key = "g_TeamName_Allies", value = ConfigValues.settings_teamnames_allies });
+                                                    if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamnames_axis))
+                                                        teamNames.Add(new Dvar { key = "g_TeamName_Axis", value = ConfigValues.settings_teamnames_axis });
+                                                    if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamicons_allies))
+                                                        teamNames.Add(new Dvar { key = "g_TeamIcon_Allies", value = ConfigValues.settings_teamicons_allies });
+                                                    if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamicons_axis))
+                                                        teamNames.Add(new Dvar { key = "g_TeamIcon_Axis", value = ConfigValues.settings_teamicons_axis });
+                                                    break;
+                                            }
+                                            break;
+                                        }
                                 }
                             }
                             else
@@ -695,6 +709,64 @@ namespace LambAdmin
                     WriteLog.Info(string.Format("dynamic_properties:: Done reading {0} settings from \"{1}\"", count, DSR));
 
             }
+        }
+
+        public void CFG_Dynprop_Apply()
+        {
+            WriteLog.Debug("Sleep(400)");
+            ConfigValues.sv_current_dsr = UTILS_GetDSRName();
+            WriteLog.Debug("dsr: " + ConfigValues.sv_current_dsr);
+            CFG_Dynprop_Init();
+
+            if (ConfigValues.ISNIPE_MODE)
+            {
+                WriteLog.Debug("Initializing iSnipe mode...");
+                SNIPE_OnServerStart();
+
+                /* {~~~~~~~} */
+                foreach (Entity player in Players)
+                {
+                    SNIPE_OnPlayerConnect(player);
+                    if (player.IsAlive)
+                        SNIPE_OnPlayerSpawn(player);
+                }
+                /* {~~~~~~~} */
+            }
+
+            if (ConfigValues.settings_enable_xlrstats)
+            {
+                WriteLog.Debug("Initializing XLRStats...");
+                XLR_OnServerStart();
+                XLR_InitCommands();
+
+                /* {~~~~~~~} */
+                foreach (Entity player in Players)
+                    XLR_OnPlayerConnected(player);
+                /* {~~~~~~~} */
+            }
+
+            if (ConfigValues.settings_enable_alive_counter)
+            {
+                PlayerConnected += hud_alive_players;
+                /* {~~~~~~~} */
+                foreach (Entity player in Players)
+                    hud_alive_players(player);
+                /* {~~~~~~~} */
+            }
+
+            if (ConfigValues.settings_enable_chat_alias)
+            {
+                WriteLog.Debug("Initializing Chat aliases...");
+                InitChatAlias();
+            }
+
+            timed_messages_init();
+
+            if (ConfigValues.settings_servertitle)
+                if (ConfigValues.LockServer)
+                    UTILS_ServerTitle("^1::LOCKED", "^1" + File.ReadAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER"));
+                else
+                    UTILS_ServerTitle_MapFormat();
         }
 
         public static string Lang_GetString(string key)
