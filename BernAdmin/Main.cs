@@ -42,11 +42,7 @@ namespace LambAdmin
 
             UTILS_OnServerStart();
             CMDS_OnServerStart();
-            if (ConfigValues.ISNIPE_MODE)
-            {
-                WriteLog.Debug("Initializing iSnipe mode...");
-                SNIPE_OnServerStart();
-            }
+
             WriteLog.Debug("Initializing PersonalPlayerDvars...");
             PersonalPlayerDvars = UTILS_PersonalPlayerDvars_load();
             if (ConfigValues.settings_enable_chat_alias)
@@ -72,6 +68,21 @@ namespace LambAdmin
                     WriteLog.Debug("dsr: " + ConfigValues.sv_current_dsr);
                     CFG_Dynprop_Init();
 
+                    if (ConfigValues.ISNIPE_MODE)
+                    {
+                        WriteLog.Debug("Initializing iSnipe mode...");
+                        SNIPE_OnServerStart();
+
+                        /* {~~~~~~~} */
+                        foreach (Entity player in Players)
+                        {
+                            SNIPE_OnPlayerConnect(player);
+                            if (player.IsAlive)
+                               SNIPE_OnPlayerSpawn(player);
+                        }
+                        /* {~~~~~~~} */
+                    }
+
                     if (ConfigValues.settings_servertitle)
                         if (ConfigValues.LockServer)
                             UTILS_ServerTitle("^1::LOCKED", "^1" + File.ReadAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER"));
@@ -79,11 +90,19 @@ namespace LambAdmin
                             UTILS_ServerTitle_MapFormat();
                 });
             else
+            {
                 if (ConfigValues.ANTIWEAPONHACK)
                     WriteLog.Info("You have to enable \"settings_dynamic_properties\" if you wish to use antiweaponhack");
-            #endregion
 
-        }
+                if (ConfigValues.ISNIPE_MODE)
+                {
+                    WriteLog.Debug("Initializing iSnipe mode...");
+                    SNIPE_OnServerStart();
+                }
+            }
+                #endregion
+
+            }
 
         public override EventEat OnSay3(Entity player, ChatType type, string name, ref string message)
         {

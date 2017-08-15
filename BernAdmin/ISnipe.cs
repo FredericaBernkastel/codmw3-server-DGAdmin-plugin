@@ -78,7 +78,6 @@ namespace LambAdmin
             SNIPE_InitCommands();
             SetupKnife();
             PlayerActuallySpawned += SNIPE_OnPlayerSpawn;
-            PlayerDisconnected += SNIPE_OnPlayerDisconnect;
             OnPlayerDamageEvent += SNIPE_PeriodicChecks;
             PlayerConnected += SNIPE_OnPlayerConnect;
 
@@ -178,11 +177,6 @@ namespace LambAdmin
             if (ConfigValues.ISNIPE_SETTINGS.ANTIBOLTCANCEL && (UTILS_GetFieldSafe<int>(attacker, "weapon_fired_boltcancel") == 1))
                 player.Health += damage;
 
-        }
-
-        public void SNIPE_OnPlayerDisconnect(Entity player)
-        {
-            player.SetClientDvar("fx_draw", "1");
         }
 
         public void SNIPE_OnPlayerConnect(Entity player)
