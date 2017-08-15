@@ -12,6 +12,7 @@ namespace LambAdmin
 {
     public partial class DGAdmin : BaseScript
     {
+
         public static partial class ConfigValues
         {
             public static string sv_current_dsr = "";
@@ -34,9 +35,12 @@ namespace LambAdmin
                 Directory.CreateDirectory(ConfigValues.ConfigPath);
             }
 
-                #region MODULE LOADING
-                MAIN_OnServerStart();
-                CFG_OnServerStart();
+            #region MODULE LOADING
+            MAIN_OnServerStart();
+            CFG_OnServerStart();
+
+            Action init_settings = () =>
+            {
                 UTILS_OnServerStart();
                 CMDS_OnServerStart();
                 groups_OnServerStart();
@@ -62,13 +66,29 @@ namespace LambAdmin
                 }
 
                 if (ConfigValues.settings_servertitle)
-                    AfterDelay(1000, () =>
-                    {
-                        if (ConfigValues.LockServer)
-                            UTILS_ServerTitle("^1::LOCKED", "^1" + File.ReadAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER"));
-                        else
-                            UTILS_ServerTitle_MapFormat();
-                    });
+                    if (ConfigValues.LockServer)
+                        UTILS_ServerTitle("^1::LOCKED", "^1" + File.ReadAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER"));
+                    else
+                        UTILS_ServerTitle_MapFormat();
+            };
+
+
+            if (ConfigValues.settings_dynamic_properties)
+                Delay(50, () =>
+                {
+                    WriteLog.Debug("Sleep(50)");
+                    ConfigValues.sv_current_dsr = UTILS_GetDSRName();
+                    WriteLog.Debug("dsr: " + ConfigValues.sv_current_dsr);
+                    CFG_Dynprop_Init();
+                    init_settings();
+                });
+            else
+            {
+                init_settings();
+
+                if (ConfigValues.ANTIWEAPONHACK)
+                    WriteLog.Info("You have to enable \"settings_dynamic_properties\" if you wish to use antiweaponhack");
+            }
             #endregion
 
         }
@@ -127,6 +147,7 @@ namespace LambAdmin
 
                 ConfigValues.SettingsMutex = false;
             }
+
             MAIN_ResetSpawnAction();
             base.OnExitLevel();
         }

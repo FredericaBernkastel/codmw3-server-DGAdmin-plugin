@@ -11,7 +11,7 @@ using System.IO;
 using System.Threading;
 
 namespace LambAdmin
-{
+{ 
     public partial class DGAdmin
     {
         System.Globalization.CultureInfo Culture = System.Globalization.CultureInfo.InvariantCulture;
@@ -2062,17 +2062,31 @@ namespace LambAdmin
             }
         }
 
-        public static void Delay(int ms, System.Timers.ElapsedEventHandler action)
+        //its not funny
+        public void Delay(int delay, Action action)
         {
-            System.Timers.Timer _timer = new System.Timers.Timer(ms);
-            _timer.Elapsed += (o, e) => { _timer.Enabled = false; };
-            _timer.Elapsed += action;
-            _timer.Enabled = true;
+            bool flag = false;
+            OnInterval(1, () =>
+            {
+                if (flag)
+                {
+                    action();
+                    return false;
+                }
+                return true;
+            });
+
+            (new Thread(() =>
+            {
+                Thread.Sleep(delay);
+                flag = true;
+            })).Start();
         }
 
-        public static string UTILS_GetDSRName()
+        public string UTILS_GetDSRName()
         {
-            return DGAdmin.Mem.ReadString(0x01B3ECB3, 32);
+            //return DGAdmin.Mem.ReadString(0x01B3ECB3, 32);
+           return Call<string>("getdvar", "sv_current_dsr");
         }
 
         public bool UTILS_WeaponAllowed(string s)

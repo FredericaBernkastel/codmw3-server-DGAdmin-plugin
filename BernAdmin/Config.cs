@@ -514,12 +514,6 @@ namespace LambAdmin
             CFG_ReadDictionary(ConfigValues.ConfigPath + @"lang.txt", ref Lang);
             CFG_ReadDictionary(ConfigValues.ConfigPath + @"cmdlang.txt", ref CmdLang);
 
-            if (ConfigValues.settings_dynamic_properties)
-                CFG_Dynprop_Init();
-
-            else if(ConfigValues.ANTIWEAPONHACK)
-                WriteLog.Info("You have to enable \"settings_dynamic_properties\" if you wish to use antiweaponhack");
-
             WriteLog.Info("Done reading config...");
         }
 
