@@ -3585,10 +3585,7 @@ namespace LambAdmin
                 {
                     string[] parts = line.Split('=');
                     parts[0] = parts[0].ToLowerInvariant();
-
-                    // DSR setts got higher priority
-                    if (!(ConfigValues.settings_dynamic_properties && DefaultCDvars.Keys.Contains(parts[0])))
-                        DefaultCDvars.Add(parts[0], parts[1]);
+                    DefaultCDvars.Add(parts[0], parts[1]);
                 }
             }
             if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))

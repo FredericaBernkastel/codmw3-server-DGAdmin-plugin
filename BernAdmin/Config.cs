@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
+using InfinityScript;
 
 namespace LambAdmin
 {
@@ -530,7 +531,7 @@ namespace LambAdmin
 
         /* ############## DYNAMIC_PROPERTIES ############### */
         /* ############# basic implementation ############## */
-        public static void CFG_Dynprop_Init()
+        public void CFG_Dynprop_Init()
         {
             if (System.IO.Directory.Exists(@"admin\"))
             {
@@ -550,6 +551,8 @@ namespace LambAdmin
                     WriteLog.Error("Error loading dynamic_properties feature: DSR not exists! \"" + DSR + "\"");
                     return;
                 }
+
+                List<Dvar> dvars = new List<Dvar>();
 
                 // start of parsing
 
@@ -591,7 +594,7 @@ namespace LambAdmin
                             count++;
                             string prop = match.Groups[1].Value.ToLower();
                             string value = match.Groups[2].Value;
-                            DefaultCDvars.Add(prop, value);
+                            dvars.Add(new Dvar { key = prop, value = value });
                         }
 
                         /* 
@@ -626,6 +629,17 @@ namespace LambAdmin
                             }
                         }
                     });
+
+                    if (dvars.Count > 0)
+                    {
+                        foreach (Dvar dvar in dvars)
+                            if (DefaultCDvars.ContainsKey(dvar.key))
+                                DefaultCDvars[dvar.key] = dvar.value;
+                            else
+                                DefaultCDvars.Add(dvar.key, dvar.value);
+                        foreach (Entity player in Players)
+                            UTILS_SetClientDvarsPacked(player, dvars);
+                    }
                 };
 
                 /* 
