@@ -23,7 +23,6 @@ namespace LambAdmin
 
         HudElem RGAdminMessage;
         HudElem OnlineAdmins;
-        HudElem VoteStatsHUD;
 
         //typedef
         public struct Dvar
@@ -1074,28 +1073,6 @@ namespace LambAdmin
             }
         }
 
-        public void CMD_Votekick_CreateHUD()
-        {
-            VoteStatsHUD = HudElem.CreateServerFontString("hudsmall", 0.7f);
-            VoteStatsHUD.SetPoint("TOPLEFT", "TOPLEFT", 10, 290);
-            VoteStatsHUD.Foreground = true;
-            VoteStatsHUD.HideWhenInMenu = true;
-            VoteStatsHUD.Archived = false;
-
-            OnInterval(1000, () =>
-            {
-                if (voting.isActive())
-                {
-                    VoteStatsHUD.SetText(voting.hudText);
-                    return true;
-                }
-                else
-                {
-                    VoteStatsHUD.Call("destroy");
-                    return false;
-                }
-            });
-        }
 
         public void UTILS_BetterBalance(Entity player, Entity inflictor, Entity attacker, int damage, string mod, string weapon, Vector3 dir, string hitLoc)
         {
@@ -2092,9 +2069,10 @@ namespace LambAdmin
             _timer.Elapsed += action;
             _timer.Enabled = true;
         }
+
         public static string UTILS_GetDSRName()
         {
-            return DGAdmin.Mem.ReadString(0x6480E70, 32);
+            return DGAdmin.Mem.ReadString(0x01B3ECB3, 32);
         }
 
         public bool UTILS_WeaponAllowed(string s)

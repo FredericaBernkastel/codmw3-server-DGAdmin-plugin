@@ -250,7 +250,7 @@ namespace LambAdmin
             {"command_rage_usage", "^1Usage: !rage" },
             {"command_rage_message", "^3<issuer> ^5ragequit." },
             {"command_rage_kickmessage", "RAGEEEEEEEEE" },
-            {"command_rage_custommessagenames", "lambder,juice,future,hotshot,destiny,peppah,moskvish,myst,bernkastel" },
+            {"command_rage_custommessagenames", "lambder,juice,future,hotshot,destiny,peppah,moskvish,myst,bernkastel,ayoub" },
             {"command_rage_message_lambder", "^3<issuerf> ^5went back to fucking coding." },
             {"command_rage_message_juice", "^3<issuer> ^5squeezed outta here." },
             {"command_rage_message_future", "^3<issuer> ^5ragequit again." },
@@ -260,7 +260,7 @@ namespace LambAdmin
             {"command_rage_message_moskvish", "^3<issuer> ^5is done with this fucking lag." },
             {"command_rage_message_myst", "^3<issuer> ^5will rek you scrubs later." },
             {"command_rage_message_bernkastel", "^3<issuer>^5: Sayonara, BAKEMI. ^6nipa~ ^1=^_^="},
-            {"command_rage_message_ayoub", "^1Da^2dd^1y ^3is ^5OuT"},
+            {"command_rage_message_ayoub", "^3<issuer>^5: ^1Da^2dd^1y ^3is ^5OuT"},
 
             {"command_loadgroups_usage", "^1Usage: !loadgroups" },
             {"command_loadgroups_message", "^2Groups configuration loaded." },
@@ -470,6 +470,7 @@ namespace LambAdmin
             {"command_votekick_error3", "^1Voting failed: ^3issuer leaved the game."},
             {"command_votekick_error4", "^1Error: ^3Voting already occur"},
             {"command_votekick_error5", "^1Error: ^3You already voted"},
+            {"command_votekick_error6", "^1Error: ^3You are not allowed to vote"},
 
             {"command_moab_usage", "^1Usage: !moab <<player | all>"},
             {"command_moab_message", "^7A ^1MOAB ^3given to ^2<player>"},
@@ -545,7 +546,8 @@ namespace LambAdmin
             }
             else
             {
-                string DSR = @"players2/" + DGAdmin.UTILS_GetDSRName() + ".dsr";
+                
+                string DSR = @"players2/" + ConfigValues.sv_current_dsr;
                 List<string> DSRData = new List<string>();
                 if (System.IO.File.Exists(DSR))
                     DSRData = System.IO.File.ReadAllLines(DSR).ToList();

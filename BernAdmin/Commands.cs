@@ -295,10 +295,12 @@ namespace LambAdmin
             int PosVotes, NegVotes;
             //HudElem VoteStatsHUD = null;
             private bool Active;
-            Entity issuer, target;
+            public Entity issuer, target;
             string reason;
             List<long> VotedPlayers;
             public string hudText = "";
+            DGAdmin script;
+            HudElem VoteStatsHUD;
 
             public bool isActive(){
                 return Active;
@@ -318,37 +320,49 @@ namespace LambAdmin
                 this.NegVotes = 0;
                 this.VotedPlayers = new List<long>();
                 int time = MaxTime;
-                //CreateHUD();
-                System.Timers.Timer _timer = new System.Timers.Timer(1000);
-                _timer.Elapsed +=
-                    (object sender, System.Timers.ElapsedEventArgs e) =>
+                this.script = script;
+
+                VoteStatsHUD = HudElem.CreateServerFontString("hudsmall", 0.7f);
+                VoteStatsHUD.SetPoint("TOPLEFT", "TOPLEFT", 10, 290);
+                VoteStatsHUD.Foreground = true;
+                VoteStatsHUD.HideWhenInMenu = true;
+                VoteStatsHUD.Archived = false;
+
+                script.OnInterval(1000, () =>
+                {
+                    try
                     {
-                        try
+                        if ((target == null) || (issuer == null))
                         {
-                            time--;
-                            UpdateHUD(time);
-                            if (time % 5 == 0)
-                            {
-                                WriteLog.Info("Votekick: " + time.ToString() + "s remain");
-                            }
-                            if ((issuer == null) || (target == null) || (time <= 0) || !Active)
-                            {
-                                _timer.Enabled = false;
-                                _timer.Close();
-                                //VoteStatsHUD.SetText("");
-                                hudText = "";
-                            }
-                            if ((target == null) || (issuer == null))
-                                return;
-                            if (time <= 0)
-                                End(script);
+                            VoteStatsHUD.Call("destroy");
+                            return false;
                         }
-                        catch
+                        if (!Active)
                         {
-                            WriteLog.Error("Exception at DGAdmin.Voting::TimerEvent");
+                            VoteStatsHUD.Call("destroy");
+                            return false;
                         }
-                    };
-                _timer.Enabled = true;
+                        if (time <= 0)
+                        {
+                            VoteStatsHUD.Call("destroy");
+                            End(script);
+                            return false;
+                        }
+
+                        time--;
+                        UpdateHUD(time);
+                        VoteStatsHUD.SetText(String.IsNullOrEmpty(this.hudText) ? " " : this.hudText);
+                        if (time % 5 == 0)
+                        {
+                            WriteLog.Info("Votekick: " + time.ToString() + "s remain");
+                        }
+                    }
+                    catch
+                    {
+                        WriteLog.Error("Exception at DGAdmin.Voting::TimerEvent");
+                    }
+                    return true;
+                });
             }
             private void End(DGAdmin script)
             {
@@ -370,7 +384,7 @@ namespace LambAdmin
                             {"<issuer>", issuer.Name },
                             {"<reason>", reason },
                         }));
-                        Delay(100, (o, e) =>
+                        script.AfterDelay(100, () =>
                         {
                             ExecuteCommand("dropclient " + target.GetEntityNumber() + " \"" + reason + "\"");
                             WriteLog.Info("Voting passed successfully.");
@@ -425,9 +439,9 @@ namespace LambAdmin
                 //    }));
                 List<string> lines = Command.GetString("votekick", "HUD").Format(
                         new Dictionary<string, string>(){
-                            {"<player>", target.Name},
+                            {"<player>", String.IsNullOrEmpty(target.Name)?" ": target.Name},
                             {"<reason>", String.IsNullOrEmpty(reason)?"nothing":reason},
-                            {"<time>", (time - 1).ToString()},
+                            {"<time>", (time + 1).ToString()},
                             {"<posvotes>", PosVotes.ToString()},
                             {"<negvotes>", NegVotes.ToString()},
                     }).Split(new string[]{@"\n"},StringSplitOptions.None).ToList();
@@ -443,6 +457,8 @@ namespace LambAdmin
 
             public bool PositiveVote(Entity player)
             {
+                if((player == issuer) || (player == target))
+                    return false;
                 if(VotedPlayers.Contains(player.GUID))
                     return false; //whatever the vote is accepted, or not
                 VotedPlayers.Add(player.GUID);
@@ -451,6 +467,8 @@ namespace LambAdmin
             }
             public bool NegativeVote(Entity player)
             {
+                if ((player == issuer) || (player == target))
+                    return false;
                 if (VotedPlayers.Contains(player.GUID))
                     return false;
                 VotedPlayers.Add(player.GUID);
@@ -2663,8 +2681,13 @@ namespace LambAdmin
                         if (voting.isActive())
                             if (voting.PositiveVote(sender))
                                 WriteChatToAll(Command.GetString("yes", "message").Format(new Dictionary<string, string>() { { "<player>", sender.Name } }));
-                            else //...
-                                WriteChatToPlayer(sender, Command.GetString("votekick", "error5"));
+                            else
+                            {
+                                if ((sender == voting.issuer) || (sender == voting.target))
+                                    WriteChatToPlayer(sender, Command.GetString("votekick", "error6"));
+                                else
+                                    WriteChatToPlayer(sender, Command.GetString("votekick", "error5"));
+                            }
                         else
                             WriteChatToPlayer(sender, "^3Warning: Command buffer is empty.");
                     else
@@ -2680,8 +2703,13 @@ namespace LambAdmin
                         if (voting.isActive())
                             if (voting.NegativeVote(sender))
                                 WriteChatToAll(Command.GetString("no", "message").Format(new Dictionary<string, string>() { { "<player>", sender.Name } }));
-                            else //more else for god of else
-                                WriteChatToPlayer(sender, Command.GetString("votekick", "error5"));
+                            else
+                            {
+                                if ((sender == voting.issuer) || (sender == voting.target))
+                                    WriteChatToPlayer(sender, Command.GetString("votekick", "error6"));
+                                else
+                                    WriteChatToPlayer(sender, Command.GetString("votekick", "error5"));
+                            }
                         else
                             WriteChatToPlayer(sender, "^3Warning: Command buffer is empty.");
                     else
@@ -3022,7 +3050,6 @@ namespace LambAdmin
                     WriteChatToAll(message2);
 
                 voting.Start(sender, target, reason, this);
-                CMD_Votekick_CreateHUD();
             }));
 
             // DRUNK
@@ -3236,12 +3263,6 @@ namespace LambAdmin
             {
                 switch (arguments[0])
                 {
-                    case "dsrname":
-                        {
-                            WriteChatSpyToPlayer(sender, "debug.dsrname::callback");
-                            WriteChatToPlayer(sender, UTILS_GetDSRName());
-                            break;
-                        };
                     case "name":
                         {
                             OnInterval(1, () => {
@@ -3281,6 +3302,17 @@ namespace LambAdmin
                             sender.SetClientDvar("r_lighttweaksunlight", "0.991101 0.947308 0.760525" );
                             sender.SetClientDvar("r_heroLightScale", "1 1 1");
                             sender.SetClientDvar("r_skyColorTemp", "6500");
+                            break;
+                        }
+                    case "dsr":
+                        {
+                            string dsr = @"players2/" + ConfigValues.sv_current_dsr;
+                            WriteLog.Warning(" DSR:  players2/" + Call<string>("getdvar", "sv_current_dsr"));
+                            WriteChatToAll("dsr: " + dsr);
+                            if (System.IO.File.Exists(dsr))
+                                WriteChatToAll("(exists)");
+                            else
+                                WriteChatToAll("(not exists)");
                             break;
                         }
                 }

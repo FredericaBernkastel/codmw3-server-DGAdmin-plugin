@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using InfinityScript;
 using System.IO;
 using System.Net;
+using System.Threading;
 
 namespace LambAdmin
 {
@@ -13,7 +14,7 @@ namespace LambAdmin
     {
         public static partial class ConfigValues
         {
-
+            public static string sv_current_dsr = "";
         }
 
         event Action<Entity> PlayerActuallySpawned = ent => { };
@@ -33,40 +34,41 @@ namespace LambAdmin
                 Directory.CreateDirectory(ConfigValues.ConfigPath);
             }
 
-            #region MODULE LOADING
-            MAIN_OnServerStart();
-            CFG_OnServerStart();
-            UTILS_OnServerStart();
-            CMDS_OnServerStart();
-            groups_OnServerStart();
-            if (ConfigValues.ISNIPE_MODE)
-            {
-                WriteLog.Debug("Initializing iSnipe mode...");
-                SNIPE_OnServerStart();
-            }
-            WriteLog.Debug("Initializing PersonalPlayerDvars...");
-            PersonalPlayerDvars = UTILS_PersonalPlayerDvars_load();
-            if (ConfigValues.settings_enable_chat_alias)
-            {
-                WriteLog.Debug("Initializing Chat aliases...");
-                InitChatAlias();
-            }
-            if (ConfigValues.settings_enable_alive_counter)
-                PlayerConnected += hud_alive_players;
-            if (ConfigValues.settings_enable_xlrstats)
-            {
-                WriteLog.Debug("Initializing XLRStats...");
-                XLR_OnServerStart();
-                XLR_InitCommands();
-            }
+                #region MODULE LOADING
+                MAIN_OnServerStart();
+                CFG_OnServerStart();
+                UTILS_OnServerStart();
+                CMDS_OnServerStart();
+                groups_OnServerStart();
+                if (ConfigValues.ISNIPE_MODE)
+                {
+                    WriteLog.Debug("Initializing iSnipe mode...");
+                    SNIPE_OnServerStart();
+                }
+                WriteLog.Debug("Initializing PersonalPlayerDvars...");
+                PersonalPlayerDvars = UTILS_PersonalPlayerDvars_load();
+                if (ConfigValues.settings_enable_chat_alias)
+                {
+                    WriteLog.Debug("Initializing Chat aliases...");
+                    InitChatAlias();
+                }
+                if (ConfigValues.settings_enable_alive_counter)
+                    PlayerConnected += hud_alive_players;
+                if (ConfigValues.settings_enable_xlrstats)
+                {
+                    WriteLog.Debug("Initializing XLRStats...");
+                    XLR_OnServerStart();
+                    XLR_InitCommands();
+                }
 
-            if (ConfigValues.settings_servertitle)
-                AfterDelay(1000, () => {
-                    if (ConfigValues.LockServer)
-                        UTILS_ServerTitle("^1::LOCKED", "^1" + File.ReadAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER"));
-                    else
-                        UTILS_ServerTitle_MapFormat();
-                });
+                if (ConfigValues.settings_servertitle)
+                    AfterDelay(1000, () =>
+                    {
+                        if (ConfigValues.LockServer)
+                            UTILS_ServerTitle("^1::LOCKED", "^1" + File.ReadAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER"));
+                        else
+                            UTILS_ServerTitle_MapFormat();
+                    });
             #endregion
 
         }
