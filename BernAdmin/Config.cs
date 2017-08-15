@@ -553,6 +553,7 @@ namespace LambAdmin
                 }
 
                 List<Dvar> dvars = new List<Dvar>();
+                List<Dvar> teamNames = new List<Dvar>();
 
                 // start of parsing
 
@@ -576,6 +577,24 @@ namespace LambAdmin
                             {
                                 count++;
                                 Settings[prop] = match.Groups[2].Value;
+
+                                //team names
+                                switch (prop)
+                                {
+                                    case "settings_teamnames_allies":
+                                    case "settings_teamnames_axis":
+                                    case "settings_teamicons_allies":
+                                    case "settings_teamicons_axis":
+                                        if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamnames_allies))
+                                            teamNames.Add(new Dvar { key = "g_TeamName_Allies", value = ConfigValues.settings_teamnames_allies });
+                                        if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamnames_axis))
+                                            teamNames.Add(new Dvar { key = "g_TeamName_Axis", value = ConfigValues.settings_teamnames_axis });
+                                        if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamicons_allies))
+                                            teamNames.Add(new Dvar { key = "g_TeamIcon_Allies", value = ConfigValues.settings_teamicons_allies });
+                                        if (!String.IsNullOrWhiteSpace(ConfigValues.settings_teamicons_axis))
+                                            teamNames.Add(new Dvar { key = "g_TeamIcon_Axis", value = ConfigValues.settings_teamicons_axis });
+                                        break;
+                                }
                             }
                             else
                             {
@@ -629,6 +648,8 @@ namespace LambAdmin
                             }
                         }
                     });
+
+                    dvars = UTILS_DvarListUnion(dvars, teamNames);
 
                     if (dvars.Count > 0)
                     {

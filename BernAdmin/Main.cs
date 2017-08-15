@@ -52,13 +52,6 @@ namespace LambAdmin
             }
             if (ConfigValues.settings_enable_alive_counter)
                 PlayerConnected += hud_alive_players;
-            if (ConfigValues.settings_enable_xlrstats)
-            {
-                WriteLog.Debug("Initializing XLRStats...");
-                XLR_OnServerStart();
-                XLR_InitCommands();
-            }
-
 
             if (ConfigValues.settings_dynamic_properties)
                 Delay(400, () =>
@@ -78,8 +71,20 @@ namespace LambAdmin
                         {
                             SNIPE_OnPlayerConnect(player);
                             if (player.IsAlive)
-                               SNIPE_OnPlayerSpawn(player);
+                                SNIPE_OnPlayerSpawn(player);
                         }
+                        /* {~~~~~~~} */
+                    }
+
+                    if (ConfigValues.settings_enable_xlrstats)
+                    {
+                        WriteLog.Debug("Initializing XLRStats...");
+                        XLR_OnServerStart();
+                        XLR_InitCommands();
+
+                        /* {~~~~~~~} */
+                        foreach (Entity player in Players)
+                            XLR_OnPlayerConnected(player);
                         /* {~~~~~~~} */
                     }
 
@@ -99,10 +104,17 @@ namespace LambAdmin
                     WriteLog.Debug("Initializing iSnipe mode...");
                     SNIPE_OnServerStart();
                 }
-            }
-                #endregion
 
+                if (ConfigValues.settings_enable_xlrstats)
+                {
+                    WriteLog.Debug("Initializing XLRStats...");
+                    XLR_OnServerStart();
+                    XLR_InitCommands();
+                }
             }
+            #endregion
+
+        }
 
         public override EventEat OnSay3(Entity player, ChatType type, string name, ref string message)
         {
