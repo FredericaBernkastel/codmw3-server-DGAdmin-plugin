@@ -38,57 +38,49 @@ namespace LambAdmin
             #region MODULE LOADING
             MAIN_OnServerStart();
             CFG_OnServerStart();
+            groups_OnServerStart();
 
-            Action init_settings = () =>
+            UTILS_OnServerStart();
+            CMDS_OnServerStart();
+            if (ConfigValues.ISNIPE_MODE)
             {
-                UTILS_OnServerStart();
-                CMDS_OnServerStart();
-                groups_OnServerStart();
-                if (ConfigValues.ISNIPE_MODE)
-                {
-                    WriteLog.Debug("Initializing iSnipe mode...");
-                    SNIPE_OnServerStart();
-                }
-                WriteLog.Debug("Initializing PersonalPlayerDvars...");
-                PersonalPlayerDvars = UTILS_PersonalPlayerDvars_load();
-                if (ConfigValues.settings_enable_chat_alias)
-                {
-                    WriteLog.Debug("Initializing Chat aliases...");
-                    InitChatAlias();
-                }
-                if (ConfigValues.settings_enable_alive_counter)
-                    PlayerConnected += hud_alive_players;
-                if (ConfigValues.settings_enable_xlrstats)
-                {
-                    WriteLog.Debug("Initializing XLRStats...");
-                    XLR_OnServerStart();
-                    XLR_InitCommands();
-                }
-
-                if (ConfigValues.settings_servertitle)
-                    if (ConfigValues.LockServer)
-                        UTILS_ServerTitle("^1::LOCKED", "^1" + File.ReadAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER"));
-                    else
-                        UTILS_ServerTitle_MapFormat();
-            };
+                WriteLog.Debug("Initializing iSnipe mode...");
+                SNIPE_OnServerStart();
+            }
+            WriteLog.Debug("Initializing PersonalPlayerDvars...");
+            PersonalPlayerDvars = UTILS_PersonalPlayerDvars_load();
+            if (ConfigValues.settings_enable_chat_alias)
+            {
+                WriteLog.Debug("Initializing Chat aliases...");
+                InitChatAlias();
+            }
+            if (ConfigValues.settings_enable_alive_counter)
+                PlayerConnected += hud_alive_players;
+            if (ConfigValues.settings_enable_xlrstats)
+            {
+                WriteLog.Debug("Initializing XLRStats...");
+                XLR_OnServerStart();
+                XLR_InitCommands();
+            }
 
 
             if (ConfigValues.settings_dynamic_properties)
-                Delay(50, () =>
+                Delay(400, () =>
                 {
-                    WriteLog.Debug("Sleep(50)");
+                    WriteLog.Debug("Sleep(400)");
                     ConfigValues.sv_current_dsr = UTILS_GetDSRName();
                     WriteLog.Debug("dsr: " + ConfigValues.sv_current_dsr);
                     CFG_Dynprop_Init();
-                    init_settings();
+
+                    if (ConfigValues.settings_servertitle)
+                        if (ConfigValues.LockServer)
+                            UTILS_ServerTitle("^1::LOCKED", "^1" + File.ReadAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER"));
+                        else
+                            UTILS_ServerTitle_MapFormat();
                 });
             else
-            {
-                init_settings();
-
                 if (ConfigValues.ANTIWEAPONHACK)
                     WriteLog.Info("You have to enable \"settings_dynamic_properties\" if you wish to use antiweaponhack");
-            }
             #endregion
 
         }

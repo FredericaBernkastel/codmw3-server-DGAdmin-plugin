@@ -1008,9 +1008,7 @@ namespace LambAdmin
 
             if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\rules.txt"))
             {
-                // DSR setts got higher priority
-                if (!(ConfigValues.settings_dynamic_properties && ConfigValues.cmd_rules.Count > 0))
-                    ConfigValues.cmd_rules = File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\rules.txt").ToList();
+                ConfigValues.cmd_rules = File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\rules.txt").ToList();
 
                 // RULES
                 CommandList.Add(new Command("rules", 0, Command.Behaviour.Normal,

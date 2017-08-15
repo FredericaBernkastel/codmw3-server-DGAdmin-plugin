@@ -2066,7 +2066,7 @@ namespace LambAdmin
         public void Delay(int delay, Action action)
         {
             bool flag = false;
-            OnInterval(1, () =>
+            OnInterval(10, () =>
             {
                 if (flag)
                 {

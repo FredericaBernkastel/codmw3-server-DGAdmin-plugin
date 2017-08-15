@@ -162,9 +162,9 @@ namespace LambAdmin
                     WriteLog.Error(ex.Message);
                 }
 
-                if (ConfigValues.DEBUG)
-                    foreach (string message in GetGroupScheme())
-                        WriteLog.Debug(message);
+                //if (ConfigValues.DEBUG)
+                //    foreach (string message in GetGroupScheme())
+                //        WriteLog.Debug(message);
 
                 if (!Directory.Exists(ConfigValues.ConfigPath + @"Groups\internal"))
                     Directory.CreateDirectory(ConfigValues.ConfigPath + @"Groups\internal");
