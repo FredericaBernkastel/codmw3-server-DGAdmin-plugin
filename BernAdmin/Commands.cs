@@ -23,6 +23,7 @@ namespace LambAdmin
             public static bool _3rdPerson = false;
             public static List<string> cmd_rules = new List<string>();
             public static bool cmd_foreachContext = false;
+            public static bool unlimited_ammo_active = false;
 
             public static int settings_warn_maxwarns
             {
@@ -78,6 +79,13 @@ namespace LambAdmin
                 get
                 {
                     return bool.Parse(Sett_GetString("settings_dynamic_properties"));
+                }
+            }
+            public static int settings_dynamic_properties_delay
+            {
+                get
+                {
+                    return int.Parse(Sett_GetString("settings_dynamic_properties_delay"));
                 }
             }
             public static bool ANTIWEAPONHACK
@@ -3050,6 +3058,26 @@ namespace LambAdmin
                 voting.Start(sender, target, reason, this);
             }));
 
+            // votecancel
+            CommandList.Add(new Command("votecancel", 0, Command.Behaviour.Normal,
+            (sender, arguments, optarg) =>
+            {
+                if (!voting.isActive())
+                {
+                    WriteChatToPlayer(sender, Command.GetString("votecancel", "error"));
+                    return;
+                }
+
+                voting.Abort();
+
+                WriteChatToAll(Command.GetString("votecancel", "message").Format(
+                            new Dictionary<string, string>()
+                            {
+                                    {"<issuer>", sender.Name},
+                                    {"<issuerf>", sender.GetFormattedName(database)},
+                            }));
+            }));
+
             // DRUNK
             CommandList.Add(new Command("drunk", 0, Command.Behaviour.Normal,
             (sender, arguments, optarg) =>
@@ -3160,6 +3188,26 @@ namespace LambAdmin
                         {
                             {"<count>", targets.Count.ToString() }
                         }));
+            }));
+
+            CommandList.Add(new Command("unlimitedammo", 1, Command.Behaviour.Normal,
+            (sender, arguments, optarg) =>
+            {
+                if (UTILS_ParseBool(arguments[0]))
+                {
+                    UTILS_SetDvar("unlimited_ammo", "1");
+                    UTILS_UnlimitedAmmo(true);
+
+                } else
+                    UTILS_SetDvar("unlimited_ammo", "0");
+
+                WriteChatToAll(Command.GetString("unlimitedammo", UTILS_ParseBool(arguments[0]) ? "message_on" : "message_off").Format(
+                            new Dictionary<string, string>()
+                            {
+                                {"<issuer>", sender.Name},
+                                {"<issuerf>", sender.GetFormattedName(database)}
+                            }));
+
             }));
 
 #if DEBUG
@@ -3565,7 +3613,10 @@ namespace LambAdmin
                     "fr=foreach",
                     "s=suicide",
                     "tp=teleport",
-                    "pft=playfxontag"
+                    "pft=playfxontag",
+                    "vk=votekick",
+                    "vc=votecancel",
+                    "ua=unlimitedammo"
                 });
 
             foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\commandaliases.txt"))

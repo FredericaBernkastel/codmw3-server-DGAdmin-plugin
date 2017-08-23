@@ -129,6 +129,13 @@ namespace LambAdmin
                         return 4500;
                 }
             }
+            public static bool settings_unlimited_ammo
+            {
+                get
+                {
+                    return bool.Parse(Sett_GetString("settings_unlimited_ammo"));
+                }
+            }
 #if DEBUG
             public static bool DEBUG = true;
 #else
@@ -1141,6 +1148,33 @@ namespace LambAdmin
                     }
                     return;
             }
+        }
+
+        public void UTILS_UnlimitedAmmo(bool force = false)
+        {
+            if ((!ConfigValues.settings_unlimited_ammo || Call<string>("getdvar", "g_gametype") == "infect") && !force) 
+                return;
+            if (ConfigValues.unlimited_ammo_active)
+                return;
+            ConfigValues.unlimited_ammo_active = true;
+
+            OnInterval(50, () =>
+            {
+                if(UTILS_GetDvar("unlimited_ammo") == "1")
+                    foreach(Entity player in from player in Players where player.IsAlive select player)
+                    {
+                        var Currwep = player.CurrentWeapon;
+                        var offhandAmmo = player.Call<string>("getcurrentoffhand");
+
+                        player.Call("setweaponammoclip", offhandAmmo, 99);
+                        player.Call("givemaxammo", offhandAmmo);
+
+                        player.Call("setweaponammoclip", Currwep, 99);
+                        player.Call("setweaponammoclip", Currwep, 99, "left");
+                        player.Call("setweaponammoclip", Currwep, 99, "right");
+                    }
+                return true;
+            });
         }
 
         public void UTILS_OnGameEnded()

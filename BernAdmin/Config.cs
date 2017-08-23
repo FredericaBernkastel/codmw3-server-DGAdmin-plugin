@@ -74,12 +74,14 @@ namespace LambAdmin
             { "settings_enable_chat_alias", "true" },
             { "settings_enable_spree_messages", "true"},
             { "settings_dynamic_properties", "true" },
+            { "settings_dynamic_properties_delay", "400" },
             { "settings_antiweaponhack", "true" },
             { "settings_servertitle", "true" },
             { "commands_vote_time", "20"},
             { "commands_vote_threshold", "2"},
             { "settings_timed_messages", "true" },
-            { "settings_timed_messages_interval", "45" }
+            { "settings_timed_messages_interval", "45" },
+            { "settings_unlimited_ammo", "false" }
         };
 
         public static Dictionary<string, string> DefaultCmdLang = new Dictionary<string, string>()
@@ -472,6 +474,10 @@ namespace LambAdmin
             {"command_votekick_error5", "^1Error: ^3You already voted"},
             {"command_votekick_error6", "^1Error: ^3You are not allowed to vote"},
 
+            {"command_votecancel_usage", "^1Usage: !votecancel"},
+            {"command_votecancel_error", "^1Error: ^3There is no voting" },
+            {"command_votecancel_message", "^3Voting cancelled by ^2<issuer>" },
+
             {"command_moab_usage", "^1Usage: !moab <<player | all>"},
             {"command_moab_message", "^7A ^1MOAB ^3given to ^2<player>"},
             {"command_moab_message_all", "^7A ^1MOAB ^3given to ^1Everyone by ^2<issuer>"},
@@ -487,6 +493,10 @@ namespace LambAdmin
             {"command_fx_usage", "^1Usage: !fx <on/off>"},
             {"command_fx_message_on", "^3Fx ^2applied."},
             {"command_fx_message_off", "^3Fx ^1disabled."},
+
+            {"command_unlimitedammo_usage", "^1Usage: !unlimitedammo <on/off>"},
+            {"command_unlimitedammo_message_on", "^3Unlimited ammo ^2enabled ^7by <issuerf>"},
+            {"command_unlimitedammo_message_off", "^3Unlimited ammo ^1disabled ^7by <issuerf>"},
 
             {"command_@admins_usage", "^1Usage: !@admins" },
 
@@ -580,6 +590,7 @@ namespace LambAdmin
                                     case "settings_showversion":
                                     case "settings_adminshudelem":
                                     case "settings_enable_dlcmaps":
+                                    case "settings_dynamic_properties_delay":
                                         WriteLog.Debug("dynamic_properties:: unable to override \"" + prop +"\"");
                                         break;
                                     case "settings_dynamic_properties":
@@ -713,7 +724,7 @@ namespace LambAdmin
 
         public void CFG_Dynprop_Apply()
         {
-            WriteLog.Debug("Sleep(400)");
+            WriteLog.Debug(String.Format("Sleep({0})", ConfigValues.settings_dynamic_properties_delay.ToString()));
             ConfigValues.sv_current_dsr = UTILS_GetDSRName();
             WriteLog.Debug("dsr: " + ConfigValues.sv_current_dsr);
             CFG_Dynprop_Init();
@@ -764,6 +775,13 @@ namespace LambAdmin
                 DisableKnife();
             else
                 EnableKnife();
+
+            if (ConfigValues.settings_unlimited_ammo)
+            {
+                WriteLog.Debug("Initializing Unlimited Ammo...");
+                Call("setdvarifuninitialized", "unlimited_ammo", "1");
+                UTILS_UnlimitedAmmo();
+            }
 
             timed_messages_init();
 

@@ -84,22 +84,70 @@ namespace LambAdmin
                     WriteLog.Warning("Groups file not found, creating new one...");
                     File.WriteAllLines(ConfigValues.ConfigPath + @"Groups\groups.txt", new string[]
                     {
-                        "default::pm,admins,guid,version,rules,afk,credits,hidebombicon,help,rage,maps,dsrnames,time,amsg,ft,hwid,apply,night,ga,report,suicide,yes,no,register,xlrstats,xlrtop,votekick,drunk,fx",
-                        "moderator::login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,changeteam,lastreports,@admins,@rules,@apply,@time,@xlrstats,@xlrtop:^0[^5Moderator^0]^7",
-                        "family::kickhacker,kill,mute,unmute,end,tmpbantime,cdvar,getplayerinfo,say,sayto,resetwarns,setgroup,scream,whois,changeteam,yell,gametype,mode,login,map,status,kick,tmpban,ban,warn,unwarn,getwarns,res,setafk,setteam,balance,clanvsall,clanvsallspectate,sunlight,alias,lastreports,fire,@admins,@rules,@apply,@time,@xlrstats,@xlrtop:^0[^3F^0]^7",
-                        "elder:password:-*unsafe*,*all*:^0[^4Elder^0]^7",
-                        "developer:password:*all*:^0[^6neko neko ^1=^_^=^0]^5",
-                        "owner:password:*all*:^0[^1O^2w^3n^4e^5r^0]^3",
-                        "admin::scream,whois,changeteam,yell,gametype,mode,login,map,status,unban,unban-id,kick,tmpban,ban,warn,unwarn,getwarns,res,setafk,setteam,balance,clanvsall,clanvsallspectate,login,lastreports,@admins,@rules,@apply,@time,@xlrstats,@xlrtop:^0[^1Admin^0]^7",
-                        "leader:password:*all*:^0[^1L^2e^3a^4d^5e^7r^0]^2",
-                        "trial::login,warn,unwarn,kick:^0[^5Trial^0]^7",
-                        "member::login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,lastreports,@admins,@rules,@apply,@time,@xlrstats,@xlrtop:^0[^5Member^0]^7",
-                        "friend::login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,map,mode,tmpban,lastreports,@admins,@rules,@apply,@time,@xlrstats,@xlrtop:^0[^6Friend^0]^7",
-                        "vip::ban,kick,tmpban,warn,unwarn,map,balance,mode,whois,status,login,setafk,changeteam,scream,fakesay,myalias,fire,@admins,@rules,@apply,@time,@xlrstats,@xlrtop:^0[^3V.I.P.^0]^7",
-                        "founder:password:*all*:^0[^1F^2o^3u^4n^5d^6e^8r^0]^6",
-                        "donator::kick,warn,tmpban,unwarn,mute,unmute,login,balance,setafk,changeteam,myalias,lastreports,fire,@admins,@rules,@apply,@time,@xlrstats,@xlrtop:^0[^2Donator^0]^7",
-                        "coleader:password:-*abusive*,-*unsafe*,*all*:^0[^3CoLeader^0]^7",
-                        "banned::drunk,help:^0[^1BANNED^0]^5"
+                        "default::"
+                                + "pm,admins,guid,version,rules,afk,credits,hidebombicon,help,rage,maps,time,"
+                                + "amsg,ft,hwid,apply,night,ga,report,suicide,yes,no,register,xlrstats,xlrtop,votekick,drunk,fx",
+                        "moderator::"
+                                + "login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,changeteam,lastreports,dsrnames,votecancel,"
+                                + "@admins,@rules,@apply,@time,@xlrstats,@xlrtop"
+                                    + ":^0[^5Moderator^0]^7",
+                        "family::"
+                                + "kickhacker,kill,mute,unmute,end,tmpbantime,cdvar,getplayerinfo,say,sayto,resetwarns,setgroup,"
+                                + "scream,whois,changeteam,yell,gametype,mode,login,map,status,kick,tmpban,ban,warn,unwarn,getwarns,"
+                                + "res,setafk,setteam,balance,clanvsall,clanvsallspectate,sunlight,alias,lastreports,fire,"
+                                + "dsrnames,votecancel,@admins,@rules,@apply,@time,@xlrstats,@xlrtop"
+                                    + ":^0[^3F^0]^7",
+                        "elder:"
+                            + "password:"
+                                + "-*unsafe*,*all*"
+                                    + ":^0[^4Elder^0]^7",
+                        "developer:"
+                            + "password:"
+                                + "*all*"
+                                    + ":^0[^6neko neko ^1=^_^=^0]^5",
+                        "owner:"
+                            + "password:"
+                                + "*all*"
+                                    + ":^0[^1O^2w^3n^4e^5r^0]^3",
+                        "admin::"
+                                + "scream,whois,changeteam,yell,gametype,mode,login,map,status,unban,unban-id,kick,tmpban,ban,warn,"
+                                + "unwarn,getwarns,res,setafk,setteam,balance,clanvsall,clanvsallspectate,login,lastreports,"
+                                + "dsrnames,votecancel,@admins,@rules,@apply,@time,@xlrstats,@xlrtop"
+                                    + ":^0[^1Admin^0]^7",
+                        "leader:"
+                            + "password:"
+                                + "*all*"
+                                    + ":^0[^1L^2e^3a^4d^5e^7r^0]^2",
+                        "trial::"
+                                + "login,warn,unwarn,kick"
+                                    + ":^0[^5Trial^0]^7",
+                        "member::"
+                                + "login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,lastreports,dsrnames,votecancel,"
+                                + "@admins,@rules,@apply,@time,@xlrstats,@xlrtop"
+                                    + ":^0[^5Member^0]^7",
+                        "friend::"
+                                + "login,warn,unwarn,kick,mode,map,setafk,kick,tmpban,map,mode,tmpban,lastreports,"
+                                + "dsrnames,votecancel,@admins,@rules,@apply,@time,@xlrstats,@xlrtop"
+                                    + ":^0[^6Friend^0]^7",
+                        "vip::"
+                                + "ban,kick,tmpban,warn,unwarn,map,balance,mode,whois,status,login,setafk,changeteam,scream,fakesay,"
+                                + "myalias,fire,dsrnames,votecancel,@admins,@rules,@apply,@time,@xlrstats,@xlrtop"
+                                    + ":^0[^3V.I.P.^0]^7",
+                        "founder:"
+                            + "password:"
+                                + "*all*"
+                                    + ":^0[^1F^2o^3u^4n^5d^6e^8r^0]^6",
+                        "donator::"
+                                + "kick,warn,tmpban,unwarn,mute,unmute,login,balance,setafk,changeteam,myalias,lastreports,fire,"
+                                + "votecancel,@admins,@rules,@apply,@time,@xlrstats,@xlrtop"
+                                    + ":^0[^2Donator^0]^7",
+                        "coleader:"
+                            + "password:"
+                                + "-*abusive*,-*unsafe*,*all*"
+                                    + ":^0[^3CoLeader^0]^7",
+                        "banned::"
+                                + "drunk,help"
+                                    + ":^0[^1BANNED^0]^5"
                     });
                 }
 

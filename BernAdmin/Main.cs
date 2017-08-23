@@ -88,6 +88,13 @@ namespace LambAdmin
                 else
                     EnableKnife();
 
+                if (ConfigValues.settings_unlimited_ammo)
+                {
+                    WriteLog.Debug("Initializing Unlimited Ammo...");
+                    Call("setdvarifuninitialized", "unlimited_ammo", "1");
+                    UTILS_UnlimitedAmmo();
+                }
+                
                 timed_messages_init();
             }
             #endregion
