@@ -1881,7 +1881,7 @@ namespace LambAdmin
                     }
                 }));
 
-                    // TIME
+            // TIME
             CommandList.Add(new Command("time", 0, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
@@ -2176,19 +2176,27 @@ namespace LambAdmin
                         WriteChatToPlayer(sender, Command.GetMessage("blockedByNightMode"));
                         return;
                     }
-                    switch (arguments[0])
+                    bool enable = UTILS_ParseBool(arguments[0]);
+                    List<Dvar> dvars = UTILS_SetClientNightVision();
+                    switch (enable)
                     {
-                        case "on": {
-                                UTILS_SetClientDvarsPacked(sender, UTILS_SetClientNightVision());
+                        case true: {
+                                UTILS_SetClientDvarsPacked(sender, dvars);
+                                if (PersonalPlayerDvars.ContainsKey(sender.GUID))
+                                    PersonalPlayerDvars[sender.GUID] = UTILS_DvarListUnion(PersonalPlayerDvars[sender.GUID], dvars);
+                                else
+                                    PersonalPlayerDvars.Add(sender.GUID, dvars);
                                 WriteChatToPlayer(sender, "^4NigthMod ^2Activated");
                                 break;
                         }
-                        case "off": { 
+                        case false: {
+                                if (PersonalPlayerDvars.ContainsKey(sender.GUID))
+                                    PersonalPlayerDvars[sender.GUID] = UTILS_DvarListRelativeComplement(PersonalPlayerDvars[sender.GUID], dvars.ConvertAll((s) => { return s.key; }));
                                 UTILS_SetCliDefDvars(sender);
                                 WriteChatToPlayer(sender, "^4NightMod ^1Deactivated");
                                 break;
                         }
-                    }
+                    };
                 }));
 
             // SUNLIGHT COLOR
@@ -3190,6 +3198,7 @@ namespace LambAdmin
                         }));
             }));
 
+            // unlimitedammo <on/off>
             CommandList.Add(new Command("unlimitedammo", 1, Command.Behaviour.Normal,
             (sender, arguments, optarg) =>
             {
@@ -3309,16 +3318,6 @@ namespace LambAdmin
             {
                 switch (arguments[0])
                 {
-                    case "name":
-                        {
-                            OnInterval(1, () => {
-                                sender.Name = "test";
-                                return true;
-                            });
-                            
-                            WriteChatSpyToPlayer(sender, "debug.name::callback");
-                            break;
-                        }
                     case "restrictedweapons":
                         {
                             WriteChatSpyToPlayer(sender, "debug.restrictedweapons::console out");
@@ -3359,6 +3358,11 @@ namespace LambAdmin
                                 WriteChatToAll("(exists)");
                             else
                                 WriteChatToAll("(not exists)");
+                            break;
+                        }
+                    case "cmdcnt":
+                        {
+                            WriteChatSpyToPlayer(sender, "debug.cmdcnt:: Total commands count: " + CommandList.Count.ToString());
                             break;
                         }
                 }

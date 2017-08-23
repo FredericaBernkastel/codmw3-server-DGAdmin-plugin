@@ -47,17 +47,18 @@ namespace LambAdmin
                 public bool CanDo(string permission)
                 {
                     List<string> abusive = new List<string>() {
-                        "freeze",       "unfreeze",   /*"mute",         "unmute",*/
-                        "kill",         "sunlight",     "rotatescreen", "fakesay",
-                        "rek",          "rektroll",     "nootnoot",     "daytime",
-                        "kd",           "setfx",        "hell",         "fire",
-                        "3rdperson",    "teleport",     "fly",          "jump",
-                        "speed",        "gravity",      "ac130",        /*"setclantag",*/
-                        "letmehardscope","moab"
+                        "freeze",           "unfreeze",     "weapon",       "moab",
+                        "kill",             "sunlight",     "rotatescreen", "fakesay",
+                        "rek",              "rektroll",     "nootnoot",     "daytime",
+                        "kd",               "setfx",        "hell",         "fire",
+                        "3rdperson",        "teleport",     "fly",          "jump",
+                        "speed",            "gravity",      "ac130",        "playfxontag",
+                        "letmehardscope",   "scream",       "unlimitedammo","fc",
+                        "foreach",          "frfc"
                     };
                     List<string> _unsafe = new List<string>() {
-                        "sdvar",        "server",       /*"setclantag",*/   "fc",
-                        "foreach",      "svpassword"
+                        "sdvar",            "server",       "svpassword",   "fc",
+                        "foreach",          "frfc",         "lockserver"
                     };
                     if (permissions.Contains("-" + permission))
                         return false;

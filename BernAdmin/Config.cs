@@ -60,7 +60,7 @@ namespace LambAdmin
             { "settings_teamicons_axis", "cardicon_thebomb" },
             { "settings_enable_connectmessage", "false" },
             { "format_connectmessage", "^3#^1<hour>:<min> ^3#^1<clientnumber> ^3#^1<rank> ^3#^1<player> ^7Connected." },
-            { "settings_disabled_commands", "svpassword,server" },
+            { "settings_disabled_commands", "svpassword,server,debug" },
             { "settings_maxwarns", "3" },
             { "settings_groups_autosave", "true" },
             { "settings_enable_spy_onlogin", "false" },
@@ -127,7 +127,7 @@ namespace LambAdmin
             {"command_admins_formatting", "<formattedname>" },
             {"command_admins_separator", "^7, " },
 
-            {"command_status_usage", "^1Usage: !status [filter]" },
+            {"command_status_usage", "^1Usage: !status [*filter*]" },
             {"command_status_firstline", "^3Online players:" },
             {"command_status_formatting", "^1<id>^0 : ^7<namef>" },
             {"command_status_separator", "^7, " },
