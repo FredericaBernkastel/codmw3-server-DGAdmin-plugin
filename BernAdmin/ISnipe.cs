@@ -76,7 +76,6 @@ namespace LambAdmin
         {
             WriteLog.Info("Initializing isnipe settings...");
             SNIPE_InitCommands();
-            SetupKnife();
             PlayerActuallySpawned += SNIPE_OnPlayerSpawn;
             OnPlayerDamageEvent += SNIPE_PeriodicChecks;
             PlayerConnected += SNIPE_OnPlayerConnect;

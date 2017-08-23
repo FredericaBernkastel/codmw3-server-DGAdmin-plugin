@@ -1110,6 +1110,8 @@ namespace LambAdmin
         {
             if (!ConfigValues.settings_betterbalance_enable || Call<string>("getdvar", "g_gametype") == "infect")
                 return;
+            if (Call<string>("getdvar", "betterbalance") == "0")
+                return;
             int axis = 0, allies = 0;
             UTILS_GetTeamPlayers(out axis, out allies);
             switch (player.GetTeam())

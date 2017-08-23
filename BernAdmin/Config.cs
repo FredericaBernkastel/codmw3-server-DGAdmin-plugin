@@ -760,6 +760,11 @@ namespace LambAdmin
                 InitChatAlias();
             }
 
+            if (ConfigValues.ISNIPE_SETTINGS.ANTIKNIFE)
+                DisableKnife();
+            else
+                EnableKnife();
+
             timed_messages_init();
 
             if (ConfigValues.settings_servertitle)

@@ -43,6 +43,8 @@ namespace LambAdmin
             UTILS_OnServerStart();
             CMDS_OnServerStart();
 
+            SetupKnife();
+
             WriteLog.Debug("Initializing PersonalPlayerDvars...");
             PersonalPlayerDvars = UTILS_PersonalPlayerDvars_load();
 
@@ -80,6 +82,11 @@ namespace LambAdmin
                     WriteLog.Debug("Initializing Chat aliases...");
                     InitChatAlias();
                 }
+
+                if (ConfigValues.ISNIPE_SETTINGS.ANTIKNIFE)
+                    DisableKnife();
+                else
+                    EnableKnife();
 
                 timed_messages_init();
             }
