@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>nuke</name>
+    </assembly>
+    <members>
+        <member name="T:nuke">
+            <summary>
+            Contains the function holder to allow players to use M.O.A.B.s
+            </summary>
+        </member>
+        <member name="F:nuke.NukeFuncs">
+            <summary>
+            Holds the functions to allow scripts to call the nuke functions.
+            
+            
+            
+            NOTE: You must have the nuke.dll script loaded in the server to use this reference!!
+            </summary>
+            <remarks>You must have the nuke.dll script loaded to use this reference!!</remarks>
+        </member>
+        <member name="M:nuke.giveNuke(InfinityScript.Entity,System.Boolean)">
+            <summary>
+            Gives a M.O.A.B. to the player as a killstreak.
+            </summary>
+            <param name="player">The player to give the M.O.A.B. to</param>
+            <param name="persistant">If true, the M.O.A.B. will stay in the player's killstreaks until they use it. If false, it will go away when the player dies.</param>
+        </member>
+        <member name="M:nuke.tryUseNuke(InfinityScript.Entity,System.Boolean)">
+            <summary>
+            Trys to use a M.O.A.B. with the given player as the user. This will count as using an actual M.O.A.B. to the player.
+            </summary>
+            <param name="player">The player to be the M.O.A.B. user</param>
+            <param name="allowCancel">Whether the M.O.A.B. can be cancelled when the player dies. scr_nukeCancelMode must be higher than 0!</param>
+            <returns>Returns true if the M.O.A.B. was successfully called in, false otherwise.</returns>
+        </member>
+        <member name="M:nuke.tryUseNukeImmediate(InfinityScript.Entity)">
+            <summary>
+            Trys to use a M.O.A.B. immediately with the given player as the user. This will immediately detonate the M.O.A.B., skipping the timers. This will count as using an actual M.O.A.B. to the player.
+            </summary>
+            <param name="player">The player to be the M.O.A.B. user</param>
+            <returns>Returns true if the M.O.A.B. was successfully Function.Called in, false otherwise.</returns>
+        </member>
+    </members>
+</doc>

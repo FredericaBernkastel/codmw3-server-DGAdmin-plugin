@@ -287,9 +287,9 @@ namespace LambAdmin
             {"command_end_usage", "^1Usage: !end" },
             {"command_end_message", "^2Game ended by ^3<issuer>" },
 
-            {"command_foreach_usage", "^1Usage: !foreach <*filter*> <command>" },
+            {"command_foreach_usage", "^1Usage: !foreach *filter* <command>" },
 
-            {"command_frfc_usage", "^1Usage: !frfc <*filter*> <command>" },
+            {"command_frfc_usage", "^1Usage: !frfc *filter* <command>" },
 
             {"command_spy_usage", "^1Usage: !spy <on|off>" },
             {"command_spy_message_on", "^0Spy mode ^2enabled"},
@@ -511,8 +511,10 @@ namespace LambAdmin
 
             {"command_@xlrtop_usage", "^1Usage: !@xlrtop [amount = 4]^3; 1 <= amount <= 8"},
 
-            {"command_fc_usage", "^1Usage: !fc <player> <command>" }
+            {"command_fc_usage", "^1Usage: !fc <player> <command>" },
 
+            {"command_lockserver_usage", "^1Usage: !lockserver [reason]" },
+            {"command_lockserver_message1", "^2Server unlocked." },
         };
 
         public static void CFG_ReadConfig()

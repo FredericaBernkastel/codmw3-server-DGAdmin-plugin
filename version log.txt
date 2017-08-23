@@ -1,5 +1,71 @@
+v3.5
+ * FEATURE: Custom map & mode title in the server list
+ * FEATURE: DSR settings interface
+ * FEATURE: antiweaponhack driven by DSR
+ * FEATURE: Unlimited ammo
+ * FEATURE: Timed Messages
+ * FEATURE: players Set filters
+ * FEATURE: HUD: alive players counter (option: settings_enable_alive_counter)
+ 
+ Commands:
+ * !weapon <player | *filter*> <raw weapon string> [-t]
+ * !fx <on/off>
+ * !cdvar <<-ifds> <dvar> <value> | <-r> [dvar] [value]>
+ * !votecancel
+ * !frfc *filter* <command>
+ * !dsrnames
+ * !unlimitedammo <on/off>
+ * !drunk
+ * !moab <player | *filter*>
+ * !clantag <player> [tag]
+ * !lockserver [reason]
+ 
+ Other changes / bugfixes
+ * functionality to disable custom team names/icons
+ * fixed !ft 7 Glowing bodies texture hack
+ * fixed client crash "Server command overflow" at UTILS_SetClientDvars
+ * fixed crash at OnExitLevel::xlr_database.Save
+ * fixed crash at !votekick
+ * Restricted nested !foreach (unuseful, possible to crash server)
+ * hardcoded «banned» or «sucker» group. This group is useful to restrict any command to player.
+ * !3rdperson fix for tekno 2.8.0.2
+ * !clankick <sender> placeholder - fixed <issuerf>
+ * amended list of DLC maps (for !map, !gametype)
+ * !sunlight is saved permanently
+ * !night is saved permanently
+ * updated *abusive* and *unsafe* group placeholders
+ 
+ New settings
+ * settings_disabled_commands
+ * settings_timed_messages
+ * settings_timed_messages_interval
+ * settings_dynamic_properties
+ * settings_dynamic_properties_delay
+ * settings_antiweaponhack
+ * settings_servertitle
+ * settings_unlimited_ammo
+ 
+ * !pban is deprecated
+ * isnipe_antiweaponhack is deprecated
+ * isnipe_antinoscope is deprecated
+ * settings_enable_misccommands is deprecated
+ * settings_enable_autofpsunlock is deprecated
+ 
+ Syntax changes
+ * !cdvar <int/foat/string/direct> <key> <value> --> !cdvar <<-ifds> <dvar> <value> | <-r> [dvar] [value]>
+ * !kill <player> --> !kill <player | *filter*>
+ * !foreach <includeself> <command> --> !foreach *filter* <command>
+ * !yell <player|all> <message> --> !yell <player | *filter*> <message>
+ * !freeze <player> --> !freeze <player | *filter*>
+ * !unfreeze <player> --> !unfreeze <player | *filter*>
+ * !mute <player> --> !mute <player | *filter*>
+ * !unmute <player> --> !unmute <player | *filter*>
+ * !teleport <player1> <player2> --> !teleport <player1 | *filter*> <player2>
+ * !ac130 <all | <player>> [-p] --> !ac130 <player | *filter*> [-p]
+ * !rotatescreen <player> <degree> --> !rotatescreen <player | *filter*> <degree>
+ 
 v3.4.19
- * COMMAND (unsafe): !lockserver [reason]
+ * COMMAND: !lockserver [reason]
  * FIXED: !sunlight saved permanently
  * CLOSED issue #13
 v3.4.18

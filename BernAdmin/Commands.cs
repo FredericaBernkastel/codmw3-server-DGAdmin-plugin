@@ -3219,6 +3219,113 @@ namespace LambAdmin
 
             }));
 
+            // MOAB <<player> | *filter*>
+            CommandList.Add(new Command("moab", 1, Command.Behaviour.Normal,
+            (sender, arguments, optarg) =>
+            {
+                if (arguments[0] == "all")
+                {
+                    foreach (Entity player in Players)
+                        nuke.NukeFuncs.giveNuke(player);
+
+                    WriteChatToAll(Command.GetString("moab", "message_all").Format(new Dictionary<string, string>()
+                    {
+                        {"<issuer>", sender.Name}
+                    }));
+                }
+                else
+                {
+                    Entity target = FindSinglePlayer(arguments[0]);
+                    if (target == null)
+                    {
+                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                        return;
+                    }
+
+                    nuke.NukeFuncs.giveNuke(target);
+
+                    WriteChatToPlayer(sender, Command.GetString("moab", "message").Format(new Dictionary<string, string>()
+                    {
+                        {"<player>", target.Name}
+                    }));
+                }
+            }));
+
+            // FORCECOMMAND // fc
+            CommandList.Add(new Command("fc", 1, Command.Behaviour.HasOptionalArguments | Command.Behaviour.OptionalIsRequired,
+                (sender, arguments, optarg) =>
+                {
+                    Entity target = FindSinglePlayer(arguments[0]);
+                    if (target == null)
+                    {
+                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
+                        return;
+                    }
+                    WriteChatSpyToPlayer(target, sender.Name + ": ^6!fc " + arguments[0] + " " + optarg); //abuse proof ;)
+                    ProcessForceCommand(sender, target, target.Name, "!" + optarg);
+                }));
+
+            // FOREACH
+            CommandList.Add(new Command("foreach", 1, Command.Behaviour.HasOptionalArguments | Command.Behaviour.OptionalIsRequired,
+                (sender, arguments, optarg) =>
+                {
+                    optarg = "!" + optarg;
+
+                    //we'll use global flag to gather all possible hacks with !foreach and !fc
+                    if (ConfigValues.cmd_foreachContext)
+                    {
+                        WriteChatToPlayer(sender, "I like the way you're thinking, but nope.");
+                        return;
+                    }
+                    ConfigValues.cmd_foreachContext = true;
+
+                    List<Entity> players = FindPlayersFilter(arguments[0], sender);
+
+                    foreach (Entity player in players)
+                        ProcessCommand(sender, sender.Name, optarg
+                            .Replace("<player>", "#" + player.GetEntityNumber().ToString())
+                            .Replace("<p>", "#" + player.GetEntityNumber().ToString()));
+
+                    ConfigValues.cmd_foreachContext = false;
+
+                    if (players.Count > 0)
+                        WriteChatToPlayer(sender, Command.GetMessage("Filters_message").Format(new Dictionary<string, string>()
+                        {
+                            {"<count>", players.Count.ToString() }
+                        }));
+                }));
+
+            // frfc <*filter*> <command>  
+            CommandList.Add(new Command("frfc", 1, Command.Behaviour.HasOptionalArguments | Command.Behaviour.OptionalIsRequired,
+                (sender, arguments, optarg) =>
+                {
+
+                    //we'll use global flag to gather all possible hacks with !foreach and !fc
+                    if (ConfigValues.cmd_foreachContext)
+                    {
+                        WriteChatToPlayer(sender, "I like the way you're thinking, but nope.");
+                        return;
+                    }
+                    ConfigValues.cmd_foreachContext = true;
+
+                    List<Entity> players = FindPlayersFilter(arguments[0], sender);
+
+                    foreach (Entity player in players)
+                    {
+                        WriteChatSpyToPlayer(player, sender.Name + ": ^6!frfc " + arguments[0] + " " + optarg); //abuse proof ;)
+                        ProcessForceCommand(sender, player, player.Name, "!" + optarg);
+                    }
+
+                    ConfigValues.cmd_foreachContext = false;
+
+                    if (players.Count > 0)
+                        WriteChatToPlayer(sender, Command.GetMessage("Filters_message").Format(new Dictionary<string, string>()
+                        {
+                            {"<count>", players.Count.ToString() }
+                        }));
+
+                }));
+
 #if DEBUG
 
 
@@ -3280,39 +3387,6 @@ namespace LambAdmin
                     }
                 }));
 
-
-            // MOAB <<player> | all>
-            CommandList.Add(new Command("moab", 1, Command.Behaviour.Normal,
-            (sender, arguments, optarg) =>
-            {
-                if (arguments[0] == "all")
-                {
-                    foreach (Entity player in Players)
-                        nuke.NukeFuncs.giveNuke(player);
-
-                    WriteChatToAll(Command.GetString("moab", "message_all").Format(new Dictionary<string, string>()
-                    {
-                        {"<issuer>", sender.Name}
-                    }));
-                }
-                else
-                {
-                    Entity target = FindSinglePlayer(arguments[0]);
-                    if (target == null)
-                    {
-                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                        return;
-                    }
-
-                    nuke.NukeFuncs.giveNuke(target);
-
-                    WriteChatToPlayer(sender, Command.GetString("moab", "message").Format(new Dictionary<string, string>()
-                    {
-                        {"<player>", target.Name}
-                    }));
-                }
-            }));
-
             CommandList.Add(new Command("debug", 1, Command.Behaviour.HasOptionalArguments,
             (sender, arguments, optarg) =>
             {
@@ -3372,17 +3446,17 @@ namespace LambAdmin
 
 
 
-                /* -------------- Broadcast commands -------------- */
+             /* -------------- Broadcast commands -------------- */
 
 
 
-                // ADMINS
-                CommandList.Add(new Command("@admins", 0, Command.Behaviour.Normal,
-                (sender, arguments, optarg) =>
-                {
-                    WriteChatToAll(Command.GetString("admins", "firstline"));
-                    WriteChatToAllCondensed(database.GetAdminsString(Players), 1000, 40, Command.GetString("admins", "separator"));
-                }));
+            // ADMINS
+            CommandList.Add(new Command("@admins", 0, Command.Behaviour.Normal,
+            (sender, arguments, optarg) =>
+            {
+                WriteChatToAll(Command.GetString("admins", "firstline"));
+                WriteChatToAllCondensed(database.GetAdminsString(Players), 1000, 40, Command.GetString("admins", "separator"));
+            }));
 
             if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\rules.txt"))
             {
@@ -3411,80 +3485,10 @@ namespace LambAdmin
                     WriteChatToAll(string.Format(Command.GetString("time", "message"), DateTime.Now));
                 }));
 
-            // FORCECOMMAND // fc
-            CommandList.Add(new Command("fc", 1, Command.Behaviour.HasOptionalArguments | Command.Behaviour.OptionalIsRequired,
-                (sender, arguments, optarg) =>
-                {
-                    Entity target = FindSinglePlayer(arguments[0]);
-                    if (target == null)
-                    {
-                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                        return;
-                    }
-                    WriteChatSpyToPlayer(target, sender.Name + ": ^6!fc " + arguments[0] +" "+ optarg); //abuse proof ;)
-                    ProcessForceCommand(sender, target, target.Name, "!" + optarg);
-                }));
 
-            // FOREACH
-            CommandList.Add(new Command("foreach", 1, Command.Behaviour.HasOptionalArguments | Command.Behaviour.OptionalIsRequired,
-                (sender, arguments, optarg) =>
-                {
-                    optarg = "!" + optarg;
 
-                    //we'll use global flag to gather all possible hacks with !foreach and !fc
-                    if (ConfigValues.cmd_foreachContext)
-                    {
-                        WriteChatToPlayer(sender, "I like the way you're thinking, but nope.");
-                        return;
-                    }
-                    ConfigValues.cmd_foreachContext = true;
 
-                    List<Entity> players = FindPlayersFilter(arguments[0], sender);
-
-                    foreach (Entity player in players)
-                        ProcessCommand(sender, sender.Name, optarg
-                            .Replace("<player>", "#" + player.GetEntityNumber().ToString())
-                            .Replace("<p>", "#" + player.GetEntityNumber().ToString()));
-
-                    ConfigValues.cmd_foreachContext = false;
-
-                    if (players.Count > 0)
-                        WriteChatToPlayer(sender, Command.GetMessage("Filters_message").Format(new Dictionary<string, string>()
-                        {
-                            {"<count>", players.Count.ToString() }
-                        }));
-                }));
-
-            // frfc <*filter*> <command>  
-            CommandList.Add(new Command("frfc", 1, Command.Behaviour.HasOptionalArguments | Command.Behaviour.OptionalIsRequired,
-                (sender, arguments, optarg) =>
-                {
-
-                    //we'll use global flag to gather all possible hacks with !foreach and !fc
-                    if (ConfigValues.cmd_foreachContext)
-                    {
-                        WriteChatToPlayer(sender, "I like the way you're thinking, but nope.");
-                        return;
-                    }
-                    ConfigValues.cmd_foreachContext = true;
-
-                    List<Entity> players = FindPlayersFilter(arguments[0], sender);
-
-                    foreach (Entity player in players)
-                    {
-                        WriteChatSpyToPlayer(player, sender.Name + ": ^6!frfc " + arguments[0] + " " + optarg); //abuse proof ;)
-                        ProcessForceCommand(sender, player, player.Name, "!" + optarg);
-                    }
-
-                    ConfigValues.cmd_foreachContext = false;
-
-                    if(players.Count > 0)
-                        WriteChatToPlayer(sender, Command.GetMessage("Filters_message").Format(new Dictionary<string, string>()
-                        {
-                            {"<count>", players.Count.ToString() }
-                        }));
-
-                }));
+            /* -------------- Unsafe commands -------------- */
 
             // SVPASSWORD
             CommandList.Add(new Command("svpassword", 0, Command.Behaviour.HasOptionalArguments | Command.Behaviour.MustBeConfirmed,
@@ -3558,7 +3562,7 @@ namespace LambAdmin
                         System.IO.File.Delete(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER");
                     if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt"))
                         System.IO.File.Delete(ConfigValues.ConfigPath + @"Utils\internal\lockserver_whitelist.txt");
-                    WriteChatToAll(@"^2Server unlocked.");
+                    WriteChatToAll(Command.GetString("lockserver", "message1"));
 
                     if (ConfigValues.settings_servertitle)
                         UTILS_ServerTitle_MapFormat();
