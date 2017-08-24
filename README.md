@@ -1,5 +1,13 @@
 ## "DGAdmin" - is a TeknoMW3 Dedicated server administrative plugin
+[![](https://img.shields.io/github/downloads/FredericaBernkastel/codmw3-server-DGAdmin-plugin/total.svg?maxAge=2592000)]()
+[![](https://img.shields.io/github/commits-since/FredericaBernkastel/codmw3-server-DGAdmin-plugin/v3.5.svg?maxAge=2592000)]()
+[![](https://img.shields.io/github/issues/FredericaBernkastel/codmw3-server-DGAdmin-plugin.svg?maxAge=2592000)]()
 
+
+[![](https://img.shields.io/github/forks/FredericaBernkastel/codmw3-server-DGAdmin-plugin.svg?style=social&label=Fork)]()
+[![](https://img.shields.io/github/stars/FredericaBernkastel/codmw3-server-DGAdmin-plugin.svg?style=social&label=Star)]()
+[![](https://img.shields.io/github/watchers/FredericaBernkastel/codmw3-server-DGAdmin-plugin.svg?style=social&label=Watch)]()
+[![GitHub followers](https://img.shields.io/github/followers/FredericaBernkastel.svg?style=social&label=Follow)]()
 
 ## License
 
@@ -28,6 +36,8 @@ Due modular structure, each feature can be easilly disabled to reduce CPU and RA
 
 
 ## Features:
+
+#### Custom Ban system, based on GUID + HWID
 
 #### ISNIPE - Support of iSnipe game type:
  -	anti-plant
@@ -72,3 +82,12 @@ From simple and fast to copmlex and powerful command syntaxes are supported.
 <br><br>
 
 Read the [official documentation](https://drive.google.com/file/d/0B4OfimTH0gRhaXJFYWRId0ZZaG8/view?usp=sharing) for advanced guidelines.
+<br><br>
+
+
+## Compiling from sources:
+Target platform is .NET Framework 4.0
+
+InfinityScript version: 1.1.0.33
+
+Used Visual Studio 2015
