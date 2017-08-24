@@ -1,0 +1,325 @@
+[RELEASE] DGAdmin v3.5 + SOURCE + Documentation
+
+[b][size=150]Thanks section[/size][/b]
+
+[list][*]Thanks to dear me for supporting myself these 2 years of DGAdmin development.
+[*]Thanks to Musta for bugreports and testing.
+[*]Thanks to Smurf, who patched Tekno specially for DGAdmin.
+[*]Last of all, thanks to Lambder for being a faggot. Keep it up![/list]
+
+
+
+[color=#FF3030][b][size=200]UPDATE INTRODUCTION[/size][/b][/color]
+
+This is a major update.
+Lots of new features were realized. Lots of bugs and crashes were fixed.
+Reached 10'000 lines of the source code!
+
+I'll continue the development, if DGAdmin will stay popular.
+Don't be lazy to read the official documentation for advanced guidelines.***
+If you're found any bugs, or if you got any suggestions, don't be lazy to post them on GitHub Repo. ***
+
+[b][size=200]New Features[/size][/b]
+
+[b][color=#FF8000][size=150]Dynamic Properties[/size][/color][/b]
+[size=85][color=#7F7F7F]setting: settings_dynamic_properties[/color][/size]
+
+It' s possible to override any DGAdmin setting through DSR.
+[b]Example usecase:[/b]
+You wish to use same server as iSnipe and Reg Guns.
+
+First, enable the feature:
+[color=#FF8000]settings_dynamic_properties=true[/color]
+and disable iSnipe mode
+[color=#FF8000]settings_isnipe=false[/color]
+Now, open your[color=#FF8000] players2/isnipe.dsr[/color], and add following line to beginning of the file:
+[color=#FF8000]//#DGAdmin settings settings_isnipe = true[/color]
+
+So, iSnipe mode will be enabled only for isnipe DSR, and disabled for any other.
+
+[b]Possible syntaxes:[/b]
+[code]//#DGAdmin settings <setting> = <value>
+Where <setting> Is any setting from settings.txt
+
+//#DGAdmin rules "<rules>" 
+Override Commands/rules.txt. Newlines separated by \n
+
+//#DGAdmin cdvar <dvar name> = <value>
+Add / Override dvars from Utils/cdvars.txt
+
+//#DGAdmin servertitle map = <map title>
+Map title in the server list. Supported <map> placeholder. Max length is 28 characters.
+
+//#DGAdmin servertitle mode = <mode title>
+Mode title in the server list. Max length is 15 characters.
+
+Examples:
+//#DGAdmin settings settings_unlimited_ammo = true
+//#DGAdmin settings settings_teamnames_allies=^1BAKA
+//#DGAdmin settings settings_teamnames_axis=^6NEKO
+//#DGAdmin settings settings_teamicons_allies=cardicon_moon
+//#DGAdmin settings settings_teamicons_axis=cardicon_kitten
+//#DGAdmin rules "Rule 1\nRule 2\n Rule 3"
+//#DGAdmin cdvar r_filmTweakInvert = 1
+//#DGAdmin cdvar r_filmUseTweaks = 1
+//#DGAdmin cdvar r_filmTweakEnable = 1
+//#DGAdmin servertitle map = ^1<map>
+//#DGAdmin servertitle mode = ^3iSnipe: ^1SND[/code]
+ 
+
+
+[b][color=#FF8000][size=150]Dynamic Properties --> Antiweaponhack[/size][/color][/b]
+[size=85][color=#7F7F7F]setting: settings_antiweaponhack[/color][/size]
+
+Antiweaponhack here acts like a class unlocker detector. It will read all the restricted weapons from the current DSR. 
+If usage of restricted weapon detected, hacker will be banned instantly.
+
+Please note, you have to configure your DSR properly. 
+I.e. for iSnipe mode, you have to restrict all the weapons except [b]l118a [/b]and [b]stinger[/b].
+[code]gameOpt commonOption.weaponRestricted.iw5_acr "1"
+gameOpt commonOption.weaponRestricted.iw5_ak47 "1"
+gameOpt commonOption.weaponRestricted.iw5_as50 "1"
+//...
+
+gameOpt commonOption.weaponRestricted.iw5_l96a1 "0"
+gameOpt commonOption.weaponRestricted.stinger "0"[/code]
+
+
+[b][color=#FF8000][size=150]Server Title[/size][/color][/b]
+[size=85][color=#7F7F7F]setting: settings_servertitle[/color][/size]
+
+Its possible to achieve custom map & mode names in the servers browser.
+Accessible through DSR settings:
+[color=#FF8000]//#DGAdmin servertitle map = <map title>[/color]
+Map title in the server list. Supported [color=#FF8000][b]<map>[/b][/color] placeholder. Max length is 28 characters.
+
+[color=#FF8000]//#DGAdmin servertitle mode = <mode title>[/color]
+Mode title in the server list. Max length is 15 characters.
+
+[img]https://raw.githubusercontent.com/FredericaBernkastel/codmw3-server-DGAdmin-plugin/master/doc/img/005.png[/img]
+
+
+
+[b][color=#FF8000][size=150]Timed Messages[/size][/color][/b]
+
+Messages are stored in [color=#FF8000]Utils/announcer.txt[/color], one message per line.
+Setting is [color=#FF8000]settings_timed_messages[/color]
+Interval can be changed using [color=#FF8000]settings_timed_messages_interval[/color]
+
+
+
+[b][color=#FF8000][size=150]Unlimited ammo[/size][/color][/b]
+
+Unlimited ammo feature can be enabled in several ways:
+[list][*]command: [color=#FF8000]!unlimitedammo <on/off>[/color]
+[*]setting:[color=#FF8000] settings_unlimited_ammo[/color]
+[*]DSR: [color=#FF8000]//#DGAdmin settings settings_unlimited_ammo = true[/color][/list]
+
+
+[b][color=#FF8000][size=150]LockServer[/size][/color][/b]
+Prevent any player from connecting the server. Useful for 1v1 and clanwars.
+Accesible through [color=#FF8000]!lockserver[/color] command
+
+
+
+
+
+[b][size=200]COMMANDS[/size][/b]
+
+Total count of commands: [color=#FF3030][b]119 ± 7[/b][/color].
+Enough for any cases, don't you think?
+
+[b][color=#FF8000][size=150]*filter* placeholder[/size][/color][/b]
+
+Instead of applying command for a single player, now you can apply it for a Set of players.
+
+[b]Available selectors:[/b]
+[list][*][color=#FF8000]*all*[/color] = all of the players
+[*][color=#FF8000]*allies*[/color] = allies of the command issuer
+[*][color=#FF8000]*enemies*[/color] =  enemies of the command issuer
+[*][color=#FF8000]*team1*[/color] = axis
+[*][color=#FF8000]*team2*[/color] = allies
+[*][color=#FF8000]*spectators*[/color]
+[*][color=#FF8000]*alive*[/color]
+[*][color=#FF8000]*me*[/color] = command issuer
+[*][color=#FF8000]*name:*[/color] - specify directly part of player's name or clantag [/list]
+
+Supported conjunction, disjunction and complement of selectors:
+
+[color=#FF8000]*selector1&selector2*[/color] = conjunction of selector1 and selector2
+[color=#FF8000]*selector1|selector2*[/color] = disjunction of selector1 and selector2
+[color=#FF8000]*-selector*[/color] =  complement of the selector in U
+
+Conjunction and disjunction have same priority, i.e string is parsed from left to right.
+
+[b]examples:[/b]
+[code]!kill *all&-me*
+kill everyone except me
+
+!kill *all&-name:bern*
+kill everyone except bern
+
+!kill *enemies*
+kill all your enemies
+
+!foreach *enemies* fc <p> cdvar -d r_skipPvs 1
+( ?° ?? ?°)
+
+!foreach *team1|team2* changeteam <player>
+swap teams
+
+!foreach *-name:bern|-name:lambder&-spectators* setafk <p>
+lambder will loose in 1v1[/code]
+
+
+[color=#FF8000][b]!weapon <player | *filter*> <raw weapon string> [-t][/b][/color]
+Give weapon to player / set of players.
+Optional flag  [b][color=#FF8000]-t[/color][/b] to take other weapons.
+
+[b]Example:[/b]
+[code]!weapon *all* iw5_l96a1_mp_thermal_heartbeat_silencer03_camo11 -t[/code]
+
+[color=#FF8000][b]!fx <on/off>[/b][/color]
+Remove all the fog and smoke.
+
+[color=#FF8000][b]!cdvar <<-ifds> <dvar> <value> | <-r> [dvar] [value]>[/b][/color]
+Set client dvar for issuer.
+[b]Flags:[/b]
+
+[list][*][color=#FF8000]-i, --int: [/color]interpret value as integer
+[*][color=#FF8000]-f, --float: [/color]interpret value as float
+[*][color=#FF8000]-d, --direct: [/color]interpret value type automatically. Its possible to set complex numbers,
+                vectors, strings etc. (separate vector parts by space)
+[*][color=#FF8000]-s, --save: [/color]Save dvar permanently. (wont be lost after player reconnect)
+                "direct" interpreter will be used.
+[*][color=#FF8000]-r, --reset: [/color]Reset saved dvars[/list]
+
+All the possible syntaxes:
+[code]!cdvar -i <dvar> <value>
+!cdvar -f <dvar> <value>
+!cdvar -d <dvar> <value>
+
+!cdvar -s <dvar> <value>  - Save dvar
+!cdvar -r  - Reset all the saved dvars
+!cdvar -r <dvar> - Reset a specific dvar
+!cdvar -r <dvar> <value> - Reset a specific dvar, and apply new value instantly
+
+example: 
+!cdvar --save cg_chatHeight 0[/code]
+
+[b][color=#FF8000]!votecancel[/color][/b]
+Abort the voting
+
+[color=#FF8000][b]!frfc *filter* <command>[/b][/color]
+A shortening of
+[code]!foreach *filter* fc <player> <command>[/code]
+
+[color=#FF8000][b]!dsrnames[/b][/color]
+Displays the available game modes
+
+[color=#FF8000][b]!unlimitedammo <on/off>[/b][/color]
+Toggle the unlimited ammo feature.
+
+[color=#FF8000][b]!drunk[/b][/color]
+Like "[color=#FF8000]!shellshock[/color]" from MW2.
+
+[b][color=#FF8000]!moab <player | *filter*>[/color][/b]
+Give a working M.O.A.B. to player.
+You have to load optional "[color=#FF8000]DGAdmin.nuke.dll[/color]" asset.
+If you dont need this command, disable it in settings, and remove the .dll
+
+[b][color=#FF8000]!clantag <player> [tag][/color][/b]
+Set custom clan tag for a player. Max length is 7 characters. Leave tag field to reset it.
+
+[b][color=#FF8000]!lockserver [reason][/color][/b]
+Prevent any player from connecting the server. Useful for 1v1 and clanwars.
+Players, connected at the moment of command execution, will be added to whitelist.
+
+
+
+[b][size=200]Other changes / bugfixes[/size][/b]
+[list][*]functionality to disable custom team names/icons
+[*]fixed !ft 7 Glowing bodies texture hack
+[*]fixed client crash "Server command overflow" at UTILS_SetClientDvars
+[*]fixed crash at OnExitLevel::xlr_database.Save
+[*]fixed crash at !votekick
+[*]Restricted nested !foreach (unuseful, possible to crash server)
+[*]hardcoded «banned» or «sucker» group. This group is useful to restrict any command to player.
+[*]!3rdperson fix for tekno 2.8.0.2
+[*]!clankick <sender> placeholder - fixed <issuerf>
+[*]amended list of DLC maps (for !map, !gametype)
+[*]!sunlight is saved permanently
+[*]!night is saved permanently
+[*]updated *abusive* and *unsafe* group placeholders[/list]
+[list][*]!pban is deprecated
+[*]isnipe_antiweaponhack is deprecated
+[*]isnipe_antinoscope is deprecated
+[*]settings_enable_misccommands is deprecated
+[*]settings_enable_autofpsunlock is deprecated[/list]
+[b]New settings[/b]
+[code] * settings_disabled_commands
+ * settings_timed_messages
+ * settings_timed_messages_interval
+ * settings_dynamic_properties
+ * settings_dynamic_properties_delay
+ * settings_enable_alive_counter
+ * settings_antiweaponhack
+ * settings_servertitle
+ * settings_unlimited_ammo[/code]
+[b] Syntax changes[/b]
+[code] * !cdvar <int/foat/string/direct> <key> <value> --> !cdvar <<-ifds> <dvar> <value> | <-r> [dvar] [value]>
+ * !kill <player> --> !kill <player | *filter*>
+ * !foreach <includeself> <command> --> !foreach *filter* <command>
+ * !yell <player|all> <message> --> !yell <player | *filter*> <message>
+ * !freeze <player> --> !freeze <player | *filter*>
+ * !unfreeze <player> --> !unfreeze <player | *filter*>
+ * !mute <player> --> !mute <player | *filter*>
+ * !unmute <player> --> !unmute <player | *filter*>
+ * !teleport <player1> <player2> --> !teleport <player1 | *filter*> <player2>
+ * !ac130 <all | <player>> [-p] --> !ac130 <player | *filter*> [-p]
+ * !rotatescreen <player> <degree> --> !rotatescreen <player | *filter*> <degree>[/code]
+
+
+
+
+
+
+
+[color=#FF3030][b][size=200]DOWNLOAD[/size][/b][/color]
+Source: 
+Script: 
+Documentation: 
+<virustotal>***
+
+
+
+
+
+
+[color=#FF3030][b][size=200]INSTALLATION[/size][/b][/color]
+
+[color=#FF3030][b]Warning: 
+DGAdmin v3.5 requires Tekno v2.8.0.4 and later.
+If you wish to install DGAdmin on older server, please use older DGAdmin version. i.e v3.4.19[/b][/color]
+
+[list=1][*]Copy [color=#FF8000]DGAdmin.dll[/color] to the "[color=#FF8000]/scripts[/color]" folder
+[*]Don't forget to update [color=#FF8000]InfinityScript.dll[/color]
+[*]Open "[color=#FF8000]/players2/server.cfg[/color]", and add below:
+[code]loadscript "DGAdmin.dll"[/code]
+[*]Start server, wait till plugin loaded, then kill it
+[*]Go to "[color=#FF8000]/scripts/DGAdmin/[/color]", and configure the script
+[*]Start server again.[/list]
+
+
+
+
+----------------------------------------------------------------------------
+Sincerely, F. Bernkastel
+
+Contact me at
+[list][*][color=#FF8000]E-Mail[/color]: bernkastel.frederica@protonmail.com
+[*][color=#FF8000]Discord[/color]: Frederica Bernkastel#3247
+[*][url=https://discord.gg/Hj96sDX]https://discord.gg/Hj96sDX[/url][/list]
+
+[color=#FF40FF][b][size=150]nipa~?( =^_^= )[/size][/b][/color]
+[img]https://raw.githubusercontent.com/FredericaBernkastel/codmw3-server-DGAdmin-plugin/master/doc/img/h_1474103025_2152881_1cc4d9128b.gif[/img]

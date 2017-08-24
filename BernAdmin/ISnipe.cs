@@ -27,13 +27,6 @@ namespace LambAdmin
                         return bool.Parse(Sett_GetString("settings_isnipe_antihardscope"));
                     }
                 }
-                public static bool ANTINOSCOPE
-                {
-                    get
-                    {
-                        return bool.Parse(Sett_GetString("settings_isnipe_antinoscope"));
-                    }
-                }
                 public static bool ANTIBOLTCANCEL
                 {
                     get
@@ -180,10 +173,6 @@ namespace LambAdmin
 
         public void SNIPE_OnPlayerConnect(Entity player)
         {
-            if (ConfigValues.ISNIPE_SETTINGS.ANTINOSCOPE)
-                //EventDispatcher_AntiNoScope(player);
-                WriteLog.Info("settings_isnipe_antinoscope is DEPRECATED");
-
             if (ConfigValues.ISNIPE_SETTINGS.ANTIBOLTCANCEL)
                 EventDispatcher_AntiBoltCancel(player);
 
