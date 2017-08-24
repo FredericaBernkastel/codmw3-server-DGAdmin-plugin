@@ -1,142 +1,74 @@
-## "DGAdmin" - Call of Duty: MW3 dedicated server plugin
-DG Admin script for Call of Duty: MW3 dedicated server. Based on RGAdmin v1.05, modified by **F. Bernkastel**<br>
-Complete admin guide can be found [here](https://drive.google.com/file/d/0B4OfimTH0gRhdGxoSHBJY194UWs/view?usp=sharing).<br><br>
-
-**New commands** (not included in RG Admin)
-
-**`!apply`**<br>
-`　　　print apply message (commands\apply.txt)`
-        
-**`!night <on/off>`**<br>
-`　　　turn night mode for you`
-
-**`!sunlight <float RED> <float GREEN> <float BLUE>`**<br>
-`　　　set sunlight color multiplier`
-
-**`!cdvar <int/foat/string/direct> <key> <value>`**<br>
-`　　　set custom cdvar. In direct mode, `<br>
-`　　　you can separate multiple values by comma.`
-
-**`!alias <player> [alias]`**<br>
-`　　　set chat alias *(leave [alias] field to reset it)*`
-
-**`!myalias [alias]`**<br>
-
-**`!daytime <day|night|morning|cloudy>`**<br>
-`　　　Force graphics mode for all players. `<br>
-`　　　If “night”, commands “!fx” and “!night” are blocked.`
-
-**`!kd <player> <kills> <deaths>`**<br>
-`　　　Set custom kills/deaths score for player. `<br>
-`　　　(Affects only scoreboard, but doesn’t actually changes it).`
-
-**`!unban <player>`**<br>
-`　　　Unban single player by name.`
-
-**`!unban-id <ban id>`**<br>
-`　　　Deletes given banentry from banlist.`<br>
-`　　　You can get banentries by doing !lastbans or !searchbans.`
-
-**`!report <message>`**<br>
-`　　　Player can report hackers. Message will be sent to all online admins, and saved to history.`
-
-**`!lastreports [amount]`**<br>
-`　　　Admins can access to !report history. Amount may be 1 – 8, default is 4.`
-
-**`!setfx <fx> [spawn key]`**<br>
-`　　　Spawn custom FX at player origin. Triggered by key. If key not specified, default is “activate”.`
-
-**`!fire`**<br>
-`　　　Player emit beatiful fire sparks. `
-
-**`!suicide`**<br>
-`　　　Suicide.`
-
-**`!yes`**<br>
-`　　　Confirm command execution.`
-
-**`!no`**<br>
-`　　　Abort command execution.`
-
-**`!sdvar <key> [value]`**<br>
-`　　　Set server dvar. If value not specified, NULL value will be set. `
-`　　　Multiple values are separated by space.`
-
-**`!3rdperson`**<br>
-`　　　Forced 3rd person view.`
-
-**`!teleport <player1> <player2>`**<br>
-`　　　Teleport player1 to player2.`
-
-**`!fly <on|off> [bound key]`**<br>
-`　　　Invisible flying god mode. If key not specified, default is “F” (activate).`
-
-**`!jump <<height> | default>`**<br>
-`　　　Set jump height.`
-
-**`!speed <<speed> | default>`**<br>
-`　　　Set speed multiplier.`
-
-**`!gravity <<g> | default>`**<br>
-`　　　Set gravity force.`
-
-**`!ac130 <all | <player>> [-p]`**<br>
-`　　　Hand-held AC130 gun. `<br>
-`　　　–p flag makes it permanent, until round end.`
-
-**`!register`**<br>
-`　　　Register to XLR Stats.`
-
-**`!xlrstats [player]`**<br>
-`　　　Your statistics. `<br>
-`　　　Specify player, if you wanna know how good other players.`
-
-**`!xlrtop [amount]`**<br>
-`　　　XLR Top scores. `<br>
-`　　　Amount should’nt be greather than 8, and smaller than 1.`
-
-**`!playfxontag <fx> [tag = j_head]`**<br>
-`　　　Like !setfx, but effect is linked to the player's origin.`
-
-**`!setclantag <player> [tag]`**<br>
-`　　　Set clan tag of player. Up to 7 characters.`
-
-**`!rotatescreen <player> <degree>`**<br>
-`　　　Set camera roll of player. Very abusive.`
-
-**`!votekick <player> [reason]`**<br>
-`　　　Start a vote to kick player.`
-
-**`!moab <<player> | all>`**<br>
-`　　　Working MOAB`
-
-**Misc comands** `(not enabled by default)`
-
-**`!svpassword [password]`**<br>
-`　　　Will set server password in “players2\server.cfg”, and kill server.`<br>
-`　　　*Server should be run under daemon*, i.e. “Alani’s server manager” to be auto-restarted.`
-
-**New set of broadcast commands** `(print to the public chat):`
-  - **`!@admins`**
-  - **`!@rules`**
-  - **`!@apply`**
-  - **`!@time`**
-  - **`!@xlrstats`**
-  - **`!@xlrtop`**
+## "DGAdmin" - is a TeknoMW3 Dedicated server administrative plugin
 
 
-**New features**
- - **`Spree messages`**` (option: settings_enable_spree_messages)`
- - **`Chat aliases`**` (option: settings_enable_chat_alias)`
- - **`AntiNoScope`**` (option: settings_isnipe_antinoscope)`
- - **`AntiCRTK`**` (option: settings_isnipe_anticrtk)`
- - **`AntiBoltCancel`**`  (option: settings_isnipe_antiboltcancel)`
- - **`XLR Stats`**` (option: settings_enable_xlrstats)`
- - **`Advanced cdvar manager`**` - you can set default client dvars in "Utils\cdvars.txt"`
- - **`Voting`**
+## License
 
-` Fixed issue with trophy-kill (when victim gets banned for it);`
+This project is licensed under GPLv3. Please see the LICENSE file.
 
- `Fixed issue with !ac130 in isnipe mode (when issuer gets banned for it)`
+Copyright © 2015-2017 F. Bernkastel (bernkastel.frederica@protonmail.com)
 
-![nipaa~ =^_^=](http://anime.net.kg/uploads/pictures/Furude.Rika.low.1153817.png)
+##### Technologies used:
+
+- InfinityScript, Copyright © 2012 NTA
+- RGAdmin v1.05, Copyright © 2015 Lambder
+
+## Special thanks and acknowledgements
+
+- The [TeknoMW3](http://teknogods.com/) team, especially...
+- Hans Krebs and Smurf for their work with Tekno and InfinityScript.
+-	Lambder and his team for coding the base script
+-	Musta for bugreports and testing
+-	SAT creators for HWID offsets and AntiKnife
+-	x86JMPSTREET (lelz)
+-	HKClan for trying to give their help
+<br>
+
+DGAdmin was made to be a fast and lagless All-in-One plugin, collecting lots of features, previously possible only with separate scripts.
+Due modular structure, each feature can be easilly disabled to reduce CPU and RAM load.
+
+
+## Features:
+
+#### ISNIPE - Support of iSnipe game type:
+ -	anti-plant
+ -	anti-hardscope
+ -	anti-knife
+ -	anti-close range throwing knife
+ -	anti-boltcancel
+ -	anti-falldamage
+#### Custom chat aliases, and clantags
+#### Custom team names/icons
+#### Auto balance
+#### DSR settings interface
+    possibility to override script settings through DSR
+#### anti-weaponhack
+    detect class unlockers
+
+#### Server Title
+    Custom map & mode name in the servers browser.
+
+#### Voting
+    Let players vote to kick hackers
+
+#### XLR Stats
+    A players rating system
+
+#### Advanced cdvar manager
+    Force client dvars
+
+#### LockServer
+    Prevent any player from connecting the server. Useful for 1v1 and clanwars.
+
+#### Timed messages
+#### Spree messages
+#### Unlimited ammo
+#### Alive players counter
+<br>
+
+## Commands:
+DGAdmin got **119 ± 7** of chat commands.
+
+From simple and fast to copmlex and powerful command syntaxes are supported.
+<br><br>
+
+Read the [official documentation](https://drive.google.com/file/d/0B4OfimTH0gRhaXJFYWRId0ZZaG8/view?usp=sharing) for advanced guidelines.
