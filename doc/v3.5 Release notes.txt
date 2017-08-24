@@ -1,4 +1,4 @@
-[RELEASE] DGAdmin v3.5 + SOURCE + Documentation
+ï»¿[RELEASE] DGAdmin v3.5 + SOURCE + Documentation
 
 [b][size=150]Thanks section[/size][/b]
 
@@ -16,8 +16,9 @@ Lots of new features were realized. Lots of bugs and crashes were fixed.
 Reached 10'000 lines of the source code!
 
 I'll continue the development, if DGAdmin will stay popular.
-Don't be lazy to read the official documentation for advanced guidelines.***
-If you're found any bugs, or if you got any suggestions, don't be lazy to post them on GitHub Repo. ***
+Don't be lazy to read the [url=https://drive.google.com/file/d/0B4OfimTH0gRhaXJFYWRId0ZZaG8/view?usp=sharing]official documentation[/url] for advanced guidelines.
+If you're found any bugs, or if you got any suggestions, don't be lazy to post them on [url=https://github.com/FredericaBernkastel/codmw3-server-DGAdmin-plugin]GitHub Repo[/url].
+
 
 [b][size=200]New Features[/size][/b]
 
@@ -126,7 +127,7 @@ Accesible through [color=#FF8000]!lockserver[/color] command
 
 [b][size=200]COMMANDS[/size][/b]
 
-Total count of commands: [color=#FF3030][b]119 ± 7[/b][/color].
+Total count of commands: [color=#FF3030][b]119 Â± 7[/b][/color].
 Enough for any cases, don't you think?
 
 [b][color=#FF8000][size=150]*filter* placeholder[/size][/color][/b]
@@ -163,7 +164,7 @@ kill everyone except bern
 kill all your enemies
 
 !foreach *enemies* fc <p> cdvar -d r_skipPvs 1
-( ?° ?? ?°)
+( Í¡Â° ÍœÊ– Í¡Â°)
 
 !foreach *team1|team2* changeteam <player>
 swap teams
@@ -244,7 +245,7 @@ Players, connected at the moment of command execution, will be added to whitelis
 [*]fixed crash at OnExitLevel::xlr_database.Save
 [*]fixed crash at !votekick
 [*]Restricted nested !foreach (unuseful, possible to crash server)
-[*]hardcoded «banned» or «sucker» group. This group is useful to restrict any command to player.
+[*]hardcoded Â«bannedÂ» or Â«suckerÂ» group. This group is useful to restrict any command to player.
 [*]!3rdperson fix for tekno 2.8.0.2
 [*]!clankick <sender> placeholder - fixed <issuerf>
 [*]amended list of DLC maps (for !map, !gametype)
@@ -286,12 +287,15 @@ Players, connected at the moment of command execution, will be added to whitelis
 
 
 [color=#FF3030][b][size=200]DOWNLOAD[/size][/b][/color]
-Source: 
-Script: 
-Documentation: 
-<virustotal>***
+Source: [url=https://github.com/FredericaBernkastel/codmw3-server-DGAdmin-plugin]https://github.com/FredericaBernkastel/codmw3-server-DGAdmin-plugin[/url]
+Script: [url=https://github.com/FredericaBernkastel/codmw3-server-DGAdmin-plugin/releases/download/v3.5/DGAdmin.v3.5.zip]https://github.com/FredericaBernkastel/codmw3-server-DGAdmin-plugin/releases/download/v3.5/DGAdmin.v3.5.zip[/url]
+Documentation: [url=https://drive.google.com/file/d/0B4OfimTH0gRhaXJFYWRId0ZZaG8/view?usp=sharing]https://drive.google.com/file/d/0B4OfimTH0gRhaXJFYWRId0ZZaG8/view?usp=sharing[/url]
+[code]checksums: 
+SHA1:   6678A1844319B59E9D4297564C8A68B01EF5E681
+SHA256: ED37991C2A1A8DAB734C84CD54E08041CC4D572E3935CDE20DCA8480F3AAFB00
 
-
+virustotal:
+https://www.virustotal.com/en/file/ed37991c2a1a8dab734c84cd54e08041cc4d572e3935cde20dca8480f3aafb00/analysis/1503605023/[/code]
 
 
 
@@ -321,5 +325,5 @@ Contact me at
 [*][color=#FF8000]Discord[/color]: Frederica Bernkastel#3247
 [*][url=https://discord.gg/Hj96sDX]https://discord.gg/Hj96sDX[/url][/list]
 
-[color=#FF40FF][b][size=150]nipa~?( =^_^= )[/size][/b][/color]
+[color=#FF40FF][b][size=150]nipa~â˜…( =^_^= )[/size][/b][/color]
 [img]https://raw.githubusercontent.com/FredericaBernkastel/codmw3-server-DGAdmin-plugin/master/doc/img/h_1474103025_2152881_1cc4d9128b.gif[/img]
