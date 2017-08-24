@@ -1,5 +1,13 @@
 ## "DGAdmin" - is a TeknoMW3 Dedicated server administrative plugin
+[![](https://img.shields.io/github/downloads/FredericaBernkastel/codmw3-server-DGAdmin-plugin/total.svg)]()
+[![](https://img.shields.io/github/commits-since/FredericaBernkastel/codmw3-server-DGAdmin-plugin/v3.5.svg)]()
+[![](https://img.shields.io/github/issues/FredericaBernkastel/codmw3-server-DGAdmin-plugin.svg)]()
 
+
+[![](https://img.shields.io/github/forks/FredericaBernkastel/codmw3-server-DGAdmin-plugin.svg?style=social&label=Fork)]()
+[![](https://img.shields.io/github/stars/FredericaBernkastel/codmw3-server-DGAdmin-plugin.svg?style=social&label=Star)]()
+[![](https://img.shields.io/github/watchers/FredericaBernkastel/codmw3-server-DGAdmin-plugin.svg?style=social&label=Watch)]()
+[![GitHub followers](https://img.shields.io/github/followers/FredericaBernkastel.svg?style=social&label=Follow)]()
 
 ## License
 
