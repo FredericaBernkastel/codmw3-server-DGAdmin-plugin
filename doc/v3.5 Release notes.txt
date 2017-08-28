@@ -17,7 +17,7 @@ Reached 10'000 lines of the source code!
 
 I'll continue the development, if DGAdmin will stay popular.
 Don't be lazy to read the [url=https://drive.google.com/file/d/0B4OfimTH0gRhaXJFYWRId0ZZaG8/view?usp=sharing]official documentation[/url] for advanced guidelines.
-If you're found any bugs, or if you got any suggestions, don't be lazy to post them on [url=https://github.com/FredericaBernkastel/codmw3-server-DGAdmin-plugin]GitHub Repo[/url].
+If you're found any bugs, or if you got any suggestions, don't be lazy to post them on [url=https://github.com/FredericaBernkastel/codmw3-server-DGAdmin-plugin/issues]GitHub Repo[/url].
 
 
 [b][size=200]New Features[/size][/b]
@@ -26,6 +26,7 @@ If you're found any bugs, or if you got any suggestions, don't be lazy to post t
 [size=85][color=#7F7F7F]setting: settings_dynamic_properties[/color][/size]
 
 It' s possible to override any DGAdmin setting through DSR.
+
 [b]Example usecase:[/b]
 You wish to use same server as iSnipe and Reg Guns.
 
@@ -323,7 +324,7 @@ Sincerely, F. Bernkastel
 Contact me at
 [list][*][color=#FF8000]E-Mail[/color]: bernkastel.frederica@protonmail.com
 [*][color=#FF8000]Discord[/color]: Frederica Bernkastel#3247
-[*][url=https://discord.gg/Hj96sDX]https://discord.gg/Hj96sDX[/url][/list]
+[*][url=https://discord.gg/q9bmYPz]https://discord.gg/q9bmYPz[/url][/list]
 
 [color=#FF40FF][b][size=150]nipa~★( =^_^= )[/size][/b][/color]
 [img]https://raw.githubusercontent.com/FredericaBernkastel/codmw3-server-DGAdmin-plugin/master/doc/img/h_1474103025_2152881_1cc4d9128b.gif[/img]
