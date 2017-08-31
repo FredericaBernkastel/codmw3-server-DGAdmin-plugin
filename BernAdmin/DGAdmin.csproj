@@ -36,9 +36,8 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="InfinityScript, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Servers\Mw3\InfinityScript.dll</HintPath>
+    <Reference Include="InfinityScript_1.5_FUCKING_FUCK_FIXED">
+      <HintPath>InfinityFuck 1.5\InfinityScript_1.5_FUCKING_FUCK_FIXED.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="nuke">
