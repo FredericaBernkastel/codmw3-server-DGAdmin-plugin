@@ -38,7 +38,7 @@
   <ItemGroup>
     <Reference Include="InfinityScript, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Servers\Mw3\InfinityScript.dll</HintPath>
+      <HintPath>InfinityScript 1.1\InfinityScript.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="nuke">
