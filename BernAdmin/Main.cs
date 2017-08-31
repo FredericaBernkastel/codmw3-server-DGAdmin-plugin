@@ -83,15 +83,16 @@ namespace LambAdmin
                     InitChatAlias();
                 }
 
-                if (ConfigValues.ISNIPE_SETTINGS.ANTIKNIFE)
+                if (ConfigValues.ISNIPE_MODE && ConfigValues.ISNIPE_SETTINGS.ANTIKNIFE)
                     DisableKnife();
                 else
                     EnableKnife();
 
-                if (ConfigValues.settings_unlimited_ammo)
+                Call("setdvarifuninitialized", "unlimited_ammo", "2");
+
+                if (ConfigValues.settings_unlimited_ammo || (UTILS_GetDvar("unlimited_ammo") == "1"))
                 {
                     WriteLog.Debug("Initializing Unlimited Ammo...");
-                    Call("setdvarifuninitialized", "unlimited_ammo", "1");
                     UTILS_UnlimitedAmmo();
                 }
                 

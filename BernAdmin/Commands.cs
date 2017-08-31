@@ -3198,19 +3198,31 @@ namespace LambAdmin
                         }));
             }));
 
-            // unlimitedammo <on/off>
+            // unlimitedammo <on/off/auto>
             CommandList.Add(new Command("unlimitedammo", 1, Command.Behaviour.Normal,
             (sender, arguments, optarg) =>
             {
-                if (UTILS_ParseBool(arguments[0]))
+                if (arguments[0] == "auto")
                 {
-                    UTILS_SetDvar("unlimited_ammo", "1");
-                    UTILS_UnlimitedAmmo(true);
-
-                } else
                     UTILS_SetDvar("unlimited_ammo", "0");
+                    AfterDelay(200, () => {
+                        UTILS_SetDvar("unlimited_ammo", "2");
+                        UTILS_UnlimitedAmmo();
+                    });    
+                }
+                else
+                {
+                    if (UTILS_ParseBool(arguments[0]))
+                    {
+                        UTILS_SetDvar("unlimited_ammo", "1");
+                        UTILS_UnlimitedAmmo(true);
 
-                WriteChatToAll(Command.GetString("unlimitedammo", UTILS_ParseBool(arguments[0]) ? "message_on" : "message_off").Format(
+                    }
+                    else
+                        UTILS_SetDvar("unlimited_ammo", "0");
+                }
+
+                WriteChatToAll(Command.GetString("unlimitedammo", (arguments[0] == "auto") ? "message_auto" : (UTILS_ParseBool(arguments[0]) ? "message_on" : "message_off")).Format(
                             new Dictionary<string, string>()
                             {
                                 {"<issuer>", sender.Name},
@@ -3223,7 +3235,7 @@ namespace LambAdmin
             CommandList.Add(new Command("moab", 1, Command.Behaviour.Normal,
             (sender, arguments, optarg) =>
             {
-                if (arguments[0] == "all")
+                if (arguments[0] == "*all*")
                 {
                     foreach (Entity player in Players)
                         nuke.NukeFuncs.giveNuke(player);
@@ -3235,19 +3247,17 @@ namespace LambAdmin
                 }
                 else
                 {
-                    Entity target = FindSinglePlayer(arguments[0]);
-                    if (target == null)
+                    List<Entity> targets = FindSinglePlayerXFilter(arguments[0]);
+
+                    foreach (Entity target in targets)
                     {
-                        WriteChatToPlayer(sender, Command.GetMessage("NotOnePlayerFound"));
-                        return;
+                        nuke.NukeFuncs.giveNuke(target);
                     }
 
-                    nuke.NukeFuncs.giveNuke(target);
-
-                    WriteChatToPlayer(sender, Command.GetString("moab", "message").Format(new Dictionary<string, string>()
-                    {
-                        {"<player>", target.Name}
-                    }));
+                    WriteChatToPlayer(sender, Command.GetMessage("Filters_message").Format(new Dictionary<string, string>()
+                        {
+                            {"<count>", targets.Count.ToString() }
+                        }));
                 }
             }));
 

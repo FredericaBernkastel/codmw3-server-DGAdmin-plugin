@@ -1152,16 +1152,27 @@ namespace LambAdmin
 
         public void UTILS_UnlimitedAmmo(bool force = false)
         {
-            if ((!ConfigValues.settings_unlimited_ammo || Call<string>("getdvar", "g_gametype") == "infect") && !force) 
-                return;
+            string state = UTILS_GetDvar("unlimited_ammo");
+            switch (state)
+            {
+                case "0":
+                    return;
+                case "1":
+                    break;
+                case "2":
+                    if ((!ConfigValues.settings_unlimited_ammo || Call<string>("getdvar", "g_gametype") == "infect") && !force)
+                        return;
+                    break;
+            }
+
             if (ConfigValues.unlimited_ammo_active)
                 return;
             ConfigValues.unlimited_ammo_active = true;
 
             OnInterval(50, () =>
             {
-                if(UTILS_GetDvar("unlimited_ammo") == "1")
-                    foreach(Entity player in from player in Players where player.IsAlive select player)
+                if ((UTILS_GetDvar("unlimited_ammo") == "1") || (UTILS_GetDvar("unlimited_ammo") == "2"))
+                    foreach (Entity player in from player in Players where player.IsAlive select player)
                     {
                         var Currwep = player.CurrentWeapon;
                         var offhandAmmo = player.Call<string>("getcurrentoffhand");
@@ -1173,7 +1184,10 @@ namespace LambAdmin
                         player.Call("setweaponammoclip", Currwep, 99, "left");
                         player.Call("setweaponammoclip", Currwep, 99, "right");
                     }
-                return true;
+                else
+                    ConfigValues.unlimited_ammo_active = false;
+
+                return ConfigValues.unlimited_ammo_active;
             });
         }
 

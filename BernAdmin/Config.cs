@@ -476,7 +476,7 @@ namespace LambAdmin
             {"command_votecancel_error", "^1Error: ^3There is no voting" },
             {"command_votecancel_message", "^3Voting cancelled by ^2<issuer>" },
 
-            {"command_moab_usage", "^1Usage: !moab <<player | all>"},
+            {"command_moab_usage", "^1Usage: !moab <<player | *filter*>"},
             {"command_moab_message", "^7A ^1MOAB ^3given to ^2<player>"},
             {"command_moab_message_all", "^7A ^1MOAB ^3given to ^1Everyone by ^2<issuer>"},
 
@@ -492,9 +492,10 @@ namespace LambAdmin
             {"command_fx_message_on", "^3Fx ^2applied."},
             {"command_fx_message_off", "^3Fx ^1disabled."},
 
-            {"command_unlimitedammo_usage", "^1Usage: !unlimitedammo <on/off>"},
+            {"command_unlimitedammo_usage", "^1Usage: !unlimitedammo <on/off/auto>"},
             {"command_unlimitedammo_message_on", "^3Unlimited ammo ^2enabled ^7by <issuerf>"},
             {"command_unlimitedammo_message_off", "^3Unlimited ammo ^1disabled ^7by <issuerf>"},
+            {"command_unlimitedammo_message_auto", "^3Unlimited ammo set to ^5auto ^7by <issuerf>"},
 
             {"command_@admins_usage", "^1Usage: !@admins" },
 
@@ -771,15 +772,22 @@ namespace LambAdmin
                 InitChatAlias();
             }
 
-            if (ConfigValues.ISNIPE_SETTINGS.ANTIKNIFE)
+            if (ConfigValues.ISNIPE_MODE && ConfigValues.ISNIPE_SETTINGS.ANTIKNIFE)
+            {
                 DisableKnife();
+                WriteLog.Debug("Disable knife");
+            }
             else
+            {
                 EnableKnife();
+                WriteLog.Debug("Enable knife");
+            }
 
-            if (ConfigValues.settings_unlimited_ammo)
+            Call("setdvarifuninitialized", "unlimited_ammo", "2");
+
+            if (ConfigValues.settings_unlimited_ammo || (UTILS_GetDvar("unlimited_ammo") == "1"))
             {
                 WriteLog.Debug("Initializing Unlimited Ammo...");
-                Call("setdvarifuninitialized", "unlimited_ammo", "1");
                 UTILS_UnlimitedAmmo();
             }
 
