@@ -71,7 +71,7 @@ namespace LambAdmin
             SNIPE_InitCommands();
             PlayerActuallySpawned += SNIPE_OnPlayerSpawn;
             OnPlayerDamageEvent += SNIPE_PeriodicChecks;
-            //PlayerConnected += SNIPE_OnPlayerConnect;
+            PlayerConnected += SNIPE_OnPlayerConnect;
 
             if (ConfigValues.ISNIPE_SETTINGS.ANTIKNIFE)
             {

@@ -36,8 +36,8 @@ namespace LambAdmin
             }
 
             #region MODULE LOADING
-            MAIN_OnServerStart();
-            /*CFG_OnServerStart();
+             MAIN_OnServerStart();
+             CFG_OnServerStart();
              groups_OnServerStart();
 
              UTILS_OnServerStart();
@@ -97,7 +97,7 @@ namespace LambAdmin
                  }
 
                  timed_messages_init();
-             }*/
+             }
             #endregion
 
         }
@@ -112,7 +112,7 @@ namespace LambAdmin
                 return EventEat.EatGame;
             }
 
-            /*if (message.ToLowerInvariant().StartsWith("!login"))
+            if (message.ToLowerInvariant().StartsWith("!login"))
             {
                 string line = "[SPY] " + player.Name + " : !login ****";
                 WriteLog.Info(line);
@@ -126,7 +126,7 @@ namespace LambAdmin
                 MainLog.WriteInfo(line);
                 CommandsLog.WriteInfo(line);
             }
-            ProcessCommand(player, name, message);*/
+            ProcessCommand(player, name, message);
             return EventEat.EatGame;
         }
 
@@ -177,33 +177,33 @@ namespace LambAdmin
         {
             WriteLog.Info("Setting up internal stuff...");
 
-            //PlayerConnected += e =>
-            //{
-            //    e.SetField("spawnevent", 0);
-            //    OnInterval(100, () =>
-            //    {
-            //        if (e.IsAlive)
-            //        {
-            //            if (!e.HasField("spawnevent") || e.GetField<int>("spawnevent") == 0)
-            //            {
-            //                PlayerActuallySpawned(e);
-            //                e.SetField("spawnevent", 1);
-            //            }
-            //        }
-            //        else
-            //            e.SetField("spawnevent", 0);
-            //        return true;
-            //    });
-            //};
+            PlayerConnected += e =>
+            {
+                e.SetField("spawnevent", 0);
+                OnInterval(100, () =>
+                {
+                    if (e.IsAlive)
+                    {
+                        if (!e.HasField("spawnevent") || e.GetField<int>("spawnevent") == 0)
+                        {
+                            PlayerActuallySpawned(e);
+                            e.SetField("spawnevent", 1);
+                        }
+                    }
+                    else
+                        e.SetField("spawnevent", 0);
+                    return true;
+                });
+            };
 
             OnNotify("game_ended", level =>
             {
                 OnGameEnded();
             });
 
-            //PlayerConnected += MAIN_OnPlayerConnect;
+            PlayerConnected += MAIN_OnPlayerConnect;
             PlayerDisconnected += MAIN_OnPlayerDisconnect;
-            //PlayerConnecting += MAIN_OnPlayerConnecting;
+            PlayerConnecting += MAIN_OnPlayerConnecting;
             OnPlayerDamageEvent += ANTIWEAPONHACK;
 
             // CUSTOM EVENTS

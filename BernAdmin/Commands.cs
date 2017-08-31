@@ -646,8 +646,8 @@ namespace LambAdmin
             if (!System.IO.Directory.Exists(ConfigValues.ConfigPath + @"Commands"))
                 System.IO.Directory.CreateDirectory(ConfigValues.ConfigPath + @"Commands");
 
-            //PlayerConnected += CMDS_OnConnect;
-            //PlayerConnecting += CMDS_OnConnecting;
+            PlayerConnected += CMDS_OnConnect;
+            PlayerConnecting += CMDS_OnConnecting;
             PlayerDisconnected += CMDS_OnDisconnect;
             PlayerActuallySpawned += CMDS_OnPlayerSpawned;
             OnPlayerKilledEvent += CMDS_OnPlayerKilled;

@@ -391,23 +391,7 @@ namespace LambAdmin
 
             public HWID(Entity player)
             {
-                if (player == null || !player.IsPlayer)
-                {
-                    Value = null;
-                    return;
-                }
-                int address = Data.HWIDDataSize * player.GetEntityNumber() + Data.HWIDOffset;
-                string formattedhwid = "";
-                unsafe
-                {
-                    for (int i = 0; i < 12; i++)
-                    {
-                        if (i % 4 == 0 && i != 0)
-                            formattedhwid += "-";
-                        formattedhwid += (*(byte*)(address + i)).ToString("x2");
-                    }
-                }
-                Value = formattedhwid;
+                Value = player.HWID.ToLower();
             }
 
             private HWID(string value)
@@ -417,7 +401,7 @@ namespace LambAdmin
 
             public bool IsBadHWID()
             {
-                return string.IsNullOrWhiteSpace(Value) || Value == "00000000-00000000-00000000";
+                return string.IsNullOrWhiteSpace(Value) || Value == "00000000000000000000000000000000";
             }
 
             public override string ToString()
@@ -428,22 +412,13 @@ namespace LambAdmin
             public static bool TryParse(string str, out HWID parsedhwid)
             {
                 str = str.ToLowerInvariant();
-                if (str.Length != 26)
+                if (str.Length != 32)
                 {
                     parsedhwid = new HWID((string)null);
                     return false;
                 }
-                for (int i = 0; i < 26; i++)
+                for (int i = 0; i < 32; i++)
                 {
-                    if (i == 8 || i == 17)
-                    {
-                        if (str[i] != '-')
-                        {
-                            parsedhwid = new HWID((string)null);
-                            return false;
-                        }
-                        continue;
-                    }
                     if (!str[i].IsHex())
                     {
                         parsedhwid = new HWID((string)null);
@@ -574,8 +549,6 @@ namespace LambAdmin
                 List<string> identifiers = new List<string>();
                 if (player_guid != null)
                     identifiers.Add(player_guid.ToString());
-                //if (player_ip != null)
-                //    identifiers.Add(player_ip.ToString());
                 if (player_hwid != null)
                     identifiers.Add(player_hwid.ToString());
                 return string.Join(",", identifiers);
@@ -610,6 +583,7 @@ namespace LambAdmin
                 PlayerInfo commoninfo = new PlayerInfo();
                 if (B.isNull() || A.isNull())
                     return null;
+
                 if (!string.IsNullOrWhiteSpace(A.GetGUIDString()))
                 {
                     if (!string.IsNullOrWhiteSpace(B.GetGUIDString()) && A.GetGUIDString() == B.GetGUIDString())
@@ -932,8 +906,8 @@ namespace LambAdmin
 
         public void UTILS_OnServerStart()
         {
-            //PlayerConnected += UTILS_OnPlayerConnect;
-            //PlayerConnecting += UTILS_OnPlayerConnecting;
+            PlayerConnected += UTILS_OnPlayerConnect;
+            PlayerConnecting += UTILS_OnPlayerConnecting;
             OnPlayerKilledEvent += UTILS_BetterBalance;
 
             if (!System.IO.Directory.Exists(ConfigValues.ConfigPath + @"Utils"))
@@ -970,9 +944,9 @@ namespace LambAdmin
             // RGADMIN HUDELEM
             if (bool.Parse(Sett_GetString("settings_showversion")))
             {
-                RGAdminMessage = HudElem.CreateServerFontString(HudElem.Fonts.Big, 0.6f);
-                RGAdminMessage.SetPoint("BOTTOMRIGHT", "BOTTOMRIGHT",0,-30);
-                RGAdminMessage.SetText(" ^0[^1DG^0]\n^:Admin\n^0" + ConfigValues.Version);
+                RGAdminMessage = HudElem.CreateServerFontString(HudElem.Fonts.HudSmall, 0.6f);
+                RGAdminMessage.SetPoint("BOTTOMRIGHT", "BOTTOMRIGHT",0,-20);
+                RGAdminMessage.SetText(" ^0[^1DG^0]\n ^:Admin\n ^0" + ConfigValues.Version);
                 RGAdminMessage.Color = new Vector3(1f, 0.75f, 0f);
                 RGAdminMessage.GlowAlpha = 1f;
                 RGAdminMessage.GlowColor = new Vector3(0.349f, 0f, 0f);
@@ -1023,7 +997,7 @@ namespace LambAdmin
             hudElem3.HideWhenInMenu = true;
             OnInterval(50, (Func<bool>)(() =>
             {
-                string str1 = player.GetField<string>("sessionteam");
+                string str1 = player.GetTeam();
                 string str2 = GSCFunctions.GetTeamPlayersAlive("axis").ToString();
                 string str3 = GSCFunctions.GetTeamPlayersAlive("allies").ToString();
                 hudElem2.SetText(str1.Equals("allies") ? str3 : str2);
@@ -1285,7 +1259,9 @@ namespace LambAdmin
 
         public void UTILS_SetClientDvarsPacked(Entity player, List<Dvar> dvars)
         {
-            player.SetClientDvars(null, null, dvars.ConvertAll((v) => { return new Parameter[] { v.key, v.value }; }).SelectMany(v => v).ToArray());
+            if (dvars.Count == 0)
+                return;
+            player.SetClientDvars(dvars.First().key, dvars.First().value, dvars.Skip(1).ToList().ConvertAll((v) => { return new Parameter[] { v.key, v.value }; }).SelectMany(v => v).ToArray());
         }
 
         public static void ExecuteCommand(string command)
@@ -2266,11 +2242,6 @@ namespace LambAdmin
             player.IPrintLn(message);
         }
 
-        public static int GetEntityNumber(this Entity player)
-        {
-            return player.GetEntityNumber();
-        }
-
         public static void Suicide(this Entity player)
         {
             player.Suicide();
@@ -2278,7 +2249,7 @@ namespace LambAdmin
 
         public static string GetTeam(this Entity player)
         {
-            return player.GetField<string>("sessionteam");
+            return player.SessionTeam;
         }
 
         public static bool IsSpectating(this Entity player)
@@ -2331,16 +2302,7 @@ namespace LambAdmin
 
         public static string GetHWIDRaw(this Entity player)
         {
-            int address = DGAdmin.Data.HWIDDataSize * player.GetEntityNumber() + DGAdmin.Data.HWIDOffset;
-            string formattedhwid = "";
-            unsafe
-            {
-                for (int i = 0; i < 12; i++)
-                {
-                    formattedhwid += (*(byte*)(address + i)).ToString("x2");
-                }
-            }
-            return formattedhwid;
+            return player.HWID.ToLower();
         }
 
         public static string GetClantag(this Entity player)

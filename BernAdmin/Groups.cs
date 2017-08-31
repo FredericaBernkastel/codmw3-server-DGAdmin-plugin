@@ -64,7 +64,7 @@ namespace LambAdmin
                         return false;
                     if (permissions.Contains("-*abusive*") && abusive.Contains(permission))
                         return false;
-                    if (permissions.Contains("-*unsafe*")  && _unsafe.Contains(permission))
+                    if (permissions.Contains("-*unsafe*") && _unsafe.Contains(permission))
                         return false;
                     if (ConfigValues.settings_disabled_commands.Contains(permission))
                         return false;
@@ -372,6 +372,7 @@ namespace LambAdmin
 
             database = new GroupsDatabase();
         }
+
     }
 
     public static partial class EntityExtensions
@@ -391,7 +392,7 @@ namespace LambAdmin
                 return grp;
             else
             {
-                DGAdmin.WriteLog.Error("# Player " + entity.Name + ": GUID=" + entity.GUID + ", HWID = " + entity.GetHWID().ToString() + ", IP:" + entity.IP.ToString());
+                DGAdmin.WriteLog.Error("# Player " + entity.Name + ": GUID=" + entity.GUID + ", HWID = " + entity.GetHWID().ToString());
                 DGAdmin.WriteLog.Error("# Is in nonexistent group: " + playerFromGroups);
                 return database.GetGroup("default");
             }
