@@ -20,7 +20,7 @@ namespace LambAdmin
         {
             if (sender.isMuted())
                 return;
-            ChatLog(sender, message, type);
+            /*ChatLog(sender, message, type);
             if (sender.HasField("nootnoot") && sender.GetField<int>("nootnoot") == 1)
                 message = "noot noot";
             if(type == ChatType.All)
@@ -59,7 +59,7 @@ namespace LambAdmin
                     CHAT_WriteToAllFromTeam(team, string.Format(ConfigValues.format_message, ConfigValues.format_prefix_team + ConfigValues.format_prefix_dead, sender.GetFormattedName(database), message));
                     return;
                 }
-            }
+            }*/
         }
 
         public void ChatLog(Entity sender, string message, ChatType chattype)

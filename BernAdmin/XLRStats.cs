@@ -136,7 +136,7 @@ namespace LambAdmin
         {
             xlr_database = new XLR_database();
             xlr_database.Init();
-            PlayerConnected += XLR_OnPlayerConnected;
+            //PlayerConnected += XLR_OnPlayerConnected;
             OnPlayerKilledEvent += XLR_OnPlayerKilled;
             WriteLog.Info("Done initializing XLRstats.");
         }

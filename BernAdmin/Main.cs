@@ -37,67 +37,67 @@ namespace LambAdmin
 
             #region MODULE LOADING
             MAIN_OnServerStart();
-            CFG_OnServerStart();
-            groups_OnServerStart();
+            /*CFG_OnServerStart();
+             groups_OnServerStart();
 
-            UTILS_OnServerStart();
-            CMDS_OnServerStart();
+             UTILS_OnServerStart();
+             CMDS_OnServerStart();
 
-            SetupKnife();
+             SetupKnife();
 
-            WriteLog.Debug("Initializing PersonalPlayerDvars...");
-            PersonalPlayerDvars = UTILS_PersonalPlayerDvars_load();
+             WriteLog.Debug("Initializing PersonalPlayerDvars...");
+             PersonalPlayerDvars = UTILS_PersonalPlayerDvars_load();
 
-            if (ConfigValues.settings_dynamic_properties)
-                Delay(400, () =>
-                {
-                    CFG_Dynprop_Apply();
-                });
-            else
-            {
-                if (ConfigValues.ANTIWEAPONHACK)
-                    WriteLog.Info("You have to enable \"settings_dynamic_properties\" if you wish to use antiweaponhack");
+             if (ConfigValues.settings_dynamic_properties)
+                 Delay(400, () =>
+                 {
+                     CFG_Dynprop_Apply();
+                 });
+             else
+             {
+                 if (ConfigValues.ANTIWEAPONHACK)
+                     WriteLog.Info("You have to enable \"settings_dynamic_properties\" if you wish to use antiweaponhack");
 
-                if (ConfigValues.settings_servertitle)
-                    WriteLog.Info("You have to enable \"settings_dynamic_properties\" if you wish to use \"Server Title\"");
+                 if (ConfigValues.settings_servertitle)
+                     WriteLog.Info("You have to enable \"settings_dynamic_properties\" if you wish to use \"Server Title\"");
 
-                if (ConfigValues.ISNIPE_MODE)
-                {
-                    WriteLog.Debug("Initializing iSnipe mode...");
-                    SNIPE_OnServerStart();
-                }
+                 if (ConfigValues.ISNIPE_MODE)
+                 {
+                     WriteLog.Debug("Initializing iSnipe mode...");
+                     SNIPE_OnServerStart();
+                 }
 
-                if (ConfigValues.settings_enable_xlrstats)
-                {
-                    WriteLog.Debug("Initializing XLRStats...");
-                    XLR_OnServerStart();
-                    XLR_InitCommands();
-                }
+                 if (ConfigValues.settings_enable_xlrstats)
+                 {
+                     WriteLog.Debug("Initializing XLRStats...");
+                     XLR_OnServerStart();
+                     XLR_InitCommands();
+                 }
 
-                if (ConfigValues.settings_enable_alive_counter)
-                    PlayerConnected += hud_alive_players;
+                 if (ConfigValues.settings_enable_alive_counter)
+                     PlayerConnected += hud_alive_players;
 
-                if (ConfigValues.settings_enable_chat_alias)
-                {
-                    WriteLog.Debug("Initializing Chat aliases...");
-                    InitChatAlias();
-                }
+                 if (ConfigValues.settings_enable_chat_alias)
+                 {
+                     WriteLog.Debug("Initializing Chat aliases...");
+                     InitChatAlias();
+                 }
 
-                if (ConfigValues.ISNIPE_MODE && ConfigValues.ISNIPE_SETTINGS.ANTIKNIFE)
-                    DisableKnife();
-                else
-                    EnableKnife();
+                 if (ConfigValues.ISNIPE_MODE && ConfigValues.ISNIPE_SETTINGS.ANTIKNIFE)
+                     DisableKnife();
+                 else
+                     EnableKnife();
 
-                Call("setdvarifuninitialized", "unlimited_ammo", "2");
+                 GSCFunctions.SetDvarIfUninitialized("unlimited_ammo", "2");
 
-                if (ConfigValues.settings_unlimited_ammo || (UTILS_GetDvar("unlimited_ammo") == "1"))
-                {
-                    WriteLog.Debug("Initializing Unlimited Ammo...");
-                    UTILS_UnlimitedAmmo();
-                }
-                
-                timed_messages_init();
-            }
+                 if (ConfigValues.settings_unlimited_ammo || (UTILS_GetDvar("unlimited_ammo") == "1"))
+                 {
+                     WriteLog.Debug("Initializing Unlimited Ammo...");
+                     UTILS_UnlimitedAmmo();
+                 }
+
+                 timed_messages_init();
+             }*/
             #endregion
 
         }
@@ -107,12 +107,12 @@ namespace LambAdmin
             if (!message.StartsWith("!") || type != ChatType.All)
             {
                 MainLog.WriteInfo("[CHAT:" + type + "] " + player.Name + ": " + message);
-                
+
                 CHAT_WriteChat(player, type, message);
                 return EventEat.EatGame;
             }
 
-            if (message.ToLowerInvariant().StartsWith("!login"))
+            /*if (message.ToLowerInvariant().StartsWith("!login"))
             {
                 string line = "[SPY] " + player.Name + " : !login ****";
                 WriteLog.Info(line);
@@ -126,7 +126,7 @@ namespace LambAdmin
                 MainLog.WriteInfo(line);
                 CommandsLog.WriteInfo(line);
             }
-            ProcessCommand(player, name, message);
+            ProcessCommand(player, name, message);*/
             return EventEat.EatGame;
         }
 
@@ -177,33 +177,33 @@ namespace LambAdmin
         {
             WriteLog.Info("Setting up internal stuff...");
 
-            PlayerConnected += e =>
-            {
-                e.SetField("spawnevent", 0);
-                e.OnInterval(100, (ent) =>
-                {
-                    if (ent.IsAlive)
-                    {
-                        if (!ent.HasField("spawnevent") || ent.GetField<int>("spawnevent") == 0)
-                        {
-                            PlayerActuallySpawned(ent);
-                            ent.SetField("spawnevent", 1);
-                        }
-                    }
-                    else
-                        ent.SetField("spawnevent", 0);
-                    return true;
-                });
-            };
+            //PlayerConnected += e =>
+            //{
+            //    e.SetField("spawnevent", 0);
+            //    OnInterval(100, () =>
+            //    {
+            //        if (e.IsAlive)
+            //        {
+            //            if (!e.HasField("spawnevent") || e.GetField<int>("spawnevent") == 0)
+            //            {
+            //                PlayerActuallySpawned(e);
+            //                e.SetField("spawnevent", 1);
+            //            }
+            //        }
+            //        else
+            //            e.SetField("spawnevent", 0);
+            //        return true;
+            //    });
+            //};
 
             OnNotify("game_ended", level =>
             {
                 OnGameEnded();
             });
 
-            PlayerConnected += MAIN_OnPlayerConnect;
+            //PlayerConnected += MAIN_OnPlayerConnect;
             PlayerDisconnected += MAIN_OnPlayerDisconnect;
-            PlayerConnecting += MAIN_OnPlayerConnecting;
+            //PlayerConnecting += MAIN_OnPlayerConnecting;
             OnPlayerDamageEvent += ANTIWEAPONHACK;
 
             // CUSTOM EVENTS
@@ -216,7 +216,6 @@ namespace LambAdmin
         public void MAIN_OnPlayerConnecting(Entity player)
         {
             player.SetField("isConnecting", 1);
-            player.SetClientDvar("didyouknow", "get REKT naba");
         }
 
         public void MAIN_OnPlayerConnect(Entity player)

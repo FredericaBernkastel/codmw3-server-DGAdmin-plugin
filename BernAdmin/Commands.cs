@@ -330,29 +330,29 @@ namespace LambAdmin
                 int time = MaxTime;
                 this.script = script;
 
-                VoteStatsHUD = HudElem.CreateServerFontString("hudsmall", 0.7f);
+                VoteStatsHUD = HudElem.CreateServerFontString(HudElem.Fonts.HudSmall, 0.7f);
                 VoteStatsHUD.SetPoint("TOPLEFT", "TOPLEFT", 10, 290);
                 VoteStatsHUD.Foreground = true;
                 VoteStatsHUD.HideWhenInMenu = true;
                 VoteStatsHUD.Archived = false;
 
-                script.OnInterval(1000, () =>
+                OnInterval(1000, () =>
                 {
                     try
                     {
                         if ((target == null) || (issuer == null))
                         {
-                            VoteStatsHUD.Call("destroy");
+                            VoteStatsHUD.Destroy();
                             return false;
                         }
                         if (!Active)
                         {
-                            VoteStatsHUD.Call("destroy");
+                            VoteStatsHUD.Destroy();
                             return false;
                         }
                         if (time <= 0)
                         {
-                            VoteStatsHUD.Call("destroy");
+                            VoteStatsHUD.Destroy();
                             End(script);
                             return false;
                         }
@@ -392,7 +392,7 @@ namespace LambAdmin
                             {"<issuer>", issuer.Name },
                             {"<reason>", reason },
                         }));
-                        script.AfterDelay(100, () =>
+                        AfterDelay(100, () =>
                         {
                             ExecuteCommand("dropclient " + target.GetEntityNumber() + " \"" + reason + "\"");
                             WriteLog.Info("Voting passed successfully.");
@@ -646,8 +646,8 @@ namespace LambAdmin
             if (!System.IO.Directory.Exists(ConfigValues.ConfigPath + @"Commands"))
                 System.IO.Directory.CreateDirectory(ConfigValues.ConfigPath + @"Commands");
 
-            PlayerConnected += CMDS_OnConnect;
-            PlayerConnecting += CMDS_OnConnecting;
+            //PlayerConnected += CMDS_OnConnect;
+            //PlayerConnecting += CMDS_OnConnecting;
             PlayerDisconnected += CMDS_OnDisconnect;
             PlayerActuallySpawned += CMDS_OnPlayerSpawned;
             OnPlayerKilledEvent += CMDS_OnPlayerKilled;
@@ -1432,13 +1432,13 @@ namespace LambAdmin
                             {
                                 case "-i":
                                 case "--int":
-                                    sender.Call("setclientdvar", optargs[0], int.Parse(optargs[1]));
+                                    sender.SetClientDvar(optargs[0], int.Parse(optargs[1]));
                                     success = true;
                                     break;
 
                                 case "-f":
                                 case "--float":
-                                    sender.Call("setclientdvar", optargs[0], float.Parse(optargs[1]));
+                                    sender.SetClientDvar(optargs[0], float.Parse(optargs[1]));
                                     success = true;
                                     break;
 
@@ -1545,7 +1545,7 @@ namespace LambAdmin
             CommandList.Add(new Command("sdvar", 1, Command.Behaviour.HasOptionalArguments,
                 (sender, arguments, optarg) =>
                 {
-                    Call("setdvar", arguments[0], optarg);
+                    GSCFunctions.SetDvar(arguments[0], optarg);
                     WriteChatToPlayer(sender, Command.GetString("sdvar", "message").Format(new Dictionary<string, string>()
                     {
                         {"<key>", arguments[0] },
@@ -1725,7 +1725,6 @@ namespace LambAdmin
                             {"<banid>", banentry.banid.ToString() },
                             {"<name>", banentry.playername },
                             {"<guid>", banentry.playerinfo.GetGUIDString() },
-                            {"<ip>", banentry.playerinfo.GetIPString() },
                             {"<hwid>", banentry.playerinfo.GetHWIDString() },
                             {"<time>", banentry.until.Year == 9999 ? "^6PERMANENT" : banentry.until.ToString("yyyy MMM d HH:mm") },
                         }));
@@ -1760,7 +1759,6 @@ namespace LambAdmin
                             {"<banid>", banentry.banid.ToString() },
                             {"<name>", banentry.playername },
                             {"<guid>", banentry.playerinfo.GetGUIDString() },
-                            {"<ip>", banentry.playerinfo.GetIPString() },
                             {"<hwid>", banentry.playerinfo.GetHWIDString() },
                             {"<time>", banentry.until.Year == 9999 ? "^6PERMANENT" : banentry.until.ToString("yyyy MMM d HH:mm") },
                         }));
@@ -2014,7 +2012,7 @@ namespace LambAdmin
                             WriteChatToPlayer(sender, Command.GetMessage("TargetIsImmune"));
                             continue;
                         }
-                        target.Call("freezecontrols", true);
+                        target.FreezeControls(true);
                         target.SetField("frozenbycommand", 1);
                         WriteChatToAll(Command.GetString("freeze", "message").Format(new Dictionary<string, string>() {
                             {"<issuer>", sender.Name },
@@ -2042,7 +2040,7 @@ namespace LambAdmin
                         if (target.HasField("frozenbycommand") && target.GetField<int>("frozenbycommand") == 1)
                         {
                             target.SetField("frozenbycommand", 0);
-                            target.Call("freezecontrols", false);
+                            target.FreezeControls(false);
                         }
                         WriteChatToAll(Command.GetString("unfreeze", "message").Format(new Dictionary<string, string>() {
                             {"<issuer>", sender.Name },
@@ -2203,16 +2201,18 @@ namespace LambAdmin
             CommandList.Add(new Command("sunlight", 3, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
-                    try
-                    {
-                        Single r = Convert.ToSingle(arguments[0]), g = Convert.ToSingle(arguments[1]), b = Convert.ToSingle(arguments[2]);
-                        ConfigValues.settings_sunlight = new Single[3] { r, g, b };
-                        Call("setsunlight", r,g,b);
-                    }
-                    catch
-                    {
-                        WriteChatToPlayer(sender, Command.GetString("sunlight", "usage"));
-                    }
+                    WriteChatToPlayer(sender, "^1Temporary DEPRECATED");
+                    return;
+                    //try
+                    //{
+                    //    Single r = Convert.ToSingle(arguments[0]), g = Convert.ToSingle(arguments[1]), b = Convert.ToSingle(arguments[2]);
+                    //    ConfigValues.settings_sunlight = new Single[3] { r, g, b };
+                    //    Call("setsunlight", r,g,b);
+                    //}
+                    //catch
+                    //{
+                    //    WriteChatToPlayer(sender, Command.GetString("sunlight", "usage"));
+                    //}
                 }));
 
             //SET ALIAS
@@ -2289,9 +2289,9 @@ namespace LambAdmin
                         return;
                     }
                     CMDS_AddToBanList(target, DateTime.MaxValue);
-                    target.OnInterval(50, (ent) =>
+                    OnInterval(50, () =>
                     {
-                        ent.SetClientDvar("g_scriptMainMenu", "");
+                        target.SetClientDvar("g_scriptMainMenu", "");
                         return true;
                     });
                     WriteChatToPlayer(sender, Command.GetString("silentban", "message").Format(new Dictionary<string, string>()
@@ -2406,11 +2406,11 @@ namespace LambAdmin
                     switch (state)
                     {
                         case true:
-                            Call("setdvar", "betterbalance", "1");
+                            GSCFunctions.SetDvar("betterbalance", "1");
                             WriteChatToAll(Command.GetString("betterbalance", "message_on"));
                             break;
                         case false:
-                            Call("setdvar", "betterbalance", "0");
+                            GSCFunctions.SetDvar("betterbalance", "0");
                             WriteChatToAll(Command.GetString("betterbalance", "message_off"));
                             break;
                     }
@@ -2499,28 +2499,30 @@ namespace LambAdmin
             CommandList.Add(new Command("daytime", 1, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
-                    ConfigValues.settings_daytime = arguments[0];
-                    switch(arguments[0]){ 
-                        case "day":
-                            ConfigValues.settings_daytime = "day";
-                            ConfigValues.settings_sunlight = new Single[3] { 1f, 1f, 1f };
-                            break;
-                        case "night":
-                            ConfigValues.settings_daytime = "night";
-                            ConfigValues.settings_sunlight = new Single[3] { 0f, 0.7f, 1f };
-                            break;
-                        case "morning":
-                            ConfigValues.settings_daytime = "day";
-                            ConfigValues.settings_sunlight = new Single[3] { 1.5f, 0.65f, 0f };
-                            break;
-                        case "cloudy":
-                            ConfigValues.settings_daytime = "day";
-                            ConfigValues.settings_sunlight = new Single[3] { 0f, 0f, 0f };
-                            break;
-                    }
-                    Call("setsunlight", ConfigValues.settings_sunlight[0], ConfigValues.settings_sunlight[1], ConfigValues.settings_sunlight[2]);
-                    foreach (Entity player in Players)
-                        UTILS_SetCliDefDvars(player);
+                    WriteChatToPlayer(sender, "^1Temporary DEPRECATED");
+                    return;
+                    //ConfigValues.settings_daytime = arguments[0];
+                    //switch(arguments[0]){ 
+                    //    case "day":
+                    //        ConfigValues.settings_daytime = "day";
+                    //        ConfigValues.settings_sunlight = new Single[3] { 1f, 1f, 1f };
+                    //        break;
+                    //    case "night":
+                    //        ConfigValues.settings_daytime = "night";
+                    //        ConfigValues.settings_sunlight = new Single[3] { 0f, 0.7f, 1f };
+                    //        break;
+                    //    case "morning":
+                    //        ConfigValues.settings_daytime = "day";
+                    //        ConfigValues.settings_sunlight = new Single[3] { 1.5f, 0.65f, 0f };
+                    //        break;
+                    //    case "cloudy":
+                    //        ConfigValues.settings_daytime = "day";
+                    //        ConfigValues.settings_sunlight = new Single[3] { 0f, 0f, 0f };
+                    //        break;
+                    //}
+                    //Call("setsunlight", ConfigValues.settings_sunlight[0], ConfigValues.settings_sunlight[1], ConfigValues.settings_sunlight[2]);
+                    //foreach (Entity player in Players)
+                    //    UTILS_SetCliDefDvars(player);
                 }));
 
             //KD
@@ -2626,14 +2628,21 @@ namespace LambAdmin
                         string key = String.IsNullOrEmpty(optarg) ? "+activate" : optarg;
                         if (!System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\setfx.txt"))
                             System.IO.File.WriteAllLines(ConfigValues.ConfigPath + @"Commands\internal\setfx.txt", new string[] { }); 
-                        sender.Call("notifyonplayercommand", "spawnfx", key);
+                        sender.NotifyOnPlayerCommand("spawnfx", key);
                         sender.OnNotify("spawnfx", ent =>
                         {
                             using (StreamWriter file = File.AppendText(ConfigValues.ConfigPath + @"Commands\internal\setfx.txt"))
                             {
                                 Array.ForEach(sender.GetField<string>("CMD_SETFX").Split(','), (s) =>
                                 {
-                                    Call("triggerfx",Call<Entity>("spawnFx", Call<int>("loadfx", s), sender.Origin, new Vector3(0, 0, 1), new Vector3(0, 0, 0)));
+                                    GSCFunctions.TriggerFX(
+                                        GSCFunctions.SpawnFX(
+                                            GSCFunctions.LoadFX(s), 
+                                            sender.Origin, 
+                                            new Vector3(0, 0, 1), 
+                                            new Vector3(0, 0, 0)
+                                        )
+                                    );
                                     WriteChatToPlayer(sender, Command.GetString("setfx", "spawned").Format(new Dictionary<string, string>()
                                     {
                                         {"<fx>", s },
@@ -2668,9 +2677,9 @@ namespace LambAdmin
                 (sender, arguments, optarg) =>
                 {
                     //Entity fx = Call<Entity>("playfxontag", Call<int>("loadfx", "fire/car_fire_mp"), sender, "tag_origin");
-                    int addr = Call<int>("loadfx", "misc/flares_cobra");
+                    int addr = GSCFunctions.LoadFX("misc/flares_cobra");
                     OnInterval(200, () => {
-                        Call("playfx", addr, sender.Call<Vector3>("GetEye"));
+                        GSCFunctions.PlayFX(addr, sender.GetEye());
                         return true;
                     });
                     WriteChatToPlayer(sender, "^1FIREEEEEEEEEEEE");
@@ -2799,7 +2808,7 @@ namespace LambAdmin
 
                     foreach (Entity player in players)
                     {
-                        player.Call("setOrigin", player2.Origin);
+                        player.SetOrigin(player2.Origin);
                         WriteChatToPlayer(sender, Command.GetString("teleport", "message").Format(new Dictionary<string, string>()
                         {
                             {"<player1>", player.Name },
@@ -2837,18 +2846,18 @@ namespace LambAdmin
                             if (UTILS_GetFieldSafe<int>(_player, "CMD_FLY") == EVENTHANDLERS_ACTIVE)
                             {
                                 sender.SetField("CMD_FLY", EFFECTS_ACTIVE);
-                                _player.Call("allowspectateteam", "freelook", true);
+                                _player.AllowSpectateTeam("freelook", true);
                                 _player.SetField("sessionstate", "spectator");
-                                _player.Call("setcontents", 0);
-                                _player.Call("ThermalVisionOn");
+                                _player.SetContents(0);
+                                _player.ThermalVisionOn();
                                 UTILS_SetClientDvarsPacked(_player, UTILS_SetClientInShadowFX());
                                 int iter = 0;
-                                _player.OnInterval(100, __player =>
+                                OnInterval(100, () =>
                                 {
                                     if (iter % 10 == 0)
-                                        __player.Call("playlocalsound", "ui_mp_nukebomb_timer");
+                                        _player.PlayLocalSound("ui_mp_nukebomb_timer");
                                     if (iter % 30 == 0)
-                                        __player.Call("playlocalsound", "breathing_hurt");
+                                        _player.PlayLocalSound("breathing_hurt");
                                     iter += 1;
                                     return UTILS_GetFieldSafe<int>(_player, "CMD_FLY") == EFFECTS_ACTIVE;
                                 });
@@ -2859,10 +2868,10 @@ namespace LambAdmin
                             if (UTILS_GetFieldSafe<int>(_player, "CMD_FLY") == EFFECTS_ACTIVE)
                             {
                                 _player.SetField("CMD_FLY", EVENTHANDLERS_ACTIVE);
-                                _player.Call("allowspectateteam", "freelook", false);
+                                _player.AllowSpectateTeam("freelook", false);
                                 _player.SetField("sessionstate", "playing");
-                                _player.Call("setcontents", 100);
-                                _player.Call("ThermalVisionOff");
+                                _player.SetContents(100);
+                                _player.ThermalVisionOff();
                                 UTILS_SetCliDefDvars(_player);
                             }
                         }));
@@ -2873,8 +2882,8 @@ namespace LambAdmin
                         int CMD_FLY = UTILS_GetFieldSafe<int>(sender, "CMD_FLY");
                         if (CMD_FLY == DISABLED)
                         {
-                            sender.Call("notifyonplayercommand", "fly_on", "+" + key);
-                            sender.Call("notifyonplayercommand", "fly_off", "-" + key);
+                            sender.NotifyOnPlayerCommand("fly_on", "+" + key);
+                            sender.NotifyOnPlayerCommand("fly_off", "-" + key);
                         }
                         WriteChatToPlayer(sender, Command.GetString("fly", "enabled").Format(new Dictionary<string, string>()
                                 {
@@ -2983,18 +2992,20 @@ namespace LambAdmin
             CommandList.Add(new Command("playfxontag", 1, Command.Behaviour.HasOptionalArguments,
             (sender, arguments, optarg) =>
             {
-                if (!UTILS_ValidateFX(arguments[0]))
-                {
-                    WriteChatToPlayer(sender, Command.GetMessage("FX_not_found"));
-                    return;
-                }
-                string tag = String.IsNullOrEmpty(optarg) ? "j_head" : optarg;
-                Entity fx = Call<Entity>("playfxontag", new Parameter[] { Call<int>("loadfx", arguments[0]), sender, tag });
-                WriteChatToPlayer(sender, Command.GetString("playfxontag", "message").Format(new Dictionary<string, string>()
-                {
-                    {"<fx>", arguments[0]},
-                    {"<tag>", tag}
-                }));
+                WriteChatToPlayer(sender, "^1Temporary DEPRECATED");
+                return;
+                //if (!UTILS_ValidateFX(arguments[0]))
+                //{
+                //    WriteChatToPlayer(sender, Command.GetMessage("FX_not_found"));
+                //    return;
+                //}
+                //string tag = String.IsNullOrEmpty(optarg) ? "j_head" : optarg;
+                //Entity fx = GSCFunctions.PlayFXOnTag(GSCFunctions.LoadFX(arguments[0]), sender, tag);
+                //WriteChatToPlayer(sender, Command.GetString("playfxontag", "message").Format(new Dictionary<string, string>()
+                //{
+                //    {"<fx>", arguments[0]},
+                //    {"<tag>", tag}
+                //}));
             }));
 
             // !rotatescreen <player | *filter*> <degree>
@@ -3012,10 +3023,10 @@ namespace LambAdmin
 
                 foreach (Entity target in targets)
                 {
-                    angles = target.Call<Vector3>("getplayerangles");
+                    angles = target.GetPlayerAngles();
                     angles.Z = float.Parse(arguments[1]);
 
-                    target.Call("setplayerangles", new Parameter[] { angles });
+                    target.SetPlayerAngles(angles);
 
                     if(targets.Count == 1)
                         WriteChatToPlayer(sender, Command.GetString("rotatescreen", "message").Format(new Dictionary<string, string>()
@@ -3090,8 +3101,8 @@ namespace LambAdmin
             CommandList.Add(new Command("drunk", 0, Command.Behaviour.Normal,
             (sender, arguments, optarg) =>
             {
-                sender.OnInterval(2, (ent) => {
-                    sender.Call("shellshock", "default", 4F);
+                OnInterval(2000, () => {
+                    sender.ShellShock("default", 4F);
                     return sender.IsAlive;
                 });
                 WriteChatToAll(Command.GetString("drunk", "message").Format(
@@ -3146,13 +3157,13 @@ namespace LambAdmin
                     if (takeWeapons)
                         target.TakeAllWeapons();
 
-                    target.AfterDelay(50, (ent) =>
+                    AfterDelay(50, () =>
                     {
                         target.GiveWeapon(arguments[1]);
-                        target.AfterDelay(50, (_ent) =>
+                        AfterDelay(50, () =>
                         {
                             target.SwitchToWeaponImmediate(arguments[1]);
-                            target.AfterDelay(1000, (__ent) =>
+                            AfterDelay(1000, () =>
                             {
                                 if (((target.CurrentWeapon == "none") && takeWeapons) ||                            //                    .
                                     ((target.CurrentWeapon == orig_weapon) && !takeWeapons))                        //                  _,|\    WE FIGHT FOR LOVE AND JUSTICE !!!!               
@@ -3160,7 +3171,7 @@ namespace LambAdmin
                                     if (takeWeapons)                                                                //                   ||     AND ALSO NICE SHOES AND PRETTY PURSES AND JEWELRY
                                     {                                                                               //___               {_].                                                     
                                         target.GiveWeapon(orig_weapon);                                             // \ \               L; `                                                    
-                                        target.AfterDelay(50, (____ent) =>                                          //  ) )               | :  ,(),_,_,(),                                       
+                                        AfterDelay(50, () =>                                                        //  ) )               | :  ,(),_,_,(),                                       
                                         {                                                                           //_/_/                | | / /(,,^,,)\ \                                      
                                             target.SwitchToWeaponImmediate(orig_weapon);                            //                    | || | ;`-o-'; | |                                     
                                         });                                                                         //                    |/:) | | '.' | | (                                     
@@ -3346,8 +3357,8 @@ namespace LambAdmin
             CommandList.Add(new Command("shellshock", 2, Command.Behaviour.Normal,
             (sender, arguments, optarg) =>
             {
-                Call("precacheshellshock", arguments[0]);
-                sender.Call("shellshock", 
+                GSCFunctions.PreCacheShellShock(arguments[0]);
+                sender.ShellShock( 
                     arguments[0],
                     float.Parse(arguments[1])
                 );
@@ -3358,9 +3369,7 @@ namespace LambAdmin
             CommandList.Add(new Command("setviewmodel", 1, Command.Behaviour.Normal,
             (sender, arguments, optarg) =>
             {
-                sender.Call("setviewmodel",
-                    arguments[0]
-                );
+                sender.SetViewModel(arguments[0]);
                 WriteChatSpyToPlayer(sender, "setviewmodel::callback");
             }));
 
@@ -3368,9 +3377,8 @@ namespace LambAdmin
             CommandList.Add(new Command("openmenu", 1, Command.Behaviour.Normal,
             (sender, arguments, optarg) =>
             {
-                sender.Call("openmenu",
-                    arguments[0]
-                );
+                GSCFunctions.PreCacheMenu(arguments[0]);
+                sender.OpenMenu(arguments[0]);
                 WriteChatSpyToPlayer(sender, "openmenu::callback");
             }));
 
@@ -3426,7 +3434,7 @@ namespace LambAdmin
                             sender.SetClientDvar("r_lighttweaksunlight", "-10" );
                             sender.SetClientDvar("r_brightness", "-0.5" );
                             sender.SetClientDvar("r_fog", "1" );
-                            sender.Call("SetClientDvars", new Parameter[] { "r_sun", "0", "r_lighttweaksunlight", "0.3 0.3 0.3" });
+                            sender.SetClientDvars("r_sun", "0", new Parameter[] {"r_lighttweaksunlight", "0.3 0.3 0.3" });
                             sender.SetClientDvar("r_lightTweakSunColor", "0 0 0");
                             sender.SetClientDvar("r_lighttweaksunlight", "0.991101 0.947308 0.760525" );
                             sender.SetClientDvar("r_heroLightScale", "1 1 1");
@@ -3436,7 +3444,7 @@ namespace LambAdmin
                     case "dsr":
                         {
                             string dsr = @"players2/" + ConfigValues.sv_current_dsr;
-                            WriteLog.Warning(" DSR:  players2/" + Call<string>("getdvar", "sv_current_dsr"));
+                            WriteLog.Warning(" DSR:  players2/" + GSCFunctions.GetDvar("sv_current_dsr"));
                             WriteChatToAll("dsr: " + dsr);
                             if (System.IO.File.Exists(dsr))
                                 WriteChatToAll("(exists)");
@@ -3657,33 +3665,35 @@ namespace LambAdmin
                     DefaultCDvars.Add(parts[0], parts[1]);
                 }
             }
-            if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))
-            {
-                try
-                {
-                    foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))
-                    {
-                        string[] _line = line.Split('=');
-                        switch (_line[0])
-                        {
-                            case "daytime":
-                                ConfigValues.settings_daytime = _line[1];
-                                break;
-                            case "sunlight":
-                                string[] _sunlight = _line[1].Split(',');
-                                ConfigValues.settings_sunlight = new Single[3] { Convert.ToSingle(_sunlight[0]), Convert.ToSingle(_sunlight[1]), Convert.ToSingle(_sunlight[2]) };
-                                break;
-                            default:
-                                break;
-                        }
-                        Call("setsunlight", ConfigValues.settings_sunlight[0], ConfigValues.settings_sunlight[1], ConfigValues.settings_sunlight[2]);
-                    }
-                }
-                catch
-                {
-                    WriteLog.Error("Error loading \"Commands\\internal\\daytime.txt\"");
-                }
-            }
+            //temporary DEPRECATED
+
+            //if (System.IO.File.Exists(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))
+            //{
+            //    try
+            //    {
+            //        foreach (string line in System.IO.File.ReadAllLines(ConfigValues.ConfigPath + @"Commands\internal\daytime.txt"))
+            //        {
+            //            string[] _line = line.Split('=');
+            //            switch (_line[0])
+            //            {
+            //                case "daytime":
+            //                    ConfigValues.settings_daytime = _line[1];
+            //                    break;
+            //                case "sunlight":
+            //                    string[] _sunlight = _line[1].Split(',');
+            //                    ConfigValues.settings_sunlight = new Single[3] { Convert.ToSingle(_sunlight[0]), Convert.ToSingle(_sunlight[1]), Convert.ToSingle(_sunlight[2]) };
+            //                    break;
+            //                default:
+            //                    break;
+            //            }
+            //            Call("setsunlight", ConfigValues.settings_sunlight[0], ConfigValues.settings_sunlight[1], ConfigValues.settings_sunlight[2]);
+            //        }
+            //    }
+            //    catch
+            //    {
+            //        WriteLog.Error("Error loading \"Commands\\internal\\daytime.txt\"");
+            //    }
+            //}
         }
 
         public void InitChatAlias()
@@ -4179,7 +4189,7 @@ namespace LambAdmin
 
         public void CMD_SPEED(Entity player, float speed)
         {
-            player.Call("setmovespeedscale", new Parameter[] { speed });
+            player.SetMoveSpeedScale(speed);
         }
 
         public unsafe void CMD_GRAVITY(int g)
@@ -4269,16 +4279,16 @@ namespace LambAdmin
         public void CMDS_RekEffects(Entity player)
         {
             player.SetField("rekt", 1);
-            player.OnInterval(50, ent =>
+            OnInterval(50, () =>
             {
-                ent.SetClientDvar("g_scriptMainMenu", "");
-                ent.Call("freezecontrols", true);
+                player.SetClientDvar("g_scriptMainMenu", "");
+                player.FreezeControls(false);
                 try
                 {
-                    ent.TakeAllWeapons();
-                    ent.Call("disableweapons");
-                    ent.Call("disableoffhandweapons");
-                    ent.Call("disableweaponswitch");
+                    player.TakeAllWeapons();
+                    player.DisableWeapons();
+                    player.DisableOffhandWeapons();
+                    player.DisableWeaponSwitch();
                     /*
                     ent.Call("closemenu");
                     ent.Call("closepopupmenu");
@@ -4303,10 +4313,10 @@ namespace LambAdmin
                         HaxLog.WriteInfo("----ENDREPORT---");
                     }
                 }
-                ent.IPrintLnBold("^1YOU'RE REKT");
-                ent.IPrintLn("^1YOU'RE REKT");
-                Utilities.RawSayTo(ent, "^1YOU'RE REKT");
-                ent.SetClientDvar("r_colorMap", "3");
+                player.IPrintLnBold("^1YOU'RE REKT");
+                player.IPrintLn("^1YOU'RE REKT");
+                Utilities.RawSayTo(player, "^1YOU'RE REKT");
+                player.SetClientDvar("r_colorMap", "3");
                 return true;
             });
         }
@@ -4321,7 +4331,7 @@ namespace LambAdmin
             DateTime until = CMDS_GetBanTime(player);
             if (until > DateTime.Now)
             {
-                player.AfterDelay(1000, ent =>
+                AfterDelay(1000, () =>
                 {
                     if (until.Year != 9999)
                     {
@@ -4339,7 +4349,7 @@ namespace LambAdmin
 
             if (ConfigValues.LockServer && !LockServer_Whitelist.Contains(player.GUID))
             {
-                player.AfterDelay(1000, ent =>
+                AfterDelay(1000, () =>
                 {
                     string reason = System.IO.File.ReadAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER");
                     ExecuteCommand(string.Format("dropclient {0} \"^3Server is protected!{1}\"", player.GetEntityNumber(), String.IsNullOrEmpty(reason) ? "" : " ^7Reason: ^1" + reason));
@@ -4447,13 +4457,6 @@ namespace LambAdmin
             List<string> identifiers = new List<string>();
             if (B.isNull() || A.isNull())
                 return null;
-            if (!string.IsNullOrWhiteSpace(A.GetIPString()))
-            {
-                if (!string.IsNullOrWhiteSpace(B.GetIPString()) && A.GetIPString() == B.GetIPString())
-                    identifiers.Add("^2" + A.GetIPString());
-                else
-                    identifiers.Add("^1" + A.GetIPString());
-            }
             if (!string.IsNullOrWhiteSpace(A.GetGUIDString()))
             {
                 if (!string.IsNullOrWhiteSpace(B.GetGUIDString()) && A.GetGUIDString() == B.GetGUIDString())
@@ -4548,7 +4551,7 @@ namespace LambAdmin
 
         public static bool isMuted(this Entity entity)
         {
-            return System.IO.File.ReadAllLines(DGAdmin.ConfigValues.ConfigPath + @"Commands\internal\mutedplayers.txt").ToList().Contains(entity.GetInfo().getIdentifiers());
+            return File.ReadAllLines(DGAdmin.ConfigValues.ConfigPath + @"Commands\internal\mutedplayers.txt").ToList().Contains(entity.GetInfo().getIdentifiers());
         }
 
         public static void setMuted(this Entity entity, bool state)

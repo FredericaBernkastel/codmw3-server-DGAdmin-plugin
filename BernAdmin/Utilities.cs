@@ -37,9 +37,9 @@ namespace LambAdmin
         public static partial class ConfigValues
         {
 #if DEBUG
-            public static string Version = "v3.5d";
+            public static string Version = "v3.6d#IS1.5";
 #else
-            public static string Version = "v3.5";
+            public static string Version = "v3.6#IS1.5";
 #endif
             public static string ConfigPath = @"scripts\DGAdmin\";
             public static string ChatPrefix
@@ -510,13 +510,11 @@ namespace LambAdmin
 
         public class PlayerInfo
         {
-            private string player_ip = null;
             private long? player_guid = null;
             private HWID player_hwid = null;
 
             public PlayerInfo(Entity player)
             {
-                player_ip = player.IP.Address.ToString();
                 player_guid = player.GUID;
                 player_hwid = player.GetHWID();
             }
@@ -531,7 +529,6 @@ namespace LambAdmin
                 if (B.isNull() || isNull())
                     return false;
                 return
-                    (B.player_ip == null || player_ip == B.player_ip) &&
                     (B.player_guid == null || player_guid.Value == B.player_guid.Value) &&
                     (B.player_hwid == null || player_hwid.Value == B.player_hwid.Value);
             }
@@ -540,8 +537,6 @@ namespace LambAdmin
             {
                 if (B.isNull() || isNull())
                     return false;
-                if ((player_ip != null && B.player_ip != null) && player_ip == B.player_ip)
-                    return true;
                 if ((player_guid != null && B.player_guid != null) && player_guid.Value == B.player_guid.Value)
                     return true;
                 if ((player_hwid != null && B.player_hwid != null) && player_hwid.Value == B.player_hwid.Value)
@@ -555,12 +550,6 @@ namespace LambAdmin
                 if (long.TryParse(identifier, out result))
                 {
                     player_guid = result;
-                    return;
-                }
-                IPAddress address;
-                if (IPAddress.TryParse(identifier, out address))
-                {
-                    player_ip = address.ToString();
                     return;
                 }
                 HWID possibleHWID;
@@ -594,7 +583,7 @@ namespace LambAdmin
 
             public bool isNull()
             {
-                return player_ip == null && !player_guid.HasValue && player_hwid == null;
+                return !player_guid.HasValue && player_hwid == null;
             }
 
             public override string ToString()
@@ -609,11 +598,6 @@ namespace LambAdmin
                 return null;
             }
 
-            public string GetIPString()
-            {
-                return player_ip;
-            }
-
             //CHANGE
             public string GetHWIDString()
             {
@@ -626,11 +610,6 @@ namespace LambAdmin
                 PlayerInfo commoninfo = new PlayerInfo();
                 if (B.isNull() || A.isNull())
                     return null;
-                if (!string.IsNullOrWhiteSpace(A.GetIPString()))
-                {
-                    if (!string.IsNullOrWhiteSpace(B.GetIPString()) && A.GetIPString() == B.GetIPString())
-                        commoninfo.player_ip = A.player_ip;
-                }
                 if (!string.IsNullOrWhiteSpace(A.GetGUIDString()))
                 {
                     if (!string.IsNullOrWhiteSpace(B.GetGUIDString()) && A.GetGUIDString() == B.GetGUIDString())
@@ -953,8 +932,8 @@ namespace LambAdmin
 
         public void UTILS_OnServerStart()
         {
-            PlayerConnected += UTILS_OnPlayerConnect;
-            PlayerConnecting += UTILS_OnPlayerConnecting;
+            //PlayerConnected += UTILS_OnPlayerConnect;
+            //PlayerConnecting += UTILS_OnPlayerConnecting;
             OnPlayerKilledEvent += UTILS_BetterBalance;
 
             if (!System.IO.Directory.Exists(ConfigValues.ConfigPath + @"Utils"))
@@ -991,7 +970,7 @@ namespace LambAdmin
             // RGADMIN HUDELEM
             if (bool.Parse(Sett_GetString("settings_showversion")))
             {
-                RGAdminMessage = HudElem.CreateServerFontString("bigfixed", 0.6f);
+                RGAdminMessage = HudElem.CreateServerFontString(HudElem.Fonts.Big, 0.6f);
                 RGAdminMessage.SetPoint("BOTTOMRIGHT", "BOTTOMRIGHT",0,-30);
                 RGAdminMessage.SetText(" ^0[^1DG^0]\n^:Admin\n^0" + ConfigValues.Version);
                 RGAdminMessage.Color = new Vector3(1f, 0.75f, 0f);
@@ -1004,7 +983,7 @@ namespace LambAdmin
             // ADMINS HUDELEM
             if (bool.Parse(Sett_GetString("settings_adminshudelem")))
             {
-                OnlineAdmins = HudElem.CreateServerFontString("hudsmall", 0.5f);
+                OnlineAdmins = HudElem.CreateServerFontString(HudElem.Fonts.HudSmall, 0.5f);
                 OnlineAdmins.SetPoint("top", "top", 0, 5);
                 OnlineAdmins.Foreground = true;
                 OnlineAdmins.Archived = false;
@@ -1028,31 +1007,25 @@ namespace LambAdmin
 
         private void hud_alive_players(Entity player)
         {
-            HudElem fontString1 = HudElem.CreateFontString(player, "hudbig", 0.6f);
+            HudElem fontString1 = HudElem.CreateFontString(player, HudElem.Fonts.HudBig, 0.6f);
             fontString1.SetPoint("DOWNRIGHT", "DOWNRIGHT", -19, 60);
             fontString1.SetText("^3Allies^7:");
             fontString1.HideWhenInMenu = true;
-            HudElem fontString2 = HudElem.CreateFontString(player, "hudbig", 0.6f);
+            HudElem fontString2 = HudElem.CreateFontString(player, HudElem.Fonts.HudBig, 0.6f);
             fontString2.SetPoint("DOWNRIGHT", "DOWNRIGHT", -19, 80);
             fontString2.SetText("^1Enemy^7:");
             fontString2.HideWhenInMenu = true;
-            HudElem hudElem2 = HudElem.CreateFontString(player, "hudbig", 0.6f);
+            HudElem hudElem2 = HudElem.CreateFontString(player, HudElem.Fonts.HudBig, 0.6f);
             hudElem2.SetPoint("DOWNRIGHT", "DOWNRIGHT", -8, 60);
             hudElem2.HideWhenInMenu = true;
-            HudElem hudElem3 = HudElem.CreateFontString(player, "hudbig", 0.6f);
+            HudElem hudElem3 = HudElem.CreateFontString(player, HudElem.Fonts.HudBig, 0.6f);
             hudElem3.SetPoint("DOWNRIGHT", "DOWNRIGHT", -8, 80);
             hudElem3.HideWhenInMenu = true;
-            this.OnInterval(50, (Func<bool>)(() =>
+            OnInterval(50, (Func<bool>)(() =>
             {
-                string str1 = (string)player.GetField<string>("sessionteam");
-                string str2 = ((int)this.Call<int>("getteamplayersalive", new Parameter[1]
-                    {
-                        "axis"
-                    })).ToString();
-                string str3 = ((int)this.Call<int>("getteamplayersalive", new Parameter[1]
-                    {
-                        "allies"
-                    })).ToString();
+                string str1 = player.GetField<string>("sessionteam");
+                string str2 = GSCFunctions.GetTeamPlayersAlive("axis").ToString();
+                string str3 = GSCFunctions.GetTeamPlayersAlive("allies").ToString();
                 hudElem2.SetText(str1.Equals("allies") ? str3 : str2);
                 hudElem3.SetText(str1.Equals("allies") ? str2 : str3);
                 return true;
@@ -1115,9 +1088,9 @@ namespace LambAdmin
 
         public void UTILS_BetterBalance(Entity player, Entity inflictor, Entity attacker, int damage, string mod, string weapon, Vector3 dir, string hitLoc)
         {
-            if (!ConfigValues.settings_betterbalance_enable || Call<string>("getdvar", "g_gametype") == "infect")
+            if (!ConfigValues.settings_betterbalance_enable || UTILS_GetDvar("g_gametype") == "infect")
                 return;
-            if (Call<string>("getdvar", "betterbalance") == "0")
+            if (UTILS_GetDvar("betterbalance") == "0")
                 return;
             int axis = 0, allies = 0;
             UTILS_GetTeamPlayers(out axis, out allies);
@@ -1160,7 +1133,7 @@ namespace LambAdmin
                 case "1":
                     break;
                 case "2":
-                    if ((!ConfigValues.settings_unlimited_ammo || Call<string>("getdvar", "g_gametype") == "infect") && !force)
+                    if ((!ConfigValues.settings_unlimited_ammo || UTILS_GetDvar("g_gametype") == "infect") && !force)
                         return;
                     break;
             }
@@ -1175,14 +1148,17 @@ namespace LambAdmin
                     foreach (Entity player in from player in Players where player.IsAlive select player)
                     {
                         var Currwep = player.CurrentWeapon;
-                        var offhandAmmo = player.Call<string>("getcurrentoffhand");
+                        var offhandAmmo = player.GetCurrentOffhand();
 
-                        player.Call("setweaponammoclip", offhandAmmo, 99);
-                        player.Call("givemaxammo", offhandAmmo);
+                        player.SetWeaponAmmoClip(offhandAmmo, 99);
+                        player.GiveMaxAmmo(offhandAmmo);
 
-                        player.Call("setweaponammoclip", Currwep, 99);
-                        player.Call("setweaponammoclip", Currwep, 99, "left");
-                        player.Call("setweaponammoclip", Currwep, 99, "right");
+                        player.SetWeaponAmmoClip(Currwep, 99);
+
+                        //DEPRECATED
+
+                        //player.SetWeaponAmmoClip(Currwep, 99, "left");
+                        //player.SetWeaponAmmoClip(Currwep, 99, "right");
                     }
                 else
                     ConfigValues.unlimited_ammo_active = false;
@@ -1199,7 +1175,7 @@ namespace LambAdmin
                 if (bool.Parse(Sett_GetString("settings_unfreezeongameend")))
                     foreach (Entity player in Players)
                         if (!CMDS_IsRekt(player))
-                            player.Call("freezecontrols", false);
+                            player.FreezeControls(false);
 
                 // Save xlr stats
                 if (ConfigValues.settings_enable_xlrstats)
@@ -1260,12 +1236,12 @@ namespace LambAdmin
 
         public string UTILS_GetDvar(string dvar)
         {
-            return Call<string>("getdvar", dvar);
+            return GSCFunctions.GetDvar(dvar);
         }
 
         public void UTILS_SetDvar(string dvar, string value)
         {
-            Call<string>("setdvar", dvar, value);
+            GSCFunctions.SetDvar(dvar, value);
         }
 
         public void UTILS_SetCliDefDvars(Entity player)
@@ -1309,7 +1285,7 @@ namespace LambAdmin
 
         public void UTILS_SetClientDvarsPacked(Entity player, List<Dvar> dvars)
         {
-            player.Call("setclientdvars", dvars.ConvertAll((v) => { return new Parameter[] { v.key, v.value }; }).SelectMany(v => v).ToArray());
+            player.SetClientDvars(null, null, dvars.ConvertAll((v) => { return new Parameter[] { v.key, v.value }; }).SelectMany(v => v).ToArray());
         }
 
         public static void ExecuteCommand(string command)
@@ -1449,9 +1425,9 @@ namespace LambAdmin
                 ((Func<string[], bool>)((fx) => {
                     try
                     {
-                        Call("triggerfx", 
-                            Call<Entity>("spawnFx", 
-                                Call<int>("loadfx", fx[0]), 
+                        GSCFunctions.TriggerFX(
+                            GSCFunctions.SpawnFX(
+                                GSCFunctions.LoadFX(fx[0]), 
                                 new Vector3(
                                     Single.Parse(fx[1]), 
                                     Single.Parse(fx[2]), 
@@ -2003,11 +1979,6 @@ namespace LambAdmin
             return precached_fx.Contains(fx);
         }
 
-        public string UTILS_GetDefCDvar(string key)
-        {
-            return Call<string>("getdvar", key);
-        }
-
         public void UTILS_SetChatAlias(Entity sender, string player, string alias)
         {
             Entity target = FindSinglePlayer(player);
@@ -2168,7 +2139,7 @@ namespace LambAdmin
         public string UTILS_GetDSRName()
         {
             //return DGAdmin.Mem.ReadString(0x01B3ECB3, 32);
-           return Call<string>("getdvar", "sv_current_dsr");
+           return GSCFunctions.GetDvar("sv_current_dsr");
         }
 
         public bool UTILS_WeaponAllowed(string s)
@@ -2287,22 +2258,22 @@ namespace LambAdmin
 
         public static void IPrintLnBold(this Entity player, string message)
         {
-            player.Call("iprintlnbold", message);
+            player.IPrintLnBold(message);
         }
 
         public static void IPrintLn(this Entity player, string message)
         {
-            player.Call("iprintln", message);
+            player.IPrintLn(message);
         }
 
         public static int GetEntityNumber(this Entity player)
         {
-            return player.Call<int>("getentitynumber");
+            return player.GetEntityNumber();
         }
 
         public static void Suicide(this Entity player)
         {
-            player.Call("suicide");
+            player.Suicide();
         }
 
         public static string GetTeam(this Entity player)

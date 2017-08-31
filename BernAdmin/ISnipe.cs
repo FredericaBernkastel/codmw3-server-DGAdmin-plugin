@@ -71,7 +71,7 @@ namespace LambAdmin
             SNIPE_InitCommands();
             PlayerActuallySpawned += SNIPE_OnPlayerSpawn;
             OnPlayerDamageEvent += SNIPE_PeriodicChecks;
-            PlayerConnected += SNIPE_OnPlayerConnect;
+            //PlayerConnected += SNIPE_OnPlayerConnect;
 
             if (ConfigValues.ISNIPE_SETTINGS.ANTIKNIFE)
             {
@@ -81,7 +81,7 @@ namespace LambAdmin
 
             AfterDelay(5000, () =>
             {
-                if (Call<string>("getdvar", "g_gametype") == "infect")
+                if (UTILS_GetDvar("g_gametype") == "infect")
                     EnableKnife();
             });
 
@@ -94,14 +94,14 @@ namespace LambAdmin
             CMD_GiveMaxAmmo(player);
 
             if (ConfigValues.ISNIPE_SETTINGS.ANTIPLANT)
-                player.OnInterval(1000, (e2) =>
+                OnInterval(1000, () =>
                 {
-                    if (!e2.IsAlive)
+                    if (!player.IsAlive)
                         return false;
-                    if (e2.CurrentWeapon.Equals("briefcase_bomb_mp"))
+                    if (player.CurrentWeapon.Equals("briefcase_bomb_mp"))
                     {
-                        e2.TakeWeapon("briefcase_bomb_mp");
-                        e2.IPrintLnBold(Lang_GetString("Message_PlantingNotAllowed"));
+                        player.TakeWeapon("briefcase_bomb_mp");
+                        player.IPrintLnBold(Lang_GetString("Message_PlantingNotAllowed"));
                         return true;
                     }
                     return true;
@@ -111,15 +111,15 @@ namespace LambAdmin
             {
                 player.SetField("adscycles", 0);
                 player.SetField("letmehardscope", 0);
-                player.OnInterval(50, ent =>
+                OnInterval(50, () =>
                 {
-                    if (!ent.IsAlive)
+                    if (!player.IsAlive)
                         return false;
-                    if (ent.GetField<int>("letmehardscope") == 1)
+                    if (player.GetField<int>("letmehardscope") == 1)
                         return true;
-                    if (Call<string>("getdvar", "g_gametype") == "infect" && ent.GetTeam() != "allies")
+                    if (UTILS_GetDvar("g_gametype") == "infect" && player.GetTeam() != "allies")
                         return true;
-                    float ads = ent.Call<float>("playerads");
+                    float ads = player.PlayerAds();
                     int adscycles = player.GetField<int>("adscycles");
                     if (ads == 1f)
                         adscycles++;
@@ -128,13 +128,13 @@ namespace LambAdmin
 
                     if (adscycles > 5)
                     {
-                        ent.Call("allowads", false);
-                        ent.IPrintLnBold(Lang_GetString("Message_HardscopingNotAllowed"));
+                        player.AllowAds(false);
+                        player.IPrintLnBold(Lang_GetString("Message_HardscopingNotAllowed"));
                     }
 
-                    if (ent.Call<int>("adsbuttonpressed") == 0 && ads == 0)
+                    if (!player.AdsButtonPressed() && ads == 0)
                     {
-                        ent.Call("allowads", true);
+                        player.AllowAds(true);
                     }
 
                     player.SetField("adscycles", adscycles);
@@ -157,14 +157,14 @@ namespace LambAdmin
                 if(attacker.IsSpectating() || !attacker.IsAlive)
                     player.Health += damage;
 
-            if (weapon == "iw5_usp45_mp_tactical" && Call<string>("getdvar", "g_gametype") == "infect" && attacker.GetTeam() != "allies")
+            if (weapon == "iw5_usp45_mp_tactical" && UTILS_GetDvar("g_gametype") == "infect" && attacker.GetTeam() != "allies")
                 return;
             //if (ConfigValues.ISNIPE_SETTINGS.ANTINOSCOPE && (UTILS_GetFieldSafe<int>(attacker, "weapon_fired_noscope") == 1))
             //    player.Health += damage;
             if (ConfigValues.ISNIPE_SETTINGS.ANTICRTK && (weapon == "throwingknife_mp") && (attacker.Origin.DistanceTo2D(player.Origin) < 200f))
             {
                 player.Health += damage;
-                attacker.Call("iprintlnbold", new Parameter[] { Lang_GetString("Message_CRTK_NotAllowed") });
+                attacker.IPrintLnBold(Lang_GetString("Message_CRTK_NotAllowed"));
             }
             if (ConfigValues.ISNIPE_SETTINGS.ANTIBOLTCANCEL && (UTILS_GetFieldSafe<int>(attacker, "weapon_fired_boltcancel") == 1))
                 player.Health += damage;
@@ -180,7 +180,7 @@ namespace LambAdmin
             {
                 CMD_GiveMaxAmmo(ent);
             });
-            if (Call<string>("getdvar", "g_gametype") == "infect")
+            if (UTILS_GetDvar("g_gametype") == "infect")
                 player.OnNotify("giveLoadout", (ent) =>
                 {
                     ent.TakeAllWeapons();
@@ -194,13 +194,13 @@ namespace LambAdmin
                             try
                             {
                                 ent.GiveWeapon("iw5_usp45_mp_tactical");
-                                ent.Call("clearperks");
-                                ent.AfterDelay(100, (e) =>
+                                ent.ClearPerks();
+                                AfterDelay(100, () =>
                                 {
-                                    e.SwitchToWeaponImmediate("iw5_usp45_mp_tactical");
+                                    ent.SwitchToWeaponImmediate("iw5_usp45_mp_tactical");
                                 });
-                                ent.Call("setweaponammoclip", "iw5_usp45_mp_tactical", 0);
-                                ent.Call("setweaponammostock", "iw5_usp45_mp_tactical", 0);
+                                ent.SetWeaponAmmoClip("iw5_usp45_mp_tactical", 0);
+                                ent.SetWeaponAmmoStock("iw5_usp45_mp_tactical", 0);
                                 ent.SetPerk("specialty_tacticalinsertion", true, true);
                             }
                             catch (Exception)
@@ -220,7 +220,7 @@ namespace LambAdmin
             CommandList.Add(new Command("ga", 0, Command.Behaviour.Normal,
                 (sender, arguments, optarg) =>
                 {
-                    if (Call<string>("getdvar", "g_gametype") == "infect" && sender.GetTeam() == "axis")
+                    if (UTILS_GetDvar("g_gametype") == "infect" && sender.GetTeam() == "axis")
                     {
                         WriteChatToPlayer(sender, "I like the way you're thinking, but nope.");
                         return;
@@ -271,7 +271,7 @@ namespace LambAdmin
 
         public void CMD_GiveMaxAmmo(Entity player)
         {
-            player.Call("giveMaxAmmo", player.CurrentWeapon);
+            player.GiveMaxAmmo(player.CurrentWeapon);
         }
 
         public void CMD_HideBombIcon(Entity player)
@@ -323,18 +323,14 @@ namespace LambAdmin
             player.SetField("fired", 0);
             player.SetField("weapon_fired_boltcancel", 0);
 
-            player.Call("notifyOnPlayerCommand", new Parameter[]
-			    {
-				    "weapon_reloading",
-				    "+reload"
-			    });
+            player.NotifyOnPlayerCommand("weapon_reloading", "+reload");
             player.OnNotify("weapon_fired", new Action<Entity, Parameter>((_player, args) =>
             {
                 _player.SetField("fired", 1);
-                _player.AfterDelay(300, new Action<Entity>((__player) =>
+                AfterDelay(300, () =>
                 {
-                    __player.SetField("fired", 0);
-                }));
+                    _player.SetField("fired", 0);
+                });
             }));
             player.OnNotify("weapon_reloading",
                 new Action<Entity>((_player) =>
@@ -344,25 +340,22 @@ namespace LambAdmin
                         if (UTILS_GetFieldSafe<int>(_player, "weapon_fired_boltcancel") == 0)
                         {
                             _player.SetField("weapon_fired_boltcancel", 1);
-                            _player.AfterDelay(2000, new Action<Entity>((__player) =>
+                            AfterDelay(2000, () =>
                             {
-                                __player.SetField("weapon_fired_boltcancel", 0);
-                            }));
+                                _player.SetField("weapon_fired_boltcancel", 0);
+                            });
                         }
                         else
                         {
-                            _player.Call("iprintlnbold", new Parameter[] { Lang_GetString("Message_BoltCancel_NotAllowed") });
-                            _player.Call("allowads", new Parameter[] { false });
-                            _player.Call("stunplayer", new Parameter[] { 1 });
-                            _player.AfterDelay(300,
-                                new Action<Entity>((__player) =>
-                                {
-                                    __player.Call("allowads", new Parameter[] { true });
-                                    __player.SetField("fired", 0);
-                                    __player.SetField("weapon_fired_boltcancel", 0);
-                                    __player.Call("stunplayer", new Parameter[] { 0 });
-                                })
-                            );
+                            _player.IPrintLnBold(Lang_GetString("Message_BoltCancel_NotAllowed"));
+                            _player.AllowAds( false );
+                            _player.StunPlayer(1);
+                            AfterDelay(300, () => {
+                                    _player.AllowAds(true);
+                                    _player.SetField("fired", 0);
+                                    _player.SetField("weapon_fired_boltcancel", 0);
+                                    _player.StunPlayer(0);
+                            });
                         }
                     }
                 })

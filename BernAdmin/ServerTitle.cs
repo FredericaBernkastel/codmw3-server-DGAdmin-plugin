@@ -271,7 +271,7 @@ namespace LambAdmin
             /* Once found, the address wont change in future
              * so we'll store it as a server dvar
              */
-            string sv_serverinfo_addr = UTILS_GetDefCDvar("sv_serverinfo_addr");
+            string sv_serverinfo_addr = UTILS_GetDvar("sv_serverinfo_addr");
             if (String.IsNullOrEmpty(sv_serverinfo_addr)) //first start
             {
                 // find teh addrs
@@ -286,14 +286,14 @@ namespace LambAdmin
                         IntPtr addr = addrs.First();
 
                         //save found address
-                        Call("setdvar", "sv_serverinfo_addr", new Parameter((int)addr.ToInt32()));
+                        GSCFunctions.SetDvar("sv_serverinfo_addr", addr.ToInt32());
 
                         Write(addr);
                     }
                     else
                     {
                         WriteLog.Warning("ServerTitle:: structure not found");
-                        Call("setdvar", "sv_serverinfo_addr", new Parameter((int)0)); //addr no found, skip search in future
+                        GSCFunctions.SetDvar("sv_serverinfo_addr", 0); //addr no found, skip search in future
                     }
                     WriteLog.Debug("ServerTitle:: done scanning.");
                     

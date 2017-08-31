@@ -759,10 +759,10 @@ namespace LambAdmin
 
             if (ConfigValues.settings_enable_alive_counter)
             {
-                PlayerConnected += hud_alive_players;
+                //PlayerConnected += hud_alive_players;
                 /* {~~~~~~~} */
-                foreach (Entity player in Players)
-                    hud_alive_players(player);
+                //foreach (Entity player in Players)
+                //    hud_alive_players(player);
                 /* {~~~~~~~} */
             }
 
@@ -783,7 +783,7 @@ namespace LambAdmin
                 WriteLog.Debug("Enable knife");
             }
 
-            Call("setdvarifuninitialized", "unlimited_ammo", "2");
+            GSCFunctions.SetDvarIfUninitialized("unlimited_ammo", "2");
 
             if (ConfigValues.settings_unlimited_ammo || (UTILS_GetDvar("unlimited_ammo") == "1"))
             {
@@ -793,11 +793,11 @@ namespace LambAdmin
 
             timed_messages_init();
 
-            if (ConfigValues.settings_servertitle)
+            /*if (ConfigValues.settings_servertitle)
                 if (ConfigValues.LockServer)
                     UTILS_ServerTitle("^1::LOCKED", "^1" + File.ReadAllText(ConfigValues.ConfigPath + @"Utils\internal\LOCKSERVER"));
                 else
-                    UTILS_ServerTitle_MapFormat();
+                    UTILS_ServerTitle_MapFormat();*/
         }
 
         public static string Lang_GetString(string key)

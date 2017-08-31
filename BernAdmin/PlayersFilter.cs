@@ -216,18 +216,18 @@ namespace LambAdmin
             private List<Entity> _sel_all(bool isComplement)
             {
                 if (!isComplement)
-                    return script.Players;
+                    return Players;
                 else
                     return new List<Entity>();
             }
             private List<Entity> _sel_allies(bool isComplement)
             {
                 List<Entity> result = (
-                    from player in script.Players
+                    from player in Players
                     where player.GetTeam() == sender.GetTeam()
                     select player).ToList();
                 if (isComplement)
-                    result = COMPLEMENT(script.Players, result);
+                    result = COMPLEMENT(Players, result);
                 return result;
             }
             private List<Entity> _sel_enemies(bool isComplement)
@@ -235,62 +235,62 @@ namespace LambAdmin
                 List<Entity> result = new List<Entity>();
                 if (sender.GetTeam() == "axis")
                     result = (
-                    from player in script.Players
+                    from player in Players
                     where player.GetTeam() == "allies"
                     select player).ToList();
                 else
                 if (sender.GetTeam() == "allies")
                     result = (
-                    from player in script.Players
+                    from player in Players
                     where player.GetTeam() == "axis"
                     select player).ToList();
 
                 if (isComplement)
-                    result = COMPLEMENT(script.Players, result);
+                    result = COMPLEMENT(Players, result);
                 return result;
             }
             private List<Entity> _sel_team1(bool isComplement)
             {
                 List<Entity> result = (
-                    from player in script.Players
+                    from player in Players
                     where player.GetTeam() == "axis"
                     select player).ToList();
 
                 if (isComplement)
-                    result = COMPLEMENT(script.Players, result);
+                    result = COMPLEMENT(Players, result);
                 return result;
             }
             private List<Entity> _sel_team2(bool isComplement)
             {
                 List<Entity> result = (
-                    from player in script.Players
+                    from player in Players
                     where player.GetTeam() == "allies"
                     select player).ToList();
 
                 if (isComplement)
-                    result = COMPLEMENT(script.Players, result);
+                    result = COMPLEMENT(Players, result);
                 return result;
             }
             private List<Entity> _sel_spectators(bool isComplement)
             {
                 List<Entity> result = (
-                    from player in script.Players
+                    from player in Players
                     where player.IsSpectating()
                     select player).ToList();
 
                 if (isComplement)
-                    result = COMPLEMENT(script.Players, result);
+                    result = COMPLEMENT(Players, result);
                 return result;
             }
             private List<Entity> _sel_alive(bool isComplement)
             {
                 List<Entity> result = (
-                    from player in script.Players
+                    from player in Players
                     where player.IsAlive
                     select player).ToList();
 
                 if (isComplement)
-                    result = COMPLEMENT(script.Players, result);
+                    result = COMPLEMENT(Players, result);
                 return result;
             }
             private List<Entity> _sel_me(bool isComplement)
@@ -298,19 +298,19 @@ namespace LambAdmin
                 List<Entity> result = new List<Entity>() { sender };
 
                 if (isComplement)
-                    result = COMPLEMENT(script.Players, result);
+                    result = COMPLEMENT(Players, result);
                 return result;
             }
             private List<Entity> _sel_name(bool isComplement, string identifier)
             {
                 string tolowidentifier = identifier.ToLowerInvariant();
                 List<Entity> result = (
-                    from player in script.Players
+                    from player in Players
                     where player.Name.ToLowerInvariant().Contains(tolowidentifier) || player.GetClantag().ToLowerInvariant().Contains(tolowidentifier)
                     select player).ToList();
 
                 if (isComplement)
-                    result = COMPLEMENT(script.Players, result);
+                    result = COMPLEMENT(Players, result);
                 return result;
             }
         }
