@@ -514,7 +514,6 @@ namespace LambAdmin
                         HaxLog.WriteInfo(ex.StackTrace);
                         HaxLog.WriteInfo(player.Name);
                         HaxLog.WriteInfo(player.GUID.ToString());
-                        HaxLog.WriteInfo(player.IP.Address.ToString());
                         HaxLog.WriteInfo(player.GetEntityNumber().ToString());
                     }
                     finally

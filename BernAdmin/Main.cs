@@ -26,8 +26,8 @@ namespace LambAdmin
         public DGAdmin()
             : base()
         {
-            WriteLog.Info("DGAdmin is starting...");
-            MainLog.WriteInfo("DGAdmin starting...");
+            WriteLog.Info("DGAdmin#IS1.5 is starting...");
+            MainLog.WriteInfo("DGAdmin#IS1.5 starting...");
 
             if (!Directory.Exists(ConfigValues.ConfigPath))
             {
@@ -226,7 +226,7 @@ namespace LambAdmin
                 player.SetField("isConnecting", 0);
                 GroupsDatabase.Group playergroup = player.GetGroup(database);
                 WriteLog.Info("# Player " + player.Name + " from group \"" + playergroup.group_name + "\" connected.");
-                WriteLog.Info("# GUID: " + player.GUID.ToString() + " IP: " + player.IP.ToString());
+                WriteLog.Info("# GUID: " + player.GUID.ToString());
                 WriteLog.Info("# HWID: " + player.GetHWID() + " ENTREF: " + player.GetEntityNumber());
                 if (string.IsNullOrEmpty(player.GetXNADDR().Value))
                     throw new Exception("Bad xnaddr");
@@ -273,7 +273,7 @@ namespace LambAdmin
                 }));
             }
 
-            string line = "[CONNECT] " + string.Format("{0} : {1}, {2}, {3}, {4}, {5}", player.Name.ToString(), player.GetEntityNumber().ToString(), player.GUID, player.IP.Address.ToString(), player.GetHWID().Value, player.GetXNADDR().ToString());
+            string line = "[CONNECT] " + string.Format("{0} : {1}, {2}, {3}, {4}", player.Name.ToString(), player.GetEntityNumber().ToString(), player.GUID, player.GetHWID().Value, player.GetXNADDR().ToString());
             line.LogTo(PlayersLog, MainLog);
         }
 
@@ -281,7 +281,7 @@ namespace LambAdmin
         {
             player.SetField("spawnevent", 0);
 
-            string line = "[DISCONNECT] " + string.Format("{0} : {1}, {2}, {3}, {4}, {5}", player.Name.ToString(), player.GetEntityNumber().ToString(), player.GUID, player.IP.Address.ToString(), player.GetHWID().Value, player.GetXNADDR().ToString());
+            string line = "[DISCONNECT] " + string.Format("{0} : {1}, {2}, {3}, {4}", player.Name.ToString(), player.GetEntityNumber().ToString(), player.GUID, player.GetHWID().Value, player.GetXNADDR().ToString());
             line.LogTo(PlayersLog, MainLog);
         }
 
