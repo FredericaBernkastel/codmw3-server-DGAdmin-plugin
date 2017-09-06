@@ -37,9 +37,9 @@ namespace LambAdmin
         public static partial class ConfigValues
         {
 #if DEBUG
-            public static string Version = "v3.6d#IS1.5";
+            public static string Version = "v3.6n2d#IS1.5";
 #else
-            public static string Version = "v3.6#IS1.5";
+            public static string Version = "v3.6n2#IS1.5";
 #endif
             public static string ConfigPath = @"scripts\DGAdmin\";
             public static string ChatPrefix
@@ -2230,21 +2230,6 @@ namespace LambAdmin
             {
                 log.WriteInfo(message);
             }
-        }
-
-        public static void IPrintLnBold(this Entity player, string message)
-        {
-            player.IPrintLnBold(message);
-        }
-
-        public static void IPrintLn(this Entity player, string message)
-        {
-            player.IPrintLn(message);
-        }
-
-        public static void Suicide(this Entity player)
-        {
-            player.Suicide();
         }
 
         public static string GetTeam(this Entity player)

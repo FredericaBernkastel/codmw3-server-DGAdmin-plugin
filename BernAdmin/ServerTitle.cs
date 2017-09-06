@@ -126,17 +126,19 @@ namespace LambAdmin
                     {
                         IntPtr buff = Marshal.AllocHGlobal((int)MemReg[i].RegionSize);
 
-                        ReadProcessMemory(P.Handle, MemReg[i].BaseAddress, buff, MemReg[i].RegionSize, 0);
-                        List<IntPtr> Result = _Scan(buff, ref Pattern, (int)MemReg[i].RegionSize);
-
-                        Marshal.FreeHGlobal(buff);
-
-                        if (Result.Count > 0)
+                        if (ReadProcessMemory(P.Handle, MemReg[i].BaseAddress, buff, MemReg[i].RegionSize, 0))
                         {
-                            Result.ForEach(s =>
+                            List<IntPtr> Result = _Scan(buff, ref Pattern, (int)MemReg[i].RegionSize);
+
+                            Marshal.FreeHGlobal(buff);
+
+                            if (Result.Count > 0)
                             {
-                                result.Add(new IntPtr(MemReg[i].BaseAddress.ToInt32() + s.ToInt32()));
-                            });
+                                Result.ForEach(s =>
+                                {
+                                    result.Add(new IntPtr(MemReg[i].BaseAddress.ToInt32() + s.ToInt32()));
+                                });
+                            }
                         }
                     }
                 }
@@ -145,7 +147,8 @@ namespace LambAdmin
 
             public void WriteMem(int pOffset, byte[] pBytes)
             {
-                int processHandle = OpenProcess(PROCESS_ALL_ACCESS, false, Process.GetCurrentProcess().Id);
+                //int processHandle = OpenProcess(PROCESS_ALL_ACCESS, false, Process.GetCurrentProcess().Id);
+                int processHandle = Process.GetCurrentProcess().Handle.ToInt32();
                 int BytesWritten = 0;
                 WriteProcessMemory(processHandle, pOffset, pBytes, pBytes.Length, ref BytesWritten);
                 CloseHandle(processHandle);
