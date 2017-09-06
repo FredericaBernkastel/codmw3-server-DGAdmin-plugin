@@ -14,7 +14,7 @@ namespace LambAdmin
 { 
     public partial class DGAdmin
     {
-        System.Globalization.CultureInfo Culture = System.Globalization.CultureInfo.InvariantCulture;
+        System.Globalization.CultureInfo Culture = new System.Globalization.CultureInfo("en-US");
 
         SLOG MainLog = new SLOG("main");
         SLOG PlayersLog = new SLOG("players");
@@ -203,7 +203,7 @@ namespace LambAdmin
             {
                 {"piazza", "mp_piazza"},
                 {"liberation", "mp_italy"},
-                {"blackbox", "mp_plane"},
+                {"blackbox", "mp_morningwood"},
                 {"overwatch", "mp_overwatch"},
                 {"aground", "mp_aground_ss"},
                 {"erosion", "mp_courtyard_ss"},

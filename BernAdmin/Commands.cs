@@ -4237,7 +4237,7 @@ namespace LambAdmin
                     string.Format
                         (
                         "{0};{1};{2}",
-                        until.ToString("yyyy MMM d HH:mm"),
+                        until.ToString("yyyy MMM d HH:mm", Culture),
                         player.GetInfo().getIdentifiers(),
                         player.Name
                         )
