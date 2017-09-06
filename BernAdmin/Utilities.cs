@@ -203,7 +203,7 @@ namespace LambAdmin
             {
                 {"piazza", "mp_piazza"},
                 {"liberation", "mp_italy"},
-                {"blackbox", "mp_plane"},
+                {"blackbox", "mp_morningwood"},
                 {"overwatch", "mp_overwatch"},
                 {"aground", "mp_aground_ss"},
                 {"erosion", "mp_courtyard_ss"},
