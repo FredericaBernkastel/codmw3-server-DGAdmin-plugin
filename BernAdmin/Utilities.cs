@@ -37,9 +37,9 @@ namespace LambAdmin
         public static partial class ConfigValues
         {
 #if DEBUG
-            public static string Version = "v3.5d";
+            public static string Version = "v3.5n1d";
 #else
-            public static string Version = "v3.5";
+            public static string Version = "v3.5n1";
 #endif
             public static string ConfigPath = @"scripts\DGAdmin\";
             public static string ChatPrefix
