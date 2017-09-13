@@ -90,6 +90,6 @@ Read the [official documentation](https://drive.google.com/file/d/0B4OfimTH0gRha
 ## Compiling from sources:
 Target platform is .NET Framework 4.0
 
-InfinityScript version: 1.1.0.33
+InfinityScript version: 1.5.0.29
 
 Used Visual Studio 2015
