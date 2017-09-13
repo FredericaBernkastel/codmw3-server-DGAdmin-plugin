@@ -9,6 +9,8 @@
 [![](https://img.shields.io/github/watchers/FredericaBernkastel/codmw3-server-DGAdmin-plugin.svg?style=social&label=Watch)]()
 [![GitHub followers](https://img.shields.io/github/followers/FredericaBernkastel.svg?style=social&label=Follow)]()
 
+## `#`InfinityScript 1.5 branch
+
 ## License
 
 This project is licensed under GPLv3. Please see the LICENSE file.
