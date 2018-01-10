@@ -145,11 +145,17 @@ namespace LambAdmin
 
         public void SNIPE_PeriodicChecks(Entity player, Entity inflictor, Entity attacker, int damage, int dFlags, string mod, string weapon, Vector3 point, Vector3 dir, string hitLoc)
         {
+            if (player == null)
+                return;
+
             if (ConfigValues.ISNIPE_SETTINGS.ANTIFALLDAMAGE && mod == "MOD_FALLING")
             {
                 player.Health += damage;
                 return;
             }
+
+            if (attacker == null)
+                return;
             if (!attacker.IsPlayer)
                 return;
 

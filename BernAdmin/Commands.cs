@@ -4368,36 +4368,45 @@ namespace LambAdmin
 
         public void CMDS_OnPlayerKilled(Entity player, Entity inflictor, Entity attacker, int damage, string mod, string weapon, Vector3 dir, string hitLoc)
         {
+            if (player == null)
+                return;
+
+            string attacker_name = (attacker == null) ? "god" : attacker.Name;
+
             if (ConfigValues.settings_enable_spree_messages)
             {
-                if (!attacker.HasField("killstreak"))
-                    attacker.SetField("killstreak", new Parameter((int)0));
-                if (!player.HasField("killstreak"))
-                    player.SetField("killstreak", new Parameter((int)0));
+                int attacker_killstreak = -1;
+                if (attacker != null)
+                {
+                    if (!attacker.HasField("killstreak"))
+                        attacker.SetField("killstreak", new Parameter((int)0));
+                    attacker_killstreak = UTILS_GetFieldSafe<int>(attacker, "killstreak") + 1;
+                    attacker.SetField("killstreak", attacker_killstreak);
+                    if (!player.HasField("killstreak"))
+                        player.SetField("killstreak", new Parameter((int)0));
+                }
 
-                int attacker_killstreak = UTILS_GetFieldSafe<int>(attacker, "killstreak") + 1;
                 int victim_killstreak = UTILS_GetFieldSafe<int>(player,"killstreak");
 
-                attacker.SetField("killstreak", attacker_killstreak);
                 player.SetField("killstreak", (int)0);
 
                 if (mod == "MOD_HEAD_SHOT")
                     WriteChatToAll(Lang_GetString("Spree_Headshot").Format(new Dictionary<string, string>()
                     {
-                        {"<attacker>", attacker.Name},
+                        {"<attacker>", attacker_name},
                         {"<victim>", player.Name}
                     }));
 
                 if(attacker_killstreak == 5)
                     WriteChatToAll(Lang_GetString("Spree_Kills_5").Format(new Dictionary<string, string>()
                     {
-                        {"<attacker>", attacker.Name}
+                        {"<attacker>", attacker_name}
                     }));
 
                 if (attacker_killstreak == 10)
                     WriteChatToAll(Lang_GetString("Spree_Kills_10").Format(new Dictionary<string, string>()
                     {
-                        {"<attacker>", attacker.Name}
+                        {"<attacker>", attacker_name}
                     }));
 
                 switch (weapon)
@@ -4415,14 +4424,14 @@ namespace LambAdmin
                     case "trophy_mp":
                         WriteChatToAll(Lang_GetString("Spree_Trophykill").Format(new Dictionary<string, string>()
                         {
-                            {"<attacker>", attacker.Name},
+                            {"<attacker>", attacker_name},
                             {"<victim>", player.Name}
                         }));
                         break;
                     case "knife":
                         WriteChatToAll(Lang_GetString("Spree_KnifeKill").Format(new Dictionary<string, string>()
                         {
-                            {"<attacker>", attacker.Name},
+                            {"<attacker>", attacker_name},
                             {"<victim>", player.Name}
                         }));
                         break;
@@ -4431,13 +4440,13 @@ namespace LambAdmin
                 if(victim_killstreak >= 5)
                     WriteChatToAll(Lang_GetString("Spree_Ended").Format(new Dictionary<string, string>()
                     {
-                        {"<attacker>", attacker.Name},
+                        {"<attacker>", attacker_name},
                         {"<victim>", player.Name},
                         {"<killstreak>", victim_killstreak.ToString()}
                     }));
             }
 
-            string line = "[DEATH] " + string.Format("{0} : {1}, {2}, {3}", player.Name.ToString(), attacker.Name.ToString(), mod, weapon);
+            string line = "[DEATH] " + string.Format("{0} : {1}, {2}, {3}", player.Name, attacker_name, mod, weapon);
             line.LogTo(PlayersLog, MainLog);
 
         }
